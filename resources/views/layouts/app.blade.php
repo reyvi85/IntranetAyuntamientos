@@ -9,8 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Scripts
+    <script src="{{ asset('js/app.js') }}" defer></script>-->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,9 +18,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Font awesome 5 -->
+    <link href="{{asset('fonts/fontawesome/css/fontawesome-all.min.css')}}" type="text/css" rel="stylesheet">
+    @livewireStyles
 </head>
 <body>
-    <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -74,10 +76,19 @@
                 </div>
             </div>
         </nav>
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-12">
+                @include('flash::message')
+            </div>
+        </div>
 
-        <main class="py-4">
             @yield('content')
-        </main>
+
     </div>
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+     @livewireScripts
+@yield('scripts')
 </body>
 </html>

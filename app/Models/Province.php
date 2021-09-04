@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Province extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'community_id'
+    ];
+
+    public function community(){
+        return $this->belongsTo(Community::class);
+    }
 }
