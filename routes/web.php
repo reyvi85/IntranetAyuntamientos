@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\ComunidadesProvinciasComponent,
+    App\Http\Livewire\InstanciasComponent,
+    App\Http\Livewire\UsuariosComponent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +17,16 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Route::get('/', function () {
+    return view('administrator.ComunidadesProvincias');
+});*/
+
+//Route::get('/', UploadImg::class);
+Route::get('/', ComunidadesProvinciasComponent::class);
+Route::get('/instancias', InstanciasComponent::class);
+Route::get('/usuarios', UsuariosComponent::class);
+
+
 
 Auth::routes();
 

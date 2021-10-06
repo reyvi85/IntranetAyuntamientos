@@ -6,7 +6,7 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
-        window.livewire.on('saveModalComunidad', () => {
+        window.livewire.on('saveModal', () => {
             $('#modalForm').modal('hide');
         });
     </script>

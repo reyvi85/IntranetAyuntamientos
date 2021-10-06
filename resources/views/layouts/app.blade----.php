@@ -78,7 +78,7 @@
         </nav>
     <div class="container py-4">
         <div class="row">
-            {{$slot}}
+            @yield('content')
         </div>
     </div>
         <!-- Scripts -->

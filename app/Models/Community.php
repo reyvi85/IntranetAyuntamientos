@@ -17,4 +17,8 @@ class Community extends Model
     public function provincias(){
         return $this->hasMany(Province::class);
     }
+
+    public function instances(){
+        return $this->hasManyThrough(Instance::class,Province::class);
+    }
 }
