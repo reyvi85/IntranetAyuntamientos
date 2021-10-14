@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Models\CategoryBusine;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\Province;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait DataModels {
 
-    public $modalConfig=[], $sort = 'id', $sortDirection='desc';
+    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false ;
 
     /** Método para ordenar colecciones
      * @param $sort
@@ -135,6 +136,10 @@ trait DataModels {
             ->get();
     }
 
+    public function getAllInstace(){
+        return Instance::all();
+    }
+
 
 
     public function getAllUsers($search = null, $sort='id', $direction='desc', $rol = null)
@@ -147,6 +152,15 @@ trait DataModels {
         })
             ->orderBy($sort, $direction)
             ->paginate();
+    }
+
+    public function getCategoryBusiness($search = null, $sort, $direction = 'desc'){
+        return CategoryBusine::withCount('business')
+            ->when($search, function ($q) use ($search){
+                $q->where('name', 'like', '%'.$search.'%');
+            })
+            ->orderBy($sort, $direction)
+            ->get();
     }
 
 }

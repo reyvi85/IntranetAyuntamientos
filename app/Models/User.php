@@ -47,4 +47,9 @@ class User extends Authenticatable
     public function instances(){
         return $this->belongsToMany(Instance::class)->withTimestamps();
     }
+
+    public function isRole($rol)
+    {
+        return $this->rol === $rol;
+    }
 }

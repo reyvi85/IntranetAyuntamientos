@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Instancias;
 
 use App\Models\Instance;
 use Illuminate\Support\Str;
@@ -53,7 +53,8 @@ class InstanciasComponent extends Component
     {
         $instancias = $this->getInstancias($this->search);
         $comunidades = $this->getCommunity();
-        return view('livewire.administrator.instancias-component', compact('instancias', 'comunidades'));
+        return view('livewire.administrator.instancias-component', compact('instancias', 'comunidades'))
+            ->extends('layouts.app');
     }
 
     public function resetProps(){

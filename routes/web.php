@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Livewire\ComunidadesProvinciasComponent,
-    App\Http\Livewire\InstanciasComponent,
-    App\Http\Livewire\UsuariosComponent;
+    App\Http\Livewire\Instancias\InstanciasComponent,
+    App\Http\Livewire\Usuarios\UsuariosComponent,
+    App\Http\Livewire\CategoryBusinessComponent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,16 +18,19 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
 |
 */
 
-/*Route::get('/', function () {
-    return view('administrator.ComunidadesProvincias');
-});*/
+Route::get('/', function () {
+    return view('welcome');
+});
 
 //Route::get('/', UploadImg::class);
-Route::get('/', ComunidadesProvinciasComponent::class);
-Route::get('/instancias', InstanciasComponent::class);
-Route::get('/usuarios', UsuariosComponent::class);
 
 
+Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])->group(function(){
+    Route::get('/comunidades-provincias', ComunidadesProvinciasComponent::class)->name('comunidades.provincias');
+    Route::get('/instancias', InstanciasComponent::class)->name('instancias');
+    Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
+    Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
+});
 
 Auth::routes();
 

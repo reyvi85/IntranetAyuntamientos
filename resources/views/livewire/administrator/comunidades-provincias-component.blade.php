@@ -1,3 +1,4 @@
+@section('title', 'Comunidades / Provincias')
 <div class="col-12">
     @component('component.card')
         @slot('titulo')Comunidades / Provincias @endslot

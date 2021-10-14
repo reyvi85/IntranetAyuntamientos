@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 
+use App\Models\Busine;
+use App\Models\CategoryBusine;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\Province;
@@ -22,5 +24,7 @@ class DatabaseSeeder extends Seeder
         Province::factory(50)->create();
         Instance::factory(25)->create();
         User::factory(100)->create();
+        CategoryBusine::factory(25)->create();
+        Busine::factory(150)->create();
     }
 }

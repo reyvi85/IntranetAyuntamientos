@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Instancias;
 
 use App\Models\User;
 use App\Traits\DataModels;
@@ -44,5 +44,7 @@ class InstaciasUsuariosComponent extends Component
         $user->instances()->sync($instances);
         $this->reset('instaceSlecteds');
         $this->emit('saveModal');
+        $this->emit('newInstanceAdd');
+
     }
 }

@@ -1,3 +1,4 @@
+@section('title', 'Gestión de usuarios')
 <div class="col-12">
     @component('component.card')
         @slot('titulo')Gestión de usuarios @endslot

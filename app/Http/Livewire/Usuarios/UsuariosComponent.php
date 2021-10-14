@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Usuarios;
 
 use App\Models\User;
 use App\Traits\Helper;
@@ -138,6 +138,7 @@ class UsuariosComponent extends Component
     public function render()
     {
         $usuarios = $this->getAllUsers($this->search, $this->sort, $this->sortDirection, $this->filterRol);
-        return view('livewire.administrator.usuarios-component', compact('usuarios'));
+        return view('livewire.administrator.usuarios-component', compact('usuarios'))
+            ->extends('layouts.app');
     }
 }

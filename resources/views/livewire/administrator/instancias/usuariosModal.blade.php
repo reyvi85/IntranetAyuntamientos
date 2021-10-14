@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @livewire('usuarios-instancias-component')
+                @livewire('usuarios.usuarios-instancias-component')
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>

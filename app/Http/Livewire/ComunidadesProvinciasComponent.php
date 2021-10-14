@@ -51,7 +51,9 @@ class ComunidadesProvinciasComponent extends Component
     public function render()
     {
         $comunidades = $this->getComunidades($this->search, $this->sort, $this->sortDirection);
-        return view('livewire.administrator.comunidades-provincias-component', compact('comunidades'));
+        return view('livewire.administrator.comunidades-provincias-component', compact('comunidades'))
+            ->extends('layouts.app');
+            //->section('scripts');
     }
 
 

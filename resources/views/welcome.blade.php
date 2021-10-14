@@ -1,13 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="col-md-12">
-        @livewire('comunidades-provincias-component')
+       Entrada publica
     </div>
 @endsection
-@section('scripts')
-    <script type="text/javascript">
-        window.livewire.on('saveModalComunidad', () => {
-            $('#modalForm').modal('hide');
-        });
-    </script>
-@endsection
+

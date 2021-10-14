@@ -1,12 +1,13 @@
 <div>
     @include('component.loading')
     <div class="form-row">
-        <div class="form-group col-md-10">
+        <div class="form-group col-md-9">
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
         </div>
 
-        <div class="form-group col-md-2">
+        <div class="form-group col-md-3">
             <select class="form-control" wire:model="limitInstance">
+                <option value="">-- Todas --</option>
                 @for ($i = 5; $i < 55; $i+= 5)
                    <option value="{{$i}}">{{$i}}</option>
                 @endfor
