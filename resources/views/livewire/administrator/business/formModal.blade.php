@@ -23,8 +23,21 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
+                @switch($modalConfig['action'])
+                    @case('add')
+                    <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
+                    @break
 
-                <div class="text-center text-muted" wire:loading wire:target="storeComunidad, updateComunidad, destroyComunidad, storeProvincia, updateProvincia, destroyProvincia"><i class="fas fa-spinner fa-spin"></i></div>
+                    @case('edit')
+                    <button type="button" class="btn btn-primary" wire:click="update({{$categorySelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    @break
+
+                    @case('trash')
+                    <button type="button" class="btn btn-danger" wire:click="destroy({{$categorySelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
+                    @break
+
+                @endswitch
+                <div class="text-center text-muted" wire:loading wire:target="update, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>

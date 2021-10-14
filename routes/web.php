@@ -6,7 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\Instancias\InstanciasComponent,
     App\Http\Livewire\Usuarios\UsuariosComponent,
-    App\Http\Livewire\CategoryBusinessComponent;
+    App\Http\Livewire\CategoryBusinessComponent,
+    App\Http\Livewire\Business\BusinessComponent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,7 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
     Route::get('/instancias', InstanciasComponent::class)->name('instancias');
     Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
     Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
+    Route::get('/comercios', BusinessComponent::class)->name('business.index');
 });
 
 Auth::routes();

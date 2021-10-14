@@ -12,7 +12,7 @@
 @section('scripts')
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
-            $('#modalUsers').modal('hide');
+            $('#modalForm').modal('hide');
         });
     </script>
 @endsection

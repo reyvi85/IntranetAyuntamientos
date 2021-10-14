@@ -5,7 +5,7 @@
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
     </div>
     <div class="form-group col-md-2">
-        <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalForm" wire:click="createComunidad"><i class="fas fa-plus-circle"></i> Añadir</a>
+        <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalForm" wire:click="add"<i class="fas fa-plus-circle"></i> Añadir</a>
     </div>
 </div>
 
@@ -28,8 +28,8 @@
                     <td>{{$item->name}}</td>
                     <td>{{$item->business_count}}</td>
                     <td class="float-right">
-                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="edit({{$item->id}})" title="Editar comunidad"><i class="fas fa-edit"></i></a>
-                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trashComunidad({{$item->id}})" title="Eliminar comunidad"><i class="fas fa-trash"></i></a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="edit({{$item->id}})" title="Editar categoría"><i class="fas fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$item->id}})" title="Eliminar categoría"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             @endforeach
