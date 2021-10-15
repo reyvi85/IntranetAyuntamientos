@@ -5,7 +5,7 @@
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
     </div>
     <div class="form-group col-md-2">
-        <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalForm" wire:click="add"<i class="fas fa-plus-circle"></i> Añadir</a>
+        <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalForm" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
     </div>
 </div>
 
@@ -36,7 +36,7 @@
             </tbody>
         </table>
     </div>
-    @include('livewire.administrator.business.formModal')
+    @include('livewire.administrator.business.formModalCategory')
 @else
     <p class="text-center text-muted">No hay categorías que mostrar!</p>
 @endif

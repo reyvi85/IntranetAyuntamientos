@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Models\Busine;
 use App\Models\CategoryBusine;
 use App\Models\Community;
 use App\Models\Instance;
@@ -141,7 +142,6 @@ trait DataModels {
     }
 
 
-
     public function getAllUsers($search = null, $sort='id', $direction='desc', $rol = null)
     {
         return User::when($search, function ($q) use($search){
@@ -154,6 +154,10 @@ trait DataModels {
             ->paginate();
     }
 
+    /**
+     * Categorías de negocios
+    **/
+
     public function getCategoryBusiness($search = null, $sort, $direction = 'desc'){
         return CategoryBusine::withCount('business')
             ->when($search, function ($q) use ($search){
@@ -161,6 +165,40 @@ trait DataModels {
             })
             ->orderBy($sort, $direction)
             ->get();
+    }
+
+    public function getAllCategoryBusiness(){
+        return CategoryBusine::orderBy('name', 'asc')
+            ->get();
+    }
+
+    /**
+     * Comercioes
+     **/
+
+    public function getBusinessFiltered($search = null, $category = null, $instance = null){
+        return Busine::with('category_busine')
+            ->when($search, function ($q) use($search){
+                $q->where('name','like','%'.$search.'%')
+                    ->orWhere([
+                        ['direccion','like','%'.$search.'%'],
+                        ['telefonos','like','%'.$search.'%'],
+                        ['faxs','like','%'.$search.'%'],
+                        ['emails','like','%'.$search.'%'],
+                        ['description','like','%'.$search.'%'],
+                    ]);
+            })
+            ->when($category, function ($q) use($category){
+                $q->whereHas('category_busine', function (Builder $builder) use($category){
+                        $builder->where('id', $category);
+                });
+            })
+            ->when($instance, function ($q) use($instance){
+                $q->whereHas('instance', function (Builder $builder) use($instance){
+                        $builder->where('id', $instance);
+                });
+            })
+            ->paginate();
     }
 
 }
