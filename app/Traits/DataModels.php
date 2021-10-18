@@ -180,13 +180,12 @@ trait DataModels {
         return Busine::with('category_busine')
             ->when($search, function ($q) use($search){
                 $q->where('name','like','%'.$search.'%')
-                    ->orWhere([
-                        ['direccion','like','%'.$search.'%'],
-                        ['telefonos','like','%'.$search.'%'],
-                        ['faxs','like','%'.$search.'%'],
-                        ['emails','like','%'.$search.'%'],
-                        ['description','like','%'.$search.'%'],
-                    ]);
+                    ->orWhere('direccion','like','%'.$search.'%')
+                    ->orWhere('telefonos','like','%'.$search.'%')
+                    ->orWhere('faxs','like','%'.$search.'%')
+                    ->orWhere('emails','like','%'.$search.'%')
+                    ->orWhere('description','like','%'.$search.'%')
+                    ->orWhere('url_web','like','%'.$search.'%');
             })
             ->when($category, function ($q) use($category){
                 $q->whereHas('category_busine', function (Builder $builder) use($category){

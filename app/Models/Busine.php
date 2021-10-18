@@ -12,11 +12,12 @@ class Busine extends Model
     protected $fillable = [
         'name',
         'direccion',
-        'telefonos',
-        'faxs',
-        'emails',
+        'telefono',
+        'fax',
+        'email',
         'logo',
         'description',
+        'url_web',
         'slug',
         'category_busine_id',
         'instance_id'

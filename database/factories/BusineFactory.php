@@ -26,11 +26,12 @@ class BusineFactory extends Factory
         return [
             'name'=> $name,
             'direccion'=>$this->faker->address(),
-            'telefonos'=>$this->faker->phoneNumber(),
-            'faxs'=>$this->faker->phoneNumber,
-            'emails'=>$this->faker->safeEmail(),
-            'logo'=>$this->faker->imageUrl(),
+            'telefono'=>$this->faker->phoneNumber(),
+            'fax'=>$this->faker->phoneNumber,
+            'email'=>$this->faker->safeEmail(),
+            'logo'=>$this->faker->image(public_path('images/business'),640,480,null,false),
             'description'=>$this->faker->paragraph(),
+            'url_web'=>$this->faker->url(),
             'slug'=>Str::slug($name),
             'category_busine_id'=>rand(1,25),
             'instance_id'=>rand(1,25)

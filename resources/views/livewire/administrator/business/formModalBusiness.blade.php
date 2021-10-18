@@ -12,13 +12,7 @@
                 @if ($modalModeDestroy)
                     <h3 class="text-center"> Confirma realmente que desea eliminar el elemento seleccionado?<br> <span class="text-danger font-weight-bolder">{{$name}}</span></h3>
                 @else
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Nombre:</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="formGroupExampleInput" wire:model="name">
-                    @error('name')
-                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                    @enderror
-                </div>
+                @include('livewire.administrator.business.form')
                 @endif
             </div>
             <div class="modal-footer">

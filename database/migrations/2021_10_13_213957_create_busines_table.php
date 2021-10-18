@@ -17,9 +17,9 @@ class CreateBusinesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('direccion');
-            $table->string('telefonos')->nullable();
-            $table->string('faxs')->nullable();
-            $table->string('emails')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('fax')->nullable();
+            $table->string('email')->nullable();
             $table->string('logo')->nullable();
             $table->text('description');
             $table->string('slug');
