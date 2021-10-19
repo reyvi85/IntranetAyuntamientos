@@ -176,13 +176,12 @@ trait DataModels {
      * Comercioes
      **/
 
-    public function getBusinessFiltered($search = null, $category = null, $instance = null){
+    public function getBusinessFiltered($search = null, $category = null, $instance = null, $sort='id', $direction = 'desc'){
         return Busine::with('category_busine')
             ->when($search, function ($q) use($search){
                 $q->where('name','like','%'.$search.'%')
                     ->orWhere('direccion','like','%'.$search.'%')
                     ->orWhere('telefonos','like','%'.$search.'%')
-                    ->orWhere('faxs','like','%'.$search.'%')
                     ->orWhere('emails','like','%'.$search.'%')
                     ->orWhere('description','like','%'.$search.'%')
                     ->orWhere('url_web','like','%'.$search.'%');
@@ -197,6 +196,7 @@ trait DataModels {
                         $builder->where('id', $instance);
                 });
             })
+            ->orderBy($sort, $direction)
             ->paginate();
     }
 

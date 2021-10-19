@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\BusinessScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,6 @@ class Busine extends Model
         'name',
         'direccion',
         'telefono',
-        'fax',
         'email',
         'logo',
         'description',
@@ -34,5 +34,11 @@ class Busine extends Model
 
     public function instance(){
         return $this->belongsTo(Instance::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new BusinessScope());
     }
 }

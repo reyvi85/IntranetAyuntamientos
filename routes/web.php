@@ -26,7 +26,7 @@ Route::get('/', function () {
 //Route::get('/', UploadImg::class);
 
 
-Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])->group(function(){
+Route::prefix('dashboard')->middleware(['auth'])->group(function(){
     Route::get('/comunidades-provincias', ComunidadesProvinciasComponent::class)->name('comunidades.provincias');
     Route::get('/instancias', InstanciasComponent::class)->name('instancias');
     Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');

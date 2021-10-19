@@ -19,8 +19,6 @@ class InstanceScope implements Scope
                 $q->where('user_id', Auth()->user()->id);
             });
         }
-      // $u =  User::find(Auth::id());
-      // dd(Auth::user()->rol);
 
     }
 }

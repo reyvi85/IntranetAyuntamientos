@@ -31,7 +31,7 @@
         <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">ID</th>
+                <th scope="col" wire:click="order('id')" style="cursor: pointer">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Email</th>
                 <th scope="col">Teléfono</th>
@@ -44,8 +44,8 @@
                 <tr>
                     <th scope="row">{{$row->id}}</th>
                     <td>{{$row->name}}</td>
-                    <td>{{$row->emails}}</td>
-                    <td>{{$row->telefonos}}</td>
+                    <td>{{$row->email}}</td>
+                    <td>{{$row->telefono}}</td>
                     <td>{{$row->category_busine->name}}</td>
                     <td>
                         <div class="dropdown">
