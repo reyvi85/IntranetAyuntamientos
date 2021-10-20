@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    @include('livewire.administrator.business.formModalBusiness')
 @else
     <p class="text-center text-muted">No hay comercios que mostrar!</p>
 @endif
+@include('livewire.administrator.business.formModalBusiness')

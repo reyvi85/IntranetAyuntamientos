@@ -19,7 +19,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('add')
-                    <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
+                    <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled" wire:target="store, logo"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
                     @break
 
                     @case('edit')

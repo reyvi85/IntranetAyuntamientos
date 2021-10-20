@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Business;
 
 use App\Models\Busine;
-use App\Scopes\BusinessScope;
+use App\Scopes\UserInstanceScope;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -21,6 +21,7 @@ class BusinessComponent extends Component
         $search=null, $categorySelected=null, $instanceSelected=null,
         $sort='id',
         $sortDirection='desc',
+        $imgBussines,
 
         $listInstances,
         $listCategoryBusiness,
@@ -78,6 +79,11 @@ class BusinessComponent extends Component
         $this->setConfigModal('Añadir Comercio');
         $this->listCategoryBusiness = $this->getAllCategoryBusiness();
         $this->listInstances = $this->getAllInstace();
+
+        if(Auth::user()->rol != 'Super-Administrador'){
+            $this->instance_busine = (!is_null(Auth::user()->instances->first())?Auth::user()->instances->first()->id:null);
+
+        }
     }
 
     public function updatedSearch(){
@@ -93,7 +99,7 @@ class BusinessComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name', 'direccion', 'telefono', 'email', 'description', 'urlWeb', 'logo', 'category_busine', 'instance_busine', 'modalModeDestroy']);
+        $this->reset(['name', 'direccion', 'telefono', 'email', 'description', 'urlWeb', 'logo', 'category_busine', 'instance_busine', 'modalModeDestroy', 'imgBussines']);
         $this->resetErrorBag();
 
     }
@@ -121,9 +127,22 @@ class BusinessComponent extends Component
         $this->resetProps();
     }
 
+    public function edit(Busine $busine){
+        $this->setConfigModal('Editar comercio', 'fa-edit', 'edit');
+        $this->resetErrorBag();
+        $this->name = $busine->name;
+        $this->direccion = $busine->direccion;
+        $this->telefono = $busine->telefono;
+        $this->email = $busine->email;
+        $this->description = $busine->description;
+        $this->urlWeb = $busine->url_web;
+        $this->imgBussines = $busine->logo;
+        $this->category_busine = $busine->category_busine_id;
+        $this->instance_busine = $busine->instance_id;
+    }
+
     public function render()
     {
-
         $listBusiness = $this->getBusinessFiltered($this->search, $this->categorySelected, $this->instanceSelected, $this->sort, $this->sortDirection);
         return view('livewire.administrator.business-component', compact('listBusiness'))
             ->extends('layouts.app');

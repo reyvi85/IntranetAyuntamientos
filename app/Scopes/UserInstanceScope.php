@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Support\Facades\Auth;
 
-class BusinessScope implements Scope
+class UserInstanceScope implements Scope
 {
 
     public function apply(Builder $builder, Model $model)

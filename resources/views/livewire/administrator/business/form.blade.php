@@ -43,18 +43,23 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group col-md-6">
-        <label>Instancias:</label>
-        <select class="form-control @error('instance_busine') is-invalid @enderror" wire:model.defer="instance_busine">
-            <option value="">-- Instancias --</option>
-            @foreach($listInstances as $int)
-                <option value="{{$int->id}}">{{$int->name}}</option>
-            @endforeach
-        </select>
+    @if (auth()->user()->rol == 'Super-Administrador')
+        <div class="form-group col-md-6">
+            <label>Instancias:</label>
+            <select class="form-control @error('instance_busine') is-invalid @enderror" wire:model.defer="instance_busine">
+                <option value="">-- Instancias --</option>
+                @foreach($listInstances as $int)
+                    <option value="{{$int->id}}">{{$int->name}}</option>
+                @endforeach
+            </select>
+            @error('instance_busine')
+            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
+    @endif
         @error('instance_busine')
         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
         @enderror
-    </div>
 
     <div class="form-group col-md-6">
         <label>Categorías:</label>
@@ -64,9 +69,6 @@
                 <option value="{{$ctg->id}}">{{$ctg->name}}</option>
             @endforeach
         </select>
-        @error('category_busine')
-        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-        @enderror
     </div>
 </div>
 
@@ -93,8 +95,10 @@
                 <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
             </div>
 
-            @if ($logo)
+            @if ($logo && is_null($imgBussines))
                 <img class="img-fluid img-thumbnail rounded" src="{{ $logo->temporaryUrl() }}">
+                @else
+                <img class="img-fluid img-thumbnail rounded" src="{{asset($imgBussines)}}">
             @endif
         </div>
         </div>

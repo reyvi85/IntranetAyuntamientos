@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Scopes\BusinessScope;
+use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,6 +39,6 @@ class Busine extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new BusinessScope());
+        static::addGlobalScope(new UserInstanceScope());
     }
 }
