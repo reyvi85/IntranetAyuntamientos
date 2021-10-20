@@ -181,8 +181,8 @@ trait DataModels {
             ->when($search, function ($q) use($search){
                 $q->where('name','like','%'.$search.'%')
                     ->orWhere('direccion','like','%'.$search.'%')
-                    ->orWhere('telefonos','like','%'.$search.'%')
-                    ->orWhere('emails','like','%'.$search.'%')
+                    ->orWhere('telefono','like','%'.$search.'%')
+                    ->orWhere('email','like','%'.$search.'%')
                     ->orWhere('description','like','%'.$search.'%')
                     ->orWhere('url_web','like','%'.$search.'%');
             })
