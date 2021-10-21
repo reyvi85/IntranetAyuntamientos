@@ -7,7 +7,8 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\Instancias\InstanciasComponent,
     App\Http\Livewire\Usuarios\UsuariosComponent,
     App\Http\Livewire\CategoryBusinessComponent,
-    App\Http\Livewire\Business\BusinessComponent;
+    App\Http\Livewire\Business\BusinessComponent,
+    App\Http\Livewire\Business\ShowPublicBusiness;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,12 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function(){
     Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
     Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
     Route::get('/comercios', BusinessComponent::class)->name('business.index');
+});
+
+/** Componentes **/
+Route::prefix('component')->middleware('checkInstance')->group(function (){
+      Route::get('/bussines', ShowPublicBusiness::class)->name('business.show');
+
 });
 
 Auth::routes();

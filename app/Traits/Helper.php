@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Models\Instance;
 use Illuminate\Support\Str;
 
 trait Helper {
@@ -16,5 +17,9 @@ trait Helper {
 
     public function generateChar($leng=32){
         return Str::random($leng);
+    }
+
+    public function getCheckInstance($intanceKey){
+        return Instance::where('key', $intanceKey)->first();
     }
 }

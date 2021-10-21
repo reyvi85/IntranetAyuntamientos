@@ -173,7 +173,7 @@ trait DataModels {
     }
 
     /**
-     * Comercioes
+     * Comercios
      **/
 
     public function getBusinessFiltered($search = null, $category = null, $instance = null, $sort='id', $direction = 'desc'){
@@ -187,9 +187,7 @@ trait DataModels {
                     ->orWhere('url_web','like','%'.$search.'%');
             })
             ->when($category, function ($q) use($category){
-                $q->whereHas('category_busine', function (Builder $builder) use($category){
-                        $builder->where('id', $category);
-                });
+                $q->where('category_busine_id', $category);
             })
             ->when($instance, function ($q) use($instance){
                 $q->whereHas('instance', function (Builder $builder) use($instance){
@@ -198,6 +196,25 @@ trait DataModels {
             })
             ->orderBy($sort, $direction)
             ->paginate();
+    }
+
+    public function getBusinessPublic($key, $search = null, $category = null, $sort, $direction){
+        return Busine::with('category_busine')
+            ->when($search, function ($q) use($search){
+                $q->where('name','like','%'.$search.'%')
+                    ->orWhere('direccion','like','%'.$search.'%')
+                    ->orWhere('telefono','like','%'.$search.'%')
+                    ->orWhere('email','like','%'.$search.'%')
+                    ->orWhere('description','like','%'.$search.'%')
+                    ->orWhere('url_web','like','%'.$search.'%');
+            })
+            ->when($category, function ($q) use($category){
+                $q->where('category_busine_id', $category);
+            })->whereHas('instance', function (Builder $builder) use($key){
+                $builder->where('key', $key);
+            })
+            ->orderBy($sort, $direction)
+            ->paginate(2);
     }
 
 }
