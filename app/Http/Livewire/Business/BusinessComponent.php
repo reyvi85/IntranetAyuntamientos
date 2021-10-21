@@ -47,7 +47,7 @@ class BusinessComponent extends Component
                 'email'=>'nullable|email',
                 'description'=>'required',
                 'urlWeb'=>'required|url',
-                'logo'=>'required|image|max:1024',
+                'logo'=>'nullable|image|max:1024',
                 'category_busine'=>'required',
                 'instance_busine'=>'required|in:'.Auth::user()->instances->pluck('id')->implode(','),
             ];
@@ -59,7 +59,7 @@ class BusinessComponent extends Component
                 'email'=>'nullable|email',
                 'description'=>'required',
                 'urlWeb'=>'required|url',
-                'logo'=>'required|image|max:1024',
+                'logo'=>'nullable|image|max:1024',
                 'category_busine'=>'required',
                 'instance_busine'=>'required',
             ];
@@ -111,7 +111,11 @@ class BusinessComponent extends Component
 
     public function store(){
         $this->validate();
-        $img = $this->logo->store('images\business', 'public');
+        if($this->logo){
+            $img = $this->logo->store('images/business', 'public');
+        }else{
+            $img=null;
+        }
         Busine::create([
             'name'=>$this->name,
             'direccion'=>$this->direccion,
@@ -138,7 +142,7 @@ class BusinessComponent extends Component
         $this->email = $busine->email;
         $this->description = $busine->description;
         $this->urlWeb = $busine->url_web;
-        $this->imgBussines = $busine->logo;
+        $this->imgBussines = (is_null($busine->logo)?'images/no-image.jpg':$busine->logo);
         $this->category_busine = $busine->category_busine_id;
         $this->instance_busine = $busine->instance_id;
     }
@@ -148,6 +152,8 @@ class BusinessComponent extends Component
         if($this->logo){
             Storage::disk('public')->delete($busine->logo);
             $img = $this->logo->store('images\business', 'public');
+        }else{
+            $img = $busine->logo;
         }
 
         $busine->fill([

@@ -77,7 +77,10 @@
 <div class="row">
     <div class="col-md-8">
         <label for="exampleFormControlTextarea1">Descripción:</label>
-        <textarea class="form-control" id="basic-example" rows="8" wire:model.defer="description"></textarea>
+        <textarea class="form-control @error('description') is-invalid @enderror" id="basic-example" rows="10" wire:model.defer="description"></textarea>
+        @error('description')
+        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+        @enderror
     </div>
     <div class="col-md-4">
         <div class="form-group">
