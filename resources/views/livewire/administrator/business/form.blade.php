@@ -95,9 +95,9 @@
                 <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
             </div>
 
-            @if ($logo && is_null($imgBussines))
+            @if ($logo)
                 <img class="img-fluid img-thumbnail rounded" src="{{ $logo->temporaryUrl() }}">
-                @else
+                @elseif(!is_null($imgBussines))
                 <img class="img-fluid img-thumbnail rounded" src="{{asset($imgBussines)}}">
             @endif
         </div>

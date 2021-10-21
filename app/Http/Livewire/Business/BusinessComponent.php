@@ -106,11 +106,12 @@ class BusinessComponent extends Component
 
     public function add(){
         $this->resetProps();
+        $this->setConfigModal();
     }
 
     public function store(){
         $this->validate();
-        $img = $this->logo->store('images/business');
+        $img = $this->logo->store('images\business', 'public');
         Busine::create([
             'name'=>$this->name,
             'direccion'=>$this->direccion,
@@ -129,7 +130,8 @@ class BusinessComponent extends Component
 
     public function edit(Busine $busine){
         $this->setConfigModal('Editar comercio', 'fa-edit', 'edit');
-        $this->resetErrorBag();
+        $this->resetProps();
+        $this->busineSelected = $busine->id;
         $this->name = $busine->name;
         $this->direccion = $busine->direccion;
         $this->telefono = $busine->telefono;
@@ -139,6 +141,43 @@ class BusinessComponent extends Component
         $this->imgBussines = $busine->logo;
         $this->category_busine = $busine->category_busine_id;
         $this->instance_busine = $busine->instance_id;
+    }
+
+    public function update(Busine $busine){
+        $this->validate();
+        if($this->logo){
+            Storage::disk('public')->delete($busine->logo);
+            $img = $this->logo->store('images\business', 'public');
+        }
+
+        $busine->fill([
+            'name'=>$this->name,
+            'direccion'=>$this->direccion,
+            'telefono'=>$this->telefono,
+            'email'=>$this->email,
+            'description'=>$this->description,
+            'url_web'=>$this->urlWeb,
+            'logo'=>$img,
+            'category_busine_id'=>$this->category_busine,
+            'instance_id'=>$this->instance_busine,
+            'slug'=>Str::slug($this->name)
+        ])->save();
+        $this->emit('saveModal');
+        $this->resetProps();
+    }
+
+    public function trash(Busine $busine){
+        $this->busineSelected = $busine->id;
+        $this->setConfigModal('Eliminar', 'fa-trash', 'trash');
+        $this->modalModeDestroy = true;
+        $this->name = $busine->name;
+    }
+
+    public function destroy(Busine $busine){
+        Storage::disk('public')->delete($busine->logo);
+        $busine->delete();
+        $this->emit('saveModal');
+        $this->resetProps();
     }
 
     public function render()

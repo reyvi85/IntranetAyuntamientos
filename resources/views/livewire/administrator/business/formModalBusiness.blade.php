@@ -23,11 +23,11 @@
                     @break
 
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update({{$categorySelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update({{$busineSelected}})" wire:loading.attr="disabled"  wire:target="update, logo"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
-                    <button type="button" class="btn btn-danger" wire:click="destroy({{$categorySelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
+                    <button type="button" class="btn btn-danger" wire:click="destroy({{$busineSelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
                     @break
 
                 @endswitch

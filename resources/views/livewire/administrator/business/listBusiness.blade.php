@@ -52,7 +52,7 @@
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownOption" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu" aria-labelledby="dropdownOption">
                                 <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormBusiness" wire:click="edit({{$row->id}})" title="Editar comercio"><i class="fas fa-edit"></i> Editar</a>
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormBusiness" wire:click="edit({{$row->id}})" title="Eliminar comercio"><i class="fas fa-trash"></i> Eliminar</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormBusiness" wire:click="trash({{$row->id}})" title="Eliminar comercio"><i class="fas fa-trash"></i> Eliminar</a>
                             </div>
                         </div>
 
