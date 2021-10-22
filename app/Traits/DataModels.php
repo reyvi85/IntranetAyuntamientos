@@ -200,18 +200,21 @@ trait DataModels {
 
     public function getBusinessPublic($key, $search = null, $category = null, $sort, $direction){
         return Busine::with('category_busine')
+            ->whereHas('instance', function (Builder $builder) use($key){
+                $builder->where('key','like', '%'.$key.'%');
+            })
             ->when($search, function ($q) use($search){
-                $q->where('name','like','%'.$search.'%')
-                    ->orWhere('direccion','like','%'.$search.'%')
-                    ->orWhere('telefono','like','%'.$search.'%')
-                    ->orWhere('email','like','%'.$search.'%')
-                    ->orWhere('description','like','%'.$search.'%')
-                    ->orWhere('url_web','like','%'.$search.'%');
+                $q->where(function ($q) use ($search){
+                    $q->orWhere('name','like','%'.$search.'%')
+                        ->orWhere('direccion','like','%'.$search.'%')
+                        ->orWhere('telefono','like','%'.$search.'%')
+                        ->orWhere('email','like','%'.$search.'%')
+                        ->orWhere('description','like','%'.$search.'%')
+                        ->orWhere('url_web','like','%'.$search.'%');
+                });
             })
             ->when($category, function ($q) use($category){
                 $q->where('category_busine_id', $category);
-            })->whereHas('instance', function (Builder $builder) use($key){
-                $builder->where('key', $key);
             })
             ->orderBy($sort, $direction)
             ->paginate(16);

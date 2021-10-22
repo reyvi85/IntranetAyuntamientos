@@ -10,7 +10,7 @@ class ShowPublicBusiness extends Component
 {
     use DataModels, WithPagination;
 
-    public $listCategoryBussiness, $search=null, $categorySelected=null;
+    public $listCategoryBussiness, $search=null, $categorySelected=null, $viewList = false;
     public $keyInst;
     protected $paginationTheme = 'bootstrap';
 
