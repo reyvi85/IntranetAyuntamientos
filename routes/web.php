@@ -37,7 +37,7 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function(){
 
 /** Componentes **/
 Route::prefix('component')->middleware('checkInstance')->group(function (){
-      Route::get('/bussines', ShowPublicBusiness::class)->name('business.show');
+      Route::get('/business', ShowPublicBusiness::class)->name('business.show');
 
 });
 

@@ -214,7 +214,7 @@ trait DataModels {
                 $builder->where('key', $key);
             })
             ->orderBy($sort, $direction)
-            ->paginate(2);
+            ->paginate();
     }
 
 }

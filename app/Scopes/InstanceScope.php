@@ -14,7 +14,7 @@ class InstanceScope implements Scope
 
     public function apply(Builder $builder, Model $model)
     {
-        if(Auth::user()->rol != 'Super-Administrador'){
+        if(Auth::check() && Auth::user()->rol != 'Super-Administrador'){
             $builder->whereHas('users', function (Builder $q){
                 $q->where('user_id', Auth()->user()->id);
             });
