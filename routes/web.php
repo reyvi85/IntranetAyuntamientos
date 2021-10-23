@@ -9,6 +9,7 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\CategoryBusinessComponent,
     App\Http\Livewire\Business\BusinessComponent,
     App\Http\Livewire\Business\ShowPublicBusiness;
+use \Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,11 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function(){
     Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
     Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
     Route::get('/comercios', BusinessComponent::class)->name('business.index');
+
+    Route::get('cmd/{comando}', function($comando){
+            $cmd = Artisan::call($comando);
+            dd(Artisan::output());
+    });
 });
 
 /** Componentes **/

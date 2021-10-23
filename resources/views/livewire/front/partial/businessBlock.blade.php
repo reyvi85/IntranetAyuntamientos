@@ -1,9 +1,9 @@
 @php($aux = 0)
 @foreach($listBusiness as $item)
     @php($aux++)
-    @if ($aux %3 == 1)
-        <div class="row py-2">
-            @endif
+        @if ($aux %3 == 1)
+            <div class="row py-2">
+        @endif
             <div class="col-md-4 pt-2">
                 <div class="card">
                     <img class="card-img-top" src="{{asset((is_null($item->logo) || empty($item->logo))?'images/no-image.jpg':$item->logo)}}" alt="{{$item->name}}"  title="{{$item->name}}" width="100%" height="248px">
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            @if ($aux %3 == 0)
-        </div>
-    @endif
+        @if ($aux %3 == 0)
+             </div>
+        @endif
 @endforeach

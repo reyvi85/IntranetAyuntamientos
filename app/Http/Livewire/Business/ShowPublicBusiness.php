@@ -21,6 +21,28 @@ class ShowPublicBusiness extends Component
 
     }
 
+    public function updatedSearch(){
+        $this->resetPage();
+    }
+
+    public function updatedCategorySelected(){
+        $this->resetPage();
+    }
+
+    public function updatedViewList(){
+        $this->resetPage();
+    }
+
+    public function changeView(){
+        if($this->viewList){
+            $this->viewList = false;
+        }else{
+            $this->viewList = true;
+        }
+    }
+
+
+
     public function render()
     {
         $listBusiness = $this->getBusinessPublic($this->keyInst, $this->search, $this->categorySelected, $this->sort, $this->sortDirection);

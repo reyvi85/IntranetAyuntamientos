@@ -217,7 +217,7 @@ trait DataModels {
                 $q->where('category_busine_id', $category);
             })
             ->orderBy($sort, $direction)
-            ->paginate(16);
+            ->paginate(2);
     }
 
 }
