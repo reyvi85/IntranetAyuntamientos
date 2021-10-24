@@ -2,6 +2,7 @@
     <div class="form-group col-md-7">
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
     </div>
+
     <div class="form-group col-md-3">
         <select class="form-control" wire:model="filterRol">
             <option value="">-- Roles --</option>
@@ -40,7 +41,9 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" role="button" data-toggle="modal" data-target="#modalUsers" wire:click="edit({{$user->id}})"><i class="fas fa-edit"></i> Editar</a>
-                                <a class="dropdown-item" role="button" data-toggle="modal" data-target="#modalInstancias" wire:click="getUserInstance({{$user->id}})"><i class="fas fa-code"></i> Asignar instancia</a>
+                                @if (auth()->user()->rol !='Super-Administrador' && auth()->user()->instances->count() >1)
+                                    <a class="dropdown-item" role="button" data-toggle="modal" data-target="#modalInstancias" wire:click="getUserInstance({{$user->id}})"><i class="fas fa-code"></i> Asignar instancia</a>
+                                @endif
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" role="button" data-toggle="modal" data-target="#modalUsers" wire:click="trashUser({{$user->id}})"><i class="fas fa-trash"></i> Eliminar</a>
                             </div>
@@ -64,5 +67,8 @@
     </div>
 @endif
 @include('livewire.administrator.usuarios.formModal')
-@include('livewire.administrator.usuarios.instanciasModal')
+
+@if (auth()->user()->rol !='Super-Administrador' && auth()->user()->instances->count() >1)
+    @include('livewire.administrator.usuarios.instanciasModal')
+@endif
 

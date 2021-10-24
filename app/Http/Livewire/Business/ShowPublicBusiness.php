@@ -3,12 +3,12 @@
 namespace App\Http\Livewire\Business;
 
 use Livewire\Component;
-use App\Traits\DataModels,
+use App\Traits\DataFront,
     Livewire\WithPagination;
 
 class ShowPublicBusiness extends Component
 {
-    use DataModels, WithPagination;
+    use DataFront, WithPagination;
 
     public $listCategoryBussiness, $search=null, $categorySelected=null, $viewList = false;
     public $keyInst;

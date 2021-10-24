@@ -8,6 +8,7 @@ use App\Models\Instance;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 trait DataModels {
 
@@ -149,7 +150,7 @@ trait DataModels {
                 ->orWhere('email', 'like', '%'.$search.'%');
         })->when($rol, function ($q) use($rol){
             $q->orWhere('rol', 'like', $rol);
-        })
+        })->ForRole()
             ->orderBy($sort, $direction)
             ->paginate();
     }

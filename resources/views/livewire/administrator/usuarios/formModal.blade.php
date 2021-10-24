@@ -14,7 +14,7 @@
                 @else
                     <div class="form-group">
                         <label for="name">Nombre y apellidos:</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" wire:model="name">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" wire:model.defer="name">
                         @error('name')
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" wire:model="email">
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" wire:model.defer="email">
                         @error('email')
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -48,7 +48,7 @@
                                 @if ($formUpdate)
                                     <small class="form-text text-muted text-right">Rellenar solo si desea cambiar la contraseña!</small>
                                 @endif
-                            <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" wire:model="password">
+                            <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" wire:model.defer="password">
                             @error('password')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                             @enderror

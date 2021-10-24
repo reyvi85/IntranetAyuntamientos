@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\Scopes\InstanceScope;
+use App\Scopes\UserInstanceScope;
+use App\Scopes\UsersScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -52,4 +57,13 @@ class User extends Authenticatable
     {
         return $this->rol === $rol;
     }
+
+    public function scopeForRole($query){
+        if(Auth::check() && Auth::user()->rol != 'Super-Administrador') {
+            return $query->whereHas('instances', function (Builder $q) {
+                $q->whereIn('instance_id', Auth::user()->instances->pluck('id'));
+            });
+        }
+    }
+
 }
