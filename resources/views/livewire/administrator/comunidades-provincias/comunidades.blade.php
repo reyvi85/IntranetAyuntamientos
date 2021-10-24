@@ -50,7 +50,7 @@
             </tbody>
         </table>
     @else
-    <div class="text-center">No hay resultados que mostrar.</div>
+    <div class="text-center">No hay registros que mostrar.</div>
 @endif
 </div>
 @include('livewire.administrator.comunidades-provincias.formModal', ['modalName'=>'modalForm'])

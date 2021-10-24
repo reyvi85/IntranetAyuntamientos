@@ -37,7 +37,7 @@
 @else
     <div class="row mt-3">
         <div class="col-md-12 d-flex justify-content-center">
-           No hay resultados para su búsqueda!
+            No hay registros que mostrar!
         </div>
     </div>
 @endif

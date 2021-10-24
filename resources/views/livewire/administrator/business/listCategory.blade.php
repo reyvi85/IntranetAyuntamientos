@@ -36,8 +36,8 @@
             </tbody>
         </table>
     </div>
-    @include('livewire.administrator.business.formModalCategory')
 @else
     <p class="text-center text-muted">No hay categorías que mostrar!</p>
 @endif
 
+@include('livewire.administrator.business.formModalCategory')
