@@ -14,11 +14,13 @@ class CheckRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $role)
+    public function handle($request, Closure $next, ... $role)
     {
-        if(Auth::user()->rol != $role || Auth::user()->rol != 'Super-Administrador'){
+        if(!in_array(Auth::user()->rol, array_values($role))){
             abort(403);
         }
         return $next($request);
+
+
     }
 }

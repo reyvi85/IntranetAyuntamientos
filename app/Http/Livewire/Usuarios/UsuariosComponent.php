@@ -88,7 +88,6 @@ class UsuariosComponent extends Component
             'rol'=>$this->rol
         ]);
         if(auth()->user()->rol !='Super-Administrador'){
-            //$instance = auth()->user()->instances->last()->id;
            $user->instances()->sync(auth()->user()->instances->last());
         }
         $this->resetProps();
@@ -141,7 +140,6 @@ class UsuariosComponent extends Component
      */
     public function render()
     {
-        //dd(auth()->user()->instances()->sync([3]));
         $usuarios = $this->getAllUsers($this->search, $this->sort, $this->sortDirection, $this->filterRol);
         return view('livewire.administrator.usuarios-component', compact('usuarios'))
             ->extends('layouts.app');

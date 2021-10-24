@@ -28,7 +28,7 @@ Route::get('/', function () {
 //Route::get('/', UploadImg::class);
 
 
-Route::prefix('dashboard')->middleware(['auth'])->group(function(){
+Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])->group(function(){
     Route::get('/comunidades-provincias', ComunidadesProvinciasComponent::class)->name('comunidades.provincias');
     Route::get('/instancias', InstanciasComponent::class)->name('instancias');
     Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
@@ -40,6 +40,19 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function(){
             dd(Artisan::output());
     });
 });
+
+/**
+ * GESTIÓN DE MODULOS
+ **/
+
+Route::prefix('gestion')->middleware('auth')->group(function (){
+    Route::get('/usuarios', UsuariosComponent::class)->middleware(['checkRol:Administrador-Instancia,Super-Administrador'])->name('usuario.gestor');
+});
+
+
+
+
+
 
 /** Componentes **/
 Route::prefix('component')->middleware('checkInstance')->group(function (){

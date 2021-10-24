@@ -1,3 +1,3 @@
 <li class="nav-item">
-    <a class="nav-link" href="#">Link Admin INstancias</a>
+    <a class="nav-link" href="{{route('usuario.gestor')}}"><i class="fas fa-users"></i> Usuarios</a>
 </li>
