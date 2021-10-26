@@ -47,6 +47,13 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
 
 Route::prefix('gestion')->middleware('auth')->group(function (){
     Route::get('/usuarios', UsuariosComponent::class)->middleware(['checkRol:Administrador-Instancia,Super-Administrador'])->name('usuario.gestor');
+    /**
+     * GESTORES DE INSTANCIAS
+     */
+    Route::middleware(['checkRol:Super-Administrador,Administrador-Instancia,Gestor-Instancia'])->group(function(){
+        Route::get('/comercios', BusinessComponent::class)->name('gestion.business');
+    });
+
 });
 
 

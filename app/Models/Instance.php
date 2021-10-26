@@ -33,6 +33,10 @@ class Instance extends Model
         return $this->hasMany(Busine::class);
     }
 
+    public function interestPhones(){
+        return $this->hasMany(InterestPhone::class);
+    }
+
 
 
 

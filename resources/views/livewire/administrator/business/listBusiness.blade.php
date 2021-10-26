@@ -1,25 +1,31 @@
 @include('component.loading')
 <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?4:7}}">
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
     </div>
-    <div class="form-group col-md-3">
-        <select class="form-control" wire:model="instanceSelected">
-            <option value="">-- Instancias --</option>
-            @foreach($listInstances as $int)
-                <option value="{{$int->id}}">{{$int->name}}</option>
-            @endforeach
-        </select>
-    </div>
 
-    <div class="form-group col-md-3">
-        <select class="form-control" wire:model="categorySelected">
-            <option value="">-- Categorías --</option>
-            @foreach($listCategoryBusiness as $ctg)
-                <option value="{{$ctg->id}}">{{$ctg->name}}</option>
-            @endforeach
-        </select>
-    </div>
+    @if (auth()->user()->rol =='Super-Administrador')
+        <div class="form-group col-md-3">
+            <select class="form-control" wire:model="instanceSelected">
+                <option value="">-- Instancias --</option>
+                @foreach($listInstances as $int)
+                    <option value="{{$int->id}}">{{$int->name}}</option>
+                @endforeach
+            </select>
+        </div>
+    @endif
+
+        <div class="form-group col-md-3">
+            <select class="form-control" wire:model="categorySelected">
+                <option value="">-- Categorías --</option>
+                @foreach($listCategoryBusiness as $ctg)
+                    <option value="{{$ctg->id}}">{{$ctg->name}}</option>
+                @endforeach
+            </select>
+        </div>
+
+
+
     <div class="form-group col-md-2">
         <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormBusiness" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
     </div>
