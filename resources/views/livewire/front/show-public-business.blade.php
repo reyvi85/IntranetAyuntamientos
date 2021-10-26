@@ -17,7 +17,7 @@
                         </select>
                     </div>
                     <div class="col-md-1 text-center">
-                        <i class="fas {{($viewList)?'fa-th-list':'fa-th-large'}} fa-2x align-middle"  wire:click="changeView()" style="cursor: pointer"></i>&nbsp;
+                        <i class="fas {{($viewList)?'fa-th-large':'fa-th-list'}} fa-2x align-middle"  wire:click="changeView()" style="cursor: pointer"></i>&nbsp;
                     </div>
                 </div>
 

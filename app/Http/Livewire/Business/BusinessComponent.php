@@ -79,10 +79,8 @@ class BusinessComponent extends Component
         $this->setConfigModal('Añadir Comercio');
         $this->listCategoryBusiness = $this->getAllCategoryBusiness();
         $this->listInstances = $this->getAllInstace();
-
         if(Auth::user()->rol != 'Super-Administrador'){
             $this->instance_busine = (!is_null(Auth::user()->instances->first())?Auth::user()->instances->first()->id:null);
-
         }
     }
 
