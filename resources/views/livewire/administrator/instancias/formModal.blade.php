@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label for="Municipio">Municipio:</label>
                             <input type="text" class="form-control @error('municipio') is-invalid @enderror" id="Municipio" wire:model="municipio">
                             @error('municipio')
@@ -58,10 +58,18 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
                             <label for="Barrio">Barrio:</label>
                             <input type="text" class="form-control @error('barrio') is-invalid @enderror" id="Barrio" wire:model="barrio">
                             @error('barrio')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <label for="Barrio">Código postal:</label>
+                            <input type="text" class="form-control @error('postal_code') is-invalid @enderror" id="Barrio" wire:model="postal_code">
+                            @error('postal_code')
                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                             @enderror
                         </div>

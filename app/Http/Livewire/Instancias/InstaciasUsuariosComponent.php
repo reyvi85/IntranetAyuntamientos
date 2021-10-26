@@ -10,20 +10,23 @@ class InstaciasUsuariosComponent extends Component
 {
     use DataModels;
 
-    public $instaceSlecteds = [], $search=null, $userName, $userSelected, $limitInstance = 5;
+    public $instaceSlecteds = [], $instanceUsers,$search=null, $userName, $userSelected, $limitInstance = 5;
 
     protected $listeners = ['getUserSelected'];
 
 
     public function mount(){
-       $this->instaceSlecteds = collect();
+       $this->instanceUsers = collect();
     }
 
     public function getUserSelected(User $user){
         $this->userName = $user->name;
         $this->userSelected  = $user->id;
         $this->reset(['instaceSlecteds', 'search', 'limitInstance']);
-        foreach ($this->getInstanceWithUser($user->id) as $key=>$value){
+        $this->instanceUsers = $this->getInstanceWithUser($user->id);
+
+
+        foreach ($this->instanceUsers as $key=>$value){
             $this->instaceSlecteds[$value->id] = $value->id;
         }
     }

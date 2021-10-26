@@ -16,6 +16,7 @@ class InstanciasComponent extends Component
         $instanceSelected,
         $municipio,
         $barrio,
+        $postal_code,
         $key,
         $selectedCommunity = null,
         $selectedProvince = null,
@@ -30,13 +31,15 @@ class InstanciasComponent extends Component
         'selectedCommunity'=>'required',
         'selectedProvince'=>'required',
         'municipio'=>'required',
+        'postal_code'=>'required',
         'key'=>'required|unique:instances'
     ];
     protected $messages = [
         'name.required'=>'El Nombre de Instancia es requerido!',
         'selectedCommunity.required'=>'Debe seleccionar una Comunidad!',
         'selectedProvince.required'=>'Debe seleccionar una Provincia!',
-        'key.unique'=>'Esta Key Token ya esta en uso!'
+        'key.unique'=>'Esta Key Token ya esta en uso!',
+        'postal_code.required'=>'El Código postal es requerido'
     ];
 
     public function mount(){
@@ -58,7 +61,7 @@ class InstanciasComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['instanceSelected','name', 'selectedCommunity', 'selectedProvince', 'provincias', 'municipio', 'barrio', 'key']);
+        $this->reset(['instanceSelected','name', 'selectedCommunity', 'selectedProvince', 'provincias', 'municipio', 'barrio', 'postal_code','key']);
         $this->setConfigModal();
         $this->resetErrorBag();
         $this->generateNewToken();
@@ -86,6 +89,7 @@ class InstanciasComponent extends Component
            'province_id'=>$this->selectedProvince ,
            'municipio'=>$this->municipio,
            'barrio'=>$this->barrio,
+           'postal_code'=>$this->postal_code,
            'key'=>$this->key
        ]);
         $this->resetProps();
@@ -102,6 +106,7 @@ class InstanciasComponent extends Component
         $this->name = $instance->name;
         $this->municipio = $instance->municipio;
         $this->barrio = $instance->barrio;
+        $this->postal_code = $instance->postal_code;
         $this->key = $instance->key;
     }
 
@@ -112,6 +117,7 @@ class InstanciasComponent extends Component
             'selectedCommunity'=>'required',
             'selectedProvince'=>'required',
             'municipio'=>'required',
+            'postal_code'=>'required',
             'key'=>'required|unique:instances,key,'.$instance->id,
         ]);
         $instance->fill([
@@ -119,6 +125,7 @@ class InstanciasComponent extends Component
             'province_id'=>$this->selectedProvince ,
             'municipio'=>$this->municipio,
             'barrio'=>$this->barrio,
+            'postal_code'=>$this->postal_code,
             'key'=>$this->key
         ])->save();
         $this->resetProps();

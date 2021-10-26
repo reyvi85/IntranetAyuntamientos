@@ -17,6 +17,7 @@
                     <li class="list-group-item"><span class="font-weight-bold text-uppercase">Provincia: </span> {{$row->province->name}}</li>
                     <li class="list-group-item"> <span class="font-weight-bold text-uppercase">Municipio: </span> {{$row->municipio}}</li>
                     <li class="list-group-item"> <span class="font-weight-bold text-uppercase">Barrio: </span> {{$row->barrio}}</li>
+                    <li class="list-group-item"> <span class="font-weight-bold text-uppercase">Código POstal: </span> {{(is_null($row->postal_code)?'-':$row->postal_code)}}</li>
                     <li class="list-group-item"> <span class="font-weight-bold text-uppercase">Key:</span>  {{$row->key}}</li>
                     <li class="list-group-item d-flex justify-content-end">
                         <a class="btn btn-primary mr-2" role="button" data-toggle="modal" data-target="#modalInstancia" wire:click="edit('{{$row->id}}')"><i class="fas fa-edit"></i> Editar</a>

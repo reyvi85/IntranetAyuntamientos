@@ -17,6 +17,7 @@ class Instance extends Model
         'province_id' ,
         'municipio',
         'barrio',
+        'postal_code',
         'key'
     ];
 

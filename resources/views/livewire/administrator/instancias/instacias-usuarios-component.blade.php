@@ -15,6 +15,20 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            @if ($instanceUsers->count())
+                <span class="text-uppercase font-weight-bold">Instancias asociadas: </span>
+                @foreach($instanceUsers as $inst)
+                    <a style="cursor: pointer" class="badge badge-secondary text-lg-right" wire:click="$set('search', '{{$inst->name}}')">{{$inst->name}}</a>&nbsp;
+                @endforeach
+            @else
+                <p class="text-center text-muted">No hay usuarios para esta instancia!</p>
+            @endif
+
+        </div>
+    </div>
+
    @if ($instancias->count())
         <div class="table-responsive">
             <table class="table">
