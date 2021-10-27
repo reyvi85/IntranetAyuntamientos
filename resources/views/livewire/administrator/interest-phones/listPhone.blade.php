@@ -5,7 +5,7 @@
     </div>
 
     <div class="form-group col-md-2">
-        <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormBusiness" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
+        <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalForm" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
     </div>
 </div>
 
@@ -28,7 +28,10 @@
                     <td>{{$tlf->name}}</td>
                     <td>{{$tlf->description}}</td>
                     <td>{{$tlf->phone}}</td>
-                    <td></td>
+                    <td>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="edit({{$tlf->id}})" title="Editar comercio"><i class="fas fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$tlf->id}})" title="Eliminar comercio"><i class="fas fa-trash"></i></a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -45,4 +48,4 @@
 @else
     <p class="text-center text-muted">No hay teléfonos que mostrar!</p>
 @endif
-
+@include('livewire.administrator.interest-phones.formModal')

@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Auth;
 
 trait DataModels {
 
-    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected, $listInstance;
+    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected,
+        $listInstance;
+
+    public function __construct()
+    {
+        $this->listInstance = collect();
+    }
 
     /** Método para ordenar colecciones
      * @param $sort
