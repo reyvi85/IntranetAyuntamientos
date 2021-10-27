@@ -13,7 +13,7 @@
 
 @if ($telefonos->count())
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Nombre</th>
