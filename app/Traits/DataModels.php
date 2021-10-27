@@ -5,6 +5,7 @@ use App\Models\Busine;
 use App\Models\CategoryBusine;
 use App\Models\Community;
 use App\Models\Instance;
+use App\Models\InterestPhone;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 trait DataModels {
 
-    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false ;
+    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected, $listInstance;
 
     /** Método para ordenar colecciones
      * @param $sort
@@ -28,6 +29,24 @@ trait DataModels {
             $this->sort = $sort;
             $this->sortDirection = 'asc';
         }
+    }
+
+    public function checkInstanceForUser(){
+        if(Auth::user()->rol != 'Super-Administrador'){
+            if (is_null(auth()->user()->instances->last())){
+                abort(403,'NO tiene instancia asignada');
+            }else{
+                $this->instanceSelected = auth()->user()->instances->last()->id;
+            }
+            if (auth()->user()->instances->count() > 1){
+                $this->listInstance = $this->getAllInstace();
+            }
+        }else{
+            $this->listInstance = $this->getAllInstace();
+        }
+    }
+    public function updatedSearch(){
+        $this->resetPage();
     }
 
     /** Generar configuracion del Modal
@@ -199,7 +218,7 @@ trait DataModels {
             ->paginate();
     }
 
-    public function getBusinessPublic($key, $search = null, $category = null, $sort, $direction){
+   /* public function getBusinessPublic($key, $search = null, $category = null, $sort, $direction){
         return Busine::with('category_busine')
             ->whereHas('instance', function (Builder $builder) use($key){
                 $builder->where('key','like', '%'.$key.'%');
@@ -219,6 +238,20 @@ trait DataModels {
             })
             ->orderBy($sort, $direction)
             ->paginate(16);
+    }*/
+
+    public function getAllPhone($search = null, $sort, $direction){
+        $InterestPhone= InterestPhone::when($search, function ($q) use($search){
+            $q->where('name','like','%'.$search.'%')
+                ->orWhere('description','like','%'.$search.'%')
+                ->orWhere('phone','like','%'.$search.'%');
+        })
+            ->orderBy($sort, $direction)
+            ->paginate();
+        if(Auth::user()->rol == 'SuperAdministrador'){
+            $InterestPhone->load('instance');
+        }
+        return $InterestPhone;
     }
 
 }

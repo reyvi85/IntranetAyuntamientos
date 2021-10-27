@@ -9,5 +9,7 @@
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{route('category-business')}}"><i class="fas fa-th-list"></i> Categorías de comercios</a>
         <a class="dropdown-item" href="{{route('business.index')}}"><i class="fas fa-euro-sign"></i> Comercios</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{route('phones.index')}}"><i class="fas fa-phone"></i> Teléfonos</a>
     </div>
 </li>

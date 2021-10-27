@@ -4,7 +4,7 @@
         @slot('titulo')Teléfonos de interés @endslot
         <div class="row">
             <div class="col-md-12">
-                @include('livewire.administrator.interest-phones.listPhone)
+                @include('livewire.administrator.interest-phones.listPhone')
             </div>
         </div>
     @endcomponent

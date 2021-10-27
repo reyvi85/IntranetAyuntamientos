@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Traits\DataModels;
 use Livewire\WithPagination;
@@ -10,16 +11,39 @@ class InterestPhonesComponent extends Component
 {
     use DataModels, WithPagination;
 
-    public $name, $description, $phone, $instanceSelected, $phoneSelected, $listInstance;
+    protected $paginationTheme = 'bootstrap';
+
+    public $search, $name, $description, $phone, $instance_id, $phoneSelected;
+
+    protected function rules(){
+        if(Auth::user()->rol != 'Super-Administrador'){
+            return [
+                'name'=>'required',
+                'description'=>'nullable',
+                'phone'=>'required'
+            ];
+        }else{
+            return [
+                'name'=>'required',
+                'description'=>'nullable',
+                'phone'=>'required',
+                'instance_id'=>'required'
+            ];
+        }
+    }
+
+    public function mount(){
+        $this->checkInstanceForUser();
+    }
 
     protected $rules = [
-        'name'=>'required',
-        'description'=>'nullable',
-        'phone'=>'required'
+
     ];
 
     public function render()
     {
-        return view('livewire.interest-phones-component');
+        $telefonos = $this->getAllPhone($this->search, $this->sort, $this->sortDirection);
+        return view('livewire.administrator.interest-phones-component', compact('telefonos'))
+            ->extends('layouts.app');
     }
 }

@@ -8,7 +8,8 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\Usuarios\UsuariosComponent,
     App\Http\Livewire\CategoryBusinessComponent,
     App\Http\Livewire\Business\BusinessComponent,
-    App\Http\Livewire\Business\ShowPublicBusiness;
+    App\Http\Livewire\Business\ShowPublicBusiness,
+    App\Http\Livewire\InterestPhonesComponent;
 use \Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,7 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
     Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
     Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
     Route::get('/comercios', BusinessComponent::class)->name('business.index');
+    Route::get('/telefonos', InterestPhonesComponent::class)->name('phones.index');
 
     Route::get('cmd/{comando}', function($comando){
             $cmd = Artisan::call($comando);
@@ -52,6 +54,8 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
      */
     Route::middleware(['checkRol:Super-Administrador,Administrador-Instancia,Gestor-Instancia'])->group(function(){
         Route::get('/comercios', BusinessComponent::class)->name('gestion.business');
+
+        Route::get('/telefonos', InterestPhonesComponent::class)->name('gestion.phones');
     });
 
 });
