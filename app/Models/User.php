@@ -27,7 +27,8 @@ class User extends Authenticatable
         'email',
         'password',
         'api_token',
-        'rol'
+        'rol',
+        'instance_id'
     ];
 
     /**
@@ -49,8 +50,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function instances(){
-        return $this->belongsToMany(Instance::class)->withTimestamps();
+    public function instance(){
+        return $this->belongsTo(Instance::class);
     }
 
     public function isRole($rol)
@@ -60,9 +61,7 @@ class User extends Authenticatable
 
     public function scopeForRole($query){
         if(Auth::check() && Auth::user()->rol != 'Super-Administrador') {
-            return $query->whereHas('instances', function (Builder $q) {
-                $q->whereIn('instance_id', Auth::user()->instances->pluck('id'));
-            });
+            return $query->where('instance_id', Auth::user()->instance_id);
         }
     }
 

@@ -15,7 +15,7 @@ class UserInstanceScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         if(Auth::check() && Auth::user()->rol != 'Super-Administrador'){
-            $builder->whereIn('instance_id',Auth::user()->instances->pluck('id'));
+            $builder->where('instance_id',Auth::user()->instance_id);
         }
     }
 }

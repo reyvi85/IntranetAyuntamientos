@@ -42,6 +42,7 @@ class UsuariosComponent extends Component
 
 
     public function mount(){
+        $this->checkInstanceForUser();
         $this->setConfigModal();
         $this->listRoles = $this->getUsersRoles();
         $this->password = $this->generateChar(10);

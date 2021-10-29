@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Scopes\InstanceScope;
+use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +26,7 @@ class Instance extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->hasMany(User::class);
     }
 
     public function business(){
@@ -44,7 +44,7 @@ class Instance extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new InstanceScope());
+        static::addGlobalScope(new UserInstanceScope());
     }
 
 

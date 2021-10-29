@@ -57,8 +57,8 @@
                         <div class="form-group col-md-4 align-self-end d-flex align-items-start">
                             <button class="btn btn-primary btn-block" wire:click="generateNewPass" wire:loading.attr="disabled"><i class="fas fa-spinner fa-spin" wire:loading wire:target="generateNewPass"></i> Generar</button>
                         </div>
-
                     </div>
+                    @include('livewire.partial.comboInstancias')
                 @endif
             </div>
             <div class="modal-footer">

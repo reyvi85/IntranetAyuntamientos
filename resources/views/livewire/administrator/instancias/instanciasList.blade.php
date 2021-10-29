@@ -21,7 +21,6 @@
                     <li class="list-group-item"> <span class="font-weight-bold text-uppercase">Key:</span>  {{$row->key}}</li>
                     <li class="list-group-item d-flex justify-content-end">
                         <a class="btn btn-primary mr-2" role="button" data-toggle="modal" data-target="#modalInstancia" wire:click="edit('{{$row->id}}')"><i class="fas fa-edit"></i> Editar</a>
-                        <a class="btn btn-secondary mr-2" role="button" data-toggle="modal" data-target="#modalUsers" wire:click="selectInstance({{$row->id}})"><i class="fas fa-users"></i> Asignar usuarios</a>
                         <a class="btn btn-danger" role="button" data-toggle="modal" data-target="#modalInstancia" wire:click="trashInstance('{{$row->id}}')"><i class="fas fa-trash"></i> Eliminar</a>
                     </li>
                 </ul>
@@ -44,6 +43,5 @@
 @endif
 
 @include('livewire.administrator.instancias.formModal')
-@include('livewire.administrator.instancias.usuariosModal')
 
 

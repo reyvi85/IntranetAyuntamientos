@@ -13,7 +13,6 @@
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
             $('#modalUsers').modal('hide');
-            $('#modalInstancias').modal('hide');
         });
     </script>
 @endsection

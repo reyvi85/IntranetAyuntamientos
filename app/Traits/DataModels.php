@@ -39,14 +39,7 @@ trait DataModels {
 
     public function checkInstanceForUser(){
         if(Auth::user()->rol != 'Super-Administrador'){
-            if (is_null(auth()->user()->instances->last())){
-                abort(403,'NO tiene instancia asignada');
-            }else{
-                $this->instanceSelected = auth()->user()->instances->last()->id;
-            }
-            if (auth()->user()->instances->count() > 1){
-                $this->listInstance = $this->getAllInstace();
-            }
+            $this->instanceSelected = auth()->user()->instance_id;
         }else{
             $this->listInstance = $this->getAllInstace();
         }
@@ -135,12 +128,12 @@ trait DataModels {
             ->get();
     }
 
-    public function getInstanceWithUser($userId){
+    /*public function getInstanceWithUser($userId){
         return Instance::whereHas('users', function(Builder $q) use($userId){
             $q->where('user_id', $userId);
         })
             ->get();
-    }
+    }*/
 
     public function getAllUsersWhithFilter($busqueda = null, $limit = null, $rol =null){
         return User::when($busqueda, function ($q) use ($busqueda){
@@ -156,12 +149,12 @@ trait DataModels {
             ->get();
     }
 
-    public function getUserWithInstance($instanceId){
+   /* public function getUserWithInstance($instanceId){
         return User::whereHas('instances', function(Builder $q) use($instanceId){
             $q->where('instance_id', $instanceId);
         })
             ->get();
-    }
+    }*/
 
     public function getAllInstace(){
         return Instance::all();
