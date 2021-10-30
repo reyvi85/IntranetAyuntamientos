@@ -26,7 +26,7 @@ class UsuariosComponent extends Component
         $listRoles,
        // $listInstances,
         $userSelected = null,
-        $userSelectedInstance = null,
+        //$userSelectedInstance = null,
         $modalModeDestroy = false,
         $formUpdate = false,
         $sortDirection = 'desc';
@@ -39,6 +39,12 @@ class UsuariosComponent extends Component
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'rol'=>['required','in:'.$this->getUsersRoles()->implode(',')],
+            'instanceSelected'=>'required'
+        ];
+    }
+    protected function messages(){
+        return [
+            'instanceSelected.required'=>'Debe seleccionar una instancia!'
         ];
     }
 
@@ -77,10 +83,10 @@ class UsuariosComponent extends Component
         $this->password = $this->generateChar(10);
     }
 
-    public function getUserInstance($userId){
+   /* public function getUserInstance($userId){
         $this->emit('getUserSelected', $userId);
         $this->userSelectedInstance = $userId;
-    }
+    }*/
 
     public function store(){
        $this->validate();
@@ -89,7 +95,7 @@ class UsuariosComponent extends Component
             'email'=>$this->email,
             'password'=>Hash::make($this->password),
             'rol'=>$this->rol,
-            'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id
+            'instance_id'=>$this->instanceSelected
         ]);
         $this->resetProps();
     }
@@ -102,7 +108,7 @@ class UsuariosComponent extends Component
         $this->email = $user->email;
         $this->password = null;
         $this->rol = $user->rol;
-        $this->instance_id = $user->instance_id;
+        $this->instanceSelected = $user->instance_id;
         $this->formUpdate=true;
         $this->setConfigModal('Editar usuario', 'fa-edit','edit');
 
@@ -114,11 +120,12 @@ class UsuariosComponent extends Component
             'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
             'password' => ' nullable|string|min:8',
             'rol'=>['required','in:'.$this->getUsersRoles()->implode(',')],
+            'instanceSelected'=>'required'
         ]);
         if(is_null($this->password)){
-            $data = ['name'=>$this->name, 'email'=>$this->email, 'rol'=>$this->rol, 'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id];
+            $data = ['name'=>$this->name, 'email'=>$this->email, 'rol'=>$this->rol, 'instance_id'=>$this->instanceSelected];
         }else{
-            $data = ['name'=>$this->name, 'email'=>$this->email, 'password'=>Hash::make($this->password) ,'rol'=>$this->rol, 'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id];
+            $data = ['name'=>$this->name, 'email'=>$this->email, 'password'=>Hash::make($this->password) ,'rol'=>$this->rol, 'instance_id'=>$this->instanceSelected];
         }
         $user->fill($data)->save();
         $this->resetProps();

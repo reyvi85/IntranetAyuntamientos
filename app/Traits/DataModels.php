@@ -240,11 +240,13 @@ trait DataModels {
             ->paginate(16);
     }*/
 
-    public function getAllPhone($search = null, $sort, $direction){
+    public function getAllPhone($search = null, $instancia=null, $sort, $direction){
         $InterestPhone= InterestPhone::when($search, function ($q) use($search){
             $q->where('name','like','%'.$search.'%')
                 ->orWhere('description','like','%'.$search.'%')
                 ->orWhere('phone','like','%'.$search.'%');
+        })->when($instancia, function ($q) use($instancia){
+            $q->where('instance_id',$instancia);
         })
             ->orderBy($sort, $direction)
             ->paginate();

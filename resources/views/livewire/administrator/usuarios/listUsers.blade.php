@@ -6,6 +6,7 @@
     @if (auth()->user()->rol =='Super-Administrador')
         <div class="form-group col-md-3">
             @php($label = false)
+            @php($ModelName = 'instance_id')
             @include('livewire.partial.comboInstancias')
 
         </div>
@@ -23,6 +24,8 @@
         <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalUsers" wire:click="addUser"><i class="fas fa-plus-circle"></i> Añadir</a>
     </div>
 </div>
+<hr>
+{{$instanceSelected}}
 @if ($usuarios->count())
     <div class="table-responsive">
         <table class="table table-striped">

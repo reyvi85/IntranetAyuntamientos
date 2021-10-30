@@ -60,6 +60,7 @@
                     </div>
                     <div class="form-group">
                         @php($label = true)
+                        @php($ModelName = 'instanceSelected')
                         @include('livewire.partial.comboInstancias')
                     </div>
                 @endif

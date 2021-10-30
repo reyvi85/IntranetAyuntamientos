@@ -14,7 +14,7 @@
                 @else
                 <div class="form-group">
                     <label for="formGroupExampleInput">Nombre:</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="formGroupExampleInput" wire:model="name">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="formGroupExampleInput" wire:model.defer="name">
                     @error('name')
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror
@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                         <label for="formGroupExampleInput">Descripción:</label>
-                        <input type="text" class="form-control @error('description') is-invalid @enderror" id="formGroupExampleInput" wire:model="description">
+                        <input type="text" class="form-control @error('description') is-invalid @enderror" id="formGroupExampleInput" wire:model.defer="description">
                         @error('description')
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
@@ -30,13 +30,14 @@
 
                     <div class="form-group">
                         <label for="formGroupExampleInput">Teléfono:</label>
-                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="formGroupExampleInput" wire:model="phone">
+                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="formGroupExampleInput" wire:model.defer="phone">
                         @error('phone')
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
-
-                    @include('livewire.partial.comboInstancias')
+                        @php($label = true)
+                        @php($ModelName = 'instanceSelected')
+                        @include('livewire.partial.comboInstancias')
                 @endif
             </div>
             <div class="modal-footer">
@@ -51,11 +52,11 @@
                     @break
 
                     @case('trash')
-                    <button type="button" class="btn btn-danger" wire:click="destroy({{$phoneSelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
+                    <button type="button" class="btn btn-danger" wire:click="destroy({{$phoneSelected}})" wire:target="destroy" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
                     @break
 
                 @endswitch
-                <div class="text-center text-muted" wire:loading wire:target="update_phone, destroy"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="text-center text-muted" wire:loading wire:target="store, update_phone, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>

@@ -17,20 +17,12 @@ class InterestPhonesComponent extends Component
     public $search, $name, $description, $phone, $instance_id, $phoneSelected;
 
     protected function rules(){
-        if(Auth::user()->rol != 'Super-Administrador'){
-            return [
-                'name'=>'required',
-                'description'=>'nullable',
-                'phone'=>'required'
-            ];
-        }else{
             return [
                 'name'=>'required',
                 'description'=>'nullable',
                 'phone'=>'required',
-                'instance_id'=>'required'
+                'instanceSelected'=>'required'
             ];
-        }
     }
 
     protected $messages =[
@@ -72,7 +64,7 @@ class InterestPhonesComponent extends Component
         $this->name = $interestPhone->name;
         $this->description = $interestPhone->description;
         $this->phone = $interestPhone->phone;
-        $this->instance_id = $interestPhone->instance_id;
+        $this->instanceSelected = $interestPhone->instance_id;
     }
 
     public function update_phone(InterestPhone $interestPhone){
@@ -81,7 +73,7 @@ class InterestPhonesComponent extends Component
             'name'=>$this->name,
             'description'=>$this->description,
             'phone'=>$this->phone,
-            'instance_id'=>$this->instance_id
+            'instance_id'=>$this->instanceSelected
         ])->save();
 
         $this->emit('saveModal');
@@ -89,6 +81,7 @@ class InterestPhonesComponent extends Component
 
     public function trash(InterestPhone $interestPhone){
         $this->modalModeDestroy =true;
+        $this->phoneSelected = $interestPhone->id;
         $this->setConfigModal('Eliminar teléfono', 'fa-trash', 'trash');
         $this->name = $interestPhone->name;
     }
@@ -102,9 +95,8 @@ class InterestPhonesComponent extends Component
 
     public function render()
     {
-        $listInstances  = $this->listInstance;
-        $telefonos = $this->getAllPhone($this->search, $this->sort, $this->sortDirection);
-        return view('livewire.administrator.interest-phones-component', compact('telefonos', 'listInstances'))
+        $telefonos = $this->getAllPhone($this->search, $this->instance_id, $this->sort, $this->sortDirection);
+        return view('livewire.administrator.interest-phones-component', compact('telefonos'))
             ->extends('layouts.app');
     }
 }

@@ -43,9 +43,13 @@
 </div>
 
 <div class="form-row">
-    <div class="form-group col-md-6">
-        @include('livewire.partial.comboInstancias')
-    </div>
+    @if (auth()->user()->rol == 'Super-Administrador')
+        <div class="form-group col-md-6">
+            @php($label = true)
+            @php($ModelName = 'instanceSelected')
+            @include('livewire.partial.comboInstancias')
+        </div>
+    @endif
 
     <div class="form-group col-md-6">
         <label>Categorías:</label>

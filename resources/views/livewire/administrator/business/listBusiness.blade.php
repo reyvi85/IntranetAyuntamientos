@@ -7,6 +7,7 @@
     @if (auth()->user()->rol =='Super-Administrador')
         <div class="form-group col-md-3">
                 @php($label = false)
+            @php($ModelName = 'instance_id')
             @include('livewire.partial.comboInstancias')
 
         </div>

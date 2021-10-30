@@ -38,7 +38,6 @@ class BusinessComponent extends Component
 
 
     protected function rules(){
-        if(Auth::user()->rol != 'Super-Administrador'){
             return [
                 'name'=>'required',
                 'direccion'=>'required',
@@ -48,26 +47,14 @@ class BusinessComponent extends Component
                 'urlWeb'=>'required|url',
                 'logo'=>'nullable|image|max:1024',
                 'category_busine'=>'required',
+                'instanceSelected'=>'required',
             ];
-        }else{
-            return [
-                'name'=>'required',
-                'direccion'=>'required',
-                'telefono'=>'nullable',
-                'email'=>'nullable|email',
-                'description'=>'required',
-                'urlWeb'=>'required|url',
-                'logo'=>'nullable|image|max:1024',
-                'category_busine'=>'required',
-                'instance_busine'=>'required',
-            ];
-        }
     }
 
     protected function messages(){
         return [
             'category_busine.required'=>'Debe seleccionar una categoría!',
-            'instance_busine.required'=>'Debe seleccionar una instancia!'
+            'instanceSelected.required'=>'Debe seleccionar una instancia!'
         ];
     }
 
@@ -94,7 +81,7 @@ class BusinessComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name', 'direccion', 'telefono', 'email', 'description', 'urlWeb', 'logo', 'category_busine', 'instance_busine', 'modalModeDestroy', 'imgBussines']);
+        $this->reset(['name', 'direccion', 'telefono', 'email', 'description', 'urlWeb', 'logo', 'category_busine', 'modalModeDestroy', 'imgBussines']);
         $this->resetErrorBag();
 
     }
@@ -120,7 +107,7 @@ class BusinessComponent extends Component
             'url_web'=>$this->urlWeb,
             'logo'=>$img,
             'category_busine_id'=>$this->category_busine,
-            'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id,
+            'instance_id'=>$this->instanceSelected,
             'slug'=>Str::slug($this->name)
         ]);
         $this->emit('saveModal');
@@ -139,7 +126,7 @@ class BusinessComponent extends Component
         $this->urlWeb = $busine->url_web;
         $this->imgBussines = (is_null($busine->logo)?'images/no-image.jpg':$busine->logo);
         $this->category_busine = $busine->category_busine_id;
-        $this->instance_id = $busine->instance_id;
+        $this->instanceSelected = $busine->instance_id;
     }
 
     public function update(Busine $busine){
@@ -160,7 +147,7 @@ class BusinessComponent extends Component
             'url_web'=>$this->urlWeb,
             'logo'=>$img,
             'category_busine_id'=>$this->category_busine,
-            'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id,
+            'instance_id'=>$this->instanceSelected,
             'slug'=>Str::slug($this->name)
         ])->save();
         $this->emit('saveModal');
