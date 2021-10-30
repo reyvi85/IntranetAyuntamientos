@@ -25,7 +25,6 @@
     </div>
 </div>
 <hr>
-{{$instanceSelected}}
 @if ($usuarios->count())
     <div class="table-responsive">
         <table class="table table-striped">
