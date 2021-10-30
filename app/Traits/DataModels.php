@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 trait DataModels {
 
     public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected,
-        $listInstance;
+        $listInstance, $instance_id;
 
     public function __construct()
     {
@@ -161,16 +161,19 @@ trait DataModels {
     }
 
 
-    public function getAllUsers($search = null, $sort='id', $direction='desc', $rol = null)
+    public function getAllUsers($search = null, $instancia = null, $sort='id', $direction='desc', $rol = null)
     {
         return User::when($search, function ($q) use($search){
             $q->where('name', 'like', '%'.$search.'%')
                 ->orWhere('email', 'like', '%'.$search.'%');
         })->when($rol, function ($q) use($rol){
             $q->orWhere('rol', 'like', $rol);
-        })->ForRole()
-            ->orderBy($sort, $direction)
-            ->paginate();
+        })->when($instancia, function ($q) use($instancia){
+            $q->where('instance_id', $instancia);
+        })
+         //   ->ForRole()
+          ->orderBy($sort, $direction)
+          ->paginate();
     }
 
     /**
@@ -209,9 +212,7 @@ trait DataModels {
                 $q->where('category_busine_id', $category);
             })
             ->when($instance, function ($q) use($instance){
-                $q->whereHas('instance', function (Builder $builder) use($instance){
-                        $builder->where('id', $instance);
-                });
+                $q->where('instance_id', $instance);
             })
             ->orderBy($sort, $direction)
             ->paginate();

@@ -1,7 +1,15 @@
 <div class="form-row">
-    <div class="form-group col-md-7">
+    <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?4:7}}">
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
     </div>
+
+    @if (auth()->user()->rol =='Super-Administrador')
+        <div class="form-group col-md-3">
+            @php($label = false)
+            @include('livewire.partial.comboInstancias')
+
+        </div>
+    @endif
 
     <div class="form-group col-md-3">
         <select class="form-control" wire:model="filterRol">

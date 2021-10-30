@@ -6,12 +6,9 @@
 
     @if (auth()->user()->rol =='Super-Administrador')
         <div class="form-group col-md-3">
-            <select class="form-control" wire:model="instanceSelected">
-                <option value="">-- Instancias --</option>
-                @foreach($listInstances as $int)
-                    <option value="{{$int->id}}">{{$int->name}}</option>
-                @endforeach
-            </select>
+                @php($label = false)
+            @include('livewire.partial.comboInstancias')
+
         </div>
     @endif
 
@@ -30,7 +27,6 @@
         <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormBusiness" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
     </div>
 </div>
-
 <hr>
 @if ($listBusiness->count())
     <div class="table-responsive">

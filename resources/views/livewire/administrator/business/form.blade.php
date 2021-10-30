@@ -43,23 +43,9 @@
 </div>
 
 <div class="form-row">
-    @if (auth()->user()->rol == 'Super-Administrador')
-        <div class="form-group col-md-6">
-            <label>Instancias:</label>
-            <select class="form-control @error('instance_busine') is-invalid @enderror" wire:model.defer="instance_busine">
-                <option value="">-- Instancias --</option>
-                @foreach($listInstances as $int)
-                    <option value="{{$int->id}}">{{$int->name}}</option>
-                @endforeach
-            </select>
-            @error('instance_busine')
-            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-            @enderror
-        </div>
-    @endif
-        @error('instance_busine')
-        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-        @enderror
+    <div class="form-group col-md-6">
+        @include('livewire.partial.comboInstancias')
+    </div>
 
     <div class="form-group col-md-6">
         <label>Categorías:</label>

@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Usuarios;
 
 use App\Models\User;
 use App\Traits\Helper;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use App\Traits\DataModels;
@@ -23,6 +24,7 @@ class UsuariosComponent extends Component
         $filterRol=null ,
         $sort='id',
         $listRoles,
+       // $listInstances,
         $userSelected = null,
         $userSelectedInstance = null,
         $modalModeDestroy = false,
@@ -56,7 +58,7 @@ class UsuariosComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name','email', 'rol','formUpdate', 'userSelected', 'modalModeDestroy']);
+        $this->reset(['name','email', 'rol','formUpdate', 'userSelected', 'modalModeDestroy', 'instance_id']);
         $this->setConfigModal();
         $this->resetErrorBag();
         $this->generateNewPass();
@@ -86,11 +88,9 @@ class UsuariosComponent extends Component
             'name'=>$this->name,
             'email'=>$this->email,
             'password'=>Hash::make($this->password),
-            'rol'=>$this->rol
+            'rol'=>$this->rol,
+            'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id
         ]);
-        if(auth()->user()->rol !='Super-Administrador'){
-           $user->instances()->sync(auth()->user()->instances->last());
-        }
         $this->resetProps();
     }
 
@@ -102,6 +102,7 @@ class UsuariosComponent extends Component
         $this->email = $user->email;
         $this->password = null;
         $this->rol = $user->rol;
+        $this->instance_id = $user->instance_id;
         $this->formUpdate=true;
         $this->setConfigModal('Editar usuario', 'fa-edit','edit');
 
@@ -115,9 +116,9 @@ class UsuariosComponent extends Component
             'rol'=>['required','in:'.$this->getUsersRoles()->implode(',')],
         ]);
         if(is_null($this->password)){
-            $data = ['name'=>$this->name, 'email'=>$this->email, 'rol'=>$this->rol];
+            $data = ['name'=>$this->name, 'email'=>$this->email, 'rol'=>$this->rol, 'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id];
         }else{
-            $data = ['name'=>$this->name, 'email'=>$this->email, 'password'=>Hash::make($this->password) ,'rol'=>$this->rol];
+            $data = ['name'=>$this->name, 'email'=>$this->email, 'password'=>Hash::make($this->password) ,'rol'=>$this->rol, 'instance_id'=>(auth()->user()->rol !='Super-Administrador')?$this->instanceSelected:$this->instance_id];
         }
         $user->fill($data)->save();
         $this->resetProps();
@@ -141,7 +142,7 @@ class UsuariosComponent extends Component
      */
     public function render()
     {
-        $usuarios = $this->getAllUsers($this->search, $this->sort, $this->sortDirection, $this->filterRol);
+        $usuarios = $this->getAllUsers($this->search, $this->instance_id, $this->sort, $this->sortDirection, $this->filterRol);
         return view('livewire.administrator.usuarios-component', compact('usuarios'))
             ->extends('layouts.app');
     }

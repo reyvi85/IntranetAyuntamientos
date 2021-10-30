@@ -65,4 +65,18 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        if(Auth::check() && Auth::user()->rol != 'Super-Administrador') {
+            static::addGlobalScope('instance', function (Builder $builder) {
+                $builder->where('instance_id', Auth::user()->instance_id);
+            });
+        }
+    }
+
 }

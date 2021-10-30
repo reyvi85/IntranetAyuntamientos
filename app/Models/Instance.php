@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use App\Scopes\UserInstanceScope;
-use Illuminate\Database\Eloquent\Builder;
+use App\Scopes\InstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Instance extends Model
 {
@@ -44,7 +42,7 @@ class Instance extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new UserInstanceScope());
+        static::addGlobalScope(new InstanceScope());
     }
 
 
