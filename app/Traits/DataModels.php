@@ -10,17 +10,16 @@ use App\Models\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+
 
 trait DataModels {
 
-    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected, $routeName,
+    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected,
         $listInstance, $instance_id;
 
     public function __construct()
     {
         $this->listInstance = collect();
-        $this->routeName = Route::currentRouteName();
     }
 
     /** Método para ordenar colecciones

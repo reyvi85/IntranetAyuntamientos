@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use App\Traits\Helper;
+use Illuminate\Support\Facades\Auth;
 
 
 class CheckPermissionModules
@@ -19,9 +20,11 @@ class CheckPermissionModules
      */
     public function handle(Request $request, Closure $next)
     {
-
-       // dd(Route::currentRouteName());
-        $perm = $this->modulosApp()->whereIn('id', [1,2]);
+       if(Auth::user()->rol !='Super-Administrador'){
+            if (!$this->getCheckAccessModules()){
+                abort(403,'No tiene Acceso al módulo: '.$this->getModuleNameAccess());
+            }
+        }
         return $next($request);
     }
 }

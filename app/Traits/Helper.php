@@ -5,8 +5,14 @@ use App\Models\Instance;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 
 trait Helper {
+
+
+    public function getRouteName(){
+       return Route::currentRouteName();
+    }
 
     public function getUsersRoles(){
         $roles = [1=>'Super-Administrador', 2=>'Administrador-Instancia', 3=>'Gestor-Instancia', 4=>'Usuarios'];
@@ -17,6 +23,22 @@ trait Helper {
         }
         return $data;
 
+    }
+
+    /**
+     * @return bool
+     * Comprobar acceso a modulos de instancia segun ruta
+     */
+    public function getCheckAccessModules(){
+        $instancePermission = Auth::user()->instance->modulos;
+        $modulos = $this->modulosApp()->where('routeName', $this->getRouteName());
+        $access = $modulos->whereIn('id', $instancePermission);
+        return ($access->count())?true:false;
+    }
+
+    public function getModuleNameAccess(){
+        $mod = $this->modulosApp()->where('routeName', $this->getRouteName())->first();
+        return $mod['modulo'];
     }
 
     public function generateChar($leng=32){
