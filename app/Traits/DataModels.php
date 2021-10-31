@@ -10,15 +10,17 @@ use App\Models\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 trait DataModels {
 
-    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected,
+    public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected, $routeName,
         $listInstance, $instance_id;
 
     public function __construct()
     {
         $this->listInstance = collect();
+        $this->routeName = Route::currentRouteName();
     }
 
     /** Método para ordenar colecciones
@@ -149,13 +151,6 @@ trait DataModels {
             ->get();
     }
 
-   /* public function getUserWithInstance($instanceId){
-        return User::whereHas('instances', function(Builder $q) use($instanceId){
-            $q->where('instance_id', $instanceId);
-        })
-            ->get();
-    }*/
-
     public function getAllInstace(){
         return Instance::all();
     }
@@ -217,28 +212,6 @@ trait DataModels {
             ->orderBy($sort, $direction)
             ->paginate();
     }
-
-   /* public function getBusinessPublic($key, $search = null, $category = null, $sort, $direction){
-        return Busine::with('category_busine')
-            ->whereHas('instance', function (Builder $builder) use($key){
-                $builder->where('key','like', '%'.$key.'%');
-            })
-            ->when($search, function ($q) use($search){
-                $q->where(function ($q) use ($search){
-                    $q->orWhere('name','like','%'.$search.'%')
-                        ->orWhere('direccion','like','%'.$search.'%')
-                        ->orWhere('telefono','like','%'.$search.'%')
-                        ->orWhere('email','like','%'.$search.'%')
-                        ->orWhere('description','like','%'.$search.'%')
-                        ->orWhere('url_web','like','%'.$search.'%');
-                });
-            })
-            ->when($category, function ($q) use($category){
-                $q->where('category_busine_id', $category);
-            })
-            ->orderBy($sort, $direction)
-            ->paginate(16);
-    }*/
 
     public function getAllPhone($search = null, $instancia=null, $sort, $direction){
         $InterestPhone= InterestPhone::when($search, function ($q) use($search){

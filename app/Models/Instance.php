@@ -16,7 +16,12 @@ class Instance extends Model
         'municipio',
         'barrio',
         'postal_code',
-        'key'
+        'key',
+        'modulos'
+    ];
+
+    protected $casts = [
+        'modulos'=>'array'
     ];
 
     public function province(){

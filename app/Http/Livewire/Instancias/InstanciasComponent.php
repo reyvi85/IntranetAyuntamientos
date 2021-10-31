@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Instancias;
 
 use App\Models\Instance;
+use App\Traits\Helper;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\DataModels;
+use Illuminate\Support\Facades\Route;
 class InstanciasComponent extends Component
 {
-    use DataModels;
+    use DataModels, Helper;
     use WithPagination;
 
     public $name,
@@ -18,12 +20,16 @@ class InstanciasComponent extends Component
         $barrio,
         $postal_code,
         $key,
+
+        $modulos,
+       // $modulosSelecteds,
+        $listaModulos,
+
         $selectedCommunity = null,
         $selectedProvince = null,
         $provincias = null,
-        $search = null,
-        $modalModeDestroy = false,
-        $modalConfig = [];
+        $search = null;
+        //$modalModeDestroy = false;
 
     protected $paginationTheme = 'bootstrap';
     protected $rules =[
@@ -43,11 +49,9 @@ class InstanciasComponent extends Component
     ];
 
     public function mount(){
-       $this->modalConfig = [
-           'titulo'=>'Crear Instancia',
-           'icon'=>'fa-plus-circle',
-           'action'=>'add'
-       ];
+        $this->listaModulos = $this->modulosApp();
+        $this->modulos = [];
+       $this->setConfigModal('Crear Instancia');
        $this->key = Str::random(64);
       // dd($this->getAllInstancias());
     }
@@ -61,11 +65,11 @@ class InstanciasComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['instanceSelected','name', 'selectedCommunity', 'selectedProvince', 'provincias', 'municipio', 'barrio', 'postal_code','key']);
+        $this->reset(['instanceSelected','name', 'selectedCommunity', 'selectedProvince', 'provincias', 'municipio', 'barrio', 'postal_code','key', 'modulos']);
         $this->setConfigModal();
         $this->resetErrorBag();
         $this->generateNewToken();
-        $this->emit('saveModal');
+
     }
 
     public function updatedSearch(){
@@ -77,26 +81,44 @@ class InstanciasComponent extends Component
         $this->provincias = $this->getProvince($community_id);
     }
 
-
     public function generateNewToken(){
         $this->key = Str::random(64);
     }
 
+    public function add(){
+        $this->resetProps();
+    }
+
+    private function addPermission(){
+        $permission=[];
+        if($this->modulos){
+            foreach($this->modulos as $mod){
+                if ($mod){
+                    $permission[] = $mod;
+                }
+            }
+        }
+        return $permission;
+    }
+
     public function storeInstance(){
         $this->validate();
+
        Instance::create([
            'name'=>$this->name,
            'province_id'=>$this->selectedProvince ,
            'municipio'=>$this->municipio,
            'barrio'=>$this->barrio,
            'postal_code'=>$this->postal_code,
-           'key'=>$this->key
+           'key'=>$this->key,
+           'modulos'=>$this->addPermission()
        ]);
         $this->resetProps();
-       // $this->emit('saveModal');
+        $this->emit('saveModal');
     }
 
     public function edit(Instance $instance){
+       $this->resetProps();
         $this->instanceSelected = $instance->id;
         $this->modalModeDestroy = false;
         $this->setConfigModal('Editar instancia', 'fa-edit','edit');
@@ -108,6 +130,12 @@ class InstanciasComponent extends Component
         $this->barrio = $instance->barrio;
         $this->postal_code = $instance->postal_code;
         $this->key = $instance->key;
+
+        if (is_array($instance->modulos) && count($instance->modulos)){
+            foreach ($instance->modulos as $value){
+                $this->modulos[$value]=$value;
+            }
+        }
     }
 
     public function updateInstance(Instance $instance)
@@ -126,9 +154,11 @@ class InstanciasComponent extends Component
             'municipio'=>$this->municipio,
             'barrio'=>$this->barrio,
             'postal_code'=>$this->postal_code,
-            'key'=>$this->key
+            'key'=>$this->key,
+            'modulos'=>$this->addPermission()
         ])->save();
         $this->resetProps();
+        $this->emit('saveModal');
     }
 
     public function trashInstance(Instance $instance){
@@ -142,7 +172,7 @@ class InstanciasComponent extends Component
        $instance->delete();
        $this->resetProps();
        $this->modalModeDestroy = false;
-       $this->setConfigModal('Crear Instancia');
+        $this->emit('saveModal');
     }
 
     public function selectInstance($instance){

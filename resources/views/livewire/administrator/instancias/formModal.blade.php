@@ -87,7 +87,17 @@
                            <button class="btn btn-primary btn-block" wire:click="generateNewToken" wire:loading.attr="disabled"><i class="fas fa-spinner fa-spin" wire:loading wire:target="generateNewToken"></i> Generar token</button>
                        </div>
                    </div>
-
+                    <div class="form-group">
+                        <label class="font-weight-bold text-uppercase"><i class="fas fa-key"></i> Acceso a Módulos:</label>
+                        @foreach ($listaModulos as $key=>$mod)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" wire:model="modulos.{{$mod['id']}}" value="{{$mod['id']}}" id="CheckPermission-{{$key}}">
+                                <label class="form-check-label" for="CheckPermission-{{$key}}">
+                                    {{$mod['modulo']}}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
                 @endif
             </div>
             <div class="modal-footer">

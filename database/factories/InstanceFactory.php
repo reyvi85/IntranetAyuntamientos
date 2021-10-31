@@ -27,6 +27,7 @@ class InstanceFactory extends Factory
             'province_id'=>rand(1,50),
             'municipio'=>$this->faker->word(),
             'barrio'=>$this->faker->word(),
+            'postal_code'=>$this->faker->randomNumber(5),
             'key'=>Str::random(64)
         ];
     }

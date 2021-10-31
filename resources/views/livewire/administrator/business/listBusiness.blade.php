@@ -21,9 +21,6 @@
                 @endforeach
             </select>
         </div>
-
-
-
     <div class="form-group col-md-2">
         <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormBusiness" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
     </div>
