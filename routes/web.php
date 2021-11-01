@@ -9,7 +9,9 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\CategoryBusinessComponent,
     App\Http\Livewire\Business\BusinessComponent,
     App\Http\Livewire\Business\ShowPublicBusiness,
-    App\Http\Livewire\InterestPhonesComponent;
+    App\Http\Livewire\InterestPhonesComponent,
+    App\Http\Livewire\Notifications\CategoryNotificationComponent,
+    App\Http\Livewire\Notifications\NotificationComponent;
 use \Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -36,9 +38,11 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
     Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
     Route::get('/comercios', BusinessComponent::class)->name('business.index');
     Route::get('/telefonos', InterestPhonesComponent::class)->name('phones.index');
+    Route::get('/categorias-notificaciones', CategoryNotificationComponent::class)->name('category.notifications');
+    Route::get('/notificaciones', NotificationComponent::class)->name('notifications.index');
 
     Route::get('cmd/{comando}', function($comando){
-            $cmd = Artisan::call($comando);
+            Artisan::call($comando);
             dd(Artisan::output());
     });
 });

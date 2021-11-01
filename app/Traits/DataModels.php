@@ -3,6 +3,7 @@ namespace App\Traits;
 
 use App\Models\Busine;
 use App\Models\CategoryBusine;
+use App\Models\CategoryNotification;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\InterestPhone;
@@ -213,19 +214,27 @@ trait DataModels {
     }
 
     public function getAllPhone($search = null, $instancia=null, $sort, $direction){
-        $InterestPhone= InterestPhone::when($search, function ($q) use($search){
+        return InterestPhone::when($search, function ($q) use($search){
             $q->where('name','like','%'.$search.'%')
                 ->orWhere('description','like','%'.$search.'%')
                 ->orWhere('phone','like','%'.$search.'%');
-        })->when($instancia, function ($q) use($instancia){
-            $q->where('instance_id',$instancia);
-        })
+            })->when($instancia, function ($q) use($instancia){
+                 $q->where('instance_id',$instancia);
+            })
             ->orderBy($sort, $direction)
             ->paginate();
-        if(Auth::user()->rol == 'SuperAdministrador'){
-            $InterestPhone->load('instance');
-        }
-        return $InterestPhone;
+    }
+    /**
+     * NOtificaciones
+    **/
+    public function getCategoryNotification($search = null, $instancia=null, $sort, $direction){
+        return CategoryNotification::when($search, function ($q) use($search){
+                    $q->where('name','like','%'.$search.'%');
+                })->when($instancia, function ($q) use($instancia){
+                     $q->where('instance_id',$instancia);
+                })
+                ->orderBy($sort, $direction)
+                ->paginate();
     }
 
 }

@@ -22,7 +22,7 @@ class CategoryNotificationFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->word(),
+            'name'=>$this->faker->sentence(4),
             'instance_id'=>rand(1,25)
         ];
     }
