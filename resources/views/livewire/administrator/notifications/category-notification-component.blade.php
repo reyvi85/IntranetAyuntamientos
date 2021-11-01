@@ -25,7 +25,8 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Nombre</th>
+                    <th scope="col" wire:click="order('name')">Nombre</th>
+                    <th class="text-center" scope="col" wire:click="order('notifications_count')">Notificaciones</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -33,6 +34,7 @@
                 @foreach($listCategoryNotification as $item)
                 <tr>
                     <td>{{$item->name}}</td>
+                    <td class="text-center">{{$item->notifications_count}}</td>
                     <td class="float-lg-right">
                         <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="edit({{$item->id}})" title="Editar comercio"><i class="fas fa-edit"></i></a>
                         <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="trash({{$item->id}})" title="Eliminar comercio"><i class="fas fa-trash"></i></a>

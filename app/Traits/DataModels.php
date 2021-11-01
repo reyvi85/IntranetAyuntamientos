@@ -234,7 +234,7 @@ trait DataModels {
      * NOtificaciones
     **/
     public function getCategoryNotification($search = null, $instancia=null, $sort, $direction){
-        return CategoryNotification::when($search, function ($q) use($search){
+        return CategoryNotification::withCount('notifications')->when($search, function ($q) use($search){
                     $q->where('name','like','%'.$search.'%');
                 })->when($instancia, function ($q) use($instancia){
                      $q->where('instance_id',$instancia);
