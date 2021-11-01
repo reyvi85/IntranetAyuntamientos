@@ -7,7 +7,7 @@
     @if (auth()->user()->rol =='Super-Administrador')
         <div class="form-group col-md-3">
                 @php($label = false)
-            @php($ModelName = 'instance_id')
+            @php($ModelName = 'instancias')
             @include('livewire.partial.comboInstancias')
 
         </div>
@@ -31,7 +31,6 @@
         <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
-                <th scope="col" wire:click="order('id')" style="cursor: pointer">ID</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Email</th>
                 <th scope="col">Teléfono</th>
@@ -42,7 +41,6 @@
             <tbody>
             @foreach($listBusiness as $row)
                 <tr>
-                    <th scope="row">{{$row->id}}</th>
                     <td>{{$row->name}}</td>
                     <td>{{$row->email}}</td>
                     <td>{{$row->telefono}}</td>

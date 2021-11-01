@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 trait DataModels {
 
     public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected,
-        $listInstance, $instance_id;
+        $listInstance, $instancias;
 
     public function __construct()
     {
@@ -49,6 +49,11 @@ trait DataModels {
     public function updatedSearch(){
         $this->resetPage();
     }
+    public function updatedInstancias(){
+        $this->resetPage();
+    }
+
+
 
     /** Generar configuracion del Modal
      * @param string $titulo

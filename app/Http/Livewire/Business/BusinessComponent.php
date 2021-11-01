@@ -17,13 +17,14 @@ class BusinessComponent extends Component
     use DataModels, WithPagination, WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
+
     public $busineSelected, $modalModeDestroy = false,
         $search=null, $categorySelected=null,
         $sort='id',
         $sortDirection='desc',
         $imgBussines,
 
-        $listInstances,
+      //  $listInstances,
         $listCategoryBusiness,
 
         $name,
@@ -64,7 +65,7 @@ class BusinessComponent extends Component
         $this->indentificadorLogo = rand();
         $this->setConfigModal('Añadir Comercio');
         $this->listCategoryBusiness = $this->getAllCategoryBusiness();
-        $this->listInstances = $this->getAllInstace();
+       // $this->listInstances = $this->getAllInstace();
 
     }
 
@@ -170,7 +171,7 @@ class BusinessComponent extends Component
 
     public function render()
     {
-        $listBusiness = $this->getBusinessFiltered($this->search, $this->categorySelected, $this->instance_id, $this->sort, $this->sortDirection);
+        $listBusiness = $this->getBusinessFiltered($this->search, $this->categorySelected, $this->instancias, $this->sort, $this->sortDirection);
         return view('livewire.administrator.business-component', compact('listBusiness'))
             ->extends('layouts.app');
     }

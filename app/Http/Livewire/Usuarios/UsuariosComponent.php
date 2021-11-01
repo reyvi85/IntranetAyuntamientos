@@ -24,6 +24,7 @@ class UsuariosComponent extends Component
         $filterRol=null ,
         $sort='id',
         $listRoles,
+
        // $listInstances,
         $userSelected = null,
         //$userSelectedInstance = null,
@@ -64,7 +65,7 @@ class UsuariosComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name','email', 'rol','formUpdate', 'userSelected', 'modalModeDestroy', 'instance_id']);
+        $this->reset(['name','email', 'rol','formUpdate', 'userSelected', 'modalModeDestroy', 'instancias']);
         $this->setConfigModal();
         $this->resetErrorBag();
         $this->generateNewPass();
@@ -149,7 +150,7 @@ class UsuariosComponent extends Component
      */
     public function render()
     {
-        $usuarios = $this->getAllUsers($this->search, $this->instance_id, $this->sort, $this->sortDirection, $this->filterRol);
+        $usuarios = $this->getAllUsers($this->search, $this->instancias, $this->sort, $this->sortDirection, $this->filterRol);
         return view('livewire.administrator.usuarios-component', compact('usuarios'))
             ->extends('layouts.app');
     }

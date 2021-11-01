@@ -35,7 +35,7 @@ class InterestPhonesComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name', 'description', 'phone', 'instance_id', 'modalModeDestroy']);
+        $this->reset(['name', 'description', 'phone', 'instanceSelected', 'modalModeDestroy']);
         $this->resetErrorBag();
     }
 
@@ -95,7 +95,7 @@ class InterestPhonesComponent extends Component
 
     public function render()
     {
-        $telefonos = $this->getAllPhone($this->search, $this->instance_id, $this->sort, $this->sortDirection);
+        $telefonos = $this->getAllPhone($this->search, $this->instancias, $this->sort, $this->sortDirection);
         return view('livewire.administrator.interest-phones-component', compact('telefonos'))
             ->extends('layouts.app');
     }
