@@ -53,14 +53,13 @@ class InstanciasComponent extends Component
         $this->modulos = [];
        $this->setConfigModal('Crear Instancia');
        $this->key = Str::random(64);
-      // dd($this->getAllInstancias());
     }
 
     public function render()
     {
-        $instancias = $this->getInstancias($this->search);
+        $instanciasList = $this->getInstancias($this->search);
         $comunidades = $this->getCommunity();
-        return view('livewire.administrator.instancias-component', compact('instancias', 'comunidades'))
+        return view('livewire.administrator.instancias-component', compact('instanciasList','comunidades'))
             ->extends('layouts.app');
     }
 

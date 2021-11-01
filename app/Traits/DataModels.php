@@ -21,6 +21,7 @@ trait DataModels {
     public function __construct()
     {
         $this->listInstance = collect();
+        //$this->instancias = collect();
     }
 
     /** Método para ordenar colecciones

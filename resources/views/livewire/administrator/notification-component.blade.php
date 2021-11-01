@@ -8,6 +8,7 @@
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
             <a>Notificaciones</a>
+
         </div>
 
         <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">

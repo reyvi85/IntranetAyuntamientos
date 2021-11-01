@@ -7,10 +7,10 @@
         </div>
     </div>
 
-    @if ($instancias->count())
+    @if ($instanciasList->count())
     <div class="row">
         <div class="col-md-12">
-            @foreach($instancias as $row)
+            @foreach($instanciasList as $row)
                 <ul class="list-group mt-2">
                     <li class="list-group-item active"><h5><i class="fas fa-university"></i> {{$row->name}}</h5></li>
                     <li class="list-group-item"><span class="font-weight-bold text-uppercase">Comunidad: </span> {{$row->province->community->name}}</li>
@@ -31,7 +31,7 @@
 
     <div class="row mt-3">
         <div class="col-md-12 d-flex justify-content-end">
-            {{$instancias->links()}}
+            {{$instanciasList->links()}}
         </div>
     </div>
 @else

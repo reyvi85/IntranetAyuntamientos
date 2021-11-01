@@ -38,6 +38,12 @@ class CategoryNotificationComponent extends Component
 
     public function store(){
         $this->validate();
+        CategoryNotification::create([
+            'name'=>$this->name,
+            'instance_id'=>$this->instanceSelected
+        ]);
+        $this->emit('saveModal');
+        $this->resetProps();
 
     }
 
@@ -62,6 +68,7 @@ class CategoryNotificationComponent extends Component
     public function trash(CategoryNotification $categoryNotification){
         $this->setConfigModal('Eliminar categoría', 'fa-trash', 'trash');
         $this->name = $categoryNotification->name;
+        $this->categorySelected = $categoryNotification->id;
         $this->modalModeDestroy = true;
     }
 
@@ -74,7 +81,6 @@ class CategoryNotificationComponent extends Component
     public function render()
     {
         $listCategoryNotification = $this->getCategoryNotification($this->search,$this->instancias, $this->sort, $this->sortDirection);
-        return view('livewire.administrator.notifications.category-notification-component', compact('listCategoryNotification'))
-            ->extends('layouts.app');
+        return view('livewire.administrator.notifications.category-notification-component', compact('listCategoryNotification'));
     }
 }

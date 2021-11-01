@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 @if ($modalModeDestroy)
-                    <h3 class="text-center"> Confirma realmente que desea eliminar el usuario<br> <span class="text-danger font-weight-bolder">{{$name}}</span>?</h3>
+                    <h3 class="text-center"> Confirma realmente que desea eliminar esta categoría<br> <span class="text-danger font-weight-bolder">{{$name}}</span>?</h3>
                 @else
                     <div class="form-group">
                         <label for="name">Nombre:</label>
