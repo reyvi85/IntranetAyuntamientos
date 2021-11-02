@@ -20,7 +20,7 @@ class CategoryNotificationComponent extends Component
     protected $messages =[
         'instanceSelected.required'=>'Debe seleccionar una instancia'
     ];
-    public $search, $name, $categorySelected, $pageName='categoryPage';
+    public $search, $name, $categorySelected;
 
     public function mount(){
         $this->resetPage();

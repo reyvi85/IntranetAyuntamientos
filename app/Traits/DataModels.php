@@ -247,12 +247,30 @@ trait DataModels {
                 ->paginate();
     }
 
-    public function getAllNotifications($search = null){
-        return Notification::with('category_notification')
-            ->when($search, function ($q) use($search){
+    public function getAllCategoryNotifications($instancia=null){
+        return CategoryNotification::when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
+            ->orderBy('name', 'asc')
+            ->get();
+    }
+
+    public function getAllNotifications($search = null,  $instancia=null, $category = null, $sort, $direction){
+        $notifications = Notification::when($search, function ($q) use($search){
                 $q->where('titulo','like','%'.$search.'%');
             })
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
+            ->when($category, function ($q) use($category){
+                $q->where('category_notification_id', $category);
+            })
+            ->orderBy($sort, $direction)
             ->paginate();
+        if($notifications->count()){
+            $notifications->load('category_notification');
+        }
+        return $notifications;
     }
 
 }
