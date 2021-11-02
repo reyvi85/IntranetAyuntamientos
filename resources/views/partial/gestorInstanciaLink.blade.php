@@ -7,5 +7,7 @@
         <a class="dropdown-item" href="{{route('gestion.business')}}"><i class="fas fa-euro-sign"></i> Comercios</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{route('gestion.phones')}}"><i class="fas fa-phone"></i> Teléfonos de interés</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{route('gestion.notifications')}}"><i class="fas fa-bell"></i> Notificaciones</a>
     </div>
 </li>

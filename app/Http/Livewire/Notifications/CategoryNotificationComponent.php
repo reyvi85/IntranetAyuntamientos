@@ -12,6 +12,7 @@ class CategoryNotificationComponent extends Component
     use DataModels, WithPagination;
 
     protected $paginationTheme = 'bootstrap';
+
     protected $rules = [
         'name'=>'required',
         'instanceSelected'=>'required'
@@ -19,15 +20,16 @@ class CategoryNotificationComponent extends Component
     protected $messages =[
         'instanceSelected.required'=>'Debe seleccionar una instancia'
     ];
-    public $search, $name, $categorySelected;
+    public $search, $name, $categorySelected, $pageName='categoryPage';
 
     public function mount(){
+        $this->resetPage();
        $this->checkInstanceForUser();
        $this->setConfigModal();
     }
 
     public function resetProps(){
-        $this->reset(['name', 'instanceSelected', 'modalModeDestroy']);
+        $this->reset(['name', 'modalModeDestroy']);
         $this->resetErrorBag();
     }
 

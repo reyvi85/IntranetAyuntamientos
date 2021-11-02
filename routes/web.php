@@ -38,7 +38,7 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
     Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
     Route::get('/comercios', BusinessComponent::class)->name('business.index');
     Route::get('/telefonos', InterestPhonesComponent::class)->name('phones.index');
-    Route::get('/categorias-notificaciones', CategoryNotificationComponent::class)->name('category.notifications');
+    //Route::get('/categorias-notificaciones', CategoryNotificationComponent::class)->name('category.notifications');
     Route::get('/notificaciones', NotificationComponent::class)->name('notifications.index');
 
     Route::get('cmd/{comando}', function($comando){
@@ -58,8 +58,8 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
      */
     Route::middleware(['CheckPermissionModules','checkRol:Super-Administrador,Administrador-Instancia,Gestor-Instancia'])->group(function(){
         Route::get('/comercios', BusinessComponent::class)->name('gestion.business');
-
         Route::get('/telefonos', InterestPhonesComponent::class)->name('gestion.phones');
+        Route::get('/notificaciones', NotificationComponent::class)->name('gestion.notifications');
     });
 
 });

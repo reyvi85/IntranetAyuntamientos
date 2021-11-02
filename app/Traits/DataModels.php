@@ -7,16 +7,19 @@ use App\Models\CategoryNotification;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\InterestPhone;
+use App\Models\Notification;
 use App\Models\Province;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 
+
 trait DataModels {
 
     public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected,
         $listInstance, $instancias;
+    protected $paginationTheme = 'bootstrap';
 
     public function __construct()
     {
@@ -234,13 +237,22 @@ trait DataModels {
      * NOtificaciones
     **/
     public function getCategoryNotification($search = null, $instancia=null, $sort, $direction){
-        return CategoryNotification::withCount('notifications')->when($search, function ($q) use($search){
+        return CategoryNotification::withCount('notifications')
+            ->when($search, function ($q) use($search){
                     $q->where('name','like','%'.$search.'%');
                 })->when($instancia, function ($q) use($instancia){
                      $q->where('instance_id',$instancia);
                 })
                 ->orderBy($sort, $direction)
                 ->paginate();
+    }
+
+    public function getAllNotifications($search = null){
+        return Notification::with('category_notification')
+            ->when($search, function ($q) use($search){
+                $q->where('titulo','like','%'.$search.'%');
+            })
+            ->paginate();
     }
 
 }

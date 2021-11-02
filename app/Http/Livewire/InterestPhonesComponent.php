@@ -35,7 +35,7 @@ class InterestPhonesComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name', 'description', 'phone', 'instanceSelected', 'modalModeDestroy']);
+        $this->reset(['name', 'description', 'phone', 'modalModeDestroy']);
         $this->resetErrorBag();
     }
 

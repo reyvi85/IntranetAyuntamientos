@@ -8,8 +8,9 @@
         <a class="dropdown-item" href="{{route('usuarios')}}"><i class="fas fa-users"></i> Usuarios</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{route('category-business')}}"><i class="fas fa-th-list"></i> Categorías de comercios</a>
-        <a class="dropdown-item" href="{{route('business.index')}}"><i class="fas fa-euro-sign"></i> Comercios</a>
         <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="{{route('business.index')}}"><i class="fas fa-euro-sign"></i> Comercios</a>
         <a class="dropdown-item" href="{{route('phones.index')}}"><i class="fas fa-phone"></i> Teléfonos</a>
+        <a class="dropdown-item" href="{{route('notifications.index')}}"><i class="fas fa-bell"></i> Notificaciones</a>
     </div>
 </li>
