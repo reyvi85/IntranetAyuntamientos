@@ -45,6 +45,7 @@ class CategoryNotificationComponent extends Component
             'instance_id'=>$this->instanceSelected
         ]);
         $this->emit('saveModal');
+        $this->emit('categoryUDPT');
         $this->resetProps();
 
     }

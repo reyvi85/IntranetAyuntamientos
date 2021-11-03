@@ -248,10 +248,11 @@ trait DataModels {
     }
 
     public function getAllCategoryNotifications($instancia=null){
-        return CategoryNotification::when($instancia, function ($q) use($instancia){
+        return CategoryNotification:: //has('notifications','<>',0)
+            when($instancia, function ($q) use($instancia){
                 $q->where('instance_id',$instancia);
             })
-            ->orderBy('name', 'asc')
+            ->orderBy('id', 'asc')
             ->get();
     }
 
