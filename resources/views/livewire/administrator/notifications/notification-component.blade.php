@@ -28,7 +28,7 @@
             <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormCategory" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
         </div>
     </div>
-    {{$listCategory->last()->name}}
+
     <hr>
     @if ($notifications->count())
     <div class="table-responsive">

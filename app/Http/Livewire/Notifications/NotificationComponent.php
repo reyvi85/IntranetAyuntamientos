@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Notifications;
 
+use App\Models\Notification;
 use Livewire\Component;
 use App\Traits\DataModels;
 use Livewire\WithPagination;
@@ -16,6 +17,7 @@ class NotificationComponent extends Component
 
     public function mount(){
         $this->checkInstanceForUser();
+        $this->setConfigModal();
         $this->listCategory = $this->getAllCategoryNotifications($this->instancias);
         $this->resetPage();
     }
@@ -29,11 +31,16 @@ class NotificationComponent extends Component
         $this->listCategory = $this->getAllCategoryNotifications($this->instancias);
     }
 
+    public function add(){
+
+    }
+
     public function render()
     {
+        $nt = Notification::first();
+        $a = $nt->instance;
+        //dd()
         $notifications = $this->getAllNotifications($this->search, $this->instancias, $this->categorySelected, $this->sort, $this->sortDirection);
-        //istCategory = $this->listCategory;
-        return view('livewire.administrator.notification-component', compact('notifications'))
-            ->extends('layouts.app');
+        return view('livewire.administrator.notifications.notification-component', compact('notifications'));
     }
 }

@@ -247,9 +247,11 @@ trait DataModels {
                 ->paginate();
     }
 
-    public function getAllCategoryNotifications($instancia=null){
-        return CategoryNotification:: //has('notifications','<>',0)
-            when($instancia, function ($q) use($instancia){
+    public function getAllCategoryNotifications($instancia=null, $hasNotification = false){
+        return CategoryNotification::when($hasNotification, function ($q){
+            $q->has('notifications','<>',0);
+            })
+            ->when($instancia, function ($q) use($instancia){
                 $q->where('instance_id',$instancia);
             })
             ->orderBy('id', 'asc')

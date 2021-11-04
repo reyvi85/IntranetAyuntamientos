@@ -1,4 +1,6 @@
+@extends('layouts.app')
 @section('title', 'Gestión de notificaciones')
+@section('content')
 <div class="col-md-12">
     @component('component.card')
         @slot('titulo')Gestión de notificaciones @endslot
@@ -10,7 +12,7 @@
     </nav>
     <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-notification" role="tabpanel" aria-labelledby="nav-notification-tab">
-            @include('livewire.administrator.notifications.notification-component')
+            @livewire('notifications.notification-component')
         </div>
 
         <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
@@ -19,3 +21,4 @@
     </div>
     @endcomponent
 </div>
+    @endsection

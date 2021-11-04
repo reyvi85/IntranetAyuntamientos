@@ -15,11 +15,14 @@ class Notification extends Model
         'titulo',
         'description',
         'category_notification_id',
-        'instance_id'
     ];
 
     public function instance(){
-        return $this->belongsTo(Instance::class);
+        return $this->hasOneThrough(Instance::class, CategoryNotification::class,
+            'instance_id',
+            'id',
+            'id', 'instance_id'
+        );
     }
 
     public function category_notification(){
@@ -30,6 +33,6 @@ class Notification extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new UserInstanceScope());
+      //  static::addGlobalScope(new UserInstanceScope());
     }
 }
