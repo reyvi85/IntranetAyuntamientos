@@ -51,13 +51,14 @@ trait Helper {
 
     public function modulosApp(){
         return collect([
-            ['id'=>1,'modulo'=>'Gestión de Avisos', 'icon'=>'fa-cog','routeName'=>'home'],
+            ['id'=>1,'modulo'=>'Seguimiento de avisos', 'icon'=>'fa-cog','routeName'=>'home'],
             ['id'=>2,'modulo'=>'Comercios', 'icon'=>'fa-euro-sign', 'routeName'=>'gestion.business'],
-            ['id'=>3,'modulo'=>'Gestión de información Destacada','icon'=>'fa-cog', 'routeName'=>'home'],
-            ['id'=>4,'modulo'=>'Notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications'],
+            ['id'=>3,'modulo'=>'Widgets','icon'=>'fa-cog', 'routeName'=>'home'],
+            ['id'=>4,'modulo'=>'Envío de notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications'],
             ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-cog','routeName'=>'home'],
-            ['id'=>6,'modulo'=>'Teléfonos de interés', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones'],
-            ['id'=>7,'modulo'=>'Gestión de Sitios de Interés', 'icon'=>'fa-cog', 'routeName'=>'home'],
+            ['id'=>6,'modulo'=>'Directorio telefónico', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones'],
+            ['id'=>7,'modulo'=>'Localizaciones', 'icon'=>'fa-cog', 'routeName'=>'home'],
+            ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cog', 'routeName'=>'home'],
         ]);
     }
 

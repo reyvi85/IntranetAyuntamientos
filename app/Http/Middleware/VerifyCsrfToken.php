@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'component/*'
+        'livewire/message/business.show-public-business'
     ];
 }
