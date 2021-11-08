@@ -39,7 +39,11 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
     Route::get('/comercios', BusinessComponent::class)->name('business.index');
     Route::get('/telefonos', InterestPhonesComponent::class)->name('phones.index');
     //Route::get('/categorias-notificaciones', CategoryNotificationComponent::class)->name('category.notifications');
-    Route::get('/notificaciones', NotificationComponent::class)->name('notifications.index');
+    //Route::get('/notificaciones', NotificationComponent::class)->name('notifications.index');
+
+    Route::get('/notificaciones', function(){
+        return view('livewire.administrator.notification-component');
+    })->name('notifications.index');
 
     Route::get('cmd/{comando}', function($comando){
             Artisan::call($comando);

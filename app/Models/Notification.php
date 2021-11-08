@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     use HasFactory;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable =[
         'fecha_publicacion',
@@ -17,12 +18,13 @@ class Notification extends Model
         'category_notification_id',
     ];
 
+    /*public function instance(){
+        return $this->belongsToThrough(Instance::class, CategoryNotification::class);
+    }*/
+
     public function instance(){
         return $this->hasOneThrough(Instance::class, CategoryNotification::class,
-            'instance_id',
-            'id',
-            'id', 'instance_id'
-        );
+            'instance_id', 'id', 'id','instance_id');
     }
 
     public function category_notification(){

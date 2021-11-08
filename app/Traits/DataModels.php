@@ -262,9 +262,9 @@ trait DataModels {
         $notifications = Notification::when($search, function ($q) use($search){
                 $q->where('titulo','like','%'.$search.'%');
             })
-            ->when($instancia, function ($q) use($instancia){
+           /* ->when($instancia, function ($q) use($instancia){
                 $q->where('instance_id',$instancia);
-            })
+            })*/
             ->when($category, function ($q) use($category){
                 $q->where('category_notification_id', $category);
             })

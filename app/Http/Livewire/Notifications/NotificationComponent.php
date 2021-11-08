@@ -37,9 +37,6 @@ class NotificationComponent extends Component
 
     public function render()
     {
-        $nt = Notification::first();
-        $a = $nt->instance;
-        //dd()
         $notifications = $this->getAllNotifications($this->search, $this->instancias, $this->categorySelected, $this->sort, $this->sortDirection);
         return view('livewire.administrator.notifications.notification-component', compact('notifications'));
     }

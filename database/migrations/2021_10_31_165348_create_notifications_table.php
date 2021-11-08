@@ -19,8 +19,9 @@ class CreateNotificationsTable extends Migration
             $table->string('titulo');
             $table->text('description');
             $table->unsignedBigInteger('category_notification_id');
+            $table->unsignedBigInteger('instance_id');
             $table->timestamps();
-
+            $table->foreign('instance_id')->references('id')->on('instances')->onDelete('cascade');
             $table->foreign('category_notification_id')->references('id')->on('category_notifications')->onDelete('cascade');
         });
     }
