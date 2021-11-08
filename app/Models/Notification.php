@@ -9,22 +9,18 @@ use Illuminate\Database\Eloquent\Model;
 class Notification extends Model
 {
     use HasFactory;
-    use \Znck\Eloquent\Traits\BelongsToThrough;
+   // use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable =[
         'fecha_publicacion',
         'titulo',
         'description',
+        'instance_id',
         'category_notification_id',
     ];
 
-    /*public function instance(){
-        return $this->belongsToThrough(Instance::class, CategoryNotification::class);
-    }*/
-
     public function instance(){
-        return $this->hasOneThrough(Instance::class, CategoryNotification::class,
-            'instance_id', 'id', 'id','instance_id');
+        return $this->belongsTo(Instance::class);
     }
 
     public function category_notification(){
@@ -35,6 +31,6 @@ class Notification extends Model
     protected static function boot()
     {
         parent::boot();
-      //  static::addGlobalScope(new UserInstanceScope());
+        static::addGlobalScope(new UserInstanceScope());
     }
 }

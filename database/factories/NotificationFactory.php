@@ -26,6 +26,7 @@ class NotificationFactory extends Factory
             'titulo'=>$this->faker->sentence(),
             'description'=>$this->faker->text(),
             'category_notification_id'=>rand(1,150),
+            'instance_id'=>rand(1,25)
         ];
     }
 }

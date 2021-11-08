@@ -63,7 +63,6 @@
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
             $('#modalFormCategory').modal('hide');
-            //$('#nav-tabContent a[href="#nav-category"]').tab('show')
         });
     </script>
 @endsection

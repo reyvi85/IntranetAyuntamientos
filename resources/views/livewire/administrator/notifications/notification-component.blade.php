@@ -15,7 +15,7 @@
 
         @if ($listCategory->count())
             <div class="form-group col-md-3">
-                <select class="form-control" wire:model="categorySelected">
+                <select class="form-control" wire:model="categoryFilter">
                     <option value="">-- Categorías --</option>
                     @foreach($listCategory as $ctg)
                         <option value="{{$ctg->id}}">{{$ctg->name}}</option>
@@ -25,7 +25,7 @@
         @endif
 
         <div class="form-group col-md-2">
-            <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormCategory" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
+            <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormNotification" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
         </div>
     </div>
 
@@ -45,7 +45,10 @@
             <tr>
                 <td>{{$item->titulo}}</td>
                 <td>{{$item->category_notification->name}}</td>
-                <td></td>
+                <td class="float-lg-right">
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormNotification" wire:click="edit({{$item->id}})" title="Editar comercio"><i class="fas fa-edit"></i></a>
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormNotification" wire:click="trash({{$item->id}})" title="Eliminar comercio"><i class="fas fa-trash"></i></a>
+                </td>
             </tr>
             @endforeach
             </tbody>
@@ -59,5 +62,21 @@
             {{$notifications ->links()}}
         </div>
     </div>
-
+@include('livewire.administrator.notifications.formModalNotifications')
 </div>
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script>
+        $('#fechaPublicacion').datetimepicker({
+            footer: true,
+            modal: false,
+            format: 'yyyy-mm-dd HH:MM '
+        });
+        window.livewire.on('saveModal', () => {
+            $('#modalFormNotification').modal('hide');
+        });
+    </script>
+
+    @endsection
