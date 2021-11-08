@@ -51,13 +51,20 @@ trait Helper {
 
     public function modulosApp(){
         return collect([
-            ['id'=>1,'modulo'=>'Gestión de Avisos', 'routeName'=>'gestion.'],
-            ['id'=>2,'modulo'=>'Gestión de comercios', 'routeName'=>'gestion.business'],
-            ['id'=>3,'modulo'=>'Gestión de información Destacada', 'routeName'=>'gestion.'],
-            ['id'=>4,'modulo'=>'Gestión de Notificaciones', 'routeName'=>'gestion.notifications'],
-            ['id'=>5,'modulo'=>'Gestión de Noticias', 'routeName'=>'gestion.'],
-            ['id'=>6,'modulo'=>'Gestión de teléfonos de interés', 'routeName'=>'gestion.phones'],
-            ['id'=>7,'modulo'=>'Gestión de Sitios de Interés', 'routeName'=>'gestion.'],
+            ['id'=>1,'modulo'=>'Gestión de Avisos', 'icon'=>'fa-cog','routeName'=>'home'],
+            ['id'=>2,'modulo'=>'Comercios', 'icon'=>'fa-euro-sign', 'routeName'=>'gestion.business'],
+            ['id'=>3,'modulo'=>'Gestión de información Destacada','icon'=>'fa-cog', 'routeName'=>'home'],
+            ['id'=>4,'modulo'=>'Notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications'],
+            ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-cog','routeName'=>'home'],
+            ['id'=>6,'modulo'=>'Teléfonos de interés', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones'],
+            ['id'=>7,'modulo'=>'Gestión de Sitios de Interés', 'icon'=>'fa-cog', 'routeName'=>'home'],
         ]);
+    }
+
+    public function getOptionMenu(){
+        $instancePermission = Auth::user()->instance->modulos;
+        $modulos = $this->modulosApp();
+        $access = $modulos->whereIn('id', $instancePermission);
+        return $access;
     }
 }
