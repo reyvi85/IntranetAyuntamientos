@@ -9,6 +9,8 @@ use App\Models\CategoryNotification;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\InterestPhone;
+use App\Models\Location;
+use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Province;
 use App\Models\User;
@@ -34,7 +36,9 @@ class DatabaseSeeder extends Seeder
         CategoryBusine::factory(25)->create();
         Busine::factory(150)->create();
         InterestPhone::factory(500)->create();*/
-        CategoryNotification::factory(150)->create();
-        Notification::factory(1500)->create();
+       // CategoryNotification::factory(150)->create();
+        //Notification::factory(1500)->create();
+        LocationCategory::factory(150)->create();
+        Location::factory(550)->create();
     }
 }

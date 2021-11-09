@@ -7,6 +7,7 @@ use App\Models\CategoryNotification;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\InterestPhone;
+use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Province;
 use App\Models\User;
@@ -274,6 +275,22 @@ trait DataModels {
             $notifications->load('category_notification');
         }
         return $notifications;
+    }
+
+    /**
+     * Localizaciones
+    */
+
+    public function getCategoryLocation($search = null, $instancia=null,  $sort, $direction){
+        return LocationCategory::withCount('locations')
+            ->when($search, function ($q) use($search){
+                $q->where('name','like','%'.$search.'%');
+            })
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
+            ->orderBy($sort, $direction)
+            ->paginate();
     }
 
 }

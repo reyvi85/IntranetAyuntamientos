@@ -48,6 +48,14 @@ class Instance extends Model
         return $this->hasMany(CategoryNotification::class);
     }
 
+    public function category_location(){
+        return $this->hasMany(LocationCategory::class);
+    }
+
+    public function location(){
+        return $this->hasMany(Location::class);
+    }
+
 
 
 

@@ -11,8 +11,12 @@
                     <p>
                         <span class="font-weight-bold">Descripción:</span> {{$item->description}}<br>
                         <i class="fas fa-bookmark"></i> {{$item->category_busine->name}} <br>
-                        <i class="fas fa-phone"></i> <a href="tel:{{$item->telefono}}">{{$item->telefono}}</a> &nbsp;
-                        <i class="fas fa-envelope"></i> <a href="mailto:{{$item->email}}">{{$item->email}}</a> <br>
+                        @if (!empty($item->telefono))
+                            <i class="fas fa-phone"></i> <a href="tel:{{$item->telefono}}">{{$item->telefono}}</a> &nbsp;
+                        @endif
+                        @if (!empty($item->email))
+                            <i class="fas fa-envelope"></i> <a href="mailto:{{$item->email}}">{{$item->email}}</a> <br>
+                        @endif
                         <i class="fas fa-globe"></i> <a href="{{$item->url_web}}" target="_blank">{{$item->url_web}}</a>
                     </p>
                 </td>
