@@ -2,6 +2,7 @@
 /public/hot
 /public/storage
 /public/images/business
+/public/images/categorias-localizaciones
 /storage/*.key
 /vendor
 .env
