@@ -50,6 +50,7 @@ class CategoryLocationComponent extends Component
         ]);
         $this->resetProps();
         $this->emit('saveModal');
+
     }
 
     public function edit(LocationCategory $locationCategory){
@@ -81,6 +82,7 @@ class CategoryLocationComponent extends Component
         ])->save();
         $this->resetProps();
         $this->emit('saveModal');
+        $this->emit('addCategoryLocation');
     }
 
     public function trash(LocationCategory $locationCategory){
