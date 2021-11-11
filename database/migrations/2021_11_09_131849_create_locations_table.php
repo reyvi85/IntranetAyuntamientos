@@ -19,7 +19,7 @@ class CreateLocationsTable extends Migration
             $table->string('description');
             $table->string('ubicacion');
             $table->string('telefono');
-            $table->string('web');
+            $table->string('web')->nullable();
             $table->string('image')->nullable();
 
             $table->boolean('visitantes')->default(false);
