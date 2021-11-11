@@ -15,19 +15,34 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
-
-
 trait DataModels {
 
     public $modalConfig=[], $sort = 'id', $sortDirection='desc', $modalModeDestroy = false, $instanceSelected,
         $listInstance, $instancias;
     protected $paginationTheme = 'bootstrap';
+    public $patchToUpload;
 
     public function __construct()
     {
         $this->listInstance = collect();
-        //$this->instancias = collect();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPatchToUpload()
+    {
+        return $this->patchToUpload;
+    }
+
+    /**
+     * @param mixed $patchToUpload
+     */
+    public function setPatchToUpload($patchToUpload)
+    {
+        $this->patchToUpload = $patchToUpload;
+    }
+
 
     /** Método para ordenar colecciones
      * @param $sort

@@ -22,3 +22,11 @@
         @endcomponent
     </div>
     @endsection
+@section('scripts')
+    <script type="text/javascript">
+        window.livewire.on('saveModal', () => {
+            $('#modalFormLocation').modal('hide');
+            $('#modalFormCategory').modal('hide');
+        });
+    </script>
+@endsection

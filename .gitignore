@@ -3,6 +3,7 @@
 /public/storage
 /public/images/business/*
 /public/images/categorias-localizaciones/*
+/public/images/localizaciones/*
 /storage/*.key
 /vendor
 .env

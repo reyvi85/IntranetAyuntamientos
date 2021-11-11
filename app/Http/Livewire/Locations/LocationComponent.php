@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Locations;
 
+use App\Models\Location;
 use App\Traits\DataModels;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -10,10 +12,9 @@ use Livewire\WithPagination;
 class LocationComponent extends Component
 {
     use DataModels, WithPagination, WithFileUploads;
-    protected $paginationTheme = 'bootstrap';
     protected $listeners = ['addCategoryLocation'];
 
-    public $search, $locationSelected, $categorySelected, $categoryFilter,
+    public $search, $locationSelected, $categoryFilter,
         $name,
         $description,
         $ubicacion,
@@ -24,15 +25,35 @@ class LocationComponent extends Component
         $visitantes = false,
         $residentes = false,
         $inicio = false,
-        $location_category,
+        $categorySelected,
 
         $listCategory, $listCategoryForAdd;
+
+    protected $rules = [
+        'name'=>'required',
+        'description'=>'required',
+        'ubicacion'=>'required',
+        'telefono'=>'required',
+        'web'=>'nullable|url',
+        'image'=>'required|image|max:1024',
+        'categorySelected'=>'required',
+        'instanceSelected'=>'required',
+    ];
+
+    protected $messages = [
+        'name.required'=>'El nombre es requerido!',
+        'description.required'=>'La descripción es requerida!',
+        'categorySelected.required'=>'Debe seleccionar una categoría!',
+        'instanceSelected.required'=>'Debe seleccionar una instancia!',
+    ];
+
 
     public function mount(){
         $this->checkInstanceForUser();
         $this->setConfigModal();
         $this->listCategory = $this->getAllCategoryLocation($this->instancias);
         $this->listCategoryForAdd = $this->listCategory;
+        $this->setPatchToUpload('images/localizaciones');
     }
 
     public function addCategoryLocation(){
@@ -56,12 +77,102 @@ class LocationComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name', 'description', 'ubicacion', 'telefono', 'web', 'image', 'imageLocation', 'visitantes', 'residentes', 'inicio', 'location_category', 'modalModeDestroy']);
+        $this->reset(['name', 'description', 'ubicacion', 'telefono', 'web', 'image', 'imageLocation', 'visitantes', 'categorySelected', 'residentes', 'inicio', 'modalModeDestroy']);
         $this->resetErrorBag();
     }
 
     public function add(){
         $this->setConfigModal();
+        $this->resetProps();
+        if(auth()->user()->rol =='Super-Administrador'){
+            $this->reset('instanceSelected');
+        }
+    }
+
+    public function store(){
+        $this->validate();
+        $img = $this->image->store($this->getPatchToUpload(), 'public');
+        Location::create([
+            'name'=>$this->name,
+            'description'=>$this->description,
+            'ubicacion'=>$this->ubicacion,
+            'telefono'=>$this->telefono,
+            'web'=>$this->web,
+            'image'=>$img,
+            'visitantes'=>$this->visitantes,
+            'residentes'=>$this->residentes,
+            'inicio'=>$this->inicio,
+            'instance_id'=>$this->instanceSelected,
+            'location_category_id'=>$this->categorySelected
+        ]);
+        $this->emit('saveModal');
+        $this->resetProps();
+    }
+
+    public function edit(Location $location){
+        $this->resetProps();
+       // $this->updatedInstanceSelected();
+        $this->setConfigModal('Editar', 'fa-edit', 'edit');
+        $this->locationSelected = $location->id;
+        $this->name = $location->name;
+        $this->description = $location->description;
+        $this->ubicacion = $location->ubicacion;
+        $this->telefono = $location->telefono;
+        $this->web = $location->web;
+        $this->imageLocation = $location->image;
+        $this->visitantes = $location->visitantes;
+        $this->residentes = $location->residentes;
+        $this->inicio = $location->inicio;
+        $this->instanceSelected = $location->instance_id;
+        $this->categorySelected = $location->location_category_id;
+    }
+
+    public function update_location(Location $location){
+        $this->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'ubicacion'=>'required',
+            'telefono'=>'required',
+            'web'=>'nullable|url',
+            'image'=>'nullable|image|max:1024',
+            'categorySelected'=>'required',
+            'instanceSelected'=>'required',
+        ]);
+        if($this->image){
+            Storage::disk('public')->delete($location->image);
+            $img = $this->image->store($this->getPatchToUpload(), 'public');
+        }else{
+            $img = $location->image;
+        }
+        $location->fill([
+            'name'=>$this->name,
+            'description'=>$this->description,
+            'ubicacion'=>$this->ubicacion,
+            'telefono'=>$this->telefono,
+            'web'=>$this->web,
+            'image'=>$img,
+            'visitantes'=>$this->visitantes,
+            'residentes'=>$this->residentes,
+            'inicio'=>$this->inicio,
+            'instance_id'=>$this->instanceSelected,
+            'location_category_id'=>$this->categorySelected
+        ])->save();
+
+        $this->emit('saveModal');
+        $this->resetProps();
+    }
+
+    public function trash(Location $location){
+        $this->setConfigModal('Eliminar', 'fa-trash', 'trash');
+        $this->modalModeDestroy = true;
+        $this->locationSelected = $location->id;
+        $this->name = $location->name;
+    }
+
+    public function destroy(Location $location){
+        Storage::disk('public')->delete($location->image);
+        $location->delete();
+        $this->emit('saveModal');
         $this->resetProps();
     }
 

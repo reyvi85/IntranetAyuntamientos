@@ -21,13 +21,12 @@ class CategoryLocationComponent extends Component
         'instanceSelected'=>'required'
     ];
 
-    protected $patchImage = 'images\categorias-localizaciones';
-
     public $search, $categorySelected, $name, $image, $imageCategory=null;
 
     public function mount(){
         $this->setConfigModal();
         $this->checkInstanceForUser();
+        $this->setPatchToUpload('images\categorias-localizaciones');
     }
 
     public function resetProps(){
@@ -42,7 +41,7 @@ class CategoryLocationComponent extends Component
 
     public function store(){
         $this->validate();
-        $img = $this->image->store($this->patchImage, 'public');
+        $img = $this->image->store($this->getPatchToUpload(), 'public');
         LocationCategory::create([
             'name'=>$this->name,
             'image'=>$img,
@@ -72,7 +71,7 @@ class CategoryLocationComponent extends Component
 
         if($this->image){
             Storage::disk('public')->delete($locationCategory->image);
-            $img = $this->image->store($this->patchImage, 'public');
+            $img = $this->image->store($this->getPatchToUpload(), 'public');
         }else{
            $img = $locationCategory->image;
         }

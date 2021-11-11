@@ -75,10 +75,3 @@
     </div>
     @include('livewire.administrator.locations.formModalLocation')
 </div>
-@section('scripts')
-    <script type="text/javascript">
-        window.livewire.on('saveModal', () => {
-            $('#modalFormLocation').modal('hide');
-        });
-    </script>
-@endsection

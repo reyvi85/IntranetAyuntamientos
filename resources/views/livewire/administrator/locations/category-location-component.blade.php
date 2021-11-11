@@ -57,10 +57,3 @@
     @include('livewire.administrator.locations.formModalCategory')
 </div>
 
-@section('scripts')
-    <script type="text/javascript">
-        window.livewire.on('saveModal', () => {
-            $('#modalFormCategory').modal('hide');
-        });
-    </script>
-@endsection
