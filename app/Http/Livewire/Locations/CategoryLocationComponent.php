@@ -50,6 +50,7 @@ class CategoryLocationComponent extends Component
         ]);
         $this->resetProps();
         $this->emit('saveModal');
+        $this->emit('addCategoryLocation');
 
     }
 
@@ -96,6 +97,7 @@ class CategoryLocationComponent extends Component
         Storage::disk('public')->delete($locationCategory->image);
         $locationCategory->delete();
         $this->emit('saveModal');
+        $this->emit('addCategoryLocation');
         $this->resetProps();
     }
 

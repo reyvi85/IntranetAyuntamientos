@@ -1,4 +1,5 @@
 <div class="mt-4">
+    @include('component.loading')
     <div class="col-md-12">
         <div class="form-row">
             <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?4:7}}">
@@ -27,7 +28,7 @@
 
 
             <div class="form-group col-md-2">
-                <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormCategory" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
+                <a class="btn btn-primary btn-block" role="button" data-toggle="modal" data-target="#modalFormLocation" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir</a>
             </div>
         </div>
         <hr>
@@ -38,17 +39,24 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Teléfono</th>
-                        <th scope="col">Ubicación</th>
-                        <th scope="col"></th>
+
+                        <th scope="col">
+
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($locations as $item)
                         <tr>
-                            <th scope="row">{{$item->name}}</th>
-                            <td>{{$item->telefono}}</td>
-                            <td>{{$item->ubicacion}}</td>
-                            <td></td>
+                            <td class="align-middle">{{$item->name}}</td>
+                            <td>
+                                <i class="fas fa-phone"></i> {{$item->telefono}}<br>
+                                <i class="fa fa-address-card"></i> {{$item->ubicacion}}
+                            </td>
+                            <td class="text-right align-middle">
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormLocation" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i></a>
+                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormLocation" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -65,4 +73,12 @@
             {{$locations->links()}}
         </div>
     </div>
+    @include('livewire.administrator.locations.formModalLocation')
 </div>
+@section('scripts')
+    <script type="text/javascript">
+        window.livewire.on('saveModal', () => {
+            $('#modalFormLocation').modal('hide');
+        });
+    </script>
+@endsection

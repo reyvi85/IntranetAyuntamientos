@@ -1,4 +1,5 @@
 <div class="mt-4">
+    @include('component.loading')
    <div class="col-md-12">
        <div class="form-row">
            <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?7:10}}">
@@ -36,8 +37,8 @@
                        <td>{{$item->name}}</td>
                        <td class="text-center">{{$item->locations_count}}</td>
                        <td class="text-right">
-                           <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="edit({{$item->id}})" title="Editar comercio"><i class="fas fa-edit"></i></a>
-                           <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="trash({{$item->id}})" title="Eliminar comercio"><i class="fas fa-trash"></i></a>
+                           <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i></a>
+                           <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
                        </td>
                    </tr>
                    @endforeach
