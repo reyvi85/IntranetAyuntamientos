@@ -22,7 +22,8 @@ class InstanciasComponent extends Component
         $key,
 
         $modulos,
-       // $modulosSelecteds,
+        $lat = 40.463667,
+        $lng = -3.74922,
         $listaModulos,
 
         $selectedCommunity = null,

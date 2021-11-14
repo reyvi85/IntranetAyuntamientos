@@ -102,25 +102,25 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="col-md-8" wire:ignore>
+                        <div class="col-md-8">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Latitud:</label>
-                                    <input class="form-control" type="text" id="ltd">
+                                    <input class="form-control" type="text" id="lat" wire:model="lat">
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label>Longitud:</label>
-                                    <input class="form-control" type="text" id="lgt">
+                                    <input class="form-control" type="text" id="lng" wire:model="lng">
                                 </div>
                             </div>
-                            <div id="map" style="height: 400px; width: 100%;">
+                            <div id="map" style="height: 400px; width: 100%;" wire:ignore>
                                 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCKiIqCdZGrVxx06LSbe7uG3zXOq1Cz5k&callback=initMap" async defer></script>
                                 <script>
                                     var map;
                                     function initMap() {
                                         map = new google.maps.Map(document.getElementById('map'), {
-                                            center: {lat: 40.463667, lng: -3.74922},
+                                            center: {lat: {{$lat}}, lng: {{$lng}} },
                                             zoom: 10,
                                         });
                                         var marker = new google.maps.Marker({
@@ -130,13 +130,12 @@
                                             draggable:true
                                         });
                                         marker.addListener('dragend', function (event) {
-                                           document.getElementById('ltd').value = this.getPosition().lat();
-                                           document.getElementById('lgt').value = this.getPosition().lng();
+                                            document.getElementById('lat').value = this.getPosition().lat();
+                                            document.getElementById('lng').value = this.getPosition().lng();
                                         })
 
                                     }
                                 </script>
-
                             </div>
                         </div>
                     </div>
