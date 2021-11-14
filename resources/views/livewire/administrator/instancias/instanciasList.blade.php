@@ -41,7 +41,6 @@
         </div>
     </div>
 @endif
-
 @include('livewire.administrator.instancias.formModal')
 
 
