@@ -103,40 +103,10 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Latitud:</label>
-                                    <input class="form-control" type="text" id="lat" wire:model="lat">
-                                </div>
+                            <div id="map" style="height: 400px; width: 100%;" wire:ignore></div>
+                            <input type="hidden" class="form-control" type="text" id="lat" wire:model.defer="lat">
+                            <input type="hidden" class="form-control" type="text" id="lng" wire:model.defer="lng">
 
-                                <div class="form-group col-md-6">
-                                    <label>Longitud:</label>
-                                    <input class="form-control" type="text" id="lng" wire:model="lng">
-                                </div>
-                            </div>
-                            <div id="map" style="height: 400px; width: 100%;" wire:ignore>
-                                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCKiIqCdZGrVxx06LSbe7uG3zXOq1Cz5k&callback=initMap" async defer></script>
-                                <script>
-                                    var map;
-                                    function initMap() {
-                                        map = new google.maps.Map(document.getElementById('map'), {
-                                            center: {lat: {{$lat}}, lng: {{$lng}} },
-                                            zoom: 10,
-                                        });
-                                        var marker = new google.maps.Marker({
-                                            position: {lat: 40.4165, lng: -3.70256},
-                                            map: map,
-                                            title: 'Madrid',
-                                            draggable:true
-                                        });
-                                        marker.addListener('dragend', function (event) {
-                                            document.getElementById('lat').value = this.getPosition().lat();
-                                            document.getElementById('lng').value = this.getPosition().lng();
-                                        })
-
-                                    }
-                                </script>
-                            </div>
                         </div>
                     </div>
 

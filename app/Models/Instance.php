@@ -17,11 +17,15 @@ class Instance extends Model
         'barrio',
         'postal_code',
         'key',
-        'modulos'
+        'modulos',
+        'lat',
+        'lng'
     ];
 
     protected $casts = [
-        'modulos'=>'array'
+        'modulos'=>'array',
+        'lat'=>'double',
+        'lng'=>'double'
     ];
 
     public function province(){

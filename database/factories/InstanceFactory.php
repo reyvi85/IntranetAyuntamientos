@@ -28,7 +28,9 @@ class InstanceFactory extends Factory
             'municipio'=>$this->faker->word(),
             'barrio'=>$this->faker->word(),
             'postal_code'=>$this->faker->randomNumber(5),
-            'key'=>Str::random(64)
+            'key'=>Str::random(64),
+            'lat'=>$this->faker->latitude,
+            'lat'=>$this->faker->longitude
         ];
     }
 }

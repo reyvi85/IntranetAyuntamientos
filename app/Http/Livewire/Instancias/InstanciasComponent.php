@@ -22,8 +22,8 @@ class InstanciasComponent extends Component
         $key,
 
         $modulos,
-        $lat = 40.463667,
-        $lng = -3.74922,
+        $lat,
+        $lng,
         $listaModulos,
 
         $selectedCommunity = null,
@@ -33,6 +33,24 @@ class InstanciasComponent extends Component
         //$modalModeDestroy = false;
 
     protected $paginationTheme = 'bootstrap';
+
+
+    protected $listeners = [
+        'getLatitudeForInput',  'getLongitudeForInput'
+    ];
+
+
+    public function getLatitudeForInput($value)
+    {
+        if(!is_null($value))
+            $this->lat = $value;
+    }
+    public function getLongitudeForInput($value)
+    {
+        if(!is_null($value))
+            $this->lng = $value;
+    }
+
     protected $rules =[
         'name'=>'required',
         'selectedCommunity'=>'required',
@@ -85,8 +103,10 @@ class InstanciasComponent extends Component
         $this->key = Str::random(64);
     }
 
-    public function add(){
+    public function add()
+    {
         $this->resetProps();
+        $this->emit('initMap', config('maps.lat_default'), config('maps.lng_default'));
     }
 
     private function addPermission(){
@@ -111,7 +131,9 @@ class InstanciasComponent extends Component
            'barrio'=>$this->barrio,
            'postal_code'=>$this->postal_code,
            'key'=>$this->key,
-           'modulos'=>$this->addPermission()
+           'modulos'=>$this->addPermission(),
+           'lat'=>$this->lat,
+           'lng'=>$this->lng
        ]);
         $this->resetProps();
         $this->emit('saveModal');
@@ -130,12 +152,17 @@ class InstanciasComponent extends Component
         $this->barrio = $instance->barrio;
         $this->postal_code = $instance->postal_code;
         $this->key = $instance->key;
+        $this->lat = (is_null($instance->lat)?config('maps.lat_default'):$instance->lat);
+        $this->lng = (is_null($instance->lng)?config('maps.lng_default'):$instance->lng);
+
+       // dd($this->lat);
 
         if (is_array($instance->modulos) && count($instance->modulos)){
             foreach ($instance->modulos as $value){
                 $this->modulos[$value]=$value;
             }
         }
+        $this->emit('initMap', $this->lat, $this->lng);
     }
 
     public function updateInstance(Instance $instance)
@@ -155,7 +182,9 @@ class InstanciasComponent extends Component
             'barrio'=>$this->barrio,
             'postal_code'=>$this->postal_code,
             'key'=>$this->key,
-            'modulos'=>$this->addPermission()
+            'modulos'=>$this->addPermission(),
+            'lat'=>$this->lat,
+            'lng'=>$this->lng
         ])->save();
         $this->resetProps();
         $this->emit('saveModal');
