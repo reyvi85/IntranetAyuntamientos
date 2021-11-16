@@ -12,7 +12,7 @@ use Livewire\WithPagination;
 class LocationComponent extends Component
 {
     use DataModels, WithPagination, WithFileUploads;
-    protected $listeners = ['addCategoryLocation'];
+    protected $listeners = ['addCategoryLocation',  'getLatitudeForInput',  'getLongitudeForInput'];
 
     public $search, $locationSelected, $categoryFilter,
         $name,
@@ -26,6 +26,8 @@ class LocationComponent extends Component
         $residentes = false,
         $inicio = false,
         $categorySelected,
+        $lat,
+        $lng,
 
         $listCategory, $listCategoryForAdd;
 
@@ -54,6 +56,17 @@ class LocationComponent extends Component
         $this->listCategory = $this->getAllCategoryLocation($this->instancias);
         $this->listCategoryForAdd = $this->listCategory;
         $this->setPatchToUpload('images/localizaciones');
+    }
+
+    public function getLatitudeForInput($value)
+    {
+        if(!is_null($value))
+            $this->lat = $value;
+    }
+    public function getLongitudeForInput($value)
+    {
+        if(!is_null($value))
+            $this->lng = $value;
     }
 
     public function addCategoryLocation(){
@@ -87,6 +100,7 @@ class LocationComponent extends Component
         if(auth()->user()->rol =='Super-Administrador'){
             $this->reset('instanceSelected');
         }
+        $this->emit('initMap', config('maps.lat_default'), config('maps.lng_default'));
     }
 
     public function store(){
@@ -103,7 +117,9 @@ class LocationComponent extends Component
             'residentes'=>$this->residentes,
             'inicio'=>$this->inicio,
             'instance_id'=>$this->instanceSelected,
-            'location_category_id'=>$this->categorySelected
+            'location_category_id'=>$this->categorySelected,
+            'lat'=>$this->lat,
+            'lng'=>$this->lng
         ]);
         $this->emit('saveModal');
         $this->resetProps();
@@ -125,6 +141,9 @@ class LocationComponent extends Component
         $this->inicio = $location->inicio;
         $this->instanceSelected = $location->instance_id;
         $this->categorySelected = $location->location_category_id;
+        $this->lat = (is_null($location->lat)?config('maps.lat_default'):$location->lat);
+        $this->lng = (is_null($location->lng)?config('maps.lng_default'):$location->lng);
+        $this->emit('initMap', $this->lat, $this->lng);
     }
 
     public function update_location(Location $location){
@@ -155,7 +174,9 @@ class LocationComponent extends Component
             'residentes'=>$this->residentes,
             'inicio'=>$this->inicio,
             'instance_id'=>$this->instanceSelected,
-            'location_category_id'=>$this->categorySelected
+            'location_category_id'=>$this->categorySelected,
+            'lat'=>$this->lat,
+            'lng'=>$this->lng
         ])->save();
 
         $this->emit('saveModal');

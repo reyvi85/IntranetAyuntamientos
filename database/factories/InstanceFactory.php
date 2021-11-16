@@ -30,7 +30,7 @@ class InstanceFactory extends Factory
             'postal_code'=>$this->faker->randomNumber(5),
             'key'=>Str::random(64),
             'lat'=>$this->faker->latitude,
-            'lat'=>$this->faker->longitude
+            'lng'=>$this->faker->longitude
         ];
     }
 }

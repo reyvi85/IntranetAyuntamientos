@@ -15,11 +15,9 @@
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
             $('#modalInstancia').modal('hide');
-           // resetMap(lat, lng);
         });
 
         window.livewire.on('initMap', (lat, lng) => {
-            console.log('Latitud = '+lat +" Longitud = "+lng);
             resetMap(lat, lng);
         });
     </script>

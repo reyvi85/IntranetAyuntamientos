@@ -21,7 +21,14 @@ class Location extends Model
         'residentes',
         'inicio',
         'instance_id',
-        'location_category_id'
+        'location_category_id',
+        'lat',
+        'lng'
+    ];
+
+    protected $casts = [
+        'lat'=>'double',
+        'lng'=>'double'
     ];
 
     public function instance(){

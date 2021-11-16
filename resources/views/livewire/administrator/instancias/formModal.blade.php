@@ -103,10 +103,7 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div id="map" style="height: 400px; width: 100%;" wire:ignore></div>
-                            <input type="hidden" class="form-control" type="text" id="lat" wire:model.defer="lat">
-                            <input type="hidden" class="form-control" type="text" id="lng" wire:model.defer="lng">
-
+                           @include('component.mapGoogle')
                         </div>
                     </div>
 

@@ -75,6 +75,22 @@
                                 @enderror
                             </div>
 
+
+                                <div class="form-inline d-flex justify-content-center">
+                                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                        <input type="checkbox" class="custom-control-input" id="ControlInlineVisitantes" wire:model="visitantes">
+                                        <label class="custom-control-label" for="ControlInlineVisitantes">Visitantes</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                        <input type="checkbox" class="custom-control-input" id="ControlInlineResidentes" wire:model="residentes">
+                                        <label class="custom-control-label" for="ControlInlineResidentes">Residentes</label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                        <input type="checkbox" class="custom-control-input" id="ControlInlineInicio" wire:model="inicio">
+                                        <label class="custom-control-label" for="ControlInlineInicio">Página de inicio</label>
+                                    </div>
+                                </div>
+
                         </div>
 
                         <div class="col-md-6">
@@ -99,24 +115,9 @@
                                     <img class="img-fluid img-thumbnail rounded" src="{{asset($imageLocation)}}">
                                 @endif
                             </div>
-
-                            <div class="form-inline d-flex justify-content-center">
-                                <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="ControlInlineVisitantes" wire:model="visitantes">
-                                    <label class="custom-control-label" for="ControlInlineVisitantes">Visitantes</label>
-                                </div>
-                                <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="ControlInlineResidentes" wire:model="residentes">
-                                    <label class="custom-control-label" for="ControlInlineResidentes">Residentes</label>
-                                </div>
-                                <div class="custom-control custom-checkbox my-1 mr-sm-2">
-                                    <input type="checkbox" class="custom-control-input" id="ControlInlineInicio" wire:model="inicio">
-                                    <label class="custom-control-label" for="ControlInlineInicio">Página de inicio</label>
-                                </div>
+                            <div class="form-group">
+                                @include('component.mapGoogle')
                             </div>
-
-
-
                         </div>
 
                     </div>

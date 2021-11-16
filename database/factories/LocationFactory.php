@@ -32,7 +32,9 @@ class LocationFactory extends Factory
             'residentes'=>$this->faker->boolean(),
             'inicio'=>$this->faker->boolean(),
             'instance_id'=>rand(1,25),
-            'location_category_id'=>rand(1,150)
+            'location_category_id'=>rand(1,150),
+            'lat'=>$this->faker->latitude,
+            'lng'=>$this->faker->longitude
         ];
     }
 }
