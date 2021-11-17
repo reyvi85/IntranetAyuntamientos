@@ -14,6 +14,8 @@ use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\WarningCategory;
+use App\Models\WarningSubCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,7 +40,9 @@ class DatabaseSeeder extends Seeder
         InterestPhone::factory(500)->create();*/
        // CategoryNotification::factory(150)->create();
         //Notification::factory(1500)->create();
-        LocationCategory::factory(150)->create();
-        Location::factory(550)->create();
+       // LocationCategory::factory(150)->create();
+        //Location::factory(550)->create();
+        WarningCategory::factory(250)->create();
+        WarningSubCategory::factory(2500)->create();
     }
 }

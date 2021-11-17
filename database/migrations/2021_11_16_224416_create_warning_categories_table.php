@@ -16,10 +16,10 @@ class CreateWarningCategoriesTable extends Migration
         Schema::create('warning_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('instace_id');
+            $table->unsignedBigInteger('instance_id');
             $table->timestamps();
 
-            $table->foreign('instace_id')->references('id')->on('instances')->onDelete('cascade');
+            $table->foreign('instance_id')->references('id')->on('instances')->onDelete('cascade');
         });
     }
 

@@ -27,7 +27,6 @@ class ComunidadesProvinciasComponent extends Component
         $comunidadID,
         $provinciaID,
 
-        $modalConfig = [],
         $idProvincia;
 
 
@@ -40,10 +39,7 @@ class ComunidadesProvinciasComponent extends Component
 
     public function mount()
     {
-        $this->modalConfig = [
-            'titulo'=>'Crear Comunidad',
-            'icon'=>'fa-plus-circle',
-            'action'=>'add-comunidad'];
+        $this->setConfigModal('Crear Comunidad', null, 'add-comunidad');
         $this->idProvincia = 0;
         $this->model = null;
     }
@@ -53,7 +49,6 @@ class ComunidadesProvinciasComponent extends Component
         $comunidades = $this->getComunidades($this->search, $this->sort, $this->sortDirection);
         return view('livewire.administrator.comunidades-provincias-component', compact('comunidades'))
             ->extends('layouts.app');
-            //->section('scripts');
     }
 
 
@@ -63,13 +58,6 @@ class ComunidadesProvinciasComponent extends Component
     }
 
 
-    public function setConfigModal($titulo, $icono, $action){
-        $this->modalConfig = [
-            'titulo'=>$titulo,
-            'icon'=>$icono,
-            'action'=>$action
-        ];
-    }
     /**  C O M U N I D A D E S **/
      public function createComunidad(){
         $this->resetErrorBag();

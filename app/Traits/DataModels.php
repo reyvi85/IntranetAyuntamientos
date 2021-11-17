@@ -12,6 +12,7 @@ use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\WarningCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
@@ -155,13 +156,6 @@ trait DataModels {
             })
             ->get();
     }
-
-    /*public function getInstanceWithUser($userId){
-        return Instance::whereHas('users', function(Builder $q) use($userId){
-            $q->where('user_id', $userId);
-        })
-            ->get();
-    }*/
 
     public function getAllUsersWhithFilter($busqueda = null, $limit = null, $rol =null){
         return User::when($busqueda, function ($q) use ($busqueda){
@@ -332,5 +326,23 @@ trait DataModels {
             ->orderBy($sort, $direction)
             ->paginate();
     }
+
+    /**
+     * Avisos
+     */
+
+    public function getAllWarnings($search = null,  $instancia=null, $sort='id', $direction='desc'){
+        return WarningCategory::with('sub_categories')->withCount('sub_categories')
+           ->when($search, function ($q) use($search){
+                $q->where('name','like','%'.$search.'%');
+            })
+            ->when($instancia, function ($q) use($instancia){
+                    $q->where('instance_id',$instancia);
+            })
+            ->orderBy($sort, $direction)
+            ->paginate();
+    }
+
+
 
 }

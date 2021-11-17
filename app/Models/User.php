@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Scopes\InstanceScope;
-use App\Scopes\UserInstanceScope;
-use App\Scopes\UsersScope;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

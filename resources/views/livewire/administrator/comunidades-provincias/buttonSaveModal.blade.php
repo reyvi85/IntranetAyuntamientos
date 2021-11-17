@@ -22,5 +22,4 @@
     @case('trash-prov')
     <button type="button" class="btn btn-danger" wire:click="destroyProvincia({{$provinciaID}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
     @break
-
 @endswitch

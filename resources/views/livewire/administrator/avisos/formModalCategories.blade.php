@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="{{$modalName}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,12 +20,21 @@
                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror
                 </div>
+
+                    @if (auth()->user()->rol == 'Super-Administrador' && $workSubCategory == false)
+                        <div class="form-group">
+                            @php($label = true)
+                            @php($ModelName = 'instanceSelected')
+                            @include('livewire.partial.comboInstancias')
+                        </div>
+                    @endif
+
                 @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
-                @include('livewire.administrator.comunidades-provincias.buttonSaveModal')
-                <div class="text-center text-muted" wire:loading wire:target="storeComunidad, updateComunidad, destroyComunidad, storeProvincia, updateProvincia, destroyProvincia"><i class="fas fa-spinner fa-spin"></i></div>
+                @include('livewire.administrator.avisos.buttonSaveModalCategory')
+                <div class="text-center text-muted" wire:loading wire:target="storeCategory, update_category, destroyCategory, storeSubCategory, update_Subcategory, destroySubCategory"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>
