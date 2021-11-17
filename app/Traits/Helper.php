@@ -51,7 +51,7 @@ trait Helper {
 
     public function modulosApp(){
         return collect([
-            ['id'=>1,'modulo'=>'Seguimiento de avisos', 'icon'=>'fa-cog','routeName'=>'home'],
+            ['id'=>1,'modulo'=>'Seguimiento de avisos', 'icon'=>'fa-bullhorn','routeName'=>'gestion.avisos'],
             ['id'=>2,'modulo'=>'Comercios', 'icon'=>'fa-euro-sign', 'routeName'=>'gestion.business'],
             ['id'=>3,'modulo'=>'Widgets','icon'=>'fa-cog', 'routeName'=>'home'],
             ['id'=>4,'modulo'=>'Envío de notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications'],

@@ -13,5 +13,6 @@
         <a class="dropdown-item" href="{{route('phones.index')}}"><i class="fas fa-phone"></i> Teléfonos</a>
         <a class="dropdown-item" href="{{route('notifications.index')}}"><i class="fas fa-bell"></i> Notificaciones</a>
         <a class="dropdown-item" href="{{route('localizaciones.index')}}"><i class="fas fa-map-marker-alt"></i> Localizaciones</a>
+        <a class="dropdown-item" href="{{route('avisos.index')}}"><i class="fas fa-bullhorn"></i> Avisos</a>
     </div>
 </li>

@@ -98,6 +98,7 @@ class CategorySubCategoryComponent extends Component
     public function addSubCategory(WarningCategory $warningCategory){
         $this->resetProps();
         $this->categorySelected = $warningCategory->id;
+        $this->instanceSelected = $warningCategory->instance_id;
         $this->workSubCategory = true;
         $this->setConfigModal('Añadir sub - categoría', 'fa-plus-circle', 'store-sub-category');
     }

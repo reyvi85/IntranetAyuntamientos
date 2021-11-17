@@ -40,15 +40,22 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
     Route::get('/telefonos', InterestPhonesComponent::class)->name('phones.index');
 
 
-    Route::get('/avisos', CategorySubCategoryComponent::class)->name('avisos.index');
+    //Route::get('/avisos', CategorySubCategoryComponent::class)->name('avisos.index');
 
     Route::get('/notificaciones', function(){
         return view('livewire.administrator.notification-component');
     })->name('notifications.index');
 
+    /** LOCALIZACIONES **/
     Route::get('/localizaciones', function(){
         return view('livewire.administrator.locations.index');
     })->name('localizaciones.index');
+
+    /** AVISOS  **/
+    Route::get('/avisos', function(){
+        return view('livewire.administrator.avisos.index');
+    })->name('avisos.index');
+
 
     Route::get('cmd/{comando}', function($comando){
             Artisan::call($comando);
@@ -77,8 +84,13 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
             return view('livewire.administrator.locations.index');
         })->name('gestion.localizaciones');
 
+        Route::get('/avisos', function(){
+            return view('livewire.administrator.avisos.index');
+        })->name('gestion.avisos');
+
     });
-    Route::get('/avisos', CategorySubCategoryComponent::class)->name('avisos.gestion');
+
+
 
 });
 

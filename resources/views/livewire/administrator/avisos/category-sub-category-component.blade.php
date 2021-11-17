@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="col-md-12 mt-4">
     @include('component.loading')
     <div class="form-row">
         <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?7:10}}">

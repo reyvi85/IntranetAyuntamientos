@@ -22,7 +22,15 @@ class WarningFactory extends Factory
     public function definition()
     {
         return [
-            //
+           'asunto'=>$this->faker->sentence,
+           'description'=>$this->faker->text,
+            'image'=>$this->faker->imageUrl,
+            'lat'=>$this->faker->latitude,
+            'lng'=>$this->faker->longitude,
+            'estado'=>rand(0,3),
+            'warning_sub_category_id'=>rand(1,2500),
+            'user_id'=>rand(1,100),
+            $this->faker->localCoordinates()
         ];
     }
 }
