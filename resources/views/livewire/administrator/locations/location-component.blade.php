@@ -63,7 +63,7 @@
                 </table>
             </div>
         @else
-            <p class="text-center text-muted">No hat registros que mostrar!</p>
+            <p class="text-center text-muted">No hay registros que mostrar!</p>
         @endif
 
     </div>

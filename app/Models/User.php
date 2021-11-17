@@ -54,6 +54,10 @@ class User extends Authenticatable
         return $this->belongsTo(Instance::class);
     }
 
+    public function warnings(){
+        return $this->hasMany(Warning::class);
+    }
+
     public function isRole($rol)
     {
         return $this->rol === $rol;
