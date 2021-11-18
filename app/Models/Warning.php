@@ -27,4 +27,8 @@ class Warning extends Model
     public function user(){
         return $this ->belongsTo(User::class);
     }
+
+    public function state(){
+        return $this->belongsTo(WarningState::class);
+    }
 }

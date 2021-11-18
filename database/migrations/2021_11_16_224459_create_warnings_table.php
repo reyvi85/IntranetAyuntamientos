@@ -20,12 +20,13 @@ class CreateWarningsTable extends Migration
             $table->string('image');
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
-            $table->integer('estado')->default(0);
+            $table->unsignedBigInteger('warning_state_id');
             $table->unsignedBigInteger('warning_sub_category_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
             $table->foreign('warning_sub_category_id')->references('id')->on('warning_sub_categories')->onDelete('cascade');
+            $table->foreign('warning_state_id')->references('id')->on('warning_states')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

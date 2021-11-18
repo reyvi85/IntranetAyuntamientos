@@ -27,10 +27,9 @@ class WarningFactory extends Factory
             'image'=>$this->faker->imageUrl,
             'lat'=>$this->faker->latitude,
             'lng'=>$this->faker->longitude,
-            'estado'=>rand(0,3),
-            'warning_sub_category_id'=>rand(1,2500),
+            'warning_state_id'=>rand(1,4),
+            'warning_sub_category_id'=>rand(1,1800),
             'user_id'=>rand(1,100),
-            $this->faker->localCoordinates()
         ];
     }
 }

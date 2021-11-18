@@ -13,6 +13,7 @@ use App\Models\Notification;
 use App\Models\Province;
 use App\Models\User;
 use App\Models\WarningCategory;
+use App\Models\WarningState;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
@@ -341,6 +342,10 @@ trait DataModels {
             })
             ->orderBy($sort, $direction)
             ->paginate();
+    }
+
+    public function getAllState(){
+        return WarningState::withCount('warnings')->get();
     }
 
 

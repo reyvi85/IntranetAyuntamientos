@@ -68,4 +68,6 @@ trait Helper {
         $access = $modulos->whereIn('id', $instancePermission);
         return $access;
     }
+
+
 }

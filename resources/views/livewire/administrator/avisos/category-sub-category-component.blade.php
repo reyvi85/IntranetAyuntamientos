@@ -25,8 +25,8 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col"></th>
-                <th scope="col" wire:click="order('name')">Categoría</th>
-                <th scope="col" class="text-center" wire:click="order('sub_categories_count')">Subcategorías</th>
+                <th class="link_pointer" scope="col" wire:click="order('name')">Categoría</th>
+                <th scope="col" class="text-center link_pointer" wire:click="order('sub_categories_count')" style="cursor: pointer;">Subcategorías</th>
                 <th colspan="2" class="text-center" scope="col">Opciones</th>
             </tr>
             </thead>
