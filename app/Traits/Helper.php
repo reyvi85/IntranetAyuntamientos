@@ -69,5 +69,10 @@ trait Helper {
         return $access;
     }
 
+    public function getClassColor($key=null){
+        $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+        return (is_null($key))?$colors:$colors[$key];
+    }
+
 
 }

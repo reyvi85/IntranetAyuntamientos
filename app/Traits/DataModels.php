@@ -12,6 +12,7 @@ use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\Warning;
 use App\Models\WarningCategory;
 use App\Models\WarningState;
 use Illuminate\Database\Eloquent\Builder;
@@ -332,7 +333,7 @@ trait DataModels {
      * Avisos
      */
 
-    public function getAllWarnings($search = null,  $instancia=null, $sort='id', $direction='desc'){
+    public function getAllWarningsCategory($search = null,  $instancia=null, $sort='id', $direction='desc'){
         return WarningCategory::with('sub_categories')->withCount('sub_categories')
            ->when($search, function ($q) use($search){
                 $q->where('name','like','%'.$search.'%');
@@ -344,8 +345,21 @@ trait DataModels {
             ->paginate();
     }
 
+    public function getWarningsCategoryNoFilter(){
+        return WarningCategory::with('sub_categories')->get();
+    }
+
     public function getAllState(){
         return WarningState::withCount('warnings')->get();
+    }
+
+    public function getAllWarnings($estado=null, $sort, $direction){
+        return Warning::with(['warning_state', 'warning_sub_category', 'warning_sub_category.warning_category'])
+            ->when($estado, function ($q) use($estado){
+                $q->where('warning_state_id', $estado);
+            })
+            ->orderBy($sort, $direction)
+            ->paginate();
     }
 
 

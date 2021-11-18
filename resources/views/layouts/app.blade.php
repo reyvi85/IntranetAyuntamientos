@@ -40,9 +40,6 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        @auth()
-                            @livewire('instancias.list-instance-for-user-component')
-                        @endauth
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

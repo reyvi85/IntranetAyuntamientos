@@ -15,7 +15,7 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-avisos" role="tabpanel" aria-labelledby="nav-avisos-tab">
-                    ... Avisos
+                    @livewire('avisos.avisos-component')
                 </div>
 
                 <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">

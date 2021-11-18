@@ -24,6 +24,7 @@ class WarningSubCategory extends Model
         return $this->hasMany(Warning::class);
     }
 
+
     protected static function booted()
     {
         if(Auth::check() && Auth::user()->rol != 'Super-Administrador') {

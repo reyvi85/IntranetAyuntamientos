@@ -4,41 +4,47 @@ namespace App\Http\Livewire\Avisos;
 
 use App\Models\WarningState;
 use App\Traits\DataModels;
+use App\Traits\Helper;
 use Livewire\Component;
 
 class StatesComponent extends Component
 {
-    use DataModels;
-    public $name, $stateSelected, $nameSelected, $listStates;
+    use DataModels, Helper;
+    public $name, $stateSelected, $listColors, $colorSelected='primary';
 
-    protected $listeners = ['udptState'];
 
     public function mount(){
-        $this->listStates = $this->getAllState();
-        $this->nameSelected = null;
-        $this->setConfigModal();
+        $this->listColors = $this->getClassColor();
+        $this->setConfigModal('Añadir estado');
     }
 
-    public function udptState(){
-        $this->listStates = $this->getAllState();
-        $this->setConfigModal();
-    }
 
     public function resetProps(){
-        $this->reset(['name', 'modalModeDestroy', 'stateSelected', 'nameSelected']);
+        $this->reset(['name', 'modalModeDestroy', 'stateSelected', 'colorSelected']);
     }
+
+    public function add(){
+        $this->resetProps();
+        $this->setConfigModal('Añadir estado');
+    }
+
     public function store(){
-        $attr = $this->validate([
+        $this->validate([
             'name'=>'required|unique:warning_states'
         ]);
-        WarningState::create($attr);
+        WarningState::create([
+            'name'=>$this->name,
+            'color'=>$this->colorSelected
+        ]);
         $this->resetProps();
-        $this->emit('udptState');
+        $this->emit('saveModal');
+        $this->emit('refreshState');
     }
 
     public function edit(WarningState $warningState){
         $this->setConfigModal('Editar', 'fa-edit', 'edit');
         $this->stateSelected = $warningState->id;
+        $this->colorSelected = $warningState->color;
         $this->name = $warningState->name;
     }
 
@@ -46,25 +52,31 @@ class StatesComponent extends Component
         $attr = $this->validate([
             'name'=>'required|unique:warning_states,name,'.$warningState->id
         ]);
-        $warningState->fill($attr)->save();
+        $warningState->fill([
+            'name'=>$this->name,
+            'color'=>$this->colorSelected
+        ])->save();
         $this->resetProps();
-        $this->emit('udptState');
+        $this->emit('saveModal');
+        $this->emit('refreshState');
     }
     public function trash(WarningState $warningState){
-       // $this->modalModeDestroy =true;
-        $this->nameSelected = $warningState->name;
+        $this->modalModeDestroy =true;
+        $this->setConfigModal('Eliminar estado', 'fa-trash', 'trash');
+        $this->name = $warningState->name;
         $this->stateSelected = $warningState->id;
     }
 
     public function destroy(WarningState $warningState){
         $warningState->delete();
         $this->resetProps();
-        $this->emit('udptState');
         $this->emit('saveModal');
+        $this->emit('refreshState');
     }
 
     public function render()
     {
-        return view('livewire.administrator.avisos.states-component');
+        $listStates = $this->getAllState();
+        return view('livewire.administrator.avisos.states-component', compact('listStates'));
     }
 }

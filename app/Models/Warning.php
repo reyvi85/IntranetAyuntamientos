@@ -15,12 +15,16 @@ class Warning extends Model
         'image',
         'lat',
         'lng',
-        'estado',
+        'warning_state_id',
         'warning_sub_category_id',
         'user_id'
     ];
 
-    public function sub_category(){
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+    ];
+
+    public function warning_sub_category(){
         return $this->belongsTo(WarningSubCategory::class);
     }
 
@@ -28,7 +32,7 @@ class Warning extends Model
         return $this ->belongsTo(User::class);
     }
 
-    public function state(){
+    public function warning_state(){
         return $this->belongsTo(WarningState::class);
     }
 }

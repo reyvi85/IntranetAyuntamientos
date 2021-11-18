@@ -149,8 +149,7 @@ class CategorySubCategoryComponent extends Component
 
     public function render()
     {
-        $categorias = $this->getAllWarnings($this->search, $this->instancias, $this->sort, $this->sortDirection);
-        return view('livewire.administrator.avisos.category-sub-category-component', compact('categorias'))
-            ->extends('layouts.app');
+        $categorias = $this->getAllWarningsCategory($this->search, $this->instancias, $this->sort, $this->sortDirection);
+        return view('livewire.administrator.avisos.category-sub-category-component', compact('categorias'));
     }
 }

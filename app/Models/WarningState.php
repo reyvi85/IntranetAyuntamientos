@@ -9,7 +9,7 @@ class WarningState extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'color'];
 
     public function warnings(){
         return $this->hasMany(Warning::class);
