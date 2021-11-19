@@ -31,10 +31,16 @@
     </div>
 @endsection
 @section('scripts')
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{config('maps.API_KEY_GOOGLE_MAP')}}" async defer></script>
+    <script type="text/javascript" src="{{asset('js/googleMaps.js')}}" async defer></script>
+
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
             $('#modalForm').modal('hide');
             $('#modalState').modal('hide');
+        });
+        window.livewire.on('initMap', (lat, lng) => {
+            resetMap(lat, lng);
         });
     </script>
 @endsection

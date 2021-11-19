@@ -22,7 +22,8 @@ class WarningStateFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->word()
+            'name'=>$this->faker->word(),
+            'color'=>$this->faker->randomElement(['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'])
         ];
     }
 }

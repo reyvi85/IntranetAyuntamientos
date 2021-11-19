@@ -2,6 +2,7 @@
     <div class="col-md-12">
         @include('component.loading')
     <!---- Filtros --->
+            <hr>
             <nav class="nav nav-pills flex-column flex-sm-row mb-2">
                 @foreach($listStates as $state)
                     <a class="flex-sm-fill text-sm-center nav-link" href="javascript:void(0)" wire:click="$set('stateSelected', '{{$state->id}}')"><span class="badge badge-pill badge-{{$state->color}}">{{$state->warnings_count}}</span> {{$state->name}}</a>
@@ -38,7 +39,8 @@
                         </td>
                         <td class="align-middle">{{date("Y/m/d",strtotime($row->created_at))}}</td>
                         <td class="align-middle">
-
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="edit({{$row->id}})" title="Editar"><i class="fas fa-edit"></i></a>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="trashWarning({{$row->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @endforeach
@@ -54,6 +56,5 @@
             </div>
         </div>
     </div>
-
-
+@include('livewire.administrator.avisos.formModalWarnings')
 </div>

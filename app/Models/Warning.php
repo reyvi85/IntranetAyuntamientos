@@ -15,6 +15,7 @@ class Warning extends Model
         'image',
         'lat',
         'lng',
+        'instance_id',
         'warning_state_id',
         'warning_sub_category_id',
         'user_id'
@@ -23,6 +24,10 @@ class Warning extends Model
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',
     ];
+
+    public function instance(){
+        return $this->belongsTo(Instance::class);
+    }
 
     public function warning_sub_category(){
         return $this->belongsTo(WarningSubCategory::class);

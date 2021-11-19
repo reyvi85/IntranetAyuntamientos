@@ -15,6 +15,7 @@ use App\Models\User;
 use App\Models\Warning;
 use App\Models\WarningCategory;
 use App\Models\WarningState;
+use App\Models\WarningSubCategory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
@@ -345,8 +346,19 @@ trait DataModels {
             ->paginate();
     }
 
-    public function getWarningsCategoryNoFilter(){
-        return WarningCategory::with('sub_categories')->get();
+    public function getWarningsCategoryFiltered($instancia = null){
+        return WarningCategory::with('sub_categories')
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
+            ->get();
+    }
+
+    public function getWarningSubCategoryFiltered($category=null){
+        return WarningSubCategory::when($category, function ($q) use($category){
+            $q->where('warning_category_id',$category);
+        })
+        ->get();
     }
 
     public function getAllState(){

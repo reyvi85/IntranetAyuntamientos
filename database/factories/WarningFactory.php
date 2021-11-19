@@ -27,6 +27,7 @@ class WarningFactory extends Factory
             'image'=>$this->faker->imageUrl,
             'lat'=>$this->faker->latitude,
             'lng'=>$this->faker->longitude,
+            'instance_id'=>rand(1,25),
             'warning_state_id'=>rand(1,4),
             'warning_sub_category_id'=>rand(1,1800),
             'user_id'=>rand(1,100),

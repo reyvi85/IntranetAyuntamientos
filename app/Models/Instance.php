@@ -60,6 +60,10 @@ class Instance extends Model
         return $this->hasMany(Location::class);
     }
 
+    public function warnings(){
+        return $this->hasMany(Warning::class);
+    }
+
     public function warning_categories(){
         return $this->hasMany(WarningCategory::class);
     }
