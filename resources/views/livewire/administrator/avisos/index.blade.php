@@ -38,6 +38,7 @@
         window.livewire.on('saveModal', () => {
             $('#modalForm').modal('hide');
             $('#modalState').modal('hide');
+            $('#modalFormWarning').modal('hide');
         });
         window.livewire.on('initMap', (lat, lng) => {
             resetMap(lat, lng);

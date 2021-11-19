@@ -2,6 +2,7 @@
     <div class="col-md-12">
         @include('component.loading')
     <!---- Filtros --->
+            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="add" title="Añadir"><i class="fas fa-plus-circle fa-3x link_pointer"></i></a>
             <hr>
             <nav class="nav nav-pills flex-column flex-sm-row mb-2">
                 @foreach($listStates as $state)

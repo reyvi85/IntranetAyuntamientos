@@ -27,8 +27,12 @@
 
             <div class="form-group">
                 <label for="formControlDescription">Descripción:</label>
-                <textarea class="form-control" id="formControlDescription" rows="5" wire:model.defer="description"></textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" id="formControlDescription" rows="5" wire:model.defer="description"></textarea>
+                @error('description')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
             </div>
+        <hr>
     </div>
 
     <div class="col-md-6">
@@ -41,6 +45,9 @@
                         <option value="{{$ctg->id}}">{{$ctg->name}}</option>
                     @endforeach
                 </select>
+                @error('warningCategorySelected')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
             </div>
         @endif
 
@@ -53,6 +60,7 @@
                         <option value="{{$ctg->id}}">{{$ctg->name}}</option>
                     @endforeach
                 </select>
+
             </div>
         @endif
 
@@ -73,8 +81,14 @@
 
                 @if ($image)
                     <img class="img-fluid img-thumbnail rounded" src="{{ $image->temporaryUrl() }}">
+                @elseif(is_null($imageWarning) || $imageWarning=="")
+                    <img class="img-fluid img-thumbnail rounded" src="{{asset('images/no-image.png')}}" alt="Sin imagen">
                 @elseif(!is_null($imageWarning))
                     <img class="img-fluid img-thumbnail rounded" src="{{asset($imageWarning)}}">
+                        @if ($imageWarning)
+                            <a href="#"><i class="fas fa-trash-alt fa-2x mt-2 link_pointer" title="Eliminar imagen" wire:click="destroy_image({{$warnigSelected}})"></i></a>
+                            <span wire:loading.delay wire:target="destroy_image"><i class="fas fa-spinner fa-spin"></i></span>
+                        @endif
                 @endif
             </div>
             <div class="form-group">

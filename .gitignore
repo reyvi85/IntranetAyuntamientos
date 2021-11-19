@@ -4,6 +4,7 @@
 /public/images/business/*
 /public/images/categorias-localizaciones/*
 /public/images/localizaciones/*
+/public/images/avisos/*
 /storage/*.key
 /vendor
 .env

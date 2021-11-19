@@ -4,7 +4,7 @@
         <div class="col-md-12 d-flex justify-content-end mb-2">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalState" wire:click="add"><i class="fas fa-plus-circle"></i> Añadir estado</button>
         </div>
-
+        @if($listStates->count())
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead class="thead-dark">
@@ -30,6 +30,9 @@
                 </tbody>
             </table>
         </div>
+            @else
+        <p class="text-center text-muted">No hay registros que mostrar!</p>
+            @endif
     </div>
     @include('livewire.administrator.avisos.formModalState')
 </div>

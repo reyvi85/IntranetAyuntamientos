@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 @if ($modalModeDestroy)
-                    <h3 class="text-center"> Confirma realmente que desea eliminar el elemento seleccionado?<br> <span class="text-danger font-weight-bolder">{{$name}}</span></h3>
+                    <h3 class="text-center"> Confirma realmente que desea eliminar el elemento seleccionado?<br> <span class="text-danger font-weight-bolder">{{$asunto}}</span></h3>
                 @else
                 @include('livewire.administrator.avisos.formWarning')
                 @endif
@@ -23,7 +23,7 @@
                     @break
 
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update({{$warnigSelected}})" wire:loading.attr="disabled"  wire:target="update, logo"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update_warning({{$warnigSelected}})" wire:loading.attr="disabled"  wire:target="update_warning, image"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
@@ -31,7 +31,7 @@
                     @break
 
                 @endswitch
-                <div class="text-center text-muted" wire:loading wire:target="update, destroy"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="text-center text-muted" wire:loading wire:target="update_warning, image, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>

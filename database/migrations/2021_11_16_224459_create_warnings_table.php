@@ -17,7 +17,7 @@ class CreateWarningsTable extends Migration
             $table->id();
             $table->string('asunto');
             $table->text('description');
-            $table->string('image');
+            $table->string('image')->nullable()->default(null);
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
             $table->unsignedBigInteger('instance_id');
