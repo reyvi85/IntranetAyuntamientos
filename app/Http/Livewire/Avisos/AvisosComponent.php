@@ -40,8 +40,9 @@ class AvisosComponent extends Component
 
     protected $rules = [
         'asunto'=>'required',
+        'warning_state'=>'required',
         'description'=>'required',
-        'image'=>'nullable|image|max:1024',
+        'image'=>'nullable|image|max:3072',
         'instanceSelected'=>'required',
         'warningCategorySelected'=>'required',
         'warningSubCategorySelected'=>'required',
@@ -50,6 +51,7 @@ class AvisosComponent extends Component
 
     protected $messages =[
         'description.required'=>'La descripción es requerida!',
+        'warning_state.required'=>'Debe seleccionar un estado!',
         'instanceSelected.required'=>'La instancia es requerida!',
         'warningCategorySelected.required'=>'Debe seleccionar una Categoría!',
         'warningSubCategorySelected.required'=>'Debe seleccionar una Sub - categoría!',
@@ -90,6 +92,7 @@ class AvisosComponent extends Component
             $this->warning_sub_category = null;
         }else{
             $this->warning_sub_category = $this->getWarningSubCategoryFiltered($this->warningCategorySelected);
+           // $this->warningSubCategorySelected = $this->warning_sub_category->first();
         }
     }
 
@@ -102,13 +105,19 @@ class AvisosComponent extends Component
 
     public function add(){
         $this->resetProps();
-        $this->emit('initMap', config('maps.lat_default'), config('maps.lng_default'));
+        $this->lat = config('maps.lat_default');
+        $this->lng = config('maps.lng_default');
+        $this->emit('initMap', $this->lat, $this->lng);
         $this->setConfigModal();
     }
 
     public function store(){
         $this->validate();
-        $img = $this->image->store($this->getPatchToUpload(), 'public');
+        if($this->image){
+            $img = $this->image->store($this->getPatchToUpload(), 'public');
+        }else{
+            $img = '';
+        }
         Warning::create([
             'asunto'=>$this->asunto,
             'description'=>$this->description,

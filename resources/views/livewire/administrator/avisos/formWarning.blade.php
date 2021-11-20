@@ -10,11 +10,15 @@
 
         <div class="form-group">
             <label>Estado: </label>
-            <select class="form-control" wire:model="warning_state">
+            <select class="form-control @error('warning_state') is-invalid @enderror" wire:model="warning_state">
+                <option value="">-- Estado --</option>
                 @foreach($listStates as $sta)
                     <option value="{{$sta->id}}">{{$sta->name}}</option>
                 @endforeach
             </select>
+            @error('warning_state')
+            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
         </div>
 
         <div class="form-group">
@@ -56,11 +60,14 @@
             <div class="form-group">
                 <label>Sub - categoría: <span wire:loading.delay wire:target="warningCategorySelected"><i class="fas fa-spinner fa-spin"></i></span></label>
                 <select class="form-control @error('warningSubCategorySelected') is-invalid @enderror" wire:model="warningSubCategorySelected">
+                    <option value="">-- Sub-categorías --</option>
                     @foreach($warning_sub_category as $ctg)
                         <option value="{{$ctg->id}}">{{$ctg->name}}</option>
                     @endforeach
                 </select>
-
+                @error('warningSubCategorySelected')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
             </div>
         @endif
 
