@@ -61,6 +61,7 @@ class AvisosComponent extends Component
         $this->checkInstanceForUser();
         $this->setConfigModal();
         $this->colors = $this->getClassColor();
+        $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
         $this->setPatchToUpload('images/avisos');
     }
 
