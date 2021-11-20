@@ -57,11 +57,11 @@ class AvisosComponent extends Component
         'warningSubCategorySelected.required'=>'Debe seleccionar una Sub - categoría!',
     ];
 
+
     public function mount(){
         $this->checkInstanceForUser();
         $this->setConfigModal();
         $this->colors = $this->getClassColor();
-        $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
         $this->setPatchToUpload('images/avisos');
     }
 
@@ -93,7 +93,6 @@ class AvisosComponent extends Component
             $this->warning_sub_category = null;
         }else{
             $this->warning_sub_category = $this->getWarningSubCategoryFiltered($this->warningCategorySelected);
-           // $this->warningSubCategorySelected = $this->warning_sub_category->first();
         }
     }
 
@@ -206,6 +205,7 @@ class AvisosComponent extends Component
 
     public function render()
     {
+        $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
         $listStates = $this->getAllState();
         $avisos = $this->getAllWarnings($this->stateSelected, $this->sort, $this->sortDirection);
         return view('livewire.administrator.avisos.avisos-component', compact('avisos', 'listStates'));

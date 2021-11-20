@@ -40,7 +40,7 @@
     </div>
 
     <div class="col-md-6">
-        @if ($warning_category)
+
             <div class="form-group">
                 <label>Categorías: <span wire:loading.delay wire:target="instanceSelected"><i class="fas fa-spinner fa-spin"></i></span></label>
                 <select class="form-control @error('warningCategorySelected') is-invalid @enderror" wire:model="warningCategorySelected">
@@ -53,7 +53,7 @@
                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                 @enderror
             </div>
-        @endif
+
 
 
         @if (!is_null($warning_sub_category))
