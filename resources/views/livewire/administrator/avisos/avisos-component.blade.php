@@ -2,7 +2,7 @@
     <div class="col-md-12">
         @include('component.loading')
     <!---- Filtros --->
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="add" title="Añadir"><i class="fas fa-plus-circle fa-3x link_pointer"></i></a>
+        @include('livewire.administrator.avisos.filtros')
             <hr>
             <nav class="nav nav-pills flex-column flex-sm-row mb-2">
                 @foreach($listStates as $state)
@@ -17,14 +17,15 @@
             <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
-                    <th class="align-middle link_pointer" scope="col" wire:click="order('id')">#</th>
-                    <th class="align-middle link_pointer" scope="col" wire:click="order('warning_state_id')">Estado</th>
-                    <th class="align-middle link_pointer" scope="col" wire:click="order('asunto')">Asunto</th>
+                    <th class="align-middle link-pointer" scope="col" wire:click="order('id')">#</th>
+                    <th class="align-middle link-pointer" scope="col" wire:click="order('warning_state_id')">Estado</th>
+                    <th class="align-middle link-pointer" scope="col" wire:click="order('asunto')">Asunto</th>
                     <th class="align-middle" scope="col">
                         Categoría<br>
                         Sub-categoría
                     </th>
-                    <th class="align-middle link_pointer" scope="col" wire:click="order('created_at')">Fecha</th>
+                    <th class="align-middle text-center">Respuestas</th>
+                    <th class="align-middle link-pointer" scope="col" wire:click="order('created_at')">Fecha</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -38,6 +39,7 @@
                             {{$row->warning_sub_category->warning_category->name}}<br>
                             {{$row->warning_sub_category->name}}
                         </td>
+                        <td class="align-middle text-center">{{$row->warning_answers_count}}</td>
                         <td class="align-middle">{{date("Y/m/d",strtotime($row->created_at))}}</td>
                         <td class="align-middle">
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="edit({{$row->id}})" title="Editar"><i class="fas fa-edit"></i></a>

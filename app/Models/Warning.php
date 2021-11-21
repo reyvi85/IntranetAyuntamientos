@@ -40,4 +40,8 @@ class Warning extends Model
     public function warning_state(){
         return $this->belongsTo(WarningState::class);
     }
+
+    public function warning_answers(){
+        return $this->hasMany(WarningAnswer::class);
+    }
 }

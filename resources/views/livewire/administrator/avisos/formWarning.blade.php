@@ -37,6 +37,9 @@
                 @enderror
             </div>
         <hr>
+            @if ($warnigSelected)
+                @include('livewire.administrator.avisos.listAnswer')
+            @endif
     </div>
 
     <div class="col-md-6">

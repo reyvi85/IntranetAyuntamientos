@@ -32,7 +32,17 @@ class AvisosComponent extends Component
         $warningSubCategorySelected,
         $user,
 
-        $colors, $warnigSelected,$stateSelected=null;
+        $colors, $warnigSelected,$stateSelected=null,
+        $respuesta,
+        $listAnswers,
+
+        /* Filtros **/
+    $search,
+    $categoryFilter,
+    $subCategoryFilter,
+    $fechaFilter
+
+    ;
 
     protected $listeners = [
         'refreshState'=>'render', 'getLatitudeForInput',  'getLongitudeForInput'
@@ -62,6 +72,7 @@ class AvisosComponent extends Component
         $this->checkInstanceForUser();
         $this->setConfigModal();
         $this->colors = $this->getClassColor();
+        $this->listAnswers = collect();
         $this->setPatchToUpload('images/avisos');
     }
 
@@ -79,6 +90,7 @@ class AvisosComponent extends Component
     public function updatedStateSelected(){
         $this->resetPage();
     }
+
     public function updatedInstanceSelected(){
         if($this->instanceSelected == ""){
             $this->reset(['warningCategorySelected','warning_category','warning_sub_category']);
@@ -98,7 +110,7 @@ class AvisosComponent extends Component
 
     public function resetProps(){
         $this->reset(['asunto', 'description', 'image', 'imageWarning', 'lat', 'lng', 'instance_id',
-            'warning_state','warningCategorySelected','warningSubCategorySelected', 'warning_sub_category', 'warning_category','user', 'modalModeDestroy'
+            'warning_state', 'warnigSelected','warningCategorySelected','warningSubCategorySelected', 'warning_sub_category', 'warning_category','user', 'modalModeDestroy'
             ]);
         $this->resetErrorBag();
     }
@@ -138,6 +150,7 @@ class AvisosComponent extends Component
         $this->setConfigModal('Editar', 'fa-edit', 'edit');
         $this->warnigSelected = $warning->id;
         $this->instanceSelected = $warning->instance_id;
+        $this->listAnswers = $warning->warning_answers()->orderBy('created_at', 'Desc')->get();
         /** Categoría */
         $this->updatedInstanceSelected();
         $this->warningCategorySelected = $warning->warning_sub_category->warning_category->id;
@@ -200,6 +213,15 @@ class AvisosComponent extends Component
         $warning->delete();
         $this->emit('saveModal');
         $this->resetProps();
+    }
+
+    public function storeAnswer(Warning $warning){
+        $this->validate(['respuesta'=>'required']);
+        $warning->warning_answers()->create([
+            'answer'=>$this->respuesta
+        ]);
+        $this->reset('respuesta');
+        $this->listAnswers = $warning->warning_answers()->orderBy('created_at', 'Desc')->get();
     }
 
 

@@ -10002,6 +10002,12 @@ h3 {
     border-color: #dee2e6;
   }
 }
-.link_pointer {
-  cursor: pointer !important;
+.link-pointer{
+    cursor: pointer;
 }
+
+.vertical-Scroll{
+    height: 250px;
+    overflow-y: scroll;
+}
+

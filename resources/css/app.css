@@ -1,0 +1,8 @@
+.link-pointer{
+    cursor: pointer;
+}
+
+.vertical-Scroll{
+    height: 250px;
+    overflow-y: scroll;
+}

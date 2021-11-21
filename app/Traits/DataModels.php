@@ -366,7 +366,8 @@ trait DataModels {
     }
 
     public function getAllWarnings($estado=null, $sort, $direction){
-        return Warning::with(['warning_state', 'warning_sub_category', 'warning_sub_category.warning_category'])
+        return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
+            ->withCount('warning_answers')
             ->when($estado, function ($q) use($estado){
                 $q->where('warning_state_id', $estado);
             })
