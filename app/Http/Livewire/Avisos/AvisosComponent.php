@@ -45,7 +45,7 @@ class AvisosComponent extends Component
     ;
 
     protected $listeners = [
-        'refreshState'=>'render', 'getLatitudeForInput',  'getLongitudeForInput'
+        'refreshState'=>'render', 'getLatitudeForInput',  'getLongitudeForInput', 'getFechaFilter'
     ];
 
     protected $rules = [
@@ -85,6 +85,11 @@ class AvisosComponent extends Component
     {
         if(!is_null($value))
             $this->lng = $value;
+    }
+
+    public function getFechaFilter($value){
+        if(!is_null($value))
+            $this->fechaFilter = $value;
     }
 
     public function updatedStateSelected(){
@@ -229,7 +234,7 @@ class AvisosComponent extends Component
     {
         $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
         $listStates = $this->getAllState();
-        $avisos = $this->getAllWarnings($this->stateSelected, $this->sort, $this->sortDirection);
+        $avisos = $this->getAllWarnings($this->search,$this->instancias,$this->fechaFilter,$this->stateSelected, $this->sort, $this->sortDirection);
         return view('livewire.administrator.avisos.avisos-component', compact('avisos', 'listStates'));
     }
 }

@@ -33,7 +33,7 @@
 @section('scripts')
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{config('maps.API_KEY_GOOGLE_MAP')}}" async defer></script>
     <script type="text/javascript" src="{{asset('js/googleMaps.js')}}" async defer></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
             $('#modalForm').modal('hide');
@@ -43,5 +43,33 @@
         window.livewire.on('initMap', (lat, lng) => {
             resetMap(lat, lng);
         });
+
+        /** Fecha selector */
+    /*    let elementFecha = document.getElementById('filterFecha');
+        let fecha = new Litepicker({
+            element: elementFecha,
+            singleMode: false,
+            tooltipText: {
+                one: 'día',
+                other: 'días'
+            },
+
+            tooltipNumber: (totalDays) => {
+                return totalDays - 1;
+            },
+            format:'YYYY/MM/DD'
+
+        })
+        fecha.on('render', (ui) => {
+         //  Livewire.emit('getFechaFilter', 'Hola mundo')
+        });
+
+
+        console.log(fecha)
+
+        elementFecha.addEventListener('change', (e)=>{
+            console.log(document.getElementById('filterFecha').value)
+        })*/
+
     </script>
 @endsection

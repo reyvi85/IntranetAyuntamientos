@@ -365,11 +365,22 @@ trait DataModels {
         return WarningState::withCount('warnings')->get();
     }
 
-    public function getAllWarnings($estado=null, $sort, $direction){
+    public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $estado=null, $sort, $direction){
         return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
             ->withCount('warning_answers')
+            ->when($search, function ($q) use($search){
+                $q->where('asunto','like', '%'.$search.'%')
+                    ->orWhere('description','like', '%'.$search.'%');
+            })
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
             ->when($estado, function ($q) use($estado){
                 $q->where('warning_state_id', $estado);
+            })
+
+            ->when($rangoFecha, function ($q) use($rangoFecha){
+                $q->whereBetween('created_at', [$rangoFecha]);
             })
             ->orderBy($sort, $direction)
             ->paginate();

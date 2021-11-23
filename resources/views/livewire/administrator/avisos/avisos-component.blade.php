@@ -12,6 +12,7 @@
                         <a class="flex-sm-fill text-sm-center nav-link" href="javascript:void(0)" wire:click="$set('stateSelected', null)"><i class="fas fa-filter"></i> Todos</a>
                     @endif
             </nav>
+            <hr>
     @if ($avisos->count())
         <div class="table-responsive">
             <table class="table table-striped">
