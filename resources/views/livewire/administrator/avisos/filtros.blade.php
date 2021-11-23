@@ -13,11 +13,29 @@
     @endif
 
     <div class="form-group col-md-3">
-        {{$fechaFilter}}
-        <input type="text" class="form-control datepicker" id="filterFecha" placeholder="Rango de fecha..." wire:model="fechaFilter">
+        <input type="text" class="form-control" id="filterFecha" name="fechaFilter" placeholder="Rango de fecha..." wire:model="fechaFilter">
     </div>
 
-        <div class="form-group col-md-1">
-            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="add" title="Añadir"><i class="fas fa-plus-circle fa-2x link-pointer align-middle"></i></a>
+    <div class="form-group col-md-2">
+        <select class="form-control" wire:model="categoryFilterSelected">
+            <option value="">-- Categorías --</option>
+            @foreach($listCategoryFilter as $ctg)
+                <option value="{{$ctg->id}}">{{$ctg->name}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    @if ($listSubCategoryFilter->count())
+        <div class="form-group col-md-2">
+            <select class="form-control" wire:model="subCategoryFilterSelected">
+                <option value="">-- Sub - categorías --</option>
+                @foreach($listSubCategoryFilter as $ctg)
+                    <option value="{{$ctg->id}}">{{$ctg->name}}</option>
+                @endforeach
+            </select>
         </div>
+
+    @endif
+
+
 </div>

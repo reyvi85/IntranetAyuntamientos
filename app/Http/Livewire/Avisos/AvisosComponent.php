@@ -38,8 +38,10 @@ class AvisosComponent extends Component
 
         /* Filtros **/
     $search,
-    $categoryFilter,
-    $subCategoryFilter,
+    $listCategoryFilter,
+        $categoryFilterSelected,
+    $listSubCategoryFilter,
+        $subCategoryFilterSelected,
     $fechaFilter
 
     ;
@@ -73,9 +75,11 @@ class AvisosComponent extends Component
         $this->setConfigModal();
         $this->colors = $this->getClassColor();
         $this->listAnswers = collect();
+        $this->listSubCategoryFilter = collect();
         $this->setPatchToUpload('images/avisos');
     }
 
+    /** LISTENNER **/
     public function getLatitudeForInput($value)
     {
         if(!is_null($value))
@@ -92,6 +96,8 @@ class AvisosComponent extends Component
             $this->fechaFilter = $value;
     }
 
+    /** END LISTENNER**/
+
     public function updatedStateSelected(){
         $this->resetPage();
     }
@@ -102,6 +108,20 @@ class AvisosComponent extends Component
         }else{
             $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
             $this->reset('warning_sub_category');
+        }
+    }
+
+    public function updatedInstancias()
+    {
+        $this->listSubCategoryFilter = collect();
+    }
+
+    public function updatedCategoryFilterSelected(){
+        if ($this->categoryFilterSelected == ""){
+            $this->listSubCategoryFilter = collect();
+        }else{
+
+            $this->listSubCategoryFilter = $this->getWarningSubCategoryFiltered($this->categoryFilterSelected);
         }
     }
 
@@ -149,6 +169,8 @@ class AvisosComponent extends Component
         $this->emit('saveModal');
         $this->resetProps();
     }
+
+
 
     public function edit(Warning $warning){
         $this->resetProps();
@@ -233,8 +255,10 @@ class AvisosComponent extends Component
     public function render()
     {
         $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
+        $this->listCategoryFilter = $this->getWarningsCategoryFiltered($this->instancias);
+
         $listStates = $this->getAllState();
-        $avisos = $this->getAllWarnings($this->search,$this->instancias,$this->fechaFilter,$this->stateSelected, $this->sort, $this->sortDirection);
+        $avisos = $this->getAllWarnings($this->search,$this->instancias,$this->fechaFilter,$this->categoryFilterSelected, $this->subCategoryFilterSelected,$this->stateSelected, $this->sort, $this->sortDirection);
         return view('livewire.administrator.avisos.avisos-component', compact('avisos', 'listStates'));
     }
 }

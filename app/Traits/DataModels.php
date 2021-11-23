@@ -347,8 +347,7 @@ trait DataModels {
     }
 
     public function getWarningsCategoryFiltered($instancia = null){
-        return WarningCategory::with('sub_categories')
-            ->when($instancia, function ($q) use($instancia){
+        return WarningCategory::when($instancia, function ($q) use($instancia){
                 $q->where('instance_id',$instancia);
             })
             ->get();
@@ -365,7 +364,7 @@ trait DataModels {
         return WarningState::withCount('warnings')->get();
     }
 
-    public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $estado=null, $sort, $direction){
+    public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $category = null, $subCategory = null ,$estado=null, $sort, $direction){
         return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
             ->withCount('warning_answers')
             ->when($search, function ($q) use($search){
@@ -380,7 +379,17 @@ trait DataModels {
             })
 
             ->when($rangoFecha, function ($q) use($rangoFecha){
-                $q->whereBetween('created_at', [$rangoFecha]);
+                $aux = explode('-', $rangoFecha);
+                $q->whereBetween('created_at', $aux);
+            })
+
+            ->when($category, function ($q) use($category){
+                $q->whereHas('warning_sub_category.warning_category', function (Builder $query) use($category){
+                    $query->where('id', $category);
+                });
+            })
+            ->when($subCategory, function ($q)use($subCategory){
+                $q->where('warning_sub_category_id', $subCategory);
             })
             ->orderBy($sort, $direction)
             ->paginate();
