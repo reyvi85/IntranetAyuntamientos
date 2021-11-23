@@ -11,7 +11,7 @@
                 @if (!is_null($stateSelected))
                         <a class="flex-sm-fill text-sm-center nav-link" href="javascript:void(0)" wire:click="$set('stateSelected', null)"><i class="fas fa-filter"></i> Todos</a>
                     @endif
-                <a class="flex-sm-fill text-sm-center nav-link" data-toggle="modal" data-target="#modalFormWarning" wire:click="add" title="Añadir"><i class="fas fa-plus-circle fa-2x link-pointer align-middle"></i></a>
+                <a  href="javascript:void(0)" class="flex-sm-fill text-sm-center nav-link" data-toggle="modal" data-target="#modalFormWarning" wire:click="add" title="Añadir"><i class="fas fa-plus-circle fa-2x link-pointer align-middle"></i></a>
             </nav>
             <hr>
     @if ($avisos->count())
