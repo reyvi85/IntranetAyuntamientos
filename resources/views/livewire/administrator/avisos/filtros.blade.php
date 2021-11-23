@@ -1,5 +1,5 @@
 <div class="form-row">
-    <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?3:7}}">
+    <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?3:5}}">
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
     </div>
 
