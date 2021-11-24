@@ -12,6 +12,7 @@ class Warning extends Model
     protected $fillable = [
         'asunto',
         'description',
+        'ubicacion',
         'image',
         'lat',
         'lng',

@@ -19,6 +19,7 @@ class AvisosComponent extends Component
     public
         $asunto,
         $description,
+        $ubicacion,
         $image,
         $imageWarning=null,
         $lat,
@@ -42,9 +43,11 @@ class AvisosComponent extends Component
         $categoryFilterSelected,
     $listSubCategoryFilter,
         $subCategoryFilterSelected,
-    $fechaFilter
+    $fechaFilter,
 
+        $modalModeShow=false
     ;
+
 
     protected $listeners = [
         'refreshState'=>'render', 'getLatitudeForInput',  'getLongitudeForInput', 'getFechaFilter'
@@ -54,6 +57,7 @@ class AvisosComponent extends Component
         'asunto'=>'required',
         'warning_state'=>'required',
         'description'=>'required',
+        'ubicacion'=>'required',
         'image'=>'nullable|image|max:3072',
         'instanceSelected'=>'required',
         'warningCategorySelected'=>'required',
@@ -68,6 +72,7 @@ class AvisosComponent extends Component
         'warningCategorySelected.required'=>'Debe seleccionar una Categoría!',
         'warningSubCategorySelected.required'=>'Debe seleccionar una Sub - categoría!',
     ];
+
 
 
     public function mount(){
@@ -134,10 +139,16 @@ class AvisosComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['asunto', 'description', 'image', 'imageWarning', 'lat', 'lng', 'instance_id',
-            'warning_state', 'warnigSelected','warningCategorySelected','warningSubCategorySelected', 'warning_sub_category', 'warning_category','user', 'modalModeDestroy'
+        $this->reset(['asunto', 'description', 'ubicacion','image', 'imageWarning', 'lat', 'lng', 'instance_id',
+            'warning_state', 'warnigSelected','warningCategorySelected','warningSubCategorySelected', 'warning_sub_category', 'warning_category','user', 'modalModeShow','modalModeDestroy'
             ]);
         $this->resetErrorBag();
+    }
+
+    public function show($warning){
+        $this->setConfigModal('Ver aviso', 'fa-eye', 'show');
+        $this->modalModeShow =true;
+        $this->warnigSelected = $warning;
     }
 
     public function add(){
@@ -158,6 +169,7 @@ class AvisosComponent extends Component
         Warning::create([
             'asunto'=>$this->asunto,
             'description'=>$this->description,
+            'ubicacion'=>$this->ubicacion,
             'image'=>$img,
             'lat'=>$this->lat,
             'lng'=>$this->lng,
@@ -188,6 +200,7 @@ class AvisosComponent extends Component
 
         $this->asunto = $warning->asunto;
         $this->description = $warning->description;
+        $this->ubicacion = $warning->ubicacion;
         $this->imageWarning = $warning->image;
         $this->warning_state = $warning->warning_state_id;
         $this->user = $warning->user_id;
@@ -197,9 +210,7 @@ class AvisosComponent extends Component
     }
 
     public function update_warning(Warning $warning){
-        $this->validate([
-            'image'=>'nullable|image',
-        ]);
+        $this->validate();
         if($this->image){
             Storage::disk('public')->delete($warning->image);
             $img = $this->image->store($this->getPatchToUpload(), 'public');
@@ -210,6 +221,7 @@ class AvisosComponent extends Component
         $warning->fill([
             'asunto'=>$this->asunto,
             'description'=>$this->description,
+            'ubicacion'=>$this->ubicacion,
             'image'=>$img,
             'lat'=>$this->lat,
             'lng'=>$this->lng,
@@ -256,7 +268,6 @@ class AvisosComponent extends Component
     {
         $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
         $this->listCategoryFilter = $this->getWarningsCategoryFiltered($this->instancias);
-
         $listStates = $this->getAllState();
         $avisos = $this->getAllWarnings($this->search,$this->instancias,$this->fechaFilter,$this->categoryFilterSelected, $this->subCategoryFilterSelected,$this->stateSelected, $this->sort, $this->sortDirection);
         return view('livewire.administrator.avisos.avisos-component', compact('avisos', 'listStates'));

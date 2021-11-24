@@ -38,6 +38,14 @@
             </div>
 
             <div class="form-group">
+                <label for="ubicacion">Ubicación:</label>
+                <input type="text" class="form-control @error('ubicacion') is-invalid @enderror" id="ubicacion" wire:model.defer="ubicacion">
+                @error('ubicacion')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                @enderror
+            </div>
+
+            <div class="form-group">
                 <label><i class="fas fa-map-pin"></i> <span class="font-weight-bold">Geolocalización:</span> </label>
                 @include('component.mapGoogle')
             </div>

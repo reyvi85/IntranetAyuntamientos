@@ -18,8 +18,5 @@
     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
     @enderror
 </div>
-
-
     <button type="button" class="btn btn-secondary float-right" wire:loading.attr="disabled" wire:target="storeAnswer"  wire:click="storeAnswer({{$warnigSelected}})"><i class="fas fa-paper-plane"></i> Enviar respuesta</button>
     <div class="text-center text-muted" wire:loading wire:target="storeAnswer"><i class="fas fa-spinner fa-spin"></i></div>
-

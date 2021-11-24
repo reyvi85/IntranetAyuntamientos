@@ -364,12 +364,13 @@ trait DataModels {
         return WarningState::withCount('warnings')->get();
     }
 
-    public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $category = null, $subCategory = null ,$estado=null, $sort, $direction){
-        return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
+    public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $category = null, $subCategory = null , $estado=null, $sort, $direction){
+      return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
             ->withCount('warning_answers')
             ->when($search, function ($q) use($search){
                 $q->where('asunto','like', '%'.$search.'%')
-                    ->orWhere('description','like', '%'.$search.'%');
+                    ->orWhere('description','like', '%'.$search.'%')
+                    ->orWhere('ubicacion','like', '%'.$search.'%');
             })
             ->when($instancia, function ($q) use($instancia){
                 $q->where('instance_id',$instancia);
@@ -393,6 +394,10 @@ trait DataModels {
             })
             ->orderBy($sort, $direction)
             ->paginate();
+    }
+
+    public function getWarning($warning){
+        return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])->findOrFail($warning);
     }
 
 

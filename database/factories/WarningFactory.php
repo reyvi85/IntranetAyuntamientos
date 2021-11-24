@@ -24,6 +24,7 @@ class WarningFactory extends Factory
         return [
            'asunto'=>$this->faker->sentence,
            'description'=>$this->faker->text,
+            'ubicacion'=>$this->faker->address,
             'image'=>$this->faker->imageUrl,
             'lat'=>$this->faker->latitude,
             'lng'=>$this->faker->longitude,

@@ -11,6 +11,8 @@
             <div class="modal-body">
                 @if ($modalModeDestroy)
                     <h3 class="text-center"> Confirma realmente que desea eliminar el elemento seleccionado?<br> <span class="text-danger font-weight-bolder">{{$asunto}}</span></h3>
+                @elseif($modalModeShow)
+                    @include('livewire.administrator.avisos.showWarning')
                 @else
                 @include('livewire.administrator.avisos.formWarning')
                 @endif
