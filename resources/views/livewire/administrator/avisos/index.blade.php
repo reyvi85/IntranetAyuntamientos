@@ -53,6 +53,10 @@
             resetMap(lat, lng);
         });
 
+        window.livewire.on('showMap', (lat, lng) => {
+            resetMap(lat, lng, false);
+        });
+
 
         $('input[name="fechaFilter"]').daterangepicker(
             {

@@ -1,4 +1,4 @@
-function initMap(lat, lng, capa='map') {
+function initMap(lat, lng, drag = true, capa='map') {
     let map;
     map = new google.maps.Map(document.getElementById(capa), {
         center: {lat: lat, lng: lng },
@@ -7,7 +7,7 @@ function initMap(lat, lng, capa='map') {
     var marker = new google.maps.Marker({
         position: {lat: lat, lng: lng},
         map: map,
-        draggable:true
+        draggable:drag
     });
     marker.addListener('dragend', function (event) {
         Livewire.emit('getLatitudeForInput',  this.getPosition().lat());
@@ -16,20 +16,7 @@ function initMap(lat, lng, capa='map') {
     })
 }
 
-function resetMap(lat, lng, capa='map'){
+function resetMap(lat, lng, drag = true, capa='map'){
     document.getElementById(capa).innerHTML='';
-    initMap(lat, lng, capa);
-}
-
-function showMap(lat, lng, capa='map') {
-    let map;
-    map = new google.maps.Map(document.getElementById(capa), {
-        center: {lat: lat, lng: lng },
-        zoom: 10,
-    });
-    var marker = new google.maps.Marker({
-        position: {lat: lat, lng: lng},
-        map: map,
-        draggable:false
-    });
+    initMap(lat, lng, drag, capa);
 }

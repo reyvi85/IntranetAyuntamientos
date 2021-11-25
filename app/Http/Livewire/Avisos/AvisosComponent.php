@@ -145,10 +145,11 @@ class AvisosComponent extends Component
         $this->resetErrorBag();
     }
 
-    public function show($warning){
+    public function show($warning, $lat, $lng){
         $this->setConfigModal('Ver aviso', 'fa-eye', 'show');
         $this->modalModeShow =true;
         $this->warnigSelected = $warning;
+        $this->emit('showMap', $lat, $lng);
     }
 
     public function add(){

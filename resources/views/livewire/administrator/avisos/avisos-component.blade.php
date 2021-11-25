@@ -44,7 +44,7 @@
                         <td class="align-middle text-center">{{$row->warning_answers_count}}</td>
                         <td class="align-middle">{{date("Y/m/d",strtotime($row->created_at))}}</td>
                         <td class="align-middle">
-                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="show({{$row->id}})" title="Mostrar aviso"><i class="fas fa-eye"></i></a>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="show({{$row->id}}, {{$row->lat}}, {{$row->lng}})" title="Mostrar aviso"><i class="fas fa-eye"></i></a>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="edit({{$row->id}})" title="Editar"><i class="fas fa-edit"></i></a>
                             <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormWarning" wire:click="trashWarning({{$row->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
                         </td>
