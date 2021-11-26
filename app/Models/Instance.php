@@ -68,6 +68,10 @@ class Instance extends Model
         return $this->hasMany(WarningCategory::class);
     }
 
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+
 
 
 
