@@ -27,6 +27,8 @@ class CreatePostsTable extends Migration
             $table->boolean('residentes')->default(false);
             $table->boolean('inicio')->default(false);
 
+            $table->boolean('active')->default(false);
+
             $table->string('slug');
 
             $table->timestamps();

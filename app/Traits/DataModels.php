@@ -10,6 +10,7 @@ use App\Models\InterestPhone;
 use App\Models\Location;
 use App\Models\LocationCategory;
 use App\Models\Notification;
+use App\Models\Post;
 use App\Models\Province;
 use App\Models\User;
 use App\Models\Warning;
@@ -396,8 +397,24 @@ trait DataModels {
             ->paginate();
     }
 
-    public function getWarning($warning){
-        return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])->findOrFail($warning);
+    /**
+     * N O T I C I A S
+    **/
+
+    public function getNoticias($search=null, $instancia = null, $rangoFecha=null, $sort, $direction){
+        return Post::when($search, function ($q) use($search){
+            $q->where('titulo','like', '%'.$search.'%')
+                ->orWhere('subtitulo','like', '%'.$search.'%');
+            })
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
+            ->when($rangoFecha, function ($q) use($rangoFecha){
+                $aux = explode('-', $rangoFecha);
+                $q->whereBetween('created_at', $aux);
+            })
+            ->orderBy($sort, $direction)
+            ->paginate();
     }
 
 

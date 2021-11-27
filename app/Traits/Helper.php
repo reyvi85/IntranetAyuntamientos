@@ -55,7 +55,7 @@ trait Helper {
             ['id'=>2,'modulo'=>'Comercios', 'icon'=>'fa-euro-sign', 'routeName'=>'gestion.business'],
             ['id'=>3,'modulo'=>'Widgets','icon'=>'fa-cog', 'routeName'=>'home'],
             ['id'=>4,'modulo'=>'Envío de notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications'],
-            ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-cog','routeName'=>'home'],
+            ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-newspaper','routeName'=>'home'],
             ['id'=>6,'modulo'=>'Directorio telefónico', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones'],
             ['id'=>7,'modulo'=>'Localizaciones', 'icon'=>'fa-map-marker-alt', 'routeName'=>'gestion.localizaciones'],
             ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cog', 'routeName'=>'home'],
