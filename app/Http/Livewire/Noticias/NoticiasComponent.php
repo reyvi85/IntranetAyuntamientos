@@ -17,26 +17,28 @@ class NoticiasComponent extends Component
         $subtitulo,
         $contenido,
         $image,
-        $fecha_inicio,
-        $fecha_fin,
+        $fechaNews,
         $visitantes,
         $residentes,
         $inicio,
-        $active,
-        $slug;
+        $active;
 
     protected $rules = [
         'titulo'=>'required',
         'subtitulo'=>'required',
         'contenido'=>'required',
         'image'=>'required|image|max:3072',
-        'fecha_inicio'=>'required|',
-        'fecha_fin'=>'required|date',
+        'fechaNews'=>'required|date',
         'instanceSelected'=>'required'
+    ];
+
+    protected $listeners = [
+        'getFechaFilter', 'getAddFecha'
     ];
 
     public function mount(){
         $this->checkInstanceForUser();
+        $this->setConfigModal();
     }
 
     public function update_state(Post $post, $state){
@@ -50,6 +52,42 @@ class NoticiasComponent extends Component
             abort(403);
         }
     }
+
+    public function getFechaFilter($value){
+        if(!is_null($value))
+            $this->fechaFilter = $value;
+    }
+
+    public function getAddFecha($value){
+        if(!is_null($value))
+            $this->fechaNews = $value;
+    }
+
+    public function resetProps(){
+        $this->reset([]);
+    }
+
+    public function add(){
+
+    }
+
+    public function edit(Post $post){
+        $this->setConfigModal('Editar', 'fa-edit', 'edit');
+        $this->postSelected = $post->id;
+        $this->titulo = $post->titulo;
+        $this->subtitulo = $post->subtitulo;
+        $this->contenido = $post->contenido;
+        $this->fechaNews = $post->fecha_inicio.'-'.$post->fecha_fin;
+        $this->visitantes = $post->visitantes;
+        $this->residentes = $post->residentes;
+        $this->inicio = $post->inicio;
+        $this->active = $post->active;
+    }
+
+    public function update_news(Post $post){
+
+    }
+
 
 
     public function render()

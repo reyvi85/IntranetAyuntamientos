@@ -20,6 +20,4 @@
         <button class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Añadir</button>
     </div>
 
-
-
 </div>

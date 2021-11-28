@@ -411,7 +411,7 @@ trait DataModels {
             })
             ->when($rangoFecha, function ($q) use($rangoFecha){
                 $aux = explode('-', $rangoFecha);
-                $q->whereBetween('created_at', $aux);
+                $q->whereBetween('fecha_inicio', $aux);
             })
             ->orderBy($sort, $direction)
             ->paginate();

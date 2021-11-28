@@ -25,6 +25,10 @@ class Post extends Model
         'instance_id'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+    ];
+
     public function instance(){
         return $this->belongsTo(Instance::class);
     }

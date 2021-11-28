@@ -78,11 +78,6 @@
         </nav>
     <div class="container py-4">
         <div class="row">
-            <div class="col-md-12">
-                @livewire('instancias.show-instance-info-for-user-component')
-            </div>
-        </div>
-        <div class="row">
             @yield('content')
         </div>
     </div>
