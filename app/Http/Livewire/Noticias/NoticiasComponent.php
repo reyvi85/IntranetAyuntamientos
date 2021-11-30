@@ -18,6 +18,9 @@ class NoticiasComponent extends Component
         $contenido,
         $image,
         $fechaNews,
+
+        $fecha_inicio, $fecha_fin,
+
         $visitantes,
         $residentes,
         $inicio,
@@ -72,12 +75,22 @@ class NoticiasComponent extends Component
     }
 
     public function edit(Post $post){
+      //  $this->emit('startForm', $post->fecha_inicio, $post->fecha_fin);
+
+        $this->dispatchBrowserEvent('startForm', ['fechaIni' => $post->fecha_inicio, 'fechaFin'=>$post->fecha_fin]);
+
+
         $this->setConfigModal('Editar', 'fa-edit', 'edit');
+        $this->instanceSelected = $post->instance_id;
         $this->postSelected = $post->id;
         $this->titulo = $post->titulo;
         $this->subtitulo = $post->subtitulo;
         $this->contenido = $post->contenido;
-        $this->fechaNews = $post->fecha_inicio.'-'.$post->fecha_fin;
+        $this->fechaNews = $post->fecha_inicio.' - '.$post->fecha_fin;
+
+        $this->fecha_inicio = $post->fecha_inicio;
+        $this->fecha_fin = $post->fecha_fin;
+
         $this->visitantes = $post->visitantes;
         $this->residentes = $post->residentes;
         $this->inicio = $post->inicio;

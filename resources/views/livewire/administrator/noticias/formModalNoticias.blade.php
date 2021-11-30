@@ -36,26 +36,10 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" wire:ignore>
                                 <label for="ubicacion">Fecha de inicio / fin:</label>
-                                <input type="text" class="form-control @error('fechaNews') is-invalid @enderror" name="fechaNews" id="fechaNews" wire:model="fechaNews">
+                                <input type="text" class="form-control @error('fechaNews') is-invalid @enderror" name="fechaNews" id="fechaNews" wire:model="fechaNews" value="{{$fechaNews}}">
                                 @error('fechaNews')
-                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="telefono">Teléfono:</label>
-                                <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono" wire:model.defer="telefono">
-                                @error('telefono')
-                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="web">Web:</label>
-                                <input type="text" class="form-control @error('web') is-invalid @enderror" id="web" wire:model.defer="web" placeholder="http://">
-                                @error('web')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
                             </div>

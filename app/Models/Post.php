@@ -29,6 +29,16 @@ class Post extends Model
         'created_at' => 'datetime:Y-m-d',
     ];
 
+    public function getFechaInicioAttribute($value)
+    {
+        return date("Y/m/d", strtotime($value));
+    }
+
+    public function getFechaFinAttribute($value)
+    {
+        return date("Y/m/d", strtotime($value));
+    }
+
     public function instance(){
         return $this->belongsTo(Instance::class);
     }

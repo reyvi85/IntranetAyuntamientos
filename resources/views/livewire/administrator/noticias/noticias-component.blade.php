@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
     <script type="text/javascript">
+        let fechaInicio, fechaFin;
         window.livewire.on('saveModal', () => {
             $('#modalForm').modal('hide');
         });
@@ -63,46 +64,17 @@
                 Livewire.emit('getFechaFilter', start.format('YYYY/MM/DD')+'-'+end.format('YYYY/MM/DD'));
             });
 
-        $('input[name="fechaNews"]').daterangepicker(
-            {
-                locale: {
-                    format: 'YYYY/MM/DD',
-                    separator: " - ",
-                    applyLabel: "Aplicar",
-                    cancelLabel: "Cancelar",
-                    fromLabel: "Desde",
-                    toLabel: "Hasta",
-                    customRangeLabel: "Custom",
-                    daysOfWeek: [
-                        "Do",
-                        "Lu",
-                        "Ma",
-                        "Mi",
-                        "Ju",
-                        "Vi",
-                        "Sa"
-                    ],
-                    monthNames: [
-                        "Enero",
-                        "Febrero",
-                        "Marzo",
-                        "Abril",
-                        "Mayo",
-                        "Junio",
-                        "Julio",
-                        "Augosto",
-                        "Septiembre",
-                        "Octubre",
-                        "Noviembre",
-                        "Diciembre"
-                    ],
-                    firstDay: 1
-                },
-                opens:'right'
-            },
-            function(start, end, label) {
-                Livewire.emit('getAddFecha', start.format('YYYY/MM/DD')+'-'+end.format('YYYY/MM/DD'));
-            });
+
+
+
+
+        window.addEventListener('startForm', event => {
+            fechaInicio = event.detail.fechaIni;
+            fechaFin = event.detail.fechaFin;
+            console.log(fechaInicio);
+        });
+
+
 
     </script>
 @endsection

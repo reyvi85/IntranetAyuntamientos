@@ -68,3 +68,56 @@
     </div>
 </div>
 @include('livewire.administrator.noticias.formModalNoticias');
+@push('scripts')
+    <script>
+        window.addEventListener('startForm', event => {
+            var fechaInicio = event.detail.fechaIni;
+            var fechaFin = event.detail.fechaFin;
+            console.log(fechaInicio);
+        });
+
+        $('#fechaNews').daterangepicker(
+            {
+                locale: {
+                    format: 'YYYY/MM/DD',
+                    separator: " - ",
+                    applyLabel: "Aplicar",
+                    cancelLabel: "Cancelar",
+                    fromLabel: "Desde",
+                    toLabel: "Hasta",
+                    customRangeLabel: "Custom",
+                    daysOfWeek: [
+                        "Do",
+                        "Lu",
+                        "Ma",
+                        "Mi",
+                        "Ju",
+                        "Vi",
+                        "Sa"
+                    ],
+                    monthNames: [
+                        "Enero",
+                        "Febrero",
+                        "Marzo",
+                        "Abril",
+                        "Mayo",
+                        "Junio",
+                        "Julio",
+                        "Augosto",
+                        "Septiembre",
+                        "Octubre",
+                        "Noviembre",
+                        "Diciembre"
+                    ],
+                    firstDay: 1,
+                    startDate:'',
+                    endDate:''
+                },
+                opens:'right'
+            },
+            function(start, end) {
+                Livewire.emit('getAddFecha', start.format('YYYY/MM/DD')+'-'+end.format('YYYY/MM/DD'));
+
+            });
+    </script>
+@endpush
