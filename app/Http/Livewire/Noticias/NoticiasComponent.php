@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Noticias;
 
 use App\Models\Post;
 use App\Traits\DataModels;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -31,12 +32,16 @@ class NoticiasComponent extends Component
         'subtitulo'=>'required',
         'contenido'=>'required',
         'image'=>'required|image|max:3072',
-        'fechaNews'=>'required|date',
+        'fechaNews'=>'required',
         'instanceSelected'=>'required'
     ];
 
+    protected $messages = [
+        'instanceSelected.required'=>'Debe seleccionar una instancia!'
+    ];
+
     protected $listeners = [
-        'getFechaFilter', 'getAddFecha'
+        'getFechaFilter', 'getAddFecha', 'getContenido'
     ];
 
     public function mount(){
@@ -65,6 +70,10 @@ class NoticiasComponent extends Component
         if(!is_null($value))
             $this->fechaNews = $value;
     }
+    public function getContenido($value){
+        if(!is_null($value))
+            $this->contenido = $value;
+    }
 
     public function resetProps(){
         $this->reset([]);
@@ -77,16 +86,17 @@ class NoticiasComponent extends Component
     public function edit(Post $post){
       //  $this->emit('startForm', $post->fecha_inicio, $post->fecha_fin);
 
-        $this->dispatchBrowserEvent('startForm', ['fechaIni' => $post->fecha_inicio, 'fechaFin'=>$post->fecha_fin]);
+        $this->dispatchBrowserEvent('text', ['text' => $post->contenido]);
 
 
         $this->setConfigModal('Editar', 'fa-edit', 'edit');
         $this->instanceSelected = $post->instance_id;
         $this->postSelected = $post->id;
+        $this->imagePost = $post->image;
         $this->titulo = $post->titulo;
         $this->subtitulo = $post->subtitulo;
         $this->contenido = $post->contenido;
-        $this->fechaNews = $post->fecha_inicio.' - '.$post->fecha_fin;
+        $this->fechaNews = $post->fecha_inicio.' / '.$post->fecha_fin;
 
         $this->fecha_inicio = $post->fecha_inicio;
         $this->fecha_fin = $post->fecha_fin;
@@ -98,7 +108,38 @@ class NoticiasComponent extends Component
     }
 
     public function update_news(Post $post){
-
+        trim($this->fechaNews);
+        $f = explode('/',$this->fechaNews);
+        dd($f);
+       $this->validate([
+           'titulo'=>'required',
+           'subtitulo'=>'required',
+           'contenido'=>'required',
+           'image'=>'nullable|image|max:3072',
+           'fechaNews'=>'required',
+           'instanceSelected'=>'required'
+       ]);
+       $f = explode('-',$this->fechaNews);
+        if($this->image){
+            Storage::disk('public')->delete($post->image);
+            $img = $this->image->store($this->getPatchToUpload(), 'public');
+        }else{
+            $img = $post->image;
+        }
+       $post->fill([
+        'titulo',
+        'subtitulo',
+        'contenido',
+        'image',
+        'fecha_inicio',
+        'fecha_fin',
+        'visitantes'=>$this->visitantes,
+        'residentes'=>$this->residentes,
+        'inicio'=>$this->inicio,
+        'slug'=>Str::slug($this->titulo),
+        'instance_id'=>$this->instanceSelected
+       ])->save();
+       $this->emit('saveModal');
     }
 
 

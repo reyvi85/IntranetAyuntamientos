@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div wire:ignore.self class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div wire:ignore.self class="modal fade" id="modalForm"  aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -36,9 +36,9 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group" wire:ignore>
+                            <div class="form-group">
                                 <label for="ubicacion">Fecha de inicio / fin:</label>
-                                <input type="text" class="form-control @error('fechaNews') is-invalid @enderror" name="fechaNews" id="fechaNews" wire:model="fechaNews" value="{{$fechaNews}}">
+                                <input type="text" class="form-control @error('fechaNews') is-invalid @enderror" name="fechaNews" value="{{$fechaNews}}" wire:model.defer="fechaNews">
                                 @error('fechaNews')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -86,6 +86,17 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group" wire:ignore>
+                                <textarea id="editor1" name="editor1" rows="10" wire:model.defer="contenido"></textarea>
+                            </div>
+                            @error('contenido')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
                     </div>
                 @endif
             </div>

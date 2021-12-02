@@ -9,16 +9,15 @@
 
     <title>@yield('title', config('app.name', 'Laravel'))</title>
 
-    <!-- Scripts
-    <script src="{{ asset('js/app.js') }}" defer></script>-->
 
-    <!-- Fonts -->
+<!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <!-- Font awesome 5 -->
+    @yield('css')
+<!-- Font awesome 5 -->
     <link href="{{asset('fonts/fontawesome/css/fontawesome-all.min.css')}}" type="text/css" rel="stylesheet">
     @livewireStyles
 </head>
@@ -83,7 +82,7 @@
     </div>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-     @livewireScripts
-@yield('scripts')
+        @livewireScripts
+        @yield('scripts')
 </body>
 </html>

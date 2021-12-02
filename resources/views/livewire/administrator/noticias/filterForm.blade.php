@@ -13,7 +13,7 @@
     @endif
 
     <div class="form-group col-md-3">
-        <input type="text" class="form-control" id="filterFecha" name="fechaFilter" placeholder="Rango de fecha..." wire:model="fechaFilter">
+        <input type="text" class="form-control" id="fechaFilter" name="fechaFilter" placeholder="Rango de fecha..." wire:model="fechaFilter">
     </div>
 
     <div class="form-group col-md-2">

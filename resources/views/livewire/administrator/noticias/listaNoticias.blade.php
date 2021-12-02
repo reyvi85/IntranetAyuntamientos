@@ -29,20 +29,19 @@
                         </h4>
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'residentes'])
+                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'residentes', 'row'=>$item->id])
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'visitantes'])
+                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'visitantes', 'row'=>$item->id])
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'inicio'])
+                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'inicio', 'row'=>$item->id])
                    </td>
                     <td class="align-middle text-center">
-                        {{$item->fecha_inicio}}<br>
-                        {{$item->fecha_fin}}
+                        {{$item->fecha_full}}
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'active'])
+                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'active', 'row'=>$item->id])
                     </td>
                     <td class="align-middle text-center">
 
@@ -50,8 +49,9 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" id="edit-({{$item->id}})" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
                                 <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -68,56 +68,4 @@
     </div>
 </div>
 @include('livewire.administrator.noticias.formModalNoticias');
-@push('scripts')
-    <script>
-        window.addEventListener('startForm', event => {
-            var fechaInicio = event.detail.fechaIni;
-            var fechaFin = event.detail.fechaFin;
-            console.log(fechaInicio);
-        });
 
-        $('#fechaNews').daterangepicker(
-            {
-                locale: {
-                    format: 'YYYY/MM/DD',
-                    separator: " - ",
-                    applyLabel: "Aplicar",
-                    cancelLabel: "Cancelar",
-                    fromLabel: "Desde",
-                    toLabel: "Hasta",
-                    customRangeLabel: "Custom",
-                    daysOfWeek: [
-                        "Do",
-                        "Lu",
-                        "Ma",
-                        "Mi",
-                        "Ju",
-                        "Vi",
-                        "Sa"
-                    ],
-                    monthNames: [
-                        "Enero",
-                        "Febrero",
-                        "Marzo",
-                        "Abril",
-                        "Mayo",
-                        "Junio",
-                        "Julio",
-                        "Augosto",
-                        "Septiembre",
-                        "Octubre",
-                        "Noviembre",
-                        "Diciembre"
-                    ],
-                    firstDay: 1,
-                    startDate:'',
-                    endDate:''
-                },
-                opens:'right'
-            },
-            function(start, end) {
-                Livewire.emit('getAddFecha', start.format('YYYY/MM/DD')+'-'+end.format('YYYY/MM/DD'));
-
-            });
-    </script>
-@endpush

@@ -31,12 +31,16 @@ class Post extends Model
 
     public function getFechaInicioAttribute($value)
     {
-        return date("Y/m/d", strtotime($value));
+        return date("Y-m-d", strtotime($value));
     }
 
     public function getFechaFinAttribute($value)
     {
-        return date("Y/m/d", strtotime($value));
+        return date("Y-m-d", strtotime($value));
+    }
+
+    public function getFechaFullAttribute(){
+        return $this->fecha_inicio.' - '.$this->fecha_fin;
     }
 
     public function instance(){
