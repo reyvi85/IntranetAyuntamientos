@@ -40,7 +40,7 @@ class Post extends Model
     }
 
     public function getFechaFullAttribute(){
-        return $this->fecha_inicio.' - '.$this->fecha_fin;
+        return $this->fecha_inicio.' / '.$this->fecha_fin;
     }
 
     public function instance(){

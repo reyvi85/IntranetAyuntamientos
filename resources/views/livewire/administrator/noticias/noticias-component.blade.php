@@ -18,10 +18,11 @@
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
             $('#modalForm').modal('hide');
+            $('#modalFormDestroy').modal('hide');
         });
 
 
-            $('input[name="fechaNews"]').daterangepicker({
+            $('#fechaNews').daterangepicker({
                 opens: 'left',
                 locale: {
                     format: 'YYYY-MM-DD',
@@ -30,6 +31,26 @@
             }, function(start, end, label) {
                 Livewire.emit('getAddFecha',  [start.format('YYYY-MM-DD'),end.format('YYYY-MM-DD')]);
             });
+
+        $('#fechaFilter').daterangepicker({
+            opens: 'left',
+            locale: {
+                format: 'YYYY-MM-DD',
+                separator: " / ",
+            }
+        }, function(start, end, label) {
+            Livewire.emit('getFechaFilter',  start.format('YYYY-MM-DD')+'/'+end.format('YYYY-MM-DD'));
+        });
+
+        $('#fechaFilter').on('cancel.daterangepicker', function(ev, picker) {
+            $('#fechaFilter').val('');
+            Livewire.emit('getFechaFilter',  '');
+        });
+
+         $('#fechaNews').on('cancel.daterangepicker', function(ev, picker) {
+                    $('#fechaFilter').val('');
+                    Livewire.emit('getAddFecha',  '');
+                });
 
 
             const editor = CKEDITOR.replace('editor1', {
@@ -45,10 +66,6 @@
         editor.on('change', function (event) {
             Livewire.emit('getContenido',  editor.getData());
         })
-
-        $(document).on('click', '#addNews', function () {
-            CKEDITOR.instances.editor1.getData();
-        });
 
 
     </script>

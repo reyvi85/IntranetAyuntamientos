@@ -50,7 +50,7 @@
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" id="edit-({{$item->id}})" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormDestroy" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
                             </div>
                         </div>
                     </td>
@@ -68,4 +68,5 @@
     </div>
 </div>
 @include('livewire.administrator.noticias.formModalNoticias');
+@include('livewire.administrator.noticias.formModalDestroy');
 

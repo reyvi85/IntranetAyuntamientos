@@ -38,7 +38,8 @@ class NoticiasComponent extends Component
     ];
 
     protected $messages = [
-        'instanceSelected.required'=>'Debe seleccionar una instancia!'
+        'instanceSelected.required'=>'Debe seleccionar una instancia!',
+        'fechaNews.required'=>'Debe seleccionar un rango de fecha!'
     ];
 
     protected $listeners = [
@@ -69,10 +70,14 @@ class NoticiasComponent extends Component
     }
 
     public function getAddFecha($value){
-        if(!is_null($value))
+        if(!empty($value)){
             $this->fecha_inicio = $value[0];
             $this->fecha_fin = $value[1];
             $this->fechaNews = $this->fecha_inicio.'/'.$this->fecha_fin;
+        }else{
+            $this->fechaNews = null;
+        }
+
     }
     public function getContenido($value){
         if(!is_null($value))
@@ -169,7 +174,6 @@ class NoticiasComponent extends Component
 
     public function trash(Post $post){
         $this->setConfigModal('Eliminar', 'fa-trash', 'trash');
-        $this->modalModeDestroy = true;
         $this->postSelected = $post->id;
         $this->titulo = $post->titulo;
     }

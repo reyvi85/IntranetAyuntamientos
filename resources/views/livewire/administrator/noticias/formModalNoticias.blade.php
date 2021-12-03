@@ -9,9 +9,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                @if ($modalModeDestroy)
-                    <h3 class="text-center"> Confirma realmente que desea eliminar esta noticia<br> <span class="text-danger font-weight-bolder">{{$titulo}}</span>?</h3>
-                @else
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -38,7 +35,7 @@
 
                             <div class="form-group">
                                 <label for="ubicacion">Fecha de inicio / fin:</label>
-                                <input type="text" class="form-control @error('fechaNews') is-invalid @enderror" name="fechaNews" value="{{$fechaNews}}" wire:model.defer="fechaNews">
+                                <input type="text" class="form-control @error('fechaNews') is-invalid @enderror" id="fechaNews" value="{{$fechaNews}}" wire:model.defer="fechaNews">
                                 @error('fechaNews')
                                 <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                 @enderror
@@ -98,22 +95,14 @@
                             <div class="form-group" wire:ignore>
                                 <textarea id="editor1" name="editor1" rows="10" wire:model.defer="contenido"></textarea>
                             </div>
-                            @error('contenido')
-                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                            @enderror
                         </div>
                     </div>
-                @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('edit')
                     <button type="button" class="btn btn-primary" wire:click="update_news({{$postSelected}})"  wire:loading.attr="disabled" wire:target="image,update_news"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
-                    @break
-
-                    @case('trash')
-                    <button type="button" class="btn btn-danger" wire:click="destroy({{$postSelected}})" wire:loading.attr="disabled"  wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
                     @break
 
                     @default
