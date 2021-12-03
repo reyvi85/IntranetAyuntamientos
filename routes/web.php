@@ -72,7 +72,7 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
     Route::middleware(['CheckPermissionModules','checkRol:Super-Administrador,Administrador-Instancia,Gestor-Instancia'])->group(function(){
         Route::get('/comercios', BusinessComponent::class)->name('gestion.business');
         Route::get('/telefonos', InterestPhonesComponent::class)->name('gestion.phones');
-
+        Route::get('/noticias', NoticiasComponent::class)->name('gestion.noticias');
         Route::get('/notificaciones', function(){
             return view('livewire.administrator.notification-component');
         })->name('gestion.notifications');
