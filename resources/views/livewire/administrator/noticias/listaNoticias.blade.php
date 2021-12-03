@@ -67,6 +67,6 @@
         {{$news->links()}}
     </div>
 </div>
-@include('livewire.administrator.noticias.formModalNoticias');
-@include('livewire.administrator.noticias.formModalDestroy');
+@include('livewire.administrator.noticias.formModalNoticias')
+@include('livewire.administrator.noticias.formModalDestroy')
 
