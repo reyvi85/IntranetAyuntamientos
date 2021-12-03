@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group col-md-2">
-        <button class="btn btn-primary btn-block"><i class="fas fa-plus-circle"></i> Añadir</button>
+        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalForm" wire:click="add" id="addNews"><i class="fas fa-plus-circle"></i> Añadir</button>
     </div>
 
 </div>

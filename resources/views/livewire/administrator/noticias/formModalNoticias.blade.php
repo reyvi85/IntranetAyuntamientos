@@ -58,6 +58,11 @@
                                         <input type="checkbox" class="custom-control-input" id="ControlInlineInicio" wire:model="inicio">
                                         <label class="custom-control-label" for="ControlInlineInicio">Página de inicio</label>
                                     </div>
+
+                                    <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                                        <input type="checkbox" class="custom-control-input" id="ControlInlineActive" wire:model="active">
+                                        <label class="custom-control-label" for="ControlInlineActive">Estado (Activada/Desactivada)</label>
+                                    </div>
                                 </div>
 
                         </div>
@@ -104,7 +109,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update_news({{$postSelected}})"  wire:loading.attr="disabled" wire:target="update_location, image"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update_news({{$postSelected}})"  wire:loading.attr="disabled" wire:target="image,update_news"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
@@ -114,7 +119,7 @@
                     @default
                     <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled" wire:target="store, image"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
                 @endswitch
-                <div class="text-center text-muted" wire:loading wire:target="store, update_location, image, destroy"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="text-center text-muted" wire:loading wire:target="store, update_news, image, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>

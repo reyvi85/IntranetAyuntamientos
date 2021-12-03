@@ -23,11 +23,11 @@ class CreatePostsTable extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
 
-            $table->boolean('visitantes')->default(false);
-            $table->boolean('residentes')->default(false);
-            $table->boolean('inicio')->default(false);
+            $table->boolean('visitantes')->nullable()->default(false);
+            $table->boolean('residentes')->nullable()->default(false);
+            $table->boolean('inicio')->nullable()->default(false);
 
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->nullable()->default(false);
 
             $table->string('slug');
 

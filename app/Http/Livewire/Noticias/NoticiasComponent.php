@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Noticias;
 
 use App\Models\Post;
 use App\Traits\DataModels;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -46,6 +47,7 @@ class NoticiasComponent extends Component
 
     public function mount(){
         $this->checkInstanceForUser();
+        $this->setPatchToUpload('images/post');
         $this->setConfigModal();
     }
 
@@ -68,7 +70,9 @@ class NoticiasComponent extends Component
 
     public function getAddFecha($value){
         if(!is_null($value))
-            $this->fechaNews = $value;
+            $this->fecha_inicio = $value[0];
+            $this->fecha_fin = $value[1];
+            $this->fechaNews = $this->fecha_inicio.'/'.$this->fecha_fin;
     }
     public function getContenido($value){
         if(!is_null($value))
@@ -76,19 +80,42 @@ class NoticiasComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset([]);
+        $this->reset(['postSelected', 'imagePost', 'titulo', 'subtitulo', 'contenido', 'image', 'fechaNews', 'fecha_inicio', 'fecha_fin',
+                'visitantes', 'residentes', 'inicio', 'active', 'modalModeDestroy'
+            ]);
+        $this->resetErrorBag();
     }
 
     public function add(){
+        $this->resetProps();
+        $this->dispatchBrowserEvent('text', ['text' => '']);
+        $this->setConfigModal('Nueva noticia');
+    }
 
+    public function store(){
+        $this->validate();
+        $img = $this->image->store($this->getPatchToUpload(), 'public');
+        Post::create([
+            'titulo'=>$this->titulo,
+            'subtitulo'=>$this->subtitulo,
+            'contenido'=>$this->contenido,
+            'image'=>$img,
+            'fecha_inicio'=>$this->fecha_inicio,
+            'fecha_fin'=>$this->fecha_fin,
+            'visitantes'=>$this->visitantes,
+            'residentes'=>$this->residentes,
+            'inicio'=>$this->inicio,
+            'active'=>$this->active,
+            'slug'=>Str::slug($this->titulo),
+            'instance_id'=>$this->instanceSelected
+        ]);
+        $this->emit('saveModal');
+        $this->resetProps();
     }
 
     public function edit(Post $post){
-      //  $this->emit('startForm', $post->fecha_inicio, $post->fecha_fin);
-
         $this->dispatchBrowserEvent('text', ['text' => $post->contenido]);
-
-
+        $this->resetProps();
         $this->setConfigModal('Editar', 'fa-edit', 'edit');
         $this->instanceSelected = $post->instance_id;
         $this->postSelected = $post->id;
@@ -108,9 +135,6 @@ class NoticiasComponent extends Component
     }
 
     public function update_news(Post $post){
-        trim($this->fechaNews);
-        $f = explode('/',$this->fechaNews);
-        dd($f);
        $this->validate([
            'titulo'=>'required',
            'subtitulo'=>'required',
@@ -119,7 +143,6 @@ class NoticiasComponent extends Component
            'fechaNews'=>'required',
            'instanceSelected'=>'required'
        ]);
-       $f = explode('-',$this->fechaNews);
         if($this->image){
             Storage::disk('public')->delete($post->image);
             $img = $this->image->store($this->getPatchToUpload(), 'public');
@@ -127,19 +150,35 @@ class NoticiasComponent extends Component
             $img = $post->image;
         }
        $post->fill([
-        'titulo',
-        'subtitulo',
-        'contenido',
-        'image',
-        'fecha_inicio',
-        'fecha_fin',
+        'titulo'=>$this->titulo,
+        'subtitulo'=>$this->subtitulo,
+        'contenido'=>$this->contenido,
+        'image'=>$img,
+        'fecha_inicio'=>$this->fecha_inicio,
+        'fecha_fin'=>$this->fecha_fin,
         'visitantes'=>$this->visitantes,
         'residentes'=>$this->residentes,
         'inicio'=>$this->inicio,
+        'active'=>$this->active,
         'slug'=>Str::slug($this->titulo),
         'instance_id'=>$this->instanceSelected
        ])->save();
+        $this->resetProps();
        $this->emit('saveModal');
+    }
+
+    public function trash(Post $post){
+        $this->setConfigModal('Eliminar', 'fa-trash', 'trash');
+        $this->modalModeDestroy = true;
+        $this->postSelected = $post->id;
+        $this->titulo = $post->titulo;
+    }
+
+    public function destroy(Post $post){
+        Storage::disk('public')->delete($post->image);
+        $post->delete();
+        $this->emit('saveModal');
+        $this->resetProps();
     }
 
 

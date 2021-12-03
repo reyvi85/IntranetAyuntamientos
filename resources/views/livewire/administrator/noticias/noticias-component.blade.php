@@ -1,11 +1,4 @@
 @section('title', 'Noticias')
-@section('css')
-    <link href="{{ asset('css/daterangepicker.min.css') }}" rel="stylesheet">
-    <style>
-        .modal-open .ui-datepicker{z-index: 2000!important}
-    </style>
-    @endsection
-
 <div class="col-12">
     @component('component.card')
         @slot('titulo')Noticias @endslot
@@ -35,24 +28,27 @@
                     separator: " / ",
                 }
             }, function(start, end, label) {
-                Livewire.emit('getAddFecha',  start.format('YYYY-MM-DD')+ ' / ' +end.format('YYYY-MM-DD'));
+                Livewire.emit('getAddFecha',  [start.format('YYYY-MM-DD'),end.format('YYYY-MM-DD')]);
             });
 
 
-
-        const editor = CKEDITOR.replace('editor1', {
-            height: 150,
-            removeButtons: 'PasteFromWord'
-        });
+            const editor = CKEDITOR.replace('editor1', {
+                height: 150,
+                modal:true,
+                removeButtons: 'PasteFromWord'
+            });
 
         window.addEventListener('text', event => {
-            CKEDITOR.instances.editor1.insertHtml('');
-            CKEDITOR.instances.editor1.insertHtml(event.detail.text);
+            CKEDITOR.instances.editor1.setData( event.detail.text, function() { this.updateElement(); } )
         })
 
         editor.on('change', function (event) {
             Livewire.emit('getContenido',  editor.getData());
         })
+
+        $(document).on('click', '#addNews', function () {
+            CKEDITOR.instances.editor1.getData();
+        });
 
 
     </script>
