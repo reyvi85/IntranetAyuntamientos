@@ -29,19 +29,19 @@
                         </h4>
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'residentes', 'row'=>$item->id, 'label'=>''])
+                        @include('livewire.partial.switchesForm', ['campo' => 'residentes', 'row'=>$item->id, 'label'=>''])
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'visitantes', 'row'=>$item->id, 'label'=>''])
+                        @include('livewire.partial.switchesForm', ['campo' => 'visitantes', 'row'=>$item->id, 'label'=>''])
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'inicio', 'row'=>$item->id, 'label'=>''])
+                        @include('livewire.partial.switchesForm', ['campo' => 'inicio', 'row'=>$item->id, 'label'=>''])
                    </td>
                     <td class="align-middle text-center">
                         {{$item->fecha_full}}
                     </td>
                     <td class="align-middle text-center">
-                        @include('livewire.administrator.noticias.switchesForm', ['campo' => 'active', 'row'=>$item->id, 'label'=>''])
+                        @include('livewire.partial.switchesForm', ['campo' => 'active', 'row'=>$item->id, 'label'=>''])
                     </td>
                     <td class="align-middle text-center">
 

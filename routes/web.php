@@ -10,7 +10,8 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\Business\BusinessComponent,
     App\Http\Livewire\Business\ShowPublicBusiness,
     App\Http\Livewire\InterestPhonesComponent,
-    App\Http\Livewire\Noticias\NoticiasComponent;
+    App\Http\Livewire\Noticias\NoticiasComponent,
+    App\Http\Livewire\Widget\WidgetsComponent;
 use \Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])
     Route::get('/comercios', BusinessComponent::class)->name('business.index');
     Route::get('/telefonos', InterestPhonesComponent::class)->name('phones.index');
     Route::get('/noticias', NoticiasComponent::class)->name('noticias.index');
+    Route::get('/widgets', WidgetsComponent::class)->name('widgets.index');
 
     Route::get('/notificaciones', function(){
         return view('livewire.administrator.notification-component');

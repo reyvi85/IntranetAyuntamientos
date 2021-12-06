@@ -19,6 +19,7 @@ use App\Models\Warning;
 use App\Models\WarningCategory;
 use App\Models\WarningState;
 use App\Models\WarningSubCategory;
+use App\Models\Widget;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
        // WarningSubCategory::factory(1800)->create();
        // WarningState::factory(4)->create();
        // Warning::factory(500)->create();
-
-        Post::factory(1500)->create();
+        //Post::factory(1500)->create();
+        Widget::factory(1500)->create();
     }
 }

@@ -17,6 +17,7 @@ use App\Models\Warning;
 use App\Models\WarningCategory;
 use App\Models\WarningState;
 use App\Models\WarningSubCategory;
+use App\Models\Widget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
@@ -412,6 +413,21 @@ trait DataModels {
             ->when($rangoFecha, function ($q) use($rangoFecha){
                 $aux = explode('-', $rangoFecha);
                 $q->whereBetween('fecha_inicio', $aux);
+            })
+            ->orderBy($sort, $direction)
+            ->paginate();
+    }
+
+    /**
+     * W I D G E T S
+    **/
+    public function getAllWidgets($search=null, $instancia = null, $sort, $direction){
+        return Widget::when($search, function ($q) use($search){
+            $q->where('titulo','like', '%'.$search.'%')
+                ->orWhere('subtitulo','like', '%'.$search.'%');
+            })
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
             })
             ->orderBy($sort, $direction)
             ->paginate();

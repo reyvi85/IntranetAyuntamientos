@@ -5,6 +5,7 @@
 /public/images/categorias-localizaciones/*
 /public/images/localizaciones/*
 /public/images/avisos/*
+/public/images/widgets/*
 /storage/*.key
 /vendor
 .env
