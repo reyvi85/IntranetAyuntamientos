@@ -53,7 +53,7 @@ trait Helper {
         return collect([
             ['id'=>1,'modulo'=>'Seguimiento de avisos', 'icon'=>'fa-bullhorn','routeName'=>'gestion.avisos'],
             ['id'=>2,'modulo'=>'Comercios', 'icon'=>'fa-euro-sign', 'routeName'=>'gestion.business'],
-            ['id'=>3,'modulo'=>'Widgets','icon'=>'fa-cog', 'routeName'=>'home'],
+            ['id'=>3,'modulo'=>'Widgets','icon'=>'fa-cog', 'routeName'=>'gestion.widgets'],
             ['id'=>4,'modulo'=>'Envío de notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications'],
             ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-newspaper','routeName'=>'gestion.noticias'],
             ['id'=>6,'modulo'=>'Directorio telefónico', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones'],

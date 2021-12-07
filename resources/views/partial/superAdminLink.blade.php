@@ -15,5 +15,6 @@
         <a class="dropdown-item" href="{{route('localizaciones.index')}}"><i class="fas fa-map-marker-alt"></i> Localizaciones</a>
         <a class="dropdown-item" href="{{route('avisos.index')}}"><i class="fas fa-bullhorn"></i> Avisos</a>
         <a class="dropdown-item" href="{{route('noticias.index')}}"><i class="fas fa-newspaper"></i> Noticias</a>
+        <a class="dropdown-item" href="{{route('widgets.index')}}"><i class="fas fa-cog"></i> Widgets</a>
     </div>
 </li>

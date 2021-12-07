@@ -18,9 +18,9 @@ class CreateWidgetsTable extends Migration
             $table->string('titulo');
             $table->string('subtitulo');
             $table->string('image');
-            $table->boolean('type')->nullable()->default(false); //Enlace / Noticia
+            $table->text('embed')->nullable()->default(null);
             $table->string('enlace');
-            $table->boolean('active')->nullable()->default(false);
+            $table->boolean('active')->nullable()->default(true);
             $table->string('slug');
             $table->unsignedBigInteger('instance_id');
             $table->timestamps();

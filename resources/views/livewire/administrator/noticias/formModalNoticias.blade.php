@@ -42,7 +42,7 @@
                             </div>
 
 
-                                <div class="form-inline d-flex justify-content-center">
+
                                     <div class="custom-control custom-checkbox my-1 mr-sm-2">
                                         <input type="checkbox" class="custom-control-input" id="ControlInlineVisitantes" wire:model="visitantes">
                                         <label class="custom-control-label" for="ControlInlineVisitantes">Visitantes</label>
@@ -60,7 +60,7 @@
                                         <input type="checkbox" class="custom-control-input" id="ControlInlineActive" wire:model="active">
                                         <label class="custom-control-label" for="ControlInlineActive">Estado (Activada/Desactivada)</label>
                                     </div>
-                                </div>
+
 
                         </div>
 

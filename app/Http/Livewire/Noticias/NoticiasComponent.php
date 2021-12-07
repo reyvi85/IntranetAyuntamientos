@@ -95,6 +95,7 @@ class NoticiasComponent extends Component
         $this->resetProps();
         $this->dispatchBrowserEvent('text', ['text' => '']);
         $this->setConfigModal('Nueva noticia');
+        $this->active = true;
     }
 
     public function store(){

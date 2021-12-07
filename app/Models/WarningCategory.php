@@ -26,6 +26,6 @@ class WarningCategory extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new UserInstanceScope());
+       static::addGlobalScope(new UserInstanceScope());
     }
 }

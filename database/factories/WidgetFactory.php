@@ -27,7 +27,6 @@ class WidgetFactory extends Factory
             'titulo'=>$titulo,
             'subtitulo'=>$this->faker->sentence,
             'image'=>$this->faker->imageUrl,
-            'type'=>rand(0,1),
             'enlace'=>$this->faker->url,
             'active'=>rand(0,1),
             'slug'=>Str::slug($titulo),

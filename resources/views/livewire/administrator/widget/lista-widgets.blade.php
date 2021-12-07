@@ -1,4 +1,24 @@
 @include('component.loading')
+<div class="form-row">
+    <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?7:10}}">
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
+    </div>
+
+    @if (auth()->user()->rol =='Super-Administrador')
+        <div class="form-group col-md-3">
+            @php($label = false)
+            @php($ModelName = 'instancias')
+            @include('livewire.partial.comboInstancias')
+
+        </div>
+    @endif
+
+    <div class="form-group col-md-2">
+        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalForm" wire:click="add" id="addNews"><i class="fas fa-plus-circle"></i> Añadir</button>
+    </div>
+
+</div>
+<hr>
 @if ($widgets->count())
     <div class="table-responsive">
         <table class="table table-striped table-hover">
@@ -6,8 +26,7 @@
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Widget</th>
-                <th scope="col" class="text-center">Noticia</th>
-                <th scope="col">Enlace</th>
+
                 <th scope="col">Estado</th>
                 <th scope="col"></th>
             </tr>
@@ -22,17 +41,10 @@
                             {{$item->titulo}}<br>
                             <small class="text-muted">{{$item->subtitulo}}</small>
                         </h4></td>
-                    <td class="align-middle text-center">{!! ($item->type)?'<i class="fas fa-check-circle"></i>':''!!}</td>
-                    <td class="align-middle text-center">{!! (!$item->type)?'<i class="fas fa-check-circle"></i>':''!!}</td>
                     <td class="align-middle">@include('livewire.partial.switchesForm', ['campo' => 'active', 'row'=>$item->id, 'label'=>''])</td>
                     <td class="align-middle">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" id="edit-({{$item->id}})" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
-                            </div>
-                        </div>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i></a>
+                        <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             @endforeach
@@ -47,3 +59,4 @@
         {{$widgets->links()}}
     </div>
 </div>
+@include('livewire.administrator.widget.formModal')

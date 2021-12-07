@@ -75,6 +75,7 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
         Route::get('/comercios', BusinessComponent::class)->name('gestion.business');
         Route::get('/telefonos', InterestPhonesComponent::class)->name('gestion.phones');
         Route::get('/noticias', NoticiasComponent::class)->name('gestion.noticias');
+        Route::get('/widgets', WidgetsComponent::class)->name('gestion.widgets');
         Route::get('/notificaciones', function(){
             return view('livewire.administrator.notification-component');
         })->name('gestion.notifications');

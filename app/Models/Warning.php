@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,5 +45,11 @@ class Warning extends Model
 
     public function warning_answers(){
         return $this->hasMany(WarningAnswer::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new UserInstanceScope());
     }
 }
