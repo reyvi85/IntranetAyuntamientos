@@ -51,14 +51,14 @@ trait Helper {
 
     public function modulosApp(){
         return collect([
-            ['id'=>1,'modulo'=>'Seguimiento de avisos', 'icon'=>'fa-bullhorn','routeName'=>'gestion.avisos'],
-            ['id'=>2,'modulo'=>'Comercios', 'icon'=>'fa-euro-sign', 'routeName'=>'gestion.business'],
-            ['id'=>3,'modulo'=>'Widgets','icon'=>'fa-cog', 'routeName'=>'gestion.widgets'],
-            ['id'=>4,'modulo'=>'Envío de notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications'],
-            ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-newspaper','routeName'=>'gestion.noticias'],
-            ['id'=>6,'modulo'=>'Directorio telefónico', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones'],
-            ['id'=>7,'modulo'=>'Localizaciones', 'icon'=>'fa-map-marker-alt', 'routeName'=>'gestion.localizaciones'],
-            ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cog', 'routeName'=>'home'],
+            ['id'=>1,'modulo'=>'Seguimiento de avisos', 'icon'=>'fa-bullhorn','routeName'=>'gestion.avisos', 'imagen'=>'avisos.jpg'],
+            ['id'=>2,'modulo'=>'Comercios', 'icon'=>'fa-euro-sign', 'routeName'=>'gestion.business', 'imagen'=>'comercios.jpg'],
+            ['id'=>3,'modulo'=>'Widgets','icon'=>'fa-cog', 'routeName'=>'gestion.widgets', 'imagen'=>'widgets.jpg'],
+            ['id'=>4,'modulo'=>'Envío de notificaciones','icon'=>'fa-bell', 'routeName'=>'gestion.notifications', 'imagen'=>'notificaciones.jpg'],
+            ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-newspaper','routeName'=>'gestion.noticias', 'imagen'=>'noticias.jpg'],
+            ['id'=>6,'modulo'=>'Directorio telefónico', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones', 'imagen'=>'telefonos.jpg'],
+            ['id'=>7,'modulo'=>'Localizaciones', 'icon'=>'fa-map-marker-alt', 'routeName'=>'gestion.localizaciones', 'imagen'=>'localizaciones.jpg'],
+            ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cogs', 'routeName'=>'home', 'imagen'=>'dashboard.jpg'],
         ]);
     }
 
@@ -66,7 +66,7 @@ trait Helper {
         $instancePermission = Auth::user()->instance->modulos;
         $modulos = $this->modulosApp();
         $access = $modulos->whereIn('id', $instancePermission);
-        return $access;
+        return (object)$access;
     }
 
     public function getClassColor($key=null){

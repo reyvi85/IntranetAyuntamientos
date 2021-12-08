@@ -1,4 +1,7 @@
 @auth
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('home')}}"><i class="fas fa-home"></i> Home</a>
+    </li>
     <!----- LINK DE SUPER-ADMINISTRADOR------->
     @includeWhen(auth()->user()->isRole('Super-Administrador'), 'partial.superAdminLink')
     <!----- LINK DE ADMINISTRADOR-INSTANCIAS------->
