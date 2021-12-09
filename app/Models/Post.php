@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -45,6 +46,20 @@ class Post extends Model
 
     public function instance(){
         return $this->belongsTo(Instance::class);
+    }
+
+    public function scopeApplySort($sort){
+        $sortFields = Str::of($sort)->explode(',');
+        $postQuery = Post::query();
+
+        foreach ($sortFields as $sortField){
+            $direction = 'asc';
+            if(Str::of($sortField)->startsWith('-')){
+                $direction = 'desc';
+                $sortField = Str::of($sortField)->substr(1);
+            }
+            $postQuery->orderBy($sortField, $direction);
+        }
     }
 
     protected static function boot()
