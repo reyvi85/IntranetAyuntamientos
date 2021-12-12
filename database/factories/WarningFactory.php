@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Warning;
+use App\Models\WarningCategory;
+use App\Models\WarningSubCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WarningFactory extends Factory
@@ -21,6 +23,7 @@ class WarningFactory extends Factory
      */
     public function definition()
     {
+        $inst = WarningCategory::select('id','instance_id')->get()->random();
         return [
            'asunto'=>$this->faker->sentence,
            'description'=>$this->faker->text,
@@ -28,9 +31,9 @@ class WarningFactory extends Factory
             'image'=>$this->faker->imageUrl,
             'lat'=>$this->faker->latitude,
             'lng'=>$this->faker->longitude,
-            'instance_id'=>rand(1,25),
+            'instance_id'=>$inst->instance_id,
             'warning_state_id'=>rand(1,4),
-            'warning_sub_category_id'=>rand(1,1800),
+            'warning_sub_category_id'=>$inst->sub_categories->random()->id,
             'user_id'=>rand(1,100),
         ];
     }

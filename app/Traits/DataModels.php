@@ -402,7 +402,7 @@ trait DataModels {
      * N O T I C I A S
     **/
 
-    public function getNoticias($search=null, $instancia = null, $rangoFecha=null, $sort='id', $direction='desc', $perPage=15){
+    public function getNoticias($search=null, $instancia = null, $rangoFecha=null, $sort='id', $direction='desc'){
         return Post::when($search, function ($q) use($search){
             $q->where('titulo','like', '%'.$search.'%')
                 ->orWhere('subtitulo','like', '%'.$search.'%');
@@ -415,7 +415,7 @@ trait DataModels {
                 $q->whereBetween('fecha_inicio', $aux);
             })
             ->orderBy($sort, $direction)
-            ->paginate($perPage);
+            ->paginate();
     }
 
     /**

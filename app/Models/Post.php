@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasSort;
 use App\Scopes\UserInstanceScope;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSort;
 
     protected $fillable = [
         'titulo',
@@ -25,6 +27,8 @@ class Post extends Model
         'active',
         'instance_id'
     ];
+
+    public $allowedSorts = ['id','titulo', 'subtitulo','fecha_inicio'];
 
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',
@@ -46,20 +50,6 @@ class Post extends Model
 
     public function instance(){
         return $this->belongsTo(Instance::class);
-    }
-
-    public function scopeApplySort($sort){
-        $sortFields = Str::of($sort)->explode(',');
-        $postQuery = Post::query();
-
-        foreach ($sortFields as $sortField){
-            $direction = 'asc';
-            if(Str::of($sortField)->startsWith('-')){
-                $direction = 'desc';
-                $sortField = Str::of($sortField)->substr(1);
-            }
-            $postQuery->orderBy($sortField, $direction);
-        }
     }
 
     protected static function boot()

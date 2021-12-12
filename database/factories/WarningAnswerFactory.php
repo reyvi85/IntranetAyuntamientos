@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Instance;
-use App\Models\WarningCategory;
+use App\Models\Warning;
+use App\Models\WarningAnswer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class WarningCategoryFactory extends Factory
+class WarningAnswerFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = WarningCategory::class;
+    protected $model = WarningAnswer::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,10 @@ class WarningCategoryFactory extends Factory
      */
     public function definition()
     {
+        $w = Warning::select(['id'])->get()->random();
         return [
-           'name'=>$this->faker->word,
-           'instance_id'=>Instance::all()->pluck('id')->random()
+            'answer'=>$this->faker->paragraph,
+            'warning_id'=>$w->id
         ];
     }
 }

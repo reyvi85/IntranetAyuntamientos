@@ -22,12 +22,15 @@ class PostResource extends JsonResource
                 'subtitulo'=>$this->resource->subtitulo,
                 'contenido'=>$this->resource->contenido,
                 'image'=>url($this->resource->image),
-                'iniciar'=>$this->resource->fecha_inicio,
-                'terminar'=>$this->resource->fecha_fin,
+                'inicia'=>date("Y/m/d", strtotime($this->resource->fecha_inicio)),
+                'termina'=>date("Y/m/d", strtotime($this->resource->fecha_fin)),
                 'visitantes'=>($this->resource->visitantes)?true:false,
                 'residentes'=>($this->resource->residentes)?true:false,
                 'inicio'=>($this->resource->inicio)?true:false,
                 'slug'=>$this->resource->slug,
+            ],
+            'links'=>[
+                'self'=>route('api.post.show', $this->resource)
             ]
         ];
     }
