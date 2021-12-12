@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Scopes\UserInstanceScope;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +28,10 @@ class Notification extends Model
         return $this->belongsTo(CategoryNotification::class);
     }
 
+    public function scopePublishUpDate($query){
+        $today = Carbon::now();
+        return $query->whereDate('created_at', '<=', $today);
+    }
 
     protected static function boot()
     {

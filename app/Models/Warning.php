@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasSort;
 use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Warning extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSort;
 
     protected $fillable = [
         'asunto',
@@ -23,6 +24,7 @@ class Warning extends Model
         'user_id'
     ];
 
+    public $allowedSorts = ['id', 'asunto', 'created_at'];
     protected $casts = [
         'created_at' => 'datetime:Y-m-d',
     ];

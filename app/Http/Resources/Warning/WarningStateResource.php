@@ -4,7 +4,7 @@ namespace App\Http\Resources\Warning;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class WarningCategoryResource extends JsonResource
+class WarningStateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,22 +15,21 @@ class WarningCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'category',
+            'type'=>'state',
             'id'=>(string)$this->resource->id,
             'attributes'=>[
                 'name'=>$this->resource->name
             ],
             'relationships'=>[
-                'sub-category'=>[
+                'warning'=>[
                     'links'=>[
-                        'self'=>route('api.subcategory.index', $this->resource->id),
+                        'self'=>route('api.warning.index',['state'=>$this->resource->id]),
                     ],
                 ],
             ],
-            'links'=>[
-                'self'=>route('api.category.show', $this->resource->id)
-            ],
-            'meta'=>['sub-category-count'=>$this->resource->sub_categories_count]
+            'meta'=>[
+                'warning_count'=>$this->resource->warnings_count
+            ]
         ];
     }
 }

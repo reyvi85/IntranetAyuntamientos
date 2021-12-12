@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasSort;
 use App\Scopes\UserInstanceScope;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Busine extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSort;
 
     protected $fillable = [
         'name',
@@ -23,6 +25,8 @@ class Busine extends Model
         'instance_id'
     ];
 
+    public $allowedSorts=['id','name'];
+
     protected $hidden = [
         'category_busine_id',
         'instance_id',
@@ -35,6 +39,12 @@ class Busine extends Model
     public function instance(){
         return $this->belongsTo(Instance::class);
     }
+
+    /**
+     * SCOPE
+    **/
+
+
 
     protected static function boot()
     {

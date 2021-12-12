@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Warning;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use function Livewire\str;
 
 class WarningResource extends JsonResource
 {
@@ -27,27 +28,34 @@ class WarningResource extends JsonResource
                 'longitud'=>$this->resource->lng,
                 'categoria'=>$this->resource->warning_sub_category->warning_category->name,
                 'sub_categoria'=>$this->resource->warning_sub_category->name,
-                'estado'=>$this->resource->warning_state->name
+                'estado'=>$this->resource->warning_state->name,
+                'fecha'=>date('Y-m-d', strtotime($this->resource->created_at))
             ],
 
             'relationships'=>[
-                'warning_category'=>[
-                'data'=>['type'=>'warning_category', 'id'=>(string)$this->resource->warning_sub_category->warning_category->id],
-                'links'=>['related'=>route('api.category.index')],
+                'category'=>[
+                'data'=>['type'=>'category', 'id'=>(string)$this->resource->warning_sub_category->warning_category->id],
+                'links'=>[
+                    'self'=>route('api.category.show', $this->resource->warning_sub_category->warning_category->id),
+                    'related'=>route('api.category.index')
+                ],
                 'meta'=>['name'=>$this->resource->warning_sub_category->warning_category->name]
                 ],
-                'warning_sub_category'=>[
-                    'data'=>['type'=>'warning_sub_category', 'id'=>(string)$this->resource->warning_sub_category->id],
-                    'links'=>['self'=>''],
+                'sub-category'=>[
+                    'data'=>['type'=>'sub-category', 'id'=>(string)$this->resource->warning_sub_category->id],
+                    'links'=>['self'=>route('api.subcategory.show', $this->resource->warning_sub_category->id)],
                     'meta'=>['name'=>$this->resource->warning_sub_category->name]
                 ],
 
-                'warning_state'=>[
-                    'data'=>['type'=>'warning_state', 'id'=>(string)$this->resource->warning_state->id],
-                    'links'=>['self'=>'', 'related'=>''],
+                'state'=>[
+                    'data'=>['type'=>'state', 'id'=>(string)$this->resource->warning_state->id],
+                    'links'=>[
+                        'self'=>route('api.state.show',$this->resource->warning_state->id),
+                        'related'=>route('api.state.index')
+                    ],
                     'meta'=>['name'=>$this->resource->warning_state->name]
                 ],
-                'warning_answers'=>[
+                'answers'=>[
                     'links'=>['self'=>route('api.answer.index', $this->resource->id)]
                 ]
             ],
