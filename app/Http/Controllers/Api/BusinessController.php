@@ -10,7 +10,6 @@ use App\Http\Resources\Business\BusinessResourceCollection;
 use App\Models\Busine;
 use App\Models\CategoryBusine;
 use App\Traits\DataAPI;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
@@ -20,7 +19,7 @@ class BusinessController extends Controller
      * lista de negocios
     **/
     public function index(Request $request){
-        return BusinessResourceCollection::make($this->getAllBusiness(null, null, null, null));
+        return BusinessResourceCollection::make($this->getAllBusiness($request->search, $request->category, $request->sort, $request->perPage));
     }
     /**
      * Ver negocio

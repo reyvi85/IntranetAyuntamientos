@@ -112,4 +112,8 @@ trait DataAPI
         return CategoryBusine::all();
     }
 
+    /**
+     * NOTIFICACIONES
+    **/
+
 }

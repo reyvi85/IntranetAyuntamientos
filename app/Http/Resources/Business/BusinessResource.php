@@ -31,7 +31,7 @@ class BusinessResource extends JsonResource
             'relationships'=>[
                 'category'=>[
                     'links'=>[
-                        'self'=>'',
+                        'self'=>route('api.bussinessCategory.show',$this->resource->category_busine_id),
                     ],
                 ],
             ],

@@ -63,4 +63,11 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
         Route::get('/categories/{categoryBusine}', [BusinessController::class, 'businessCategoryShow'])->name('api.bussinessCategory.show');
     });
 
+    /**
+     * NOTIFICACIONES
+    **/
+    Route::prefix('notifications')->group(function (){
+
+    });
+
 });
