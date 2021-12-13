@@ -14,6 +14,24 @@ class NotificationResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'type'=>'notification',
+            'id'=>(string)$this->resource->id,
+            'attributes'=>[
+                'titulo'=>$this->resource->titulo,
+                'description'=>$this->resource->description,
+                'categoria'=>$this->resource->category_notification->name,
+            ],
+            'relationships'=>[
+                'category'=>[
+                    'links'=>[
+                        'self'=>''
+                    ],
+                ],
+            ],
+            'links'=>[
+                'self'=>route('api.notification.show', $this->resource->id)
+            ]
+        ];
     }
 }

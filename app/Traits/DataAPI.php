@@ -11,6 +11,7 @@ namespace App\Traits;
 
 use App\Models\Busine;
 use App\Models\CategoryBusine;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Warning;
 use App\Models\WarningAnswer;
@@ -91,7 +92,7 @@ trait DataAPI
     /**
      * NEGOCIOS
     **/
-    public function getAllBusiness($search = null, $category = null, $sort= null, $perPage =15){
+    public function getAllBusiness($search = null, $category = null, $sort= null, $perPage = 15){
         return Busine::with('category_busine')
             ->when($search, function ($q) use($search){
                 $q->where('name','like','%'.$search.'%')
@@ -115,5 +116,18 @@ trait DataAPI
     /**
      * NOTIFICACIONES
     **/
+
+    public function getAllNotifications($search = null,  $category = null, $sort=null, $perPage=15) {
+       return Notification::with('category_notification')
+            ->when($search, function ($q) use($search){
+                $q->where('titulo','like','%'.$search.'%');
+             })
+            ->when($category, function ($q) use($category){
+                $q->where('category_notification_id', $category);
+            })
+            ->PublishUpDate()
+            ->ApplySorts($sort)
+            ->paginate($perPage)->appends(request()->query());
+    }
 
 }

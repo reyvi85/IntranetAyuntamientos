@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AvisosController;
 use App\Http\Controllers\Api\BusinessController;
+use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -67,7 +68,8 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
      * NOTIFICACIONES
     **/
     Route::prefix('notifications')->group(function (){
-
+        Route::get('/', [NotificationsController::class, 'index'])->name('api.notification.index');
+        Route::get('/{notification}', [NotificationsController::class, 'notificationShow'])->name('api.notification.show');
     });
 
 });
