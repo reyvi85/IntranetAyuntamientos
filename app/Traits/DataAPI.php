@@ -11,6 +11,8 @@ namespace App\Traits;
 
 use App\Models\Busine;
 use App\Models\CategoryBusine;
+use App\Models\CategoryNotification;
+use App\Models\InterestPhone;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Warning;
@@ -82,6 +84,8 @@ trait DataAPI
                     $q->whereBetween('fecha_inicio', $aux);
                 })
                 ->ApplySorts($sort)
+                ->Active()
+                ->PublishUpDate()
                 ->paginate($perPage)->appends(request()->query());
     }
 
@@ -128,6 +132,23 @@ trait DataAPI
             ->PublishUpDate()
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
+    }
+
+    public function getAllNotificationsCategory(){
+        return CategoryNotification::all();
+    }
+
+    /**
+     * TELÉFONOS DE INTERES
+    **/
+    public function getAllPhones($search = null, $sort = null, $perPage = 15){
+        return InterestPhone::when($search, function ($q) use($search){
+            $q->where('name','like','%'.$search.'%')
+                ->orWhere('description','like','%'.$search.'%')
+                ->orWhere('phone','like','%'.$search.'%');
+            })
+            ->ApplySorts($sort)
+            ->paginate($perPage);
     }
 
 }

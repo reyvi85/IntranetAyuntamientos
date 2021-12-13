@@ -15,7 +15,10 @@ class NotificationResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data'=>$this->collection
+            'data'=>$this->collection,
+            'meta'=>[
+                'categories'=>route('api.notificationCategory.index'),
+            ]
         ];
     }
 }

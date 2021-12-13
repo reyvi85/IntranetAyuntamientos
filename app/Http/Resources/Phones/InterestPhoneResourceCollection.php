@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Notifications;
+namespace App\Http\Resources\Phones;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class NotificationCategoryResourceCollection extends ResourceCollection
+class InterestPhoneResourceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -17,8 +17,7 @@ class NotificationCategoryResourceCollection extends ResourceCollection
         return [
             'data'=>$this->collection,
             'meta'=>[
-                'notifications'=>route('api.notification.index'),
-                'category_count'=>$this->collection->count()
+                'links'=>['self'=>route('api.phones.index')]
             ]
         ];
     }

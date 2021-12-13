@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Traits\HasSort;
 use App\Scopes\UserInstanceScope;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -50,6 +51,16 @@ class Post extends Model
 
     public function instance(){
         return $this->belongsTo(Instance::class);
+    }
+
+    public function scopeActive($query){
+        return $query->where('active', true);
+    }
+
+    public function scopePublishUpDate($query){
+        $today = date('Y-m-d');
+         return $query->whereDate('fecha_inicio', '<=', $today)
+                        ->whereDate('fecha_fin','>', $today);
     }
 
     protected static function boot()

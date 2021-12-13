@@ -43,15 +43,15 @@ class DatabaseSeeder extends Seeder
         CategoryBusine::factory(25)->create();
         Busine::factory(150)->create();
         InterestPhone::factory(500)->create();*/
-       // CategoryNotification::factory(150)->create();
+        //CategoryNotification::factory(150)->create();
         //Notification::factory(1500)->create();
        // LocationCategory::factory(150)->create();
         //Location::factory(550)->create();
 
-        //WarningCategory::factory(250)->create();
-       // WarningSubCategory::factory(1800)->create();
-        //WarningState::factory(4)->create();
-       // Warning::factory(500)->create();
+        WarningCategory::factory(250)->create();
+        WarningSubCategory::factory(1800)->create();
+        WarningState::factory(4)->create();
+        Warning::factory(500)->create();
         WarningAnswer::factory(1500)->create();
         //Post::factory(1500)->create();
        // Widget::factory(1500)->create();

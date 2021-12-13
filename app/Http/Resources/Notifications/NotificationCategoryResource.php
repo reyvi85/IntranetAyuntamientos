@@ -16,7 +16,20 @@ class NotificationCategoryResource extends JsonResource
     {
         return [
             'type'=>'category-notification',
-            'id'=>$this->resource->id
+            'id'=>(string)$this->resource->id,
+            'attributes'=>[
+                'name'=>$this->resource->name
+            ],
+            'relationships'=>[
+                'notification'=>[
+                    'links'=>[
+                        'self'=>route('api.notification.index',['category'=>$this->resource->id]),
+                    ],
+                ],
+            ],
+            'links'=>[
+                'self'=>route('api.notificationCategory.show', $this->resource->id)
+            ]
         ];
     }
 }

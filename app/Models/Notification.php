@@ -21,7 +21,7 @@ class Notification extends Model
         'category_notification_id',
     ];
 
-    public $allowedSorts=['id','titulo'];
+    public $allowedSorts=['id','titulo','fecha_publicacion'];
 
     public function instance(){
         return $this->belongsTo(Instance::class);

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\CategoryNotification;
 use App\Models\Notification;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,12 +22,13 @@ class NotificationFactory extends Factory
      */
     public function definition()
     {
+        $c = CategoryNotification::select('id','instance_id')->get()->random();
         return [
             'fecha_publicacion'=>$this->faker->dateTime(),
             'titulo'=>$this->faker->sentence(),
             'description'=>$this->faker->text(),
-            'category_notification_id'=>rand(1,150),
-            'instance_id'=>rand(1,25)
+            'category_notification_id'=>$c->id,
+            'instance_id'=>$c->instance_id
         ];
     }
 }

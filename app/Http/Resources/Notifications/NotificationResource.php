@@ -20,12 +20,13 @@ class NotificationResource extends JsonResource
             'attributes'=>[
                 'titulo'=>$this->resource->titulo,
                 'description'=>$this->resource->description,
+                'fecha_publicacion'=>$this->resource->fecha_publicacion,
                 'categoria'=>$this->resource->category_notification->name,
             ],
             'relationships'=>[
                 'category'=>[
                     'links'=>[
-                        'self'=>''
+                        'self'=>route('api.notificationCategory.show',$this->resource->category_notification->id)
                     ],
                 ],
             ],

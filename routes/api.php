@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AvisosController;
 use App\Http\Controllers\Api\BusinessController;
+use App\Http\Controllers\Api\InterestPhoneController;
 use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
     /**
      * AVISOS
     **/
-    Route::prefix('avisos')->group(function (){
+    Route::prefix('warnings')->group(function (){
         Route::get('/', [AvisosController::class, 'index'])->name('api.warning.index');
         Route::post('/', [AvisosController::class, 'warningStore'])->name('api.warning.store');
         Route::get('/show/{warning}', [AvisosController::class, 'show'])->name('api.warning.show');
@@ -69,7 +70,17 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
     **/
     Route::prefix('notifications')->group(function (){
         Route::get('/', [NotificationsController::class, 'index'])->name('api.notification.index');
+        Route::get('/categories', [NotificationsController::class, 'notificationCategoryIndex'])->name('api.notificationCategory.index');
         Route::get('/{notification}', [NotificationsController::class, 'notificationShow'])->name('api.notification.show');
+        Route::get('/categories/{categoryNotification}', [NotificationsController::class, 'notificationCategoryShow'])->name('api.notificationCategory.show');
+    });
+
+    /**
+     * TELEFONOS DE INTERES
+    **/
+    Route::prefix('phones')->group(function (){
+        Route::get('/', [InterestPhoneController::class, 'index'])->name('api.phones.index');
+        Route::get('/{interestPhone}', [InterestPhoneController::class, 'show'])->name('api.phones.show');
     });
 
 });
