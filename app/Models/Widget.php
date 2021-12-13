@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasSort;
 use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Widget extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSort;
 
     protected $fillable =[
         'titulo',
@@ -20,6 +21,12 @@ class Widget extends Model
         'slug',
         'instance_id'
     ];
+
+    public $allowedSorts=['id','titulo'];
+
+    public function scopeActive($query){
+        return $query->where('active', true);
+    }
 
     protected static function boot()
     {

@@ -21,6 +21,7 @@ use App\Models\Warning;
 use App\Models\WarningAnswer;
 use App\Models\WarningCategory;
 use App\Models\WarningState;
+use App\Models\Widget;
 use Illuminate\Database\Eloquent\Builder;
 
 trait DataAPI
@@ -172,6 +173,19 @@ trait DataAPI
 
     public function getAllCategoryLocation(){
         return LocationCategory::all();
+    }
+
+    /**
+     * W I D G E T S
+     **/
+    public function getAllWidgets($search=null, $sort, $perPage=15){
+        return Widget::when($search, function ($q) use($search){
+            $q->where('titulo','like', '%'.$search.'%')
+                ->orWhere('subtitulo','like', '%'.$search.'%');
+              })
+            ->Active()
+            ->ApplySorts($sort)
+            ->paginate($perPage)->appends(request()->query());
     }
 
 }

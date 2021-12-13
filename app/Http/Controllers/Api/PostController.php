@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\PostResource;
-use App\Http\Resources\PostResourceCollection;
-use App\Models\Post;
+use App\Http\Resources\Posts\PostResource;
+use App\Http\Resources\Posts\PostResourceCollection;
+//use App\Models\Post;
 use App\Traits\DataAPI;
 use App\Traits\DataModels;
 use Illuminate\Http\Request;

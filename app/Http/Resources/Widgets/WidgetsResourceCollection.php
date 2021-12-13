@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Widgets;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class PostResourceCollection extends ResourceCollection
+class WidgetsResourceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -15,7 +15,10 @@ class PostResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data'=>$this->collection
+            'data'=>$this->collection,
+            'meta'=>[
+                'widgets'=>route('api.widgets.index')
+            ]
         ];
     }
 }

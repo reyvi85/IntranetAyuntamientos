@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\InterestPhoneController;
 use App\Http\Controllers\Api\LocationsController;
 use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\WidgetsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -90,5 +91,11 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
         Route::get('/{location}', [LocationsController::class, 'locationShow'])->name('api.location.show');
         Route::get('categories/{locationCategory}', [LocationsController::class, 'locationCategoryShow'])->name('api.locationCategory.show');
     });
-
+    /**
+     * WIDGETS
+     **/
+    Route::prefix('widgets')->group(function (){
+        Route::get('/', [WidgetsController::class, 'index'])->name('api.widgets.index');
+        Route::get('/{widget}', [WidgetsController::class, 'show'])->name('api.widgets.show');
+    });
 });
