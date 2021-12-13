@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AvisosController;
 use App\Http\Controllers\Api\BusinessController;
 use App\Http\Controllers\Api\InterestPhoneController;
+use App\Http\Controllers\Api\LocationsController;
 use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\PostController;
 use Illuminate\Http\Request;
@@ -64,7 +65,6 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
         Route::get('/{busine}', [BusinessController::class, 'businessShow'])->name('api.bussiness.show');
         Route::get('/categories/{categoryBusine}', [BusinessController::class, 'businessCategoryShow'])->name('api.bussinessCategory.show');
     });
-
     /**
      * NOTIFICACIONES
     **/
@@ -74,13 +74,21 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
         Route::get('/{notification}', [NotificationsController::class, 'notificationShow'])->name('api.notification.show');
         Route::get('/categories/{categoryNotification}', [NotificationsController::class, 'notificationCategoryShow'])->name('api.notificationCategory.show');
     });
-
     /**
      * TELEFONOS DE INTERES
     **/
     Route::prefix('phones')->group(function (){
         Route::get('/', [InterestPhoneController::class, 'index'])->name('api.phones.index');
         Route::get('/{interestPhone}', [InterestPhoneController::class, 'show'])->name('api.phones.show');
+    });
+    /**
+     * LOCALIZACIONES
+    **/
+    Route::prefix('locations')->group(function (){
+        Route::get('/', [LocationsController::class, 'index'])->name('api.location.index');
+        Route::get('/categories', [LocationsController::class, 'locationCategoryIndex'])->name('api.locationCategory.index');
+        Route::get('/{location}', [LocationsController::class, 'locationShow'])->name('api.location.show');
+        Route::get('categories/{locationCategory}', [LocationsController::class, 'locationCategoryShow'])->name('api.locationCategory.show');
     });
 
 });

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Location;
+use App\Models\LocationCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class LocationFactory extends Factory
@@ -21,6 +22,7 @@ class LocationFactory extends Factory
      */
     public function definition()
     {
+        $c = LocationCategory::select('id','instance_id')->get()->random();
         return [
             'name'=>$this->faker->sentence(),
             'description'=>$this->faker->text(),
@@ -31,8 +33,8 @@ class LocationFactory extends Factory
             'visitantes'=>$this->faker->boolean(),
             'residentes'=>$this->faker->boolean(),
             'inicio'=>$this->faker->boolean(),
-            'instance_id'=>rand(1,25),
-            'location_category_id'=>rand(1,150),
+            'instance_id'=>$c->instance_id,
+            'location_category_id'=>$c->id,
             'lat'=>$this->faker->latitude,
             'lng'=>$this->faker->longitude
         ];

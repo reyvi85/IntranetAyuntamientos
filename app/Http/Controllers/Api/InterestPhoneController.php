@@ -14,7 +14,7 @@ class InterestPhoneController extends Controller
     use DataAPI;
 
     public function index(Request $request){
-        return InterestPhoneResourceCollection::make($this->getAllPhones(null, null, null));
+        return InterestPhoneResourceCollection::make($this->getAllPhones($request->search, $request->sort, $request->perPage));
     }
 
     public function show(InterestPhone $interestPhone){

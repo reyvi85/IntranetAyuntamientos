@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasSort;
 use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Location extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSort;
 
     protected $fillable = [
         'name',
@@ -30,6 +31,8 @@ class Location extends Model
         'lat'=>'double',
         'lng'=>'double'
     ];
+
+    public $allowedSorts = ['id','name'];
 
     public function instance(){
         return $this->belongsTo(Instance::class);

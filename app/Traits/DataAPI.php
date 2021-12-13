@@ -13,6 +13,8 @@ use App\Models\Busine;
 use App\Models\CategoryBusine;
 use App\Models\CategoryNotification;
 use App\Models\InterestPhone;
+use App\Models\Location;
+use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Warning;
@@ -148,7 +150,28 @@ trait DataAPI
                 ->orWhere('phone','like','%'.$search.'%');
             })
             ->ApplySorts($sort)
-            ->paginate($perPage);
+            ->paginate($perPage)->appends(request()->query());
+    }
+
+    /**
+     * LOCALIZACIONES
+    **/
+    public function getLocations($search = null, $category = null, $sort = null, $perPage = 15){
+        return Location::with('location_category')->withCount('location_category')
+            ->when($search, function ($q) use($search){
+            $q->where('name','like','%'.$search.'%')
+                ->orWhere('ubicacion','like','%'.$search.'%')
+                ->orWhere('telefono','like','%'.$search.'%');
+            })
+            ->when($category, function ($q) use($category){
+                $q->where('location_category_id',$category);
+            })
+            ->ApplySorts($sort)
+            ->paginate($perPage)->appends(request()->query());
+    }
+
+    public function getAllCategoryLocation(){
+        return LocationCategory::all();
     }
 
 }
