@@ -31,16 +31,7 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::get('/user',[AuthController::class, 'userInfo'])->middleware('auth:sanctum');
 
 
-Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,Administrador-Instancia,Gestor-Instancia'])->group(function (){
-
-    /**
-     * POST
-    **/
-    Route::prefix('post')->group(function (){
-        Route::get('/', [PostController::class, 'index'])->name('api.post.index');
-        Route::get('/{id}', [PostController::class, 'show'])->name('api.post.show');
-    });
-
+Route::prefix('v1')->middleware('auth:sanctum')->group(function (){
     /**
      * AVISOS
     **/
@@ -67,6 +58,13 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
         Route::get('/categories/{categoryBusine}', [BusinessController::class, 'businessCategoryShow'])->name('api.bussinessCategory.show');
     });
     /**
+     * WIDGETS
+     **/
+    Route::prefix('widgets')->group(function (){
+        Route::get('/', [WidgetsController::class, 'index'])->name('api.widgets.index');
+        Route::get('/{widget}', [WidgetsController::class, 'show'])->name('api.widgets.show');
+    });
+    /**
      * NOTIFICACIONES
     **/
     Route::prefix('notifications')->group(function (){
@@ -74,6 +72,13 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
         Route::get('/categories', [NotificationsController::class, 'notificationCategoryIndex'])->name('api.notificationCategory.index');
         Route::get('/{notification}', [NotificationsController::class, 'notificationShow'])->name('api.notification.show');
         Route::get('/categories/{categoryNotification}', [NotificationsController::class, 'notificationCategoryShow'])->name('api.notificationCategory.show');
+    });
+    /**
+     * POST
+     **/
+    Route::prefix('posts')->group(function (){
+        Route::get('/', [PostController::class, 'index'])->name('api.post.index');
+        Route::get('/{id}', [PostController::class, 'show'])->name('api.post.show');
     });
     /**
      * TELEFONOS DE INTERES
@@ -91,11 +96,5 @@ Route::prefix('v1')->middleware(['auth:sanctum', 'checkRol:Super-Administrador,A
         Route::get('/{location}', [LocationsController::class, 'locationShow'])->name('api.location.show');
         Route::get('categories/{locationCategory}', [LocationsController::class, 'locationCategoryShow'])->name('api.locationCategory.show');
     });
-    /**
-     * WIDGETS
-     **/
-    Route::prefix('widgets')->group(function (){
-        Route::get('/', [WidgetsController::class, 'index'])->name('api.widgets.index');
-        Route::get('/{widget}', [WidgetsController::class, 'show'])->name('api.widgets.show');
-    });
+
 });
