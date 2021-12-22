@@ -12,7 +12,7 @@ trait DataFront
 {
     public $sort = 'id', $sortDirection='desc';
 
-    public function getBusinessPublic($key, $search = null, $category = null, $sort, $direction){
+    public function getBusinessPublic($key, $search = null, $category = null, $sort, $perPage = 15){
         return Busine::withoutGlobalScopes()->with('category_busine')
            ->whereHas('instance', function (Builder $builder) use($key){
                 $builder->where('key','like', '%'.$key.'%');
@@ -30,13 +30,16 @@ trait DataFront
             ->when($category, function ($q) use($category){
                 $q->where('category_busine_id', $category);
             })
-            ->orderBy($sort, $direction)
-            ->paginate(16);
+            ->ApplySorts($sort)
+            ->paginate($perPage);
     }
 
-    public function getAllCategoryBusiness(){
-        return CategoryBusine::orderBy('name', 'asc')
-            ->get();
+    public function getAllCategoryBusiness($key){
+        return CategoryBusine::whereHas('business.instance', function (Builder $builder) use($key){
+                $builder->where('key','like', '%'.$key.'%');
+        })
+        ->orderBy('name', 'asc')
+        ->get();
     }
 
 }

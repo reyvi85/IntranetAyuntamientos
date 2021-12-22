@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AvisosController;
 use App\Http\Controllers\Api\BusinessController;
+use App\Http\Controllers\Api\ComponentController;
 use App\Http\Controllers\Api\InterestPhoneController;
 use App\Http\Controllers\Api\LocationsController;
 use App\Http\Controllers\Api\NotificationsController;
@@ -95,6 +96,16 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function (){
         Route::get('/categories', [LocationsController::class, 'locationCategoryIndex'])->name('api.locationCategory.index');
         Route::get('/{location}', [LocationsController::class, 'locationShow'])->name('api.location.show');
         Route::get('categories/{locationCategory}', [LocationsController::class, 'locationCategoryShow'])->name('api.locationCategory.show');
+    });
+
+});
+/**
+ * COMPONENTES
+**/
+Route::prefix('component')->middleware('checkInstance')->group(function (){
+    Route::prefix('business')->group(function (){
+        Route::get('/', [ComponentController::class, 'getBisnessComponent'])->name('api.component.business');
+        Route::get('/categories', [ComponentController::class, 'getCategoriesBusiness'])->name('api.component.bussinessCategory');
     });
 
 });

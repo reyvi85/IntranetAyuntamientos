@@ -21,7 +21,11 @@ class CheckEnterInstance
         $inst = $this->getCheckInstance($request->token_inst);
 
         if(!$request->has('token_inst') || is_null($inst)){
-            abort(403);
+            if (request()->wantsJson()){
+                return response()->json(['message'=>'Recurso no encontrado :('],403);
+            }
+
+            abort(403,'Recurso no encontrado :(');
         }
 
         return $next($request);
