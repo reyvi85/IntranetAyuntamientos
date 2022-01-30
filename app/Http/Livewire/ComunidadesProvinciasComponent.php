@@ -21,7 +21,7 @@ class ComunidadesProvinciasComponent extends Component
         $sort = 'id',
         $sortDirection = 'desc',
 
-        $modalModeDestroy = false,
+        //$modalModeDestroy = false,
 
 
         $comunidadID,

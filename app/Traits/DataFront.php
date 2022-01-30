@@ -31,7 +31,7 @@ trait DataFront
                 $q->where('category_busine_id', $category);
             })
             ->ApplySorts($sort)
-            ->paginate($perPage);
+            ->paginate($perPage)->appends(request()->query());
     }
 
     public function getAllCategoryBusiness($key){
