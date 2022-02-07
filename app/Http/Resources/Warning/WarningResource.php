@@ -19,18 +19,17 @@ class WarningResource extends JsonResource
         return[
             'type'=>'warning',
             'id'=>(string)$this->resource->id,
-            'attributes'=>[
-                'asunto'=>$this->resource->asunto,
-                'description'=>$this->resource->description,
-                'ubicacion'=>$this->resource->ubicacion,
-                'image'=>$this->resource->image,
-                'latitud'=>$this->resource->lat,
-                'longitud'=>$this->resource->lng,
-                'categoria'=>$this->resource->warning_sub_category->warning_category->name,
-                'sub_categoria'=>$this->resource->warning_sub_category->name,
-                'estado'=>$this->resource->warning_state->name,
-                'fecha'=>date('Y-m-d', strtotime($this->resource->created_at))
-            ],
+            'asunto'=>$this->resource->asunto,
+            'description'=>$this->resource->description,
+            'ubicacion'=>$this->resource->ubicacion,
+            'image'=>$this->resource->image,
+            'latitud'=>$this->resource->lat,
+            'longitud'=>$this->resource->lng,
+            'categoria'=>$this->resource->warning_sub_category->warning_category->name,
+            'sub_categoria'=>$this->resource->warning_sub_category->name,
+            'estado'=>$this->resource->warning_state->name,
+            'fecha'=>date('Y-m-d', strtotime($this->resource->created_at)),
+
 
             'relationships'=>[
                 'category'=>[

@@ -32,7 +32,7 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::get('/user',[AuthController::class, 'userInfo'])->middleware('auth:sanctum');
 
 
-Route::prefix('v1')->middleware('auth:sanctum')->group(function (){
+Route::prefix('v1')->middleware('checkInstance')->group(function (){
     /**
      * AVISOS
     **/

@@ -17,19 +17,17 @@ class BusinessCategoryResource extends JsonResource
         return [
             'type'=>'category-busines',
             'id'=>$this->resource->id,
-            'attributes'=>[
-                'name'=>$this->resource->name,
-                'slug'=>$this->resource->slug
-            ],
+            'name'=>$this->resource->name,
+            'slug'=>$this->resource->slug,
             'relationships'=>[
                 'busine'=>[
                     'links'=>[
-                        'self'=>route('api.bussinessCategory.index',['category'=>$this->resource->id]),
+                        'self'=>route('api.bussinessCategory.index',['category'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
                     ],
                 ],
             ],
             'links'=>[
-                'self'=>route('api.bussinessCategory.show',$this->resource->id),
+                'self'=>route('api.bussinessCategory.show',[$this->resource->id, 'token_inst'=>$request->token_inst]),
             ]
 
         ];
