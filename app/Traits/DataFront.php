@@ -7,6 +7,7 @@ namespace App\Traits;
 use App\Models\Busine;
 use App\Models\CategoryBusine;
 use Illuminate\Database\Eloquent\Builder;
+//use Illuminate\Http\Request;
 
 trait DataFront
 {
@@ -14,9 +15,10 @@ trait DataFront
 
     public function getBusinessPublic($key, $search = null, $category = null, $sort, $perPage = 15){
         return Busine::withoutGlobalScopes()->with('category_busine')
+            /*
            ->whereHas('instance', function (Builder $builder) use($key){
                 $builder->where('key','like', '%'.$key.'%');
-            })
+            })*/
             ->when($search, function ($q) use($search){
                 $q->where(function ($q) use ($search){
                     $q->orWhere('name','like','%'.$search.'%')
@@ -30,6 +32,7 @@ trait DataFront
             ->when($category, function ($q) use($category){
                 $q->where('category_busine_id', $category);
             })
+            ->GetIntance('instance')
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
     }

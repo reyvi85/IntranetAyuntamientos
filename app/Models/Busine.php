@@ -2,15 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasInstance;
 use App\Models\Traits\HasSort;
+
 use App\Scopes\UserInstanceScope;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Busine extends Model
 {
-    use HasFactory, HasSort;
+    use HasFactory, HasSort, HasInstance;
 
     protected $fillable = [
         'name',
@@ -43,7 +46,12 @@ class Busine extends Model
     /**
      * SCOPE
     **/
-
+/*
+    public function scopeGetIntance($query, $model, $key){
+        return $query->whereHas($model, function (Builder $builder) use($key){
+            $builder->where('key','like', '%'.$key.'%');
+        });
+    }*/
 
 
     protected static function boot()
