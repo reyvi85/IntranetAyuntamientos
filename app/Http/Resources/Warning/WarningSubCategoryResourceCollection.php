@@ -17,18 +17,7 @@ class WarningSubCategoryResourceCollection extends ResourceCollection
 
         return [
             'data'=>$this->collection,
-            'relationships'=>[
-                'sub-category'=>[
-                    'links'=>[
-                        'self'=>route('api.category.show', $request->warningCategory),
-                    ],
-                ],
-            ],
-            'meta'=>[
-                'sub_categories_count'=>(string)$this->collection->count(),
-            ]
-
-
+            'sub_categories_count'=>(string)$this->collection->count(),
         ];
     }
 }

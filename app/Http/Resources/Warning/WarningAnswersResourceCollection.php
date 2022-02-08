@@ -16,9 +16,6 @@ class WarningAnswersResourceCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
-            'links'=>[
-                'related'=>route('api.answer.index', $request->id)
-            ]
         ];
     }
 }

@@ -17,13 +17,14 @@ class WarningCategoryResource extends JsonResource
         return [
             'type'=>'category',
             'id'=>(string)$this->resource->id,
-            'attributes'=>[
-                'name'=>$this->resource->name
-            ],
+            'name'=>$this->resource->name,
+            'sub-category-count'=>$this->resource->sub_categories_count,
+           // 'sub-category'=>WarningSubCategoryResourceCollection::make($this->resource->sub_categories),
+
             'relationships'=>[
                 'sub-category'=>[
                     'links'=>[
-                        'self'=>route('api.subcategory.index', $this->resource->id),
+                        'self'=>route('api.subcategory.index', [$this->resource->id, 'token_inst'=>$request->token_inst]),
                     ],
                 ],
             ],

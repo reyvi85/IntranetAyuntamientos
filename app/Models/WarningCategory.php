@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Scopes\UserInstanceScope;
+use App\Models\Traits\HasInstance;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class WarningCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, HasInstance;
 
     protected $fillable = [
         'name',

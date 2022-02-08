@@ -30,35 +30,35 @@ class WarningResource extends JsonResource
             'estado'=>$this->resource->warning_state->name,
             'fecha'=>date('Y-m-d', strtotime($this->resource->created_at)),
 
-
             'relationships'=>[
                 'category'=>[
-                'data'=>['type'=>'category', 'id'=>(string)$this->resource->warning_sub_category->warning_category->id],
-                'links'=>[
-                    'self'=>route('api.category.show', $this->resource->warning_sub_category->warning_category->id),
-                    'related'=>route('api.category.index')
-                ],
-                'meta'=>['name'=>$this->resource->warning_sub_category->warning_category->name]
-                ],
+                    'type'=>'category',
+                    'id'=>(string)$this->resource->warning_sub_category->warning_category->id,
+                    'name'=>$this->resource->warning_sub_category->warning_category->name,
+                    'link_self'=>route('api.category.show', [$this->resource->warning_sub_category->warning_category->id, 'token_inst'=>$request->token_inst]),
+                    'link_categories'=>route('api.category.index',['token_inst'=>$request->token_inst]),
+                    'link_sub_categories'=>route('api.subcategory.index',[$this->resource->warning_sub_category->warning_category->id, 'token_inst'=>$request->token_inst])
+                 ],
                 'sub-category'=>[
-                    'data'=>['type'=>'sub-category', 'id'=>(string)$this->resource->warning_sub_category->id],
-                    'links'=>['self'=>route('api.subcategory.show', $this->resource->warning_sub_category->id)],
-                    'meta'=>['name'=>$this->resource->warning_sub_category->name]
+                   'type'=>'sub-category',
+                   'id'=>(string)$this->resource->warning_sub_category->id,
+                   'name'=>$this->resource->warning_sub_category->name,
+                   'link_self'=>route('api.subcategory.show', [$this->resource->warning_sub_category->id, 'token_inst'=>$request->token_inst]),
                 ],
 
                 'state'=>[
-                    'data'=>['type'=>'state', 'id'=>(string)$this->resource->warning_state->id],
-                    'links'=>[
-                        'self'=>route('api.state.show',$this->resource->warning_state->id),
-                        'related'=>route('api.state.index')
+                    'type'=>'state',
+                    'id'=>(string)$this->resource->warning_state->id,
+                    'name'=>$this->resource->warning_state->name,
+                    'link_self'=>route('api.state.show',[$this->resource->warning_state->id,'token_inst'=>$request->token_inst]),
+                    'link_state'=>route('api.state.index', ['token_inst'=>$request->token_inst])
                     ],
-                    'meta'=>['name'=>$this->resource->warning_state->name]
-                ],
-                'answers'=>[
-                    'links'=>['self'=>route('api.answer.index', $this->resource->id)]
-                ]
+
+                'answers'=>WarningAnswersResourceCollection::make($this->resource->warning_answers)
+                    //['links'=>['self'=>route('api.answer.index', [$this->resource->id, 'token_inst'=>$request->token_inst])]
+
             ],
-            'links'=>['self'=>route('api.warning.show', $this->resource->id)]
+            'link_self'=>route('api.warning.show', [$this->resource->id, 'token_inst'=>$request->token_inst])
         ];
     }
 }

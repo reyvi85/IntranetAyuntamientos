@@ -19,12 +19,12 @@ use App\Models\WarningAnswer;
 use App\Models\WarningCategory;
 use App\Models\WarningState;
 use App\Models\WarningSubCategory;
-use App\Traits\DataAPI;
+use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
 class AvisosController extends Controller
 {
-    use DataAPI;
+    use DataAPIFront;
     /** LISTA DE AVISOS **/
     public function index(Request $request){
         return WarningResourceCollection::make($this->getWarnings($request->search, $request->fecha, $request->category, $request->sub_category,$request->state,$request->sort ,$request->perPage));
@@ -47,7 +47,7 @@ class AvisosController extends Controller
             'image'=>$path,
             'lat'=>$request->latitud,
             'lng'=>$request->longitud,
-            'instance_id'=>auth()->user()->instance_id,
+            'instance_id'=>$request->instance_id,
             'warning_state_id'=>1,
             'warning_sub_category_id'=>$request->sub_categoria,
             'user_id'=>auth()->id()

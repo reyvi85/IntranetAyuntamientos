@@ -14,22 +14,12 @@ class WarningAnswersResource extends JsonResource
      */
     public function toArray($request)
     {
-       // dd($this->resource);
         return [
             'type'=>'answer',
             'id'=>(string)$this->resource->id,
-            'attributes'=>[
-                'respuesta'=>$this->resource->answer
-            ],
-            'relationships'=>[
-                'warning'=>[
-                    'data'=>['type'=>'warning', 'id'=>(string)$this->resource->warning_id],
-                    'links'=>['related'=>route('api.warning.show',$this->resource->warning_id)]
-                ],
-            ],
-            'links'=>[
-                'self'=>route('api.answer.show', ['warningAnswer'=>$this->resource->id])
-            ]
+            'respuesta'=>$this->resource->answer,
+            'link_self'=>route('api.answer.show', ['warningAnswer'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'link_related'=>route('api.warning.show',[$this->resource->warning_id, 'token_inst'=>$request->token_inst]),
         ];
     }
 }
