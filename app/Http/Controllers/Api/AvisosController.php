@@ -66,6 +66,7 @@ class AvisosController extends Controller
     /** VER RESPUESTAS **/
     public function answerShow(Request $request){
         $warningAnswer = $this->getShowAnswersOfWarning($request->warningAnswer);
+       // dd($warningAnswer);
         return WarningAnswersResource::make($warningAnswer);
     }
     /** Lista de CATEGORÍAS **/
@@ -79,22 +80,27 @@ class AvisosController extends Controller
     }
 
     /** LISTA SUB - CATEGORÍAS **/
-    public function subCategoryIndex(WarningCategory $warningCategory){
+    public function subCategoryIndex(Request $request)
+    {
+        $warningCategory = $this->getWarningSubCategories($request->warningCategory);
         return WarningSubCategoryResourceCollection::make($warningCategory->sub_categories);
     }
     /** VER SUB - CATEGORÍAS **/
-    public function subCategoryShow(WarningSubCategory $warningSubCategory){
+    public function subCategoryShow(Request $request)
+    {
+        $warningSubCategory = $this->getShowSubCategoryWarning($request->warningSubCategory);
         return WarningSubCategoryResource::make($warningSubCategory);
     }
 
     /** ESTADO DE LOS AVISOS **/
-    public function stateIndex(){
-       //$a = $this->getAllWarningState();
-
+    public function stateIndex()
+    {
         return WarningStateResourceCollection::make($this->getAllWarningState());
     }
     /** VER ESTADO**/
-    public function stateShow(WarningState $warningState){
+    public function stateShow(Request $request)
+    {
+        $warningState = $this->getShowWarningState($request->warningState);
         return WarningStateResource::make($warningState);
     }
 }

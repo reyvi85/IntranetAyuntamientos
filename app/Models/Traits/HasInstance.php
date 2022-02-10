@@ -11,7 +11,7 @@ trait HasInstance
         return $this->key = request()->token_inst;
     }
 
-    public function scopeGetIntance($query, $model = 'instance'){
+    public function scopeGetInstance($query, $model = 'instance'){
         return $query->whereHas($model, function (Builder $builder){
             $builder->where('key','like', '%'.$this->getKey().'%');
         });
