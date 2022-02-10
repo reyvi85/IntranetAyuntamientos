@@ -20,7 +20,7 @@ class WarningCategoryResource extends JsonResource
             'name'=>$this->resource->name,
             'link_self'=>route('api.category.show', [$this->resource->id, 'token_inst'=>$request->token_inst]),
             'links_sub_category'=>route('api.subcategory.index', [$this->resource->id, 'token_inst'=>$request->token_inst]),
-            'sub-category-count'=>$this->resource->sub_categories->count(),
+            'sub-category-count'=>$this->resource->sub_categories_count,
         ];
     }
 }
