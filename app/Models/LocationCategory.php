@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasInstance;
 use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class LocationCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, HasInstance;
 
     protected $fillable = [
         'name','image', 'instance_id'

@@ -16,9 +16,7 @@ class WidgetsResourceCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
-            'meta'=>[
-                'widgets'=>route('api.widgets.index')
-            ]
+            'widgets'=>route('api.widgets.index', ['token_inst'=>$request->token_inst])
         ];
     }
 }

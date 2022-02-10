@@ -5,16 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Posts\PostResource;
 use App\Http\Resources\Posts\PostResourceCollection;
-//use App\Models\Post;
-use App\Traits\DataAPI;
-use App\Traits\DataModels;
+use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    use DataAPI;
+    use DataAPIFront;
 
     /**
      * @param Request $request
@@ -25,6 +21,7 @@ class PostController extends Controller
      * @return PostResourceCollection
      */
     public function index(Request $request){
+       //return Post::all();
       return PostResourceCollection::make($this->getPosts($request->search, $request->fecha, $request->sort, $request->perPage));
 
     }

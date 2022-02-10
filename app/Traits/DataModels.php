@@ -362,8 +362,16 @@ trait DataModels {
         ->get();
     }
 
-    public function getAllState(){
-        return WarningState::withCount('warnings')->get();
+    public function getAllState($instancia = null){
+        return WarningState::with(['warnings'=>function($q) use($instancia){
+            $q->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            });
+
+        }])
+
+            ->get();
+
     }
 
     public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $category = null, $subCategory = null , $estado=null, $sort, $direction){

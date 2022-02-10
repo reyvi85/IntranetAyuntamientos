@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasInstance;
 use App\Models\Traits\HasSort;
 use App\Scopes\UserInstanceScope;
 use Carbon\Carbon;
@@ -10,8 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    use HasFactory , HasSort;
-   // use \Znck\Eloquent\Traits\BelongsToThrough;
+    use HasFactory , HasSort, HasInstance;
 
     protected $fillable =[
         'fecha_publicacion',

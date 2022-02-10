@@ -6,12 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Widgets\WidgetsResource;
 use App\Http\Resources\Widgets\WidgetsResourceCollection;
 use App\Models\Widget;
-use App\Traits\DataAPI;
+use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
 class WidgetsController extends Controller
 {
-    use DataAPI;
+    use DataAPIFront;
     public function index(Request $request){
         return  WidgetsResourceCollection::make($this->getAllWidgets($request->search, $request->sort, $request->perPage));
     }

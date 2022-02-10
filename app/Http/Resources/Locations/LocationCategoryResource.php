@@ -17,20 +17,12 @@ class LocationCategoryResource extends JsonResource
         return [
             'type'=>'category',
             'id'=>$this->resource->id,
-            'attributes'=>[
-                'name'=>$this->resource->name,
-                'image'=>url($this->resource->image),
-            ],
-            'relationships'=>[
-                'location'=>[
-                    'links'=>[
-                        'self'=>route('api.location.index',['category'=>$this->resource->id]),
-                    ],
-                ],
-            ],
-            'links'=>[
-                'self'=>route('api.locationCategory.show',$this->resource->id)
-            ]
+            'name'=>$this->resource->name,
+            'image'=>url($this->resource->image),
+            'link_location'=>route('api.location.index',['category'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'link_self'=>route('api.locationCategory.show',[$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'location_count'=>$this->resource->locations_count
+
         ];
     }
 }

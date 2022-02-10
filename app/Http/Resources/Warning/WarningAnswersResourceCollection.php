@@ -16,6 +16,7 @@ class WarningAnswersResourceCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
+            'answers_count'=>$this->collection->count()
         ];
     }
 }

@@ -7,17 +7,19 @@ use App\Http\Resources\Phones\InterestPhoneResource;
 use App\Http\Resources\Phones\InterestPhoneResourceCollection;
 use App\Models\InterestPhone;
 use App\Traits\DataAPI;
+use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
 class InterestPhoneController extends Controller
 {
-    use DataAPI;
+    use DataAPIFront;
 
     public function index(Request $request){
         return InterestPhoneResourceCollection::make($this->getAllPhones($request->search, $request->sort, $request->perPage));
     }
 
-    public function show(InterestPhone $interestPhone){
+    public function show(Request $request){
+        $interestPhone =$this->getPhone($request->interestPhone);
         return InterestPhoneResource::make($interestPhone);
     }
 }

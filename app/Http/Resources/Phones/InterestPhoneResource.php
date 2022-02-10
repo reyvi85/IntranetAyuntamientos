@@ -17,14 +17,11 @@ class InterestPhoneResource extends JsonResource
         return [
             'type'=>'phone',
             'id'=>(string)$this->resource->id,
-            'attributes'=>[
-                'name'=>$this->resource->name,
-                'description'=>$this->resource->description,
-                'phone'=>$this->resource->phone
-            ],
-            'links'=>[
-                'self'=>route('api.phones.show', $this->resource->id)
-            ]
+            'name'=>$this->resource->name,
+            'description'=>$this->resource->description,
+            'phone'=>$this->resource->phone,
+            'link_self'=>route('api.phones.show', [$this->resource, 'token_inst'=>$request->token_inst])
+
         ];
     }
 }

@@ -9,12 +9,12 @@ use App\Http\Resources\Business\BusinessResource;
 use App\Http\Resources\Business\BusinessResourceCollection;
 use App\Models\Busine;
 use App\Models\CategoryBusine;
-use App\Traits\DataAPI;
+use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
 class BusinessController extends Controller
 {
-    use DataAPI;
+    use DataAPIFront;
     /**
      * lista de negocios
     **/
@@ -38,7 +38,8 @@ class BusinessController extends Controller
     /**
      * Ver Categoría
     **/
-    public function businessCategoryShow(CategoryBusine $categoryBusine){
+    public function businessCategoryShow(){
+        $categoryBusine  = $this->getBusinessCategory(request()->categoryBusine);
         return BusinessCategoryResource::make($categoryBusine);
     }
 }

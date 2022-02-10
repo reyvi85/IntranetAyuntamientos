@@ -19,7 +19,6 @@ class WarningAnswersResource extends JsonResource
             'id'=>(string)$this->resource->id,
             'respuesta'=>$this->resource->answer,
             'link_self'=>route('api.answer.show', ['warningAnswer'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
-            'link_related'=>route('api.warning.show',[$this->resource->warning_id, 'token_inst'=>$request->token_inst]),
         ];
     }
 }

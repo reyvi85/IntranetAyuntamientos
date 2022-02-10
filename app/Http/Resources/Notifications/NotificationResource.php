@@ -17,22 +17,14 @@ class NotificationResource extends JsonResource
         return [
             'type'=>'notification',
             'id'=>(string)$this->resource->id,
-            'attributes'=>[
-                'titulo'=>$this->resource->titulo,
-                'description'=>$this->resource->description,
-                'fecha_publicacion'=>$this->resource->fecha_publicacion,
-                'categoria'=>$this->resource->category_notification->name,
-            ],
-            'relationships'=>[
-                'category'=>[
-                    'links'=>[
-                        'self'=>route('api.notificationCategory.show',$this->resource->category_notification->id)
-                    ],
-                ],
-            ],
-            'links'=>[
-                'self'=>route('api.notification.show', $this->resource->id)
-            ]
+            'titulo'=>$this->resource->titulo,
+            'description'=>$this->resource->description,
+            'fecha_publicacion'=>$this->resource->fecha_publicacion,
+            'category_id'=>$this->resource->category_notification->id,
+            'category_name'=>$this->resource->category_notification->name,
+            'link_category'=>route('api.notificationCategory.show',[$this->resource->category_notification->id, 'token_inst'=>$request->token_inst]),
+            'link_categories'=>route('api.notificationCategory.index',['token_inst'=>$request->token_inst]),
+            'link_self'=>route('api.notification.show', [$this->resource->id, 'token_inst'=>$request->token_inst])
         ];
     }
 }

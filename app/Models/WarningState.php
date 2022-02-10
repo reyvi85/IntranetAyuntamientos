@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasInstance;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class WarningState extends Model
 {
-    use HasFactory;
+    use HasFactory, HasInstance;
 
     protected $fillable = ['name', 'color'];
 

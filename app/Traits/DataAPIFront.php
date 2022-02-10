@@ -63,8 +63,30 @@ trait DataAPIFront
             ->paginate($perPage)->appends(request()->query());
     }
 
+    public function getShowWarning($warning){
+        return Warning::withoutGlobalScopes()
+            ->with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
+            ->withCount('warning_answers')
+            ->GetIntance()
+            ->findOrFail($warning);
+    }
+
     public function getAllAnswerOfWarning($warningID){
-        return WarningAnswer::where('warning_id', $warningID)->get();
+        return WarningAnswer::withoutGlobalScopes()
+            ->with(['warning'=>function($q){
+                $q->GetIntance();
+            }])
+            ->where('warning_id', $warningID)
+            ->get();
+    }
+
+    public function getShowAnswersOfWarning($answer){
+        return WarningAnswer::
+            with(['warning'=>function($q){
+                $q->GetIntance();
+           }])
+            ->findOrFail($answer);
+
     }
 
     public function getAllWarningCategory(){
@@ -74,8 +96,17 @@ trait DataAPIFront
             ->get();
     }
 
+    public function getWarningCategory($category){
+        return WarningCategory::withoutGlobalScopes()
+            ->withCount('sub_categories')
+            ->GetIntance()
+            ->findOrFail($category);
+    }
+
     public function getAllWarningState(){
-        return WarningState::withCount('warnings')->get();
+        return WarningState::withCount(['warnings'=>function ($q){
+            $q->GetIntance();
+        }])->get();
     }
 
     /**
@@ -83,7 +114,8 @@ trait DataAPIFront
      **/
 
     public function getPosts($search=null, $rangoFecha=null, $sort=null, $perPage=15){
-            return Post::when($search, function ($q) use($search){
+            return Post::withoutGlobalScopes()
+                ->when($search, function ($q) use($search){
                 $q->where('titulo','like', '%'.$search.'%')
                     ->orWhere('subtitulo','like', '%'.$search.'%');
                 })
@@ -91,21 +123,25 @@ trait DataAPIFront
                     $aux = explode('-', $rangoFecha);
                     $q->whereBetween('fecha_inicio', $aux);
                 })
+                ->GetIntance()
                 ->ApplySorts($sort)
-                ->Active()
-                ->PublishUpDate()
+               ->Active()
+                //->PublishUpDate()
                 ->paginate($perPage)->appends(request()->query());
     }
 
     public function getPost($post){
-        return Post::findOrFail($post);
+        return Post::withoutGlobalScopes()
+            ->GetIntance()
+            ->findOrFail($post);
     }
 
     /**
      * NEGOCIOS
     **/
     public function getAllBusiness($search = null, $category = null, $sort= null, $perPage = 15){
-        return Busine::with('category_busine')
+        return Busine::withoutGlobalScopes()
+            ->with('category_busine')
             ->when($search, function ($q) use($search){
                 $q->where('name','like','%'.$search.'%')
                     ->orWhere('direccion','like','%'.$search.'%')
@@ -117,12 +153,23 @@ trait DataAPIFront
             ->when($category, function ($q) use($category){
                 $q->where('category_busine_id', $category);
             })
+            ->GetIntance()
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
     }
 
     public function getAllBusinessCategory(){
-        return CategoryBusine::all();
+        return CategoryBusine::withCount(['business'=>function($q){
+            $q->GetIntance();
+             }])
+            ->get();
+    }
+
+    public function getBusinessCategory($id){
+        return CategoryBusine::withCount(['business'=>function($q){
+            $q->GetIntance();
+        }])
+            ->findOrFail($id);
     }
 
     /**
@@ -130,7 +177,8 @@ trait DataAPIFront
     **/
 
     public function getAllNotifications($search = null,  $category = null, $sort=null, $perPage=15) {
-       return Notification::with('category_notification')
+       return Notification::withoutGlobalScopes()
+            ->with('category_notification')
             ->when($search, function ($q) use($search){
                 $q->where('titulo','like','%'.$search.'%');
              })
@@ -138,32 +186,52 @@ trait DataAPIFront
                 $q->where('category_notification_id', $category);
             })
             ->PublishUpDate()
+            ->GetIntance()
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
     }
 
     public function getAllNotificationsCategory(){
-        return CategoryNotification::all();
+        return CategoryNotification::withoutGlobalScopes()
+            ->withCount('notifications')
+            ->GetIntance()
+        ->get();
+    }
+
+    public function getCategory($id){
+        return CategoryNotification::withoutGlobalScopes()
+            ->withCount('notifications')
+            ->GetIntance()
+            ->findOrFail($id);
     }
 
     /**
      * TELÉFONOS DE INTERES
     **/
     public function getAllPhones($search = null, $sort = null, $perPage = 15){
-        return InterestPhone::when($search, function ($q) use($search){
+        return InterestPhone::withoutGlobalScopes()
+            ->when($search, function ($q) use($search){
             $q->where('name','like','%'.$search.'%')
                 ->orWhere('description','like','%'.$search.'%')
                 ->orWhere('phone','like','%'.$search.'%');
             })
+            ->GetIntance()
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
+    }
+
+    public function getPhone($phone){
+        return InterestPhone::withoutGlobalScopes()
+            ->GetIntance()
+            ->findOrFail($phone);
     }
 
     /**
      * LOCALIZACIONES
     **/
     public function getLocations($search = null, $category = null, $sort = null, $perPage = 15){
-        return Location::with('location_category')->withCount('location_category')
+        return Location::withoutGlobalScopes()
+            ->with('location_category')->withCount('location_category')
             ->when($search, function ($q) use($search){
             $q->where('name','like','%'.$search.'%')
                 ->orWhere('ubicacion','like','%'.$search.'%')
@@ -172,22 +240,42 @@ trait DataAPIFront
             ->when($category, function ($q) use($category){
                 $q->where('location_category_id',$category);
             })
+            ->GetIntance()
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
     }
 
+    public function getShowLocation($location){
+        return Location::withoutGlobalScopes()
+            ->GetIntance()
+            ->findOrFail($location);
+    }
+
     public function getAllCategoryLocation(){
-        return LocationCategory::all();
+        return LocationCategory::withoutGlobalScopes()
+            ->withCount('locations')
+            ->GetIntance()
+            ->get();
+
+    }
+
+    public function getShowCategoryLocation($category){
+        return LocationCategory::withoutGlobalScopes()
+            ->withCount('locations')
+            ->GetIntance()
+            ->findOrFail($category);
     }
 
     /**
      * W I D G E T S
      **/
     public function getAllWidgets($search=null, $sort, $perPage=15){
-        return Widget::when($search, function ($q) use($search){
+        return Widget::withoutGlobalScopes()
+        ->when($search, function ($q) use($search){
             $q->where('titulo','like', '%'.$search.'%')
                 ->orWhere('subtitulo','like', '%'.$search.'%');
               })
+            ->GetIntance()
             ->Active()
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());

@@ -269,7 +269,8 @@ class AvisosComponent extends Component
     {
         $this->warning_category = $this->getWarningsCategoryFiltered($this->instanceSelected);
         $this->listCategoryFilter = $this->getWarningsCategoryFiltered($this->instancias);
-        $listStates = $this->getAllState();
+        $listStates = $this->getAllState($this->instancias);
+        //dd($listStates);
         $avisos = $this->getAllWarnings($this->search,$this->instancias,$this->fechaFilter,$this->categoryFilterSelected, $this->subCategoryFilterSelected,$this->stateSelected, $this->sort, $this->sortDirection);
         return view('livewire.administrator.avisos.avisos-component', compact('avisos', 'listStates'));
     }

@@ -9,12 +9,12 @@ use App\Http\Resources\Notifications\NotificationResource;
 use App\Http\Resources\Notifications\NotificationResourceCollection;
 use App\Models\CategoryNotification;
 use App\Models\Notification;
-use App\Traits\DataAPI;
+use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
 class NotificationsController extends Controller
 {
-    use DataAPI;
+    use DataAPIFront;
 
 
     public function index(Request $request){
@@ -29,8 +29,9 @@ class NotificationsController extends Controller
         return NotificationCategoryResourceCollection::make($this->getAllNotificationsCategory());
     }
 
-    public function notificationCategoryShow(CategoryNotification $categoryNotification)
+    public function notificationCategoryShow(Request $request)
     {
+        $categoryNotification = $this->getCategory($request->categoryNotification);
         return NotificationCategoryResource::make($categoryNotification);
     }
 }

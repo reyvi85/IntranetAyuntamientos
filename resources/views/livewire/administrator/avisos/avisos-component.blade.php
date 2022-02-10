@@ -6,7 +6,7 @@
             <hr>
             <nav class="nav nav-pills flex-column flex-sm-row mb-2">
                 @foreach($listStates as $state)
-                    <a class="flex-sm-fill text-sm-center nav-link" href="javascript:void(0)" wire:click="$set('stateSelected', '{{$state->id}}')"><span class="badge badge-pill badge-{{$state->color}}">{{$state->warnings_count}}</span> {{$state->name}}</a>
+                    <a class="flex-sm-fill text-sm-center nav-link" href="javascript:void(0)" wire:click="$set('stateSelected', '{{$state->id}}')"><span class="badge badge-pill badge-{{$state->color}}">{{$state->warnings->count()}}</span> {{$state->name}}</a>
                 @endforeach
                 @if (!is_null($stateSelected))
                         <a class="flex-sm-fill text-sm-center nav-link" href="javascript:void(0)" wire:click="$set('stateSelected', null)"><i class="fas fa-filter"></i> Todos</a>
@@ -54,7 +54,7 @@
             </table>
         </div>
     @else
-        <p class="text-center text-muted">No hat registros que mostrar!</p>
+        <p class="text-center text-muted">No hay registros que mostrar!</p>
     @endif
         <div class="row mt-3">
             <div class="col-md-12 d-flex justify-content-end">

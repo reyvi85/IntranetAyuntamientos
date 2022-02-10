@@ -17,19 +17,10 @@ class NotificationCategoryResource extends JsonResource
         return [
             'type'=>'category-notification',
             'id'=>(string)$this->resource->id,
-            'attributes'=>[
-                'name'=>$this->resource->name
-            ],
-            'relationships'=>[
-                'notification'=>[
-                    'links'=>[
-                        'self'=>route('api.notification.index',['category'=>$this->resource->id]),
-                    ],
-                ],
-            ],
-            'links'=>[
-                'self'=>route('api.notificationCategory.show', $this->resource->id)
-            ]
+            'name'=>$this->resource->name,
+            'link_notifications'=>route('api.notification.index',['category'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'link_self'=>route('api.notificationCategory.show', [$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'notifications_count'=>$this->resource->notifications_count
         ];
     }
 }

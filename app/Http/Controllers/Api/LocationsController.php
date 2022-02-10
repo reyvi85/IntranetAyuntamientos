@@ -10,17 +10,19 @@ use App\Http\Resources\Locations\LocationResourceCollection;
 use App\Models\Location;
 use App\Models\LocationCategory;
 use App\Traits\DataAPI;
+use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
 class LocationsController extends Controller
 {
-    use DataAPI;
+    use DataAPIFront;
 
     public function index(Request $request){
         return LocationResourceCollection::make($this->getLocations($request->search, $request->category,$request->sort, $request->perPage));
     }
 
-    public function locationShow(Location $location){
+    public function locationShow(Request $request){
+        $location = $this->getShowLocation($request->location);
         return LocationResource::make($location);
     }
 
@@ -31,7 +33,8 @@ class LocationsController extends Controller
         return LocationCategoryResourceCollection::make($this->getAllCategoryLocation());
     }
 
-    public function locationCategoryShow(LocationCategory $locationCategory){
+    public function locationCategoryShow(Request  $request){
+        $locationCategory = $this->getShowCategoryLocation($request->locationCategory);
         return LocationCategoryResource::make($locationCategory);
     }
 }

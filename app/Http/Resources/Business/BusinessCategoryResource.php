@@ -19,17 +19,9 @@ class BusinessCategoryResource extends JsonResource
             'id'=>$this->resource->id,
             'name'=>$this->resource->name,
             'slug'=>$this->resource->slug,
-            'relationships'=>[
-                'busine'=>[
-                    'links'=>[
-                        'self'=>route('api.bussinessCategory.index',['category'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
-                    ],
-                ],
-            ],
-            'links'=>[
-                'self'=>route('api.bussinessCategory.show',[$this->resource->id, 'token_inst'=>$request->token_inst]),
-            ]
-
+            'link_business'=>route('api.bussiness.index',['category'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'link_self'=>route('api.bussinessCategory.show', [$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'business_count'=>$this->resource->business_count
         ];
     }
 }

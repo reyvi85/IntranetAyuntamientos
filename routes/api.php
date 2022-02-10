@@ -40,7 +40,7 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
         Route::get('/', [AvisosController::class, 'index'])->name('api.warning.index');
         Route::post('/', [AvisosController::class, 'warningStore'])->name('api.warning.store');
         Route::get('/show/{warning}', [AvisosController::class, 'show'])->name('api.warning.show');
-        Route::get('/{id}/relationships/answer', [AvisosController::class, 'answerIndex'])->name('api.answer.index');
+        Route::get('/{id}/answer', [AvisosController::class, 'answerIndex'])->name('api.answer.index');
         Route::get('/answer/{warningAnswer}', [AvisosController::class, 'answerShow'])->name('api.answer.show');
         Route::get('/categories', [AvisosController::class, 'categoryIndex'])->name('api.category.index');
         Route::get('/categories/{warningCategory}', [AvisosController::class, 'categoryShow'])->name('api.category.show');
@@ -96,16 +96,6 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
         Route::get('/categories', [LocationsController::class, 'locationCategoryIndex'])->name('api.locationCategory.index');
         Route::get('/{location}', [LocationsController::class, 'locationShow'])->name('api.location.show');
         Route::get('categories/{locationCategory}', [LocationsController::class, 'locationCategoryShow'])->name('api.locationCategory.show');
-    });
-
-});
-/**
- * COMPONENTES
-**/
-Route::prefix('component')->middleware('checkInstance')->group(function (){
-    Route::prefix('business')->group(function (){
-        Route::get('/', [ComponentController::class, 'getBisnessComponent'])->name('api.component.business');
-        Route::get('/categories', [ComponentController::class, 'getCategoriesBusiness'])->name('api.component.bussinessCategory');
     });
 
 });

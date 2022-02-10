@@ -17,19 +17,10 @@ class WarningStateResource extends JsonResource
         return [
             'type'=>'state',
             'id'=>(string)$this->resource->id,
-            'attributes'=>[
-                'name'=>$this->resource->name
-            ],
-            'relationships'=>[
-                'warning'=>[
-                    'links'=>[
-                        'self'=>route('api.warning.index',['state'=>$this->resource->id]),
-                    ],
-                ],
-            ],
-            'meta'=>[
-                'warning_count'=>$this->resource->warnings_count
-            ]
+            'name'=>$this->resource->name,
+            'warning_filter'=>route('api.warning.index',['state'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'warning_count'=>$this->resource->warnings_count
+
         ];
     }
 }

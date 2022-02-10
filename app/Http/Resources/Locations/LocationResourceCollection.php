@@ -16,9 +16,8 @@ class LocationResourceCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
-            'meta'=>[
-                'categories'=>route('api.locationCategory.index')
-            ]
+            'categories'=>route('api.locationCategory.index', ['token_inst'=>$request->token_inst])
+
         ];
     }
 }

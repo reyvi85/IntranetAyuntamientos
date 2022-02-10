@@ -30,7 +30,8 @@ class AvisosController extends Controller
         return WarningResourceCollection::make($this->getWarnings($request->search, $request->fecha, $request->category, $request->sub_category,$request->state,$request->sort ,$request->perPage));
     }
     /** MOSTRAR AVISO **/
-    public function show(Warning $warning){
+    public function show(Request $request){
+        $warning = $this->getShowWarning($request->warning);
         return WarningResource::make($warning);
     }
     /** CREAR AVISO **/
@@ -47,7 +48,7 @@ class AvisosController extends Controller
             'image'=>$path,
             'lat'=>$request->latitud,
             'lng'=>$request->longitud,
-            'instance_id'=>$request->instance_id,
+            'instance_id'=>$request->instance,
             'warning_state_id'=>1,
             'warning_sub_category_id'=>$request->sub_categoria,
             'user_id'=>auth()->id()
@@ -63,7 +64,8 @@ class AvisosController extends Controller
     }
 
     /** VER RESPUESTAS **/
-    public function answerShow(WarningAnswer $warningAnswer){
+    public function answerShow(Request $request){
+        $warningAnswer = $this->getShowAnswersOfWarning($request->warningAnswer);
         return WarningAnswersResource::make($warningAnswer);
     }
     /** Lista de CATEGORÍAS **/
@@ -71,7 +73,8 @@ class AvisosController extends Controller
         return WarningCategoryResourceCollection::make($this->getAllWarningCategory());
     }
     /** Ver categoría **/
-    public function categoryShow(WarningCategory $warningCategory){
+    public function categoryShow(Request $request){
+        $warningCategory = $this->getWarningCategory($request->warningCategory);
         return WarningCategoryResource::make($warningCategory);
     }
 
@@ -86,6 +89,8 @@ class AvisosController extends Controller
 
     /** ESTADO DE LOS AVISOS **/
     public function stateIndex(){
+       //$a = $this->getAllWarningState();
+
         return WarningStateResourceCollection::make($this->getAllWarningState());
     }
     /** VER ESTADO**/
