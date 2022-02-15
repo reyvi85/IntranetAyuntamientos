@@ -80,7 +80,8 @@ class AvisosComponent extends Component
         $this->setConfigModal();
         $this->colors = $this->getClassColor();
         $this->listAnswers = collect();
-        $this->listSubCategoryFilter = collect();
+      //  dd('pp');
+        $this->listSubCategoryFilter = [];
         $this->setPatchToUpload('images/avisos');
     }
 
@@ -125,9 +126,13 @@ class AvisosComponent extends Component
         if ($this->categoryFilterSelected == ""){
             $this->listSubCategoryFilter = collect();
         }else{
-
             $this->listSubCategoryFilter = $this->getWarningSubCategoryFiltered($this->categoryFilterSelected);
         }
+    }
+
+    public function updatedSubCategoryFilterSelected()
+    {
+        $this->listSubCategoryFilter = $this->getWarningSubCategoryFiltered($this->categoryFilterSelected);
     }
 
     public function updatedWarningCategorySelected(){

@@ -25,7 +25,7 @@
         </select>
     </div>
 
-    @if ($listSubCategoryFilter->count())
+    @if (count($listSubCategoryFilter))
         <div class="form-group col-md-2">
             <select class="form-control" wire:model="subCategoryFilterSelected">
                 <option value="">-- Sub - categorías --</option>

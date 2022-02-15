@@ -87,6 +87,7 @@ class LocationComponent extends Component
     public function updatedCategoryFilter()
     {
       $this->resetPage();
+        $this->listCategory = $this->getAllCategoryLocation($this->instancias);
     }
 
     public function resetProps(){

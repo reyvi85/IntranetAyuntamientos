@@ -36,24 +36,24 @@ class DatabaseSeeder extends Seeder
       //  Storage::deleteDirectory('business');
        // Storage::makeDirectory('business');
 
-      /*  Community::factory(25)->create();
+        Community::factory(25)->create();
         Province::factory(50)->create();
         Instance::factory(25)->create();
         User::factory(100)->create();
         CategoryBusine::factory(25)->create();
         Busine::factory(150)->create();
-        InterestPhone::factory(500)->create();*/
-        //CategoryNotification::factory(150)->create();
-        //Notification::factory(1500)->create();
-        //LocationCategory::factory(150)->create();
-        //Location::factory(1500)->create();
+        InterestPhone::factory(500)->create();
+        CategoryNotification::factory(150)->create();
+        Notification::factory(1500)->create();
+        LocationCategory::factory(150)->create();
+        Location::factory(1500)->create();
 
-     //   WarningCategory::factory(250)->create();
-      //  WarningSubCategory::factory(1800)->create();
-       // WarningState::factory(4)->create();
-        //Warning::factory(500)->create();
-        //WarningAnswer::factory(1500)->create();
-        //Post::factory(1500)->create();
-       // Widget::factory(1500)->create();
+        WarningCategory::factory(250)->create();
+        WarningSubCategory::factory(1800)->create();
+        WarningState::factory(4)->create();
+        Warning::factory(500)->create();
+        WarningAnswer::factory(1500)->create();
+        Post::factory(1500)->create();
+        Widget::factory(1500)->create();
     }
 }

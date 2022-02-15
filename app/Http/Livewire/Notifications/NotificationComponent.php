@@ -28,8 +28,15 @@ class NotificationComponent extends Component
         'fechaPublicacion.required'=>'Es necesario escribir fecha de publicación!',
     ];
 
-    public $search, $categorySelected, $categoryFilter, $listCategory, $notificationSelected,
-        $fechaPublicacion, $titulo, $description, $categoryNotification;
+    public $search,
+        $categorySelected,
+        $categoryFilter,
+        $listCategory,
+        $notificationSelected,
+        $fechaPublicacion,
+        $titulo,
+        $description,
+        $categoryNotification;
 
     public function mount(){
         $this->checkInstanceForUser();
@@ -56,6 +63,10 @@ class NotificationComponent extends Component
     public function updatedInstanceSelected()
     {
        $this->resetErrorBag('categoryNotification');
+       $this->listCategory = $this->getAllCategoryNotifications($this->instanceSelected);
+    }
+
+    public function updatedCategoryFilter(){
         $this->listCategory = $this->getAllCategoryNotifications($this->instanceSelected);
     }
 
