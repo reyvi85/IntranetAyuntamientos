@@ -32,7 +32,7 @@ class BusinessController extends Controller
      * lista Categorias de negocios
     **/
     public function businessCategoryIndex(){
-        return BusinessCategoryResourceCollection::make($this->getAllBusinessCategory());
+        return BusinessCategoryResourceCollection::make($this->getAllBusinessCategory()->where('business_count','!=',0));
     }
 
     /**
