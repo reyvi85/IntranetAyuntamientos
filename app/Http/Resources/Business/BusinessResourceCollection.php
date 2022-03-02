@@ -17,7 +17,7 @@ class BusinessResourceCollection extends ResourceCollection
         return [
             'data'=>$this->collection,
             'meta'=>[
-                'categorias'=>route('api.bussinessCategory.index')
+                'categorias'=>route('api.bussinessCategory.index', ['token_inst'=>$request->token_inst]),
             ]
         ];
     }

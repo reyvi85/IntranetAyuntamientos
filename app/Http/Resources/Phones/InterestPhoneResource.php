@@ -15,7 +15,7 @@ class InterestPhoneResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'phone',
+           // 'type'=>'phone',
             'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
             'description'=>$this->resource->description,

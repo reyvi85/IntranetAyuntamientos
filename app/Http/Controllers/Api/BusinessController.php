@@ -19,7 +19,7 @@ class BusinessController extends Controller
      * lista de negocios
     **/
     public function index(Request $request){
-        return BusinessResourceCollection::make($this->getAllBusiness($request->search, $request->category, $request->sort, $request->perPage));
+        return BusinessResourceCollection::make($this->getAllBusiness($request->search, $request->category, $request->sort));
     }
     /**
      * Ver negocio

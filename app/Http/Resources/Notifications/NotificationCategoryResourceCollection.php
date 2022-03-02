@@ -16,10 +16,6 @@ class NotificationCategoryResourceCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
-            'meta'=>[
-                'notifications'=>route('api.notification.index'),
-                'category_count'=>$this->collection->count()
-            ]
         ];
     }
 }

@@ -15,7 +15,7 @@ class NotificationCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'category-notification',
+           // 'type'=>'category-notification',
             'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
             'link_notifications'=>route('api.notification.index',['category'=>$this->resource->id, 'token_inst'=>$request->token_inst]),

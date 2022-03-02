@@ -174,7 +174,11 @@ trait DataAPIFront
             })
             ->GetInstance()
             ->ApplySorts($sort)
-            ->paginate($perPage)->appends(request()->query());
+            ->get();
+
+
+
+           // ->paginate($perPage)->appends(request()->query());
     }
 
     public function getAllBusinessCategory(){
@@ -236,7 +240,7 @@ trait DataAPIFront
             })
             ->GetInstance()
             ->ApplySorts($sort)
-            ->paginate($perPage)->appends(request()->query());
+            ->get();
     }
 
     public function getPhone($phone){

@@ -16,9 +16,6 @@ class InterestPhoneResourceCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
-            'meta'=>[
-                'links'=>['self'=>route('api.phones.index')]
-            ]
         ];
     }
 }
