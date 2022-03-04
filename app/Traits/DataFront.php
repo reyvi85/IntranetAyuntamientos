@@ -38,7 +38,7 @@ trait DataFront
     }
 
     public function getAllCategoryBusiness($key){
-        return CategoryBusine::whereHas('business.instance', function (Builder $builder) use($key){
+        return CategoryBusine::withoutGlobalScopes()->whereHas('business.instance', function (Builder $builder) use($key){
                 $builder->where('key','like', '%'.$key.'%');
         })
         ->orderBy('name', 'asc')

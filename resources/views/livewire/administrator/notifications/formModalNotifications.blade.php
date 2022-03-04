@@ -26,7 +26,7 @@
                                     <label>Categoría:</label>
                                     <select class="form-control  @error('categoryNotification') is-invalid @enderror" wire:model="categoryNotification">
                                         <option value="">-- Categorías --</option>
-                                        @foreach($listCategory as $ctg)
+                                        @foreach($listCategoryAddUdpt as $ctg)
                                             <option value="{{$ctg->id}}">{{$ctg->name}}</option>
                                         @endforeach
                                     </select>

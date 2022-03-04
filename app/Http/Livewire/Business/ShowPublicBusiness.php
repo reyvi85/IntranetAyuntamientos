@@ -17,7 +17,7 @@ class ShowPublicBusiness extends Component
     public function mount()
     {
         $this->keyInst = request('token_inst');
-        $this->listCategoryBussiness = $this->getAllCategoryBusiness();
+        $this->listCategoryBussiness = $this->getAllCategoryBusiness($this->keyInst);
 
     }
 
