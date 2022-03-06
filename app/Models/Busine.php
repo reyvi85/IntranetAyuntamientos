@@ -46,12 +46,6 @@ class Busine extends Model
     /**
      * SCOPE
     **/
-/*
-    public function scopeGetIntance($query, $model, $key){
-        return $query->whereHas($model, function (Builder $builder) use($key){
-            $builder->where('key','like', '%'.$key.'%');
-        });
-    }*/
 
 
     protected static function boot()

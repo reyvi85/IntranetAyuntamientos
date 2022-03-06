@@ -15,8 +15,8 @@ class LocationCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'category',
-            'id'=>$this->resource->id,
+           // 'type'=>'category',
+            'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
             'image'=>url($this->resource->image),
             'link_location'=>route('api.location.index',['category'=>$this->resource->id, 'token_inst'=>$request->token_inst]),

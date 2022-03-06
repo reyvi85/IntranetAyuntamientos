@@ -2,18 +2,14 @@
 
 namespace App\Models\Traits;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Http\Request;
 trait HasInstance
 {
-    private $keyInst;
 
-    public function getKey(){
-        return $this->key = request()->token_inst;
-    }
-
-    public function scopeGetInstance($query, $model = 'instance'){
-        return $query->whereHas($model, function (Builder $builder){
-            $builder->where('key','like', '%'.$this->getKey().'%');
+    public function scopeGetInstance($query, $model = 'instance', $key=null){
+        $tk = (is_null($key))?request()->token_inst:$key;
+        return $query->whereHas($model, function (Builder $builder)use($tk){
+            $builder->where('key','like', '%'.$tk.'%');
         });
     }
 }

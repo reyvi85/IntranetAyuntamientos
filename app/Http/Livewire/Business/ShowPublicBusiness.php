@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Business;
 
+use App\Models\CategoryBusine;
 use Livewire\Component;
 use App\Traits\DataFront,
     Livewire\WithPagination;
@@ -10,14 +11,14 @@ class ShowPublicBusiness extends Component
 {
     use DataFront, WithPagination;
 
-    public $listCategoryBussiness, $search=null, $categorySelected=null, $viewList = false;
+    public $search=null, $listCategoryBussiness, $categorySelected=null, $viewList = false;
     public $keyInst;
     protected $paginationTheme = 'bootstrap';
 
     public function mount()
     {
         $this->keyInst = request('token_inst');
-        $this->listCategoryBussiness = $this->getAllCategoryBusiness($this->keyInst);
+       // $this->listCategoryBussiness = $this->getAllCategoryBusiness()->where('business_count','<>',0);
 
     }
 
@@ -25,9 +26,9 @@ class ShowPublicBusiness extends Component
         $this->resetPage();
     }
 
-    public function updatedCategorySelected(){
+    /*public function updatedCategorySelected(){
         $this->resetPage();
-    }
+    } */
 
     public function updatedViewList(){
         $this->resetPage();
@@ -45,8 +46,20 @@ class ShowPublicBusiness extends Component
 
     public function render()
     {
-        $listBusiness = $this->getBusinessPublic($this->keyInst, $this->search, $this->categorySelected, $this->sort, $this->sortDirection);
-        return view('livewire.front.show-public-business', compact('listBusiness'))
+        $keyInst = request('token_inst');
+        //$listBusiness = ;
+        return view('livewire.front.show-public-business', [
+            'listBusiness' =>$this->getBusinessPublic($this->keyInst, $this->search, $this->categorySelected),
+            //'listCategoryBussiness' =>$this->_getAllCategoryBusiness()->where('business_count','<>',0)
+
+        ])
             ->extends('layouts.appPublic');
+    }
+
+    public function getCategoriesProperty(){
+        return CategoryBusine::withCount(['business'=>function($q){
+            $q->GetInstance('instance', $this->keyInst);
+        }])
+            ->get()->where('business_count','!=',0);
     }
 }

@@ -11,8 +11,8 @@
                     <div class="form-group col-md-3">
                         <select class="form-control" wire:model="categorySelected">
                             <option value="">-- Categorías --</option>
-                            @foreach($listCategoryBussiness as $ctg)
-                                <option value="{{$ctg->id}}">{{$ctg->name}}</option>
+                            @foreach($this->categories as $ctg)
+                                <option wire:key="{{$loop->index}}" value="{{$ctg->id}}">{{$ctg->name}} ({{$ctg->business_count}})</option>
                             @endforeach
                         </select>
                     </div>
@@ -39,9 +39,8 @@
         </div>
     </div>
 
-
     <div class="row mt-3">
-        <div class="col-md-12 d-flex justify-content-end">
+        <div class="col-md-12 d-flex justify-content-center">
             {{$listBusiness->links()}}
         </div>
     </div>
