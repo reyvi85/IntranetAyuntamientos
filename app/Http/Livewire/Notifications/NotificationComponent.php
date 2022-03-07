@@ -44,7 +44,6 @@ class NotificationComponent extends Component
         $this->fechaPublicacion = date('Y-m-d H:i:s');
         $this->setConfigModal('Añadir notificación');
         $this->listCategory = $this->getAllCategoryNotifications();
-        $listCategoryAddUdpt = $this->listCategory;
         $this->resetPage();
     }
 
@@ -64,7 +63,7 @@ class NotificationComponent extends Component
 
     public function updatedInstanceSelected()
     {
-        dd($this->instanceSelected);
+       // dd($this->instanceSelected);
        $this->resetErrorBag('categoryNotification');
        $this->listCategoryAddUdpt = $this->getAllCategoryNotifications($this->instanceSelected);
     }
@@ -77,6 +76,7 @@ class NotificationComponent extends Component
     public function add(){
         $this->resetProps();
         $this->resetErrorBag();
+        $this->listCategoryAddUdpt = $this->getAllCategoryNotifications();;
         $this->setConfigModal('Añadir notificación');
     }
 
@@ -102,6 +102,7 @@ class NotificationComponent extends Component
         $this->description = $notification->description;
         $this->instanceSelected = $notification->instance_id;
         $this->categoryNotification = $notification->category_notification_id;
+        $this->listCategoryAddUdpt = $this->getAllCategoryNotifications($notification->instance_id);
     }
 
     public function update_notification(Notification $notification){
