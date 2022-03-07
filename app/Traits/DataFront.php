@@ -8,13 +8,12 @@ use App\Models\Busine;
 use App\Models\CategoryBusine;
 use App\Models\Traits\HasInstance;
 use Illuminate\Database\Eloquent\Builder;
-//use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 trait DataFront
 {
     //use HasInstance;
     public $sort = 'id', $sortDirection='desc';
-
     public function getBusinessPublic($key, $search = null, $category = null, $perPage = 10){
         return Busine::withoutGlobalScopes()->with('category_busine')
 

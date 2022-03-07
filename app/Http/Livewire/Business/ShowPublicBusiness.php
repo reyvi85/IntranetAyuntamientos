@@ -26,9 +26,9 @@ class ShowPublicBusiness extends Component
         $this->resetPage();
     }
 
-    /*public function updatedCategorySelected(){
+    public function updatedCategorySelected(){
         $this->resetPage();
-    } */
+    }
 
     public function updatedViewList(){
         $this->resetPage();
