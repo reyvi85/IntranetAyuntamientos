@@ -24,7 +24,7 @@ trait HasInstance
            $q = [];
            foreach ($onlyFields as $key){
                if (!in_array($key, $aceptField)){
-                   abort(400, "El parámetro {$key} no está permitido");
+                   abort(400, "El campo {$key} no está permitido");
                }
               $q = $query->where($key, true);
            }
