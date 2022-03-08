@@ -18,7 +18,7 @@ class LocationsController extends Controller
     use DataAPIFront;
 
     public function index(Request $request){
-        return LocationResourceCollection::make($this->getLocations($request->search, $request->category,$request->sort, $request->perPage));
+        return LocationResourceCollection::make($this->getLocations($request->search, $request->category,$request->sort, $request->perPage, $request->only));
     }
 
     public function locationShow(Request $request){

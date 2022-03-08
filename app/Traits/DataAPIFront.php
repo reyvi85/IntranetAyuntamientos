@@ -132,7 +132,7 @@ trait DataAPIFront
      *  P O S T
      **/
 
-    public function getPosts($search=null, $rangoFecha=null, $sort=null, $perPage=15){
+    public function getPosts($search=null, $rangoFecha=null, $sort=null, $perPage=15, $only=null){
             return Post::withoutGlobalScopes()
                 ->when($search, function ($q) use($search){
                 $q->where('titulo','like', '%'.$search.'%')
@@ -145,7 +145,8 @@ trait DataAPIFront
                 ->GetInstance()
                 ->ApplySorts($sort)
                ->Active()
-               ->PublishUpDate()
+                ->ForView($only)
+              // ->PublishUpDate()
                 ->paginate($perPage)->appends(request()->query());
     }
 
@@ -252,7 +253,7 @@ trait DataAPIFront
     /**
      * LOCALIZACIONES
     **/
-    public function getLocations($search = null, $category = null, $sort = null, $perPage = 15){
+    public function getLocations($search = null, $category = null, $sort = null, $perPage = 15, $only=null){
         return Location::withoutGlobalScopes()
             ->with('location_category')->withCount('location_category')
             ->when($search, function ($q) use($search){
@@ -264,6 +265,7 @@ trait DataAPIFront
                 $q->where('location_category_id',$category);
             })
             ->GetInstance()
+            ->ForView($only)
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
     }

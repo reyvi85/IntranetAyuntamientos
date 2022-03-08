@@ -22,7 +22,7 @@ class PostController extends Controller
      */
     public function index(Request $request){
        //return Post::all();
-      return PostResourceCollection::make($this->getPosts($request->search, $request->fecha, $request->sort, $request->perPage));
+      return PostResourceCollection::make($this->getPosts($request->search, $request->fecha, $request->sort, $request->perPage, $request->only));
 
     }
 
