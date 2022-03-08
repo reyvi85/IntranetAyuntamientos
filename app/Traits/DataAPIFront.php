@@ -144,9 +144,9 @@ trait DataAPIFront
                 })
                 ->GetInstance()
                 ->ApplySorts($sort)
-               ->Active()
+                ->Active()
                 ->ForView($only)
-              // ->PublishUpDate()
+                ->PublishUpDate()
                 ->paginate($perPage)->appends(request()->query());
     }
 
