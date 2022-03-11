@@ -26,7 +26,7 @@ class CategoryLocationComponent extends Component
     public function mount(){
         $this->setConfigModal();
         $this->checkInstanceForUser();
-        $this->setPatchToUpload('images\categorias-localizaciones');
+        $this->setPatchToUpload('images/categorias-localizaciones');
     }
 
     public function resetProps(){
