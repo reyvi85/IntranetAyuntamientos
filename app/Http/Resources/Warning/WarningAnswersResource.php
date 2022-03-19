@@ -15,7 +15,6 @@ class WarningAnswersResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'answer',
             'id'=>(string)$this->resource->id,
             'respuesta'=>$this->resource->answer,
             'link_self'=>route('api.answer.show', ['warningAnswer'=>$this->resource->id, 'token_inst'=>$request->token_inst]),

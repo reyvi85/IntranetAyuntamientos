@@ -15,7 +15,6 @@ class WarningSubCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'sub-category',
             'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
             'link_self'=>route('api.subcategory.show', [$this->resource->id, 'token_inst'=>$request->token_inst]),

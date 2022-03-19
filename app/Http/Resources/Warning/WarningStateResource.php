@@ -15,7 +15,6 @@ class WarningStateResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'state',
             'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
             'warning_filter'=>route('api.warning.index',['state'=>$this->resource->id, 'token_inst'=>$request->token_inst]),

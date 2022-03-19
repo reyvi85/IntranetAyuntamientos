@@ -15,7 +15,6 @@ class WarningCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'category',
             'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
             'link_self'=>route('api.category.show', [$this->resource->id, 'token_inst'=>$request->token_inst]),
