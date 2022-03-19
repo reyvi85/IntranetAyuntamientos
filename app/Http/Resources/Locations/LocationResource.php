@@ -28,6 +28,7 @@ class LocationResource extends JsonResource
             'inicio'=>($this->resource->inicio)?true:false,
             'latitud'=>$this->resource->lat,
             'longitud'=>$this->resource->lng,
+            'latlng'=>$this->resource->GeoLocate,
             'category_id'=>$this->resource->location_category->id,
             'category_name'=>$this->resource->location_category->name,
             'link_category'=>route('api.locationCategory.show', [$this->resource->location_category_id, 'token_inst'=>$request->token_inst]),
