@@ -16,12 +16,12 @@ class WarningCategoryResourceCollection extends ResourceCollection
     {
         return [
             'data'=>$this->collection,
-            'links'=>[
+         /*   'links'=>[
                 'self'=>route('api.category.index', ['token_inst'=>$request->token_inst]),
             ],
             'meta'=>[
                 'category_count'=>$this->collection->count()
-            ]
+            ]*/
         ];
     }
 }

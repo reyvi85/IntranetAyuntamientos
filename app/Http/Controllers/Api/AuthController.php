@@ -28,9 +28,8 @@ class AuthController extends Controller
 
         return response()->json([
             'logged'=>true,
-            'access_token'=>$token,
-            'type'=>'Bearer'
-        ]);
+            'access_token'=>$token
+        ], 201);
     }
 
     /**
@@ -50,7 +49,6 @@ class AuthController extends Controller
         return response()->json([
             'logged'=>true,
             'access_token'=>$token,
-            'type'=>'Bearer'
         ]);
     }
 

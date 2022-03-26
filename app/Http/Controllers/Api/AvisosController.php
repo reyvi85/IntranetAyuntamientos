@@ -85,6 +85,12 @@ class AvisosController extends Controller
         $warningCategory = $this->getWarningSubCategories($request->warningCategory);
         return WarningSubCategoryResourceCollection::make($warningCategory->sub_categories);
     }
+    /** TODAS LAS SUBCATEGORIAS**/
+
+    public function allSubCategories(){
+        return WarningSubCategoryResourceCollection::make($this->getAllSubCategoryWarning());
+    }
+
     /** VER SUB - CATEGORÍAS **/
     public function subCategoryShow(Request $request)
     {

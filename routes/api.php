@@ -42,6 +42,7 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
         Route::get('/show/{warning}', [AvisosController::class, 'show'])->name('api.warning.show');
         Route::get('/{id}/answer', [AvisosController::class, 'answerIndex'])->name('api.answer.index');
         Route::get('/answer/{warningAnswer}', [AvisosController::class, 'answerShow'])->name('api.answer.show');
+        Route::get('/categories/uper/', [AvisosController::class, 'allSubCategories'])->name('api.subcategory.all');
         Route::get('/categories', [AvisosController::class, 'categoryIndex'])->name('api.category.index');
         Route::get('/categories/{warningCategory}', [AvisosController::class, 'categoryShow'])->name('api.category.show');
         Route::get('/categories/{warningCategory}/subcategories', [AvisosController::class, 'subCategoryIndex'])->name('api.subcategory.index');

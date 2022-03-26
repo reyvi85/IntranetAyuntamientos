@@ -17,9 +17,10 @@ class WarningCategoryResource extends JsonResource
         return [
             'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
-            'link_self'=>route('api.category.show', [$this->resource->id, 'token_inst'=>$request->token_inst]),
-            'links_sub_category'=>route('api.subcategory.index', [$this->resource->id, 'token_inst'=>$request->token_inst]),
-            'sub-category-count'=>$this->resource->sub_categories_count,
+           // 'link_self'=>route('api.category.show', [$this->resource->id, 'token_inst'=>$request->token_inst]),
+           // 'links_sub_category'=>route('api.subcategory.index', [$this->resource->id, 'token_inst'=>$request->token_inst]),
+            'sub-category-count'=>(string)$this->resource->sub_categories_count,
+            'sub_categories'=>WarningSubCategoryResourceCollection::make($this->resource->sub_categories)
         ];
     }
 }

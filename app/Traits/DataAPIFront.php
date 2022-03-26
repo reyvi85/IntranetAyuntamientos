@@ -116,6 +116,12 @@ trait DataAPIFront
                 ->findOrFail($subcategory);
     }
 
+    public function getAllSubCategoryWarning(){
+        return WarningSubCategory::withoutGlobalScopes()
+            ->GetInstance('warning_category.instance')
+            ->get();
+    }
+
     public function getAllWarningState(){
         return WarningState::withCount(['warnings'=>function ($q){
             $q->GetInstance();

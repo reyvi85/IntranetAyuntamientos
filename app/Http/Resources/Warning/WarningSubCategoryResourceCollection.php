@@ -17,7 +17,7 @@ class WarningSubCategoryResourceCollection extends ResourceCollection
 
         return [
             'data'=>$this->collection,
-            'sub_categories_count'=>(string)$this->collection->count(),
+           // 'sub_categories_count'=>(string)$this->collection->count(),
         ];
     }
 }
