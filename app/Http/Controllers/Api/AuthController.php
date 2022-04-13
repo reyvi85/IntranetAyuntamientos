@@ -29,8 +29,7 @@ class AuthController extends Controller
         return response()->json([
             'logged'=>true,
             'access_token'=>$token,
-            'message'=>'Registro completado con éxito!',
-             'user'=>$user
+            'message'=>'Registro completado con éxito!'
         ], 201);
     }
 
@@ -44,8 +43,7 @@ class AuthController extends Controller
             return response()->json([
                 'logged'=>false,
                 'access_token'=>null,
-                'message'=>'Credenciales inválidas',
-                'user'=>[]
+                'message'=>'Credenciales inválidas'
             ],401);
         }
         $user =User::where('email', $request->email)->firstOrFail();
@@ -54,7 +52,6 @@ class AuthController extends Controller
             'logged'=>true,
             'access_token'=>$token,
             'message'=>'Bienvenido '.$user->name,
-            'user'=>$user
 
         ]);
     }
