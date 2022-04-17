@@ -110,6 +110,14 @@ trait DataAPIFront
             ->findOrFail($category);
     }
 
+    public function getWarningSubCategoriesSinClasificar()
+    {
+        return WarningSubCategory::withoutGlobalScopes()
+            ->where('name', 'like', '%Sin clasificar%')
+            ->GetInstance('warning_category.instance')
+            ->first();
+    }
+
     public function getShowSubCategoryWarning($subcategory){
         return WarningSubCategory::withoutGlobalScopes()
                 ->GetInstance('warning_category.instance')
@@ -152,7 +160,7 @@ trait DataAPIFront
                 ->ApplySorts($sort)
                 ->Active()
                 ->ForView($only)
-                ->PublishUpDate()
+             //   ->PublishUpDate()
                 ->paginate($perPage)->appends(request()->query());
     }
 

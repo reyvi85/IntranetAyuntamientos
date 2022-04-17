@@ -36,6 +36,7 @@ class AvisosController extends Controller
     }
     /** CREAR AVISO **/
     public function warningStore(WarningStoreRequest $request){
+
         if ($request->has('image')){
             $path = $request->image->store('images/avisos', 'public');
         }else{
@@ -48,13 +49,13 @@ class AvisosController extends Controller
             'image'=>$path,
             'lat'=>$request->latitud,
             'lng'=>$request->longitud,
-            'instance_id'=>$request->instance,
+            'instance_id'=>auth()->user()->instance_id,
             'warning_state_id'=>1,
-            'warning_sub_category_id'=>$request->sub_categoria,
+            'warning_sub_category_id'=> $this->getWarningSubCategoriesSinClasificar()->id,
             'user_id'=>auth()->id()
         ]);
         if ($store){
-            return response()->json(['message'=>'Se creó el aviso con éxito!'], 200);
+            return response()->json(['message'=>'Se creó el aviso con éxito!'], 201);
         }
     }
 

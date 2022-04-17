@@ -50,6 +50,10 @@ class Warning extends Model
         return $this->hasMany(WarningAnswer::class);
     }
 
+    public function scopeForUser($query){
+        return $query->where('user_id', auth()->id());
+    }
+
     public function getGeoLocateAttribute()
     {
         return $this->lat.",".$this->lng;

@@ -38,8 +38,10 @@
                             <td>{{$ctg->name}}</td>
                             <td class="text-center">{{$ctg->sub_categories_count}}</td>
                             <td class="align-middle text-center">
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="editCategory({{$ctg->id}})" title="Editar"><i class="fas fa-edit"></i></a>
-                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trashCategory({{$ctg->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
+                                @if ($ctg->name != "Sin clasificar")
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="editCategory({{$ctg->id}})" title="Editar"><i class="fas fa-edit"></i></a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trashCategory({{$ctg->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
+                                @endif
                             </td>
 
                             <td class="align-middle">
@@ -55,8 +57,10 @@
                                         <td></td>
                                         <td colspan="2"><i class="fas fa-caret-right"></i> {{$sb->name}}</td>
                                         <td class="align-middle text-right">
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="editSubCategory({{$sb->id}})" title="Editar"><i class="fas fa-edit"></i></a>
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trashSubCategory({{$sb->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
+                                            @if ($sb->name != "Sin clasificar")
+                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="editSubCategory({{$sb->id}})" title="Editar"><i class="fas fa-edit"></i></a>
+                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trashSubCategory({{$sb->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>
+                                            @endif
                                         </td>
                                         <td class="align-middle text-right w-25"></td>
                                     </tr>

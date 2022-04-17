@@ -124,7 +124,7 @@ class InstanciasComponent extends Component
     public function storeInstance(){
         $this->validate();
 
-       Instance::create([
+       $inst = Instance::create([
            'name'=>$this->name,
            'province_id'=>$this->selectedProvince ,
            'municipio'=>$this->municipio,
@@ -134,6 +134,11 @@ class InstanciasComponent extends Component
            'modulos'=>$this->addPermission(),
            'lat'=>$this->lat,
            'lng'=>$this->lng
+       ]);
+       $inst->warning_categories()->create([
+           'name'=>'Sin clasificar'
+       ])->sub_categories()->create([
+           'name'=>'Sin clasificar'
        ]);
         $this->resetProps();
         $this->emit('saveModal');

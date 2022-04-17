@@ -58,8 +58,8 @@ class Post extends Model
 
     public function scopePublishUpDate($query){
         $today = date('Y-m-d');
-         return $query->whereDate('fecha_inicio', '<=', $today)
-                        ->whereDate('fecha_fin','>', $today);
+            return $query->whereDate('fecha_inicio', '<=', $today)
+                ->whereDate('fecha_fin','>', $today);
     }
 
     protected static function boot()

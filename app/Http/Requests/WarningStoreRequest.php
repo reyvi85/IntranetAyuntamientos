@@ -30,7 +30,7 @@ class WarningStoreRequest extends FormRequest
             'image'=>'nullable|image|max:3072',
             'latitud'=>'required',
             'longitud'=>'required',
-            'sub_categoria'=>'required|in:'.auth()->user()->instance->warning_sub_categories->pluck('id')->implode(','),
+          //  'sub_categoria'=>'required|in:'.auth()->user()->instance->warning_sub_categories->pluck('id')->implode(','),
         ];
     }
 }
