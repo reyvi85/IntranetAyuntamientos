@@ -15,8 +15,8 @@ class WarningAnswersResourceCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data'=>$this->collection,
-            'answers_count'=>$this->collection->count()
+            $this->collection,
+           // 'answers_count'=>$this->collection->count()
         ];
     }
 }

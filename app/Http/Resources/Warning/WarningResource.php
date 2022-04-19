@@ -29,8 +29,9 @@ class WarningResource extends JsonResource
             'sub_categoria'=>$this->resource->warning_sub_category->name,
             'estado'=>$this->resource->warning_state->name,
             'fecha'=>date('Y-m-d', strtotime($this->resource->created_at)),
+            'answers_count'=>$this->resource->warning_answers->count(),
             'answers'=>WarningAnswersResourceCollection::make($this->resource->warning_answers),
-            'link_self'=>route('api.warning.show', [$this->resource->id, 'token_inst'=>$request->token_inst])
+           // 'link_self'=>route('api.warning.show', [$this->resource->id, 'token_inst'=>$request->token_inst])
         ];
     }
 }
