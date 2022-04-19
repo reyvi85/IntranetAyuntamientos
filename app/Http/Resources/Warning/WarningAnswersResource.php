@@ -17,7 +17,7 @@ class WarningAnswersResource extends JsonResource
         return [
             'id'=>(string)$this->resource->id,
             'respuesta'=>$this->resource->answer,
-            'fecha'=>date('Y-m-d', strtotime($this->resource->created_at)),
+            'fecha'=>date('Y-m-d H:m', strtotime($this->resource->created_at)),
            // 'link_self'=>route('api.answer.show', ['warningAnswer'=>$this->resource->id, 'token_inst'=>$request->token_inst]),
         ];
     }
