@@ -37,7 +37,7 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
      * AVISOS
     **/
     Route::prefix('warnings')->group(function (){
-        Route::get('/', [AvisosController::class, 'index'])->name('api.warning.index');
+        Route::get('/', [AvisosController::class, 'index'])->name('api.warning.index')->middleware('auth:sanctum');
         Route::post('/warningStore', [AvisosController::class, 'warningStore'])->name('api.warning.store')->middleware('auth:sanctum');
         Route::get('/show/{warning}', [AvisosController::class, 'show'])->name('api.warning.show');
         Route::get('/{id}/answer', [AvisosController::class, 'answerIndex'])->name('api.answer.index');
