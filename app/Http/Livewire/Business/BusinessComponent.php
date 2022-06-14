@@ -46,7 +46,7 @@ class BusinessComponent extends Component
                 'email'=>'nullable|email',
                 'description'=>'required',
                 'urlWeb'=>'required|url',
-                'logo'=>'nullable|image|max:1024',
+                'logo'=>'nullable|image|max:1024|mimes:jpg,png',
                 'category_busine'=>'required',
                 'instanceSelected'=>'required',
             ];
