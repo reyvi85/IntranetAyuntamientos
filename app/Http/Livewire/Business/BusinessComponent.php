@@ -55,7 +55,8 @@ class BusinessComponent extends Component
     protected function messages(){
         return [
             'category_busine.required'=>'Debe seleccionar una categoría!',
-            'instanceSelected.required'=>'Debe seleccionar una instancia!'
+            'instanceSelected.required'=>'Debe seleccionar una instancia!',
+            'logo.mimes'=>'Debe seleccionar una imagen JPG o PNG!'
         ];
     }
 
