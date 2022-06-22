@@ -135,7 +135,7 @@ class BusinessComponent extends Component
         $this->validate();
         if($this->logo){
             Storage::disk('public')->delete($busine->logo);
-            $img = $this->logo->store('images\business', 'public');
+            $img = $this->logo->store('images/business', 'public');
         }else{
             $img = $busine->logo;
         }
