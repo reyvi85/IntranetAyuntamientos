@@ -62,7 +62,7 @@ trait DataAPIFront
             ->GetInstance()
             ->ForUser()
             ->ApplySorts($sort)
-            ->paginate($perPage)->appends(request()->query());
+            ->get(); //paginate($perPage)->appends(request()->query());
     }
 
     public function getShowWarning($warning){
