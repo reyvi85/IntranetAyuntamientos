@@ -21,7 +21,7 @@ class WarningResource extends JsonResource
             'asunto'=>$this->resource->asunto,
             'description'=>$this->resource->description,
             'ubicacion'=>$this->resource->ubicacion,
-            'image'=>(empty($this->resource->image))?null:url($this->resource->image),
+            'image'=>(empty($this->resource->image))?url("images/no-image.png"):url($this->resource->image),
             'latitud'=>$this->resource->lat,
             'longitud'=>$this->resource->lng,
             'latlng'=>$this->resource->GeoLocate,
