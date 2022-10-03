@@ -101,7 +101,7 @@ trait DataModels {
      * @param $direction
      * @return array|Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Traits\Conditionable[]
      */
-    public function getComunidades($search = null, $sort, $direction){
+    public function getComunidades($search = null, $sort='id', $direction='desc'){
         return Community::with('provincias')
             ->when($search, function ($q) use ($search){
                  $q->where('name', 'like', '%'.$search.'%');
@@ -200,7 +200,7 @@ trait DataModels {
      * Categorías de negocios
     **/
 
-    public function getCategoryBusiness($search = null, $sort, $direction = 'desc'){
+    public function getCategoryBusiness($search = null, $sort='id', $direction = 'desc'){
         return CategoryBusine::withCount('business')
             ->when($search, function ($q) use ($search){
                 $q->where('name', 'like', '%'.$search.'%');
@@ -238,7 +238,7 @@ trait DataModels {
             ->paginate();
     }
 
-    public function getAllPhone($search = null, $instancia=null, $sort, $direction){
+    public function getAllPhone($search = null, $instancia=null, $sort='id', $direction='desc'){
         return InterestPhone::when($search, function ($q) use($search){
             $q->where('name','like','%'.$search.'%')
                 ->orWhere('description','like','%'.$search.'%')
@@ -252,7 +252,7 @@ trait DataModels {
     /**
      * NOtificaciones
     **/
-    public function getCategoryNotification($search = null, $instancia=null, $sort, $direction){
+    public function getCategoryNotification($search = null, $instancia=null,$sort='id', $direction='desc'){
         return CategoryNotification::withCount('notifications')
             ->when($search, function ($q) use($search){
                     $q->where('name','like','%'.$search.'%');
@@ -274,7 +274,7 @@ trait DataModels {
             ->get();
     }
 
-    public function getAllNotifications($search = null,  $instancia=null, $category = null, $sort, $direction){
+    public function getAllNotifications($search = null,  $instancia=null, $category = null, $sort='id', $direction='desc'){
         $notifications = Notification::when($search, function ($q) use($search){
                 $q->where('titulo','like','%'.$search.'%');
             })
@@ -374,7 +374,7 @@ trait DataModels {
 
     }
 
-    public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $category = null, $subCategory = null , $estado=null, $sort, $direction){
+    public function getAllWarnings($search=null, $instancia = null, $rangoFecha=null, $category = null, $subCategory = null , $estado=null, $sort='id', $direction='desc'){
       return Warning::with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
             ->withCount('warning_answers')
             ->when($search, function ($q) use($search){
@@ -429,7 +429,7 @@ trait DataModels {
     /**
      * W I D G E T S
     **/
-    public function getAllWidgets($search=null, $instancia = null, $sort, $direction){
+    public function getAllWidgets($search=null, $instancia = null, $sort='id', $direction='desc'){
         return Widget::when($search, function ($q) use($search){
             $q->where('titulo','like', '%'.$search.'%')
                 ->orWhere('subtitulo','like', '%'.$search.'%');

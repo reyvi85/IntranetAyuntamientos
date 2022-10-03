@@ -59,6 +59,8 @@ trait Helper {
             ['id'=>6,'modulo'=>'Directorio telefónico', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones', 'imagen'=>'telefonos.jpg'],
             ['id'=>7,'modulo'=>'Localizaciones', 'icon'=>'fa-map-marker-alt', 'routeName'=>'gestion.localizaciones', 'imagen'=>'localizaciones.jpg'],
             ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cogs', 'routeName'=>'home', 'imagen'=>'dashboard.jpg'],
+            ['id'=>9,'modulo'=>'Eventos', 'icon'=>'fa-cogs', 'routeName'=>'home', 'imagen'=>'dashboard.jpg'],
+            ['id'=>10,'modulo'=>'Turismo', 'icon'=>'fa-cogs', 'routeName'=>'home', 'imagen'=>'dashboard.jpg'],
         ]);
     }
 
