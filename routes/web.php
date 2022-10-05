@@ -88,6 +88,10 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
             return view('livewire.administrator.avisos.index');
         })->name('gestion.avisos');
 
+        Route::get('/events', function(){
+            return view('livewire.administrator.events.index');
+        })->name('gestion.events');
+
     });
 
 
@@ -102,7 +106,6 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
 /** Componentes **/
 Route::prefix('component')->middleware('checkInstance')->group(function (){
       Route::get('/business', ShowPublicBusiness::class)->name('business.show');
-
 });
 
 Auth::routes();
