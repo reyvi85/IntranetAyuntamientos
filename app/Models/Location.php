@@ -19,6 +19,7 @@ class Location extends Model
         'telefono',
         'web',
         'image',
+        'email',
         'visitantes',
         'residentes',
         'inicio',

@@ -75,6 +75,14 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group">
+                                <label for="web">Email:</label>
+                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="web" wire:model.defer="email" placeholder="example@domain.com">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                @enderror
+                            </div>
+
 
                                 <div class="form-inline d-flex justify-content-center">
                                     <div class="custom-control custom-checkbox my-1 mr-sm-2">

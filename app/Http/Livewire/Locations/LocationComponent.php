@@ -21,6 +21,7 @@ class LocationComponent extends Component
         $telefono,
         $web,
         $image,
+        $email,
         $imageLocation,
         $visitantes = false,
         $residentes = false,
@@ -38,6 +39,7 @@ class LocationComponent extends Component
         'telefono'=>'required',
         'web'=>'nullable|url',
         'image'=>'required|image|max:1024',
+        'email'=>'nullable|email',
         'categorySelected'=>'required',
         'instanceSelected'=>'required',
     ];
@@ -91,7 +93,7 @@ class LocationComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name', 'description', 'ubicacion', 'telefono', 'web', 'image', 'imageLocation', 'visitantes', 'categorySelected', 'residentes', 'inicio', 'modalModeDestroy']);
+        $this->reset(['name', 'description', 'ubicacion', 'telefono', 'web', 'image', 'email','imageLocation', 'visitantes', 'categorySelected', 'residentes', 'inicio', 'modalModeDestroy']);
         $this->resetErrorBag();
     }
 
@@ -114,6 +116,7 @@ class LocationComponent extends Component
             'telefono'=>$this->telefono,
             'web'=>$this->web,
             'image'=>$img,
+            'email'=>$this->email,
             'visitantes'=>$this->visitantes,
             'residentes'=>$this->residentes,
             'inicio'=>$this->inicio,
@@ -136,6 +139,7 @@ class LocationComponent extends Component
         $this->ubicacion = $location->ubicacion;
         $this->telefono = $location->telefono;
         $this->web = $location->web;
+        $this->email= $location->email;
         $this->imageLocation = $location->image;
         $this->visitantes = $location->visitantes;
         $this->residentes = $location->residentes;
@@ -154,6 +158,7 @@ class LocationComponent extends Component
             'ubicacion'=>'required',
             'telefono'=>'required',
             'web'=>'nullable|url',
+            'email'=>'nullable|email',
             'image'=>'nullable|image|max:1024',
             'categorySelected'=>'required',
             'instanceSelected'=>'required',
@@ -171,6 +176,7 @@ class LocationComponent extends Component
             'telefono'=>$this->telefono,
             'web'=>$this->web,
             'image'=>$img,
+            'email'=>$this->email,
             'visitantes'=>$this->visitantes,
             'residentes'=>$this->residentes,
             'inicio'=>$this->inicio,
