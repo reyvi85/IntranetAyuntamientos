@@ -10011,3 +10011,9 @@ h3 {
     overflow-y: scroll;
 }
 
+.horizontal-Scroll{
+    height: 200px;
+    width: 100%;
+    overflow-x: scroll;
+}
+

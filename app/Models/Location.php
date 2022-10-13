@@ -44,6 +44,10 @@ class Location extends Model
         return $this->belongsTo(LocationCategory::class);
     }
 
+    public function gallery(){
+        return $this->hasMany(LocationGallery::class);
+    }
+
     public function getGeoLocateAttribute()
     {
         return $this->lat.",".$this->lng;

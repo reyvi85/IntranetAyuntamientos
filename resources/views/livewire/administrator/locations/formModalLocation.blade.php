@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div wire:ignore.self class="modal fade" id="modalFormLocation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fas {{$modalConfig['icon']}}"></i> {{$modalConfig['titulo']}}</h5>
@@ -13,7 +13,7 @@
                     <h3 class="text-center"> Confirma realmente que desea eliminar esta localización<br> <span class="text-danger font-weight-bolder">{{$name}}</span>?</h3>
                 @else
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 @php($label = true)
                                 @php($ModelName = 'instanceSelected')
@@ -101,30 +101,40 @@
 
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Imagen:</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFileLang" lang="es" wire:model="image">
-                                    <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                                    @error('image')
-                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group text-center">
-                                <div class="text-center text-muted align-middle" wire:loading.grid wire:target="image">
-                                    <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
-                                </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Imagen principal:</label>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFileLang" lang="es" wire:model="image">
+                                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                            @error('image')
+                                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <div class="text-center text-muted align-middle" wire:loading.grid wire:target="image">
+                                            <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
+                                        </div>
 
-                                @if ($image)
-                                    <img class="img-fluid img-thumbnail rounded" src="{{ $image->temporaryUrl() }}">
-                                @elseif(!is_null($imageLocation))
-                                    <img class="img-fluid img-thumbnail rounded" src="{{asset($imageLocation)}}">
-                                @endif
+                                        @if ($image)
+                                            <img class="img-fluid img-thumbnail rounded" src="{{ $image->temporaryUrl() }}">
+                                        @elseif(!is_null($imageLocation))
+                                            <img class="img-fluid img-thumbnail rounded" src="{{asset($imageLocation)}}">
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Geolocalización:</label>
+                                    @include('component.mapGoogle')
+                                </div>
                             </div>
-                            <div class="form-group">
-                                @include('component.mapGoogle')
+
+
+                            <div class="row mt-3">
+                                @livewire('locations.image-gallery-component')
                             </div>
                         </div>
 

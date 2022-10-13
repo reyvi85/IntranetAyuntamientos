@@ -26,7 +26,7 @@
                                             <img src="{{asset('images/'.$item['imagen'])}}" class="card-img-top" alt="{{$item['modulo']}}">
                                             <div class="card-body">
                                                 <h5 class="card-title text-center font-weight-bold">{{$item['modulo']}}</h5>
-                                                <p class="card-text text-center"><i class="fas {{$item['icon']}} fa-4x"></i></p>
+                                                <!-- <p class="card-text text-center"><i class="fas {{$item['icon']}} fa-4x"></i></p> -->
                                             </div>
                                             </a>
                                         </div>

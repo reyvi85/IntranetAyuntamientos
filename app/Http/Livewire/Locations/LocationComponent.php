@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Locations;
 
 use App\Models\Location;
+use App\Models\LocationGallery;
 use App\Traits\DataModels;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -21,6 +22,7 @@ class LocationComponent extends Component
         $telefono,
         $web,
         $image,
+        $imageGallery = [],
         $email,
         $imageLocation,
         $visitantes = false,
@@ -39,6 +41,7 @@ class LocationComponent extends Component
         'telefono'=>'required',
         'web'=>'nullable|url',
         'image'=>'required|image|max:1024',
+        'imageGallery.*' => 'nullable|image', // 1MB Max
         'email'=>'nullable|email',
         'categorySelected'=>'required',
         'instanceSelected'=>'required',
@@ -58,6 +61,7 @@ class LocationComponent extends Component
         $this->listCategory = $this->getAllCategoryLocation($this->instancias);
         $this->listCategoryForAdd = $this->listCategory;
         $this->setPatchToUpload('images/localizaciones');
+
     }
 
     public function getLatitudeForInput($value)
@@ -93,7 +97,7 @@ class LocationComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['name', 'description', 'ubicacion', 'telefono', 'web', 'image', 'email','imageLocation', 'visitantes', 'categorySelected', 'residentes', 'inicio', 'modalModeDestroy']);
+        $this->reset(['name', 'description', 'ubicacion', 'telefono', 'web', 'image', 'email','imageLocation', 'visitantes', 'categorySelected', 'residentes', 'inicio', 'modalModeDestroy', 'locationSelected', 'imageGallery']);
         $this->resetErrorBag();
     }
 
@@ -103,13 +107,14 @@ class LocationComponent extends Component
         if(auth()->user()->rol =='Super-Administrador'){
             $this->reset('instanceSelected');
         }
+        $this->emit('resetGallery');
         $this->emit('initMap', config('maps.lat_default'), config('maps.lng_default'));
     }
 
     public function store(){
         $this->validate();
         $img = $this->image->store($this->getPatchToUpload(), 'public');
-        Location::create([
+        $location = Location::create([
             'name'=>$this->name,
             'description'=>$this->description,
             'ubicacion'=>$this->ubicacion,
@@ -125,15 +130,27 @@ class LocationComponent extends Component
             'lat'=>$this->lat,
             'lng'=>$this->lng
         ]);
+
+        /*foreach ($this->imageGallery as $image){
+            $gImage = $image->store($this->getPatchToUpload().'/galeria', 'public');
+            $location->gallery()->create([
+                'image'=>$gImage
+            ]);
+        }*/
+        //$this->_createGellery($location);
+        $this->emit('addImage', $location);
+
         $this->emit('saveModal');
         $this->resetProps();
     }
+
+
 
     public function edit(Location $location){
         $this->resetProps();
        // $this->updatedInstanceSelected();
         $this->setConfigModal('Editar', 'fa-edit', 'edit');
-        $this->locationSelected = $location->id;
+        $this->locationSelected = $location;
         $this->name = $location->name;
         $this->description = $location->description;
         $this->ubicacion = $location->ubicacion;
@@ -148,6 +165,7 @@ class LocationComponent extends Component
         $this->categorySelected = $location->location_category_id;
         $this->lat = (is_null($location->lat)?config('maps.lat_default'):$location->lat);
         $this->lng = (is_null($location->lng)?config('maps.lng_default'):$location->lng);
+        $this->emit('addImage', $location);
         $this->emit('initMap', $this->lat, $this->lng);
     }
 
@@ -186,6 +204,8 @@ class LocationComponent extends Component
             'lng'=>$this->lng
         ])->save();
 
+       // $this->_createGellery($location);
+        $this->emit('addImage', $location);
         $this->emit('saveModal');
         $this->resetProps();
     }
@@ -203,6 +223,8 @@ class LocationComponent extends Component
         $this->emit('saveModal');
         $this->resetProps();
     }
+
+
 
 
     public function render()
