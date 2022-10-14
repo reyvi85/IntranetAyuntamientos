@@ -14,6 +14,7 @@ class LocationResource extends JsonResource
      */
     public function toArray($request)
     {
+      //  dd($this->resource->gallery);
         return [
             //'type'=>'location',
             'id'=>(string)$this->resource->id,
@@ -23,6 +24,7 @@ class LocationResource extends JsonResource
             'telefono'=>$this->resource->telefono,
             'web'=>$this->resource->web,
             'image'=>url($this->resource->image),
+            'gallery'=>LocationGalleryResourceCollection::make($this->resource->gallery),
             'visitantes'=>($this->resource->visitantes)?true:false,
             'residentes'=>($this->resource->residentes)?true:false,
             'inicio'=>($this->resource->inicio)?true:false,

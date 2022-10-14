@@ -107,7 +107,7 @@
                                     <div class="form-group">
                                         <label>Imagen principal:</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFileLang" lang="es" wire:model="image">
+                                            <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFileLang" lang="es" wire:model="image" accept=".png, .jpg, .jpeg">
                                             <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
                                             @error('image')
                                             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>

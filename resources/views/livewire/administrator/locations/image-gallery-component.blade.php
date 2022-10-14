@@ -1,7 +1,7 @@
     <div class="col-md-12">
         <h5><i class="fas fa-images"></i> Galería de imagenes</h5>
         <div class="custom-file">
-            <input type="file" class="custom-file-input @error('imageGallery') is-invalid @enderror" id="customFileLang" lang="es" wire:model="imageGallery" multiple>
+            <input type="file" class="custom-file-input @error('imageGallery') is-invalid @enderror" id="customFileLang" lang="es" wire:model="imageGallery" multiple accept=".png, .jpg, .jpeg">
             <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
             @error('imageGallery.*')
             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
