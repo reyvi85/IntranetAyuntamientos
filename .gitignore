@@ -6,6 +6,7 @@
 /public/images/localizaciones/*
 /public/images/avisos/*
 /public/images/widgets/*
+/public/images/events/*
 /storage/*.key
 /vendor
 .env

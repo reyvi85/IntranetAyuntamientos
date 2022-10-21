@@ -5,6 +5,7 @@ use App\Models\Busine;
 use App\Models\CategoryBusine;
 use App\Models\CategoryNotification;
 use App\Models\Community;
+use App\Models\Event;
 use App\Models\Instance;
 use App\Models\InterestPhone;
 use App\Models\Location;
@@ -433,6 +434,24 @@ trait DataModels {
         return Widget::when($search, function ($q) use($search){
             $q->where('titulo','like', '%'.$search.'%')
                 ->orWhere('subtitulo','like', '%'.$search.'%');
+            })
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
+            ->orderBy($sort, $direction)
+            ->paginate();
+    }
+
+/**
+     * EVENTS
+    **/
+    public function getAllEvents($search=null, $instancia = null, $sort='id', $direction='desc'){
+        return Event::when($search, function ($q) use($search){
+            $q->where('titulo','like', '%'.$search.'%')
+                ->orWhere('description','like', '%'.$search.'%')
+            ->orWhere('f_inicio','like', '%'.$search.'%')
+            ->orWhere('f_fin','like', '%'.$search.'%');
+
             })
             ->when($instancia, function ($q) use($instancia){
                 $q->where('instance_id',$instancia);

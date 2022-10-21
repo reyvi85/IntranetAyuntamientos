@@ -4,7 +4,7 @@
     <div class="col-md-12">
         @component('component.card')
             @slot('titulo')Eventos @endslot
-
+                @livewire('events.events-component')
         @endcomponent
     </div>
 @endsection

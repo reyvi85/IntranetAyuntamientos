@@ -131,13 +131,6 @@ class LocationComponent extends Component
             'lng'=>$this->lng
         ]);
 
-        /*foreach ($this->imageGallery as $image){
-            $gImage = $image->store($this->getPatchToUpload().'/galeria', 'public');
-            $location->gallery()->create([
-                'image'=>$gImage
-            ]);
-        }*/
-        //$this->_createGellery($location);
         $this->emit('addImage', $location);
 
         $this->emit('saveModal');

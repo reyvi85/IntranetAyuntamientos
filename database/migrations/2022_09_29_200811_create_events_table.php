@@ -18,9 +18,9 @@ class CreateEventsTable extends Migration
             $table->string('titulo');
             $table->string('imagen');
             $table->text('description');
-            $table->string('lat');
-            $table->string('lng');
-            $table->string('link');
+            $table->double('lat');
+            $table->double('lng');
+            $table->string('link')->nullable();
             $table->date('f_inicio');
             $table->date('f_fin');
             $table->unsignedBigInteger('instance_id');
