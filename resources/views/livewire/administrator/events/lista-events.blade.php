@@ -39,4 +39,3 @@
         {{$events->links()}}
     </div>
 </div>
-

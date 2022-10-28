@@ -13,7 +13,7 @@ class CategoryEventComponent extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $name, $categorySelected;
+    public $name, $categorySelected, $search;
 
     protected $rules =[
         'name'=>'required|unique:event_categories,name',
@@ -77,7 +77,7 @@ class CategoryEventComponent extends Component
 
     public function render()
     {
-        $listCategory = $this->getAllCategoryEvents();
+        $listCategory = $this->getAllCategoryEvents($this->search);
         return view('livewire.administrator.events.category-event-component', compact('listCategory'));
     }
 }

@@ -464,8 +464,11 @@ trait DataModels {
             ->paginate();
     }
 
-    public function getAllCategoryEvents(){
-        return EventCategory::orderBy('name', 'asc')
+    public function getAllCategoryEvents($search=null){
+        return EventCategory::when($search, function ($q) use($search){
+            $q->where('name','like', '%'.$search.'%');
+        })
+            ->orderBy('name', 'asc')
             ->get();
     }
 
