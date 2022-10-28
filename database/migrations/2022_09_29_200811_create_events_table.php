@@ -24,7 +24,9 @@ class CreateEventsTable extends Migration
             $table->date('f_inicio');
             $table->date('f_fin');
             $table->unsignedBigInteger('instance_id');
+            $table->unsignedBigInteger('event_category_id');
             $table->foreign('instance_id')->references('id')->on('instances')->onDelete('cascade');
+            $table->foreign('event_category_id')->references('id')->on('event_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

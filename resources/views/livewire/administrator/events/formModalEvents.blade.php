@@ -19,7 +19,16 @@
                                 @php($ModelName = 'instanceSelected')
                                 @include('livewire.partial.comboInstancias')
                             </div>
-
+                            @if ($listCategory->count())
+                                <div class="form-group ">
+                                    <select class="form-control" wire:model="categorySelected">
+                                        <option value="">-- Categorías --</option>
+                                        @foreach($listCategory as $ctg)
+                                            <option value="{{$ctg->id}}">{{$ctg->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
 
                             <div class="form-group">
                                 <label for="name">Nombre:</label>

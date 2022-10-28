@@ -6,6 +6,7 @@ use App\Models\CategoryBusine;
 use App\Models\CategoryNotification;
 use App\Models\Community;
 use App\Models\Event;
+use App\Models\EventCategory;
 use App\Models\Instance;
 use App\Models\InterestPhone;
 use App\Models\Location;
@@ -445,8 +446,8 @@ trait DataModels {
 /**
      * EVENTS
     **/
-    public function getAllEvents($search=null, $instancia = null, $sort='id', $direction='desc'){
-        return Event::when($search, function ($q) use($search){
+    public function getAllEvents($search=null, $instancia = null, $categoria = null, $sort='id', $direction='desc'){
+        return Event::with('event_category')->when($search, function ($q) use($search){
             $q->where('titulo','like', '%'.$search.'%')
                 ->orWhere('description','like', '%'.$search.'%')
             ->orWhere('f_inicio','like', '%'.$search.'%')
@@ -456,8 +457,16 @@ trait DataModels {
             ->when($instancia, function ($q) use($instancia){
                 $q->where('instance_id',$instancia);
             })
+            ->when($categoria, function ($q) use($categoria){
+                $q->where('event_category_id',$categoria);
+            })
             ->orderBy($sort, $direction)
             ->paginate();
+    }
+
+    public function getAllCategoryEvents(){
+        return EventCategory::orderBy('name', 'asc')
+            ->get();
     }
 
 

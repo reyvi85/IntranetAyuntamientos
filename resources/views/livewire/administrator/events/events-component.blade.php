@@ -1,7 +1,7 @@
-<div>
+<div class="mt-4">
     @include('component.loading')
     <div class="form-row">
-        <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?7:10}}">
+        <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?4:7}}">
             <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
         </div>
 
@@ -11,6 +11,17 @@
                 @php($ModelName = 'instancias')
                 @include('livewire.partial.comboInstancias')
 
+            </div>
+        @endif
+
+        @if ($listCategory->count())
+            <div class="form-group col-md-3">
+                <select class="form-control" wire:model="categoryFilter">
+                    <option value="">-- Categorías --</option>
+                    @foreach($listCategory as $ctg)
+                        <option value="{{$ctg->id}}">{{$ctg->name}}</option>
+                    @endforeach
+                </select>
             </div>
         @endif
 

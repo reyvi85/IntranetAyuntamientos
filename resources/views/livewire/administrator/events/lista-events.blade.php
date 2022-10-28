@@ -6,6 +6,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Fecha Inicio</th>
                 <th scope="col">Fecha Fin</th>
+                <th scope="col" class="text-center">Categoría</th>
                 <th scope="col">Link</th>
                 <th scope="col"></th>
             </tr>
@@ -16,6 +17,7 @@
                 <th scope="row">{{$row->titulo}}</th>
                 <td>{{$row->f_inicio}}</td>
                 <td>{{$row->f_fin}}</td>
+                <td class="text-center">{{$row->event_category->name}}</td>
                 <td>
                    @if(!is_null($row->link) && $row->link!="")<a href="{{$row->link}}" target="_blank"><i class="fas fa-link fa-2x"></i></a>@endif
                 </td>

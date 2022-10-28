@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AvisosController;
 use App\Http\Controllers\Api\BusinessController;
-use App\Http\Controllers\Api\ComponentController;
+use App\Http\Controllers\Api\EventsController;
 use App\Http\Controllers\Api\InterestPhoneController;
 use App\Http\Controllers\Api\LocationsController;
 use App\Http\Controllers\Api\NotificationsController;
@@ -99,4 +99,7 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
         Route::get('categories/{locationCategory}', [LocationsController::class, 'locationCategoryShow'])->name('api.locationCategory.show');
     });
 
+    Route::prefix('events')->group(function (){
+        Route::get('/',[EventsController::class, 'index'])->name('event.index');
+    });
 });

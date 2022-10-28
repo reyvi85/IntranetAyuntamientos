@@ -22,7 +22,7 @@ use App\Models\WarningSubCategory;
 use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
-class AvisosController extends Controller
+class  AvisosController extends Controller
 {
     use DataAPIFront;
     /** LISTA DE AVISOS **/

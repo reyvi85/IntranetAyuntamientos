@@ -12,9 +12,9 @@ use Livewire\WithPagination;
 class EventsComponent extends Component
 {
     use DataModels, WithPagination, WithFileUploads;
-    protected $listeners = ['getLatitudeForInput',  'getLongitudeForInput'];
+    protected $listeners = ['getLatitudeForInput',  'getLongitudeForInput', 'addCategoryEvents'];
 
-    public $search, $eventSelected, $imageEvent,
+    public $search, $eventSelected, $imageEvent, $listCategory, $categoryFilter,$categorySelected,
         $titulo,
         $image,
         $description,
@@ -38,7 +38,7 @@ class EventsComponent extends Component
         $this->checkInstanceForUser();
         $this->setConfigModal();
         $this->setPatchToUpload('images/events');
-
+        $this->listCategory = $this->getAllCategoryEvents();
     }
 
     public function getLatitudeForInput($value)
@@ -51,8 +51,13 @@ class EventsComponent extends Component
         if(!is_null($value))
             $this->lng = $value;
     }
+
+    public function addCategoryEvents(){
+        $this->listCategory = $this->getAllCategoryEvents();
+    }
+
     public function resetProps(){
-        $this->reset(['eventSelected', 'imageEvent', 'titulo', 'image', 'description', 'lat', 'lng', 'web', 'fecha_inicio', 'fecha_fin']);
+        $this->reset(['eventSelected', 'imageEvent', 'titulo', 'image', 'description', 'lat', 'lng', 'web', 'fecha_inicio', 'fecha_fin', 'categorySelected']);
     }
 
     public function add(){
@@ -77,7 +82,8 @@ class EventsComponent extends Component
             'link'=>$this->web,
             'f_inicio'=>$this->fecha_inicio,
             'f_fin'=>$this->fecha_fin,
-            'instance_id'=>$this->instanceSelected
+            'instance_id'=>$this->instanceSelected,
+            'event_category_id'=>$this->categorySelected
         ]);
         $this->emit('saveModal');
         $this->resetProps();
@@ -96,6 +102,7 @@ class EventsComponent extends Component
         $this->fecha_inicio = $event->f_inicio;
         $this->fecha_fin = $event->f_fin;
         $this->instanceSelected = $event->instance_id;
+        $this->categorySelected = $event->event_category_id;
         $this->emit('initMap', $this->lat, $this->lng);
     }
 
@@ -124,7 +131,8 @@ class EventsComponent extends Component
             'link'=>$this->web,
             'f_inicio'=>$this->fecha_inicio,
             'f_fin'=>$this->fecha_fin,
-            'instance_id'=>$this->instanceSelected
+            'instance_id'=>$this->instanceSelected,
+            'event_category_id'=>$this->categorySelected
         ])->save();
         $this->emit('saveModal');
         $this->resetProps();
@@ -146,7 +154,7 @@ class EventsComponent extends Component
 
     public function render()
     {
-        $events = $this->getAllEvents($this->search,$this->instancias, $this->sort);
+        $events = $this->getAllEvents($this->search,$this->instancias, $this->categoryFilter ,$this->sort);
         return view('livewire.administrator.events.events-component', compact('events'));
     }
 }
