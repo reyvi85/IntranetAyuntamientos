@@ -25,7 +25,7 @@
                     <tbody>
                     @foreach($listCategory as $item)
                         <tr>
-                            <td>{{$item->name}}</td>
+                            <td>{{$item->id}} - {{$item->name}}</td>
                             <td class="text-right">
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="edit({{$item->id}})" title="Editar"><i class="fas fa-edit"></i></a>
                                 <a href="javascript:void(0)" data-toggle="modal" data-target="#modalFormCategory" wire:click="trash({{$item->id}})" title="Eliminar"><i class="fas fa-trash"></i></a>

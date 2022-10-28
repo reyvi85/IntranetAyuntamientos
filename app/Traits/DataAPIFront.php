@@ -12,6 +12,8 @@ namespace App\Traits;
 use App\Models\Busine;
 use App\Models\CategoryBusine;
 use App\Models\CategoryNotification;
+use App\Models\Event;
+use App\Models\EventCategory;
 use App\Models\InterestPhone;
 use App\Models\Location;
 use App\Models\LocationCategory;
@@ -319,6 +321,32 @@ trait DataAPIFront
             ->Active()
             ->ApplySorts($sort)
             ->paginate($perPage)->appends(request()->query());
+    }
+
+    /**
+     *  E V E N T S
+    */
+    public function getAllEvents($search=null, $categoria=null){
+        return Event::withoutGlobalScopes()->with('event_category')
+            ->when($search, function ($q) use($search){
+                $q->where('titulo','like', '%'.$search.'%')
+                    ->orWhere('f_inicio','like', '%'.$search.'%')
+                    ->orWhere('f_fin','like', '%'.$search.'%');
+            })
+            ->when($categoria, function ($q)use($categoria){
+                $q->where('event_category_id',$categoria);
+            })
+            ->GetInstance()
+            ->get();
+    }
+
+    public function getAllCategoryEvents(){
+        return EventCategory::whereHas('events', function (Builder $q){
+            $q->GetInstance();
+        })
+        ->withCount(['events'=>function ($q){
+            $q->GetInstance();
+        }])->get();
     }
 
 }

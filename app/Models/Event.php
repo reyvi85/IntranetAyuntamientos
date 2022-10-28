@@ -32,6 +32,10 @@ class Event extends Model
 
     public $allowedSorts = ['id', 'f_inicio', 'f_fin'];
 
+    public function instance(){
+        return $this->belongsTo(Instance::class);
+    }
+
     public function event_category(){
         return $this->belongsTo(EventCategory::class);
     }

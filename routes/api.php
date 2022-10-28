@@ -101,5 +101,6 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
 
     Route::prefix('events')->group(function (){
         Route::get('/',[EventsController::class, 'index'])->name('event.index');
+        Route::get('categories',[EventsController::class, 'categories'])->name('event.category');
     });
 });

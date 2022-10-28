@@ -19,6 +19,7 @@ class EventsResource extends JsonResource
             'evento'=>$this->resource->titulo,
             'imagen'=>asset($this->resource->imagen),
             'descripcion'=>$this->resource->description,
+            'categoría'=>$this->resource->event_category->name,
             'latitud'=>$this->resource->lat,
             'longitud'=>$this->resource->lng,
             'url'=>$this->resource->link,

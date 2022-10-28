@@ -77,6 +77,10 @@ class Instance extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function events(){
+        return $this->hasMany(Event::class);
+    }
+
 
 
 

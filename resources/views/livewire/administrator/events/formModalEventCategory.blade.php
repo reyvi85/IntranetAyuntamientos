@@ -18,7 +18,27 @@
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label>Imagen:</label>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFileLang" lang="es" wire:model="image" accept=".png, .jpg, .jpeg">
+                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                            @error('image')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="text-center text-muted align-middle" wire:loading wire:target="image">
+                            <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
+                        </div>
 
+                        @if ($image)
+                            <img class="img-fluid img-thumbnail rounded" src="{{ $image->temporaryUrl() }}">
+                        @elseif(!is_null($imageSelected))
+                            <img class="img-fluid img-thumbnail rounded" src="{{asset($imageSelected)}}">
+                        @endif
+                    </div>
 
                 @endif
             </div>
@@ -26,7 +46,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update_category({{$categorySelected}})"  wire:loading.attr="disabled" wire:target="update_category"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update_category({{$categorySelected}})"  wire:loading.attr="disabled" wire:target="update_category, image"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
@@ -34,9 +54,9 @@
                     @break
 
                     @default
-                    <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled" wire:target="store"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
+                    <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled" wire:target="store, image"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
                 @endswitch
-                <div class="text-center text-muted" wire:loading wire:target="store, update_category, destroy"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="text-center text-muted" wire:loading wire:target="store, image, update_category, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>
