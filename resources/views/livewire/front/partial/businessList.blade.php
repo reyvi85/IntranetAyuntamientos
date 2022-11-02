@@ -7,7 +7,7 @@
                     <img src="{{asset((is_null($item->logo) || empty($item->logo))?'images/no-image.jpg':$item->logo)}}" class="img-thumbnail">
                 </th>
                 <td>
-                    <h4>{{$item->name}}</h4>
+                    <h4 class="h4"><a href="{{$item->url_web}}" target="_blank">{{$item->name}}</a></h4>
                     <p>
                         <span class="font-weight-bold">Descripción:</span> {{$item->description}}<br>
                         <i class="fas fa-bookmark"></i> {{$item->category_busine->name}} <br>
@@ -17,7 +17,6 @@
                         @if (!empty($item->email))
                             <i class="fas fa-envelope"></i> <a href="mailto:{{$item->email}}">{{$item->email}}</a> <br>
                         @endif
-                        <i class="fas fa-globe"></i> <a href="{{$item->url_web}}" target="_blank">{{$item->url_web}}</a>
                     </p>
                 </td>
             </tr>
