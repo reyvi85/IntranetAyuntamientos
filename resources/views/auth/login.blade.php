@@ -1,5 +1,24 @@
 @extends('layouts.appPublic')
+@section('css')
+    <style>
+        #intro {
+            background-image: url("{{asset('images/bg.png')}}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            width: 100%;
+        }
 
+        /* Height for devices larger than 576px */
+        @media (min-width: 992px) {
+            #intro {
+                /*       margin-top: -58.59px;*/
+            }
+        }
+
+    </style>
+@endsection
 @section('content')
 <div class="container">
     <div class="row justify-content-center">

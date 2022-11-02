@@ -21,44 +21,12 @@
     <!-- Font awesome 5 -->
     <link href="{{asset('fonts/fontawesome/css/fontawesome-all.min.css')}}" type="text/css" rel="stylesheet">
     @livewireStyles
-
-
-
-    <style>
-        #intro {
-            background-image: url("{{asset('images/bg.png')}}");
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            height: 100vh;
-            width: 100%;
-        }
-
-        /* Height for devices larger than 576px */
-        @media (min-width: 992px) {
-            #intro {
-         /*       margin-top: -58.59px;*/
-            }
-        }
-
-    </style>
-
-
-
+    @yield('css')
 </head>
 <body>
 
     <div id="intro" class="container-fluid py-4 shadow-lg">
             @yield('content')
-
-
-
-
-
-
-
-
-
     </div>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
