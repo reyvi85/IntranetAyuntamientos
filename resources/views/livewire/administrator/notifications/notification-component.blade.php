@@ -78,5 +78,4 @@
             $('#modalFormNotification').modal('hide');
         });
     </script>
-
     @endsection

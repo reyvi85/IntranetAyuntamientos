@@ -37,6 +37,8 @@ class EventsComponent extends Component
     public function mount(){
         $this->checkInstanceForUser();
         $this->setConfigModal();
+        $this->fecha_inicio = date('Y-m-d');
+        $this->fecha_fin = date('Y-m-d');
         $this->setPatchToUpload('images/events');
         $this->listCategory = $this->getAllCategoryEvents();
     }

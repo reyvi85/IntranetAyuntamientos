@@ -48,8 +48,8 @@
                             <div class="form-row">
                                 <div class="col-md-6">
                                     <label for="ubicacion">Fecha inicio:</label>
-                                    <input type="text" class="form-control @error('fecha_inicio') is-invalid @enderror" id="ubicacion" wire:model.defer="fecha_inicio">
-                                    <div class="form-text"><small>YYYY/MM/DD</small></div>
+                                    <input type="text" class="form-control @error('fecha_inicio') is-invalid @enderror" id="fecha_inicio" wire:model.defer="fecha_inicio" onchange="this.dispatchEvent(new InputEvent('input'))">
+                                    <div class="form-text"><small>YYYY-MM-DD</small></div>
                                     @error('fecha_inicio')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror
@@ -57,8 +57,8 @@
 
                                 <div class="col-md-6">
                                     <label for="ubicacion">Fecha fin:</label>
-                                    <input type="text" class="form-control @error('fecha_fin') is-invalid @enderror" id="ubicacion" wire:model.defer="fecha_fin">
-                                    <div class="form-text"><small>YYYY/MM/DD</small></div>
+                                    <input type="text" class="form-control @error('fecha_fin') is-invalid @enderror" id="fecha_fin" wire:model.defer="fecha_fin" onchange="this.dispatchEvent(new InputEvent('input'))">
+                                    <div class="form-text"><small>YYYY-MM-DD</small></div>
                                     @error('fecha_fin')
                                     <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                                     @enderror

@@ -284,7 +284,7 @@ trait DataAPIFront
             ->GetInstance()
             ->ForView($only)
             ->ApplySorts($sort)
-            ->paginate($perPage)->appends(request()->query());
+            ->get();
     }
 
     public function getShowLocation($location){
