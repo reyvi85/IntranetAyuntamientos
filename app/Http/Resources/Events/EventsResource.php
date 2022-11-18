@@ -19,12 +19,13 @@ class EventsResource extends JsonResource
             'evento'=>$this->resource->titulo,
             'imagen'=>asset($this->resource->imagen),
             'descripcion'=>$this->resource->description,
-            'categoría'=>$this->resource->event_category->name,
+            'categoria'=>$this->resource->event_category->name,
+            'category_id'=>(string)$this->resource->event_category_id,
             'latitud'=>$this->resource->lat,
             'longitud'=>$this->resource->lng,
             'url'=>$this->resource->link,
-            'fecha_inicio'=>$this->resource->f_inicio,
-            'fecha_fin'=>$this->resource->f_fin,
+            'fecha_inicio'=>(string)$this->resource->f_inicio,
+            'fecha_fin'=>(string)$this->resource->f_fin,
         ];
     }
 }
