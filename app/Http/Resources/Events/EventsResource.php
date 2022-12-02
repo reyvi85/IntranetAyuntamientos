@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Events;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 
 class EventsResource extends JsonResource
 {
@@ -24,8 +25,8 @@ class EventsResource extends JsonResource
             'latitud'=>$this->resource->lat,
             'longitud'=>$this->resource->lng,
             'url'=>$this->resource->link,
-            'fecha_inicio'=>(string)$this->resource->f_inicio,
-            'fecha_fin'=>(string)$this->resource->f_fin,
+            'fecha_inicio'=>(string)Carbon::parse($this->resource->f_inicio)->isoFormat('dddd D \d\e MMMM \d\e\l Y'),
+            'fecha_fin'=>(string)Carbon::parse($this->resource->f_fin)->isoFormat('dddd D \d\e MMMM \d\e\l Y'),
         ];
     }
 }
