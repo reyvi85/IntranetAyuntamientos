@@ -108,6 +108,6 @@ Route::prefix('component')->middleware('checkInstance')->group(function (){
       Route::get('/business', ShowPublicBusiness::class)->name('business.show');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
