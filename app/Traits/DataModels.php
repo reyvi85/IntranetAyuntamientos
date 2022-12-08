@@ -298,13 +298,10 @@ trait DataModels {
      * Localizaciones
     */
 
-    public function getCategoryLocation($search = null, $instancia=null, $sort='id', $direction='desc'){
+    public function getCategoryLocation($search = null, $sort='id', $direction='desc'){
         return LocationCategory::withCount('locations')
             ->when($search, function ($q) use($search){
                 $q->where('name','like','%'.$search.'%');
-            })
-            ->when($instancia, function ($q) use($instancia){
-                $q->where('instance_id',$instancia);
             })
             ->orderBy($sort, $direction)
             ->paginate();

@@ -94,13 +94,7 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
 
     });
 
-
-
 });
-
-
-
-
 
 
 /** Componentes **/

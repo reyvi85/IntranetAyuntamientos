@@ -18,14 +18,12 @@ class CategoryLocationComponent extends Component
     protected $rules =[
         'name'=>'required',
         'image'=>'required|image|max:1024',
-        'instanceSelected'=>'required'
     ];
 
     public $search, $categorySelected, $name, $image, $imageCategory=null;
 
     public function mount(){
         $this->setConfigModal();
-        $this->checkInstanceForUser();
         $this->setPatchToUpload('images/categorias-localizaciones');
     }
 
@@ -45,7 +43,6 @@ class CategoryLocationComponent extends Component
         LocationCategory::create([
             'name'=>$this->name,
             'image'=>$img,
-            'instance_id'=>$this->instanceSelected
         ]);
         $this->resetProps();
         $this->emit('saveModal');
@@ -59,14 +56,12 @@ class CategoryLocationComponent extends Component
         $this->categorySelected = $locationCategory->id;
         $this->imageCategory = $locationCategory->image;
         $this->name = $locationCategory->name;
-        $this->instanceSelected = $locationCategory->instance_id;
     }
 
     public function update_category(LocationCategory $locationCategory){
         $this->validate([
             'name'=>'required',
             'image'=>'nullable|image|max:1024',
-            'instanceSelected'=>'required'
         ]);
 
         if($this->image){
@@ -78,7 +73,6 @@ class CategoryLocationComponent extends Component
         $locationCategory->fill([
             'name'=>$this->name,
             'image'=>$img,
-            'instance_id'=>$this->instanceSelected
         ])->save();
         $this->resetProps();
         $this->emit('saveModal');
@@ -102,7 +96,7 @@ class CategoryLocationComponent extends Component
 
     public function render()
     {
-        $listCategory = $this->getCategoryLocation($this->search, $this->instancias, $this->sort, $this->sortDirection);
+        $listCategory = $this->getCategoryLocation($this->search, $this->sort, $this->sortDirection);
         return view('livewire.administrator.locations.category-location-component', compact('listCategory'));
     }
 }

@@ -296,7 +296,6 @@ trait DataAPIFront
     public function getAllCategoryLocation(){
         return LocationCategory::withoutGlobalScopes()
             ->withCount('locations')
-            ->GetInstance()
             ->get();
 
     }

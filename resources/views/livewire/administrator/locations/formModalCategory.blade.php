@@ -20,12 +20,6 @@
                         @enderror
                     </div>
 
-                    <div class="form-group">
-                        @php($label = true)
-                        @php($ModelName = 'instanceSelected')
-                        @include('livewire.partial.comboInstancias')
-                    </div>
-
                         <div class="form-group">
                             <label>Imagen:</label>
                             <div class="custom-file">
