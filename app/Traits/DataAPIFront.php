@@ -203,6 +203,7 @@ trait DataAPIFront
         return CategoryBusine::withCount(['business'=>function($q){
             $q->GetInstance();
              }])
+            ->orderBy('business_count', 'desc')
             ->get();
     }
 
@@ -294,8 +295,10 @@ trait DataAPIFront
     }
 
     public function getAllCategoryLocation(){
-        return LocationCategory::withoutGlobalScopes()
-            ->withCount('locations')
+        return LocationCategory::withCount(['locations'=>function($q){
+                    $q->GetInstance();
+                 }])
+            ->orderBy('locations_count', 'desc')
             ->get();
 
     }
