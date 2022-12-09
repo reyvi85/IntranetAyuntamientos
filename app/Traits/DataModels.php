@@ -308,10 +308,7 @@ trait DataModels {
     }
 
     public function getAllCategoryLocation($instancia=null){
-        return LocationCategory::when($instancia, function ($q) use($instancia){
-            $q->where('instance_id',$instancia);
-            })
-            ->orderBy('name','asc')
+        return LocationCategory::orderBy('name','asc')
             ->get();
     }
 
