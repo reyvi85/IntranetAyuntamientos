@@ -92,6 +92,10 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
             return view('livewire.administrator.events.index');
         })->name('gestion.events');
 
+        Route::get('/routes', function(){
+            return view('livewire.administrator.routes.index');
+        })->name('gestion.routes');
+
     });
 
 });

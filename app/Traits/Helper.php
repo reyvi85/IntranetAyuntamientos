@@ -60,7 +60,7 @@ trait Helper {
             ['id'=>7,'modulo'=>'Localizaciones', 'icon'=>'fa-map-marker-alt', 'routeName'=>'gestion.localizaciones', 'imagen'=>'localizaciones.jpg'],
             ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cogs', 'routeName'=>'home', 'imagen'=>'dashboard.jpg'],
             ['id'=>9,'modulo'=>'Eventos', 'icon'=>'fa-cogs', 'routeName'=>'gestion.events', 'imagen'=>'eventos.jpg'],
-            //['id'=>10,'modulo'=>'Turismo', 'icon'=>'fa-cogs', 'routeName'=>'home', 'imagen'=>'turismo.jpg'],
+            ['id'=>10,'modulo'=>'Rutas', 'icon'=>'fa-cogs', 'routeName'=>'gestion.routes', 'imagen'=>'turismo.jpg'],
         ]);
     }
 
