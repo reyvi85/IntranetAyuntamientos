@@ -75,7 +75,6 @@ class RoutesCategoryComponent extends Component
         $this->resetProps();
     }
 
-
     public function render()
     {
         $listCategory = $this->getCategoryRoutes($this->search,$this->sort, $this->sortDirection);

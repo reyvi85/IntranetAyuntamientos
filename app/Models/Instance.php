@@ -81,6 +81,10 @@ class Instance extends Model
         return $this->hasMany(Event::class);
     }
 
+    public function routes(){
+        return $this->hasMany(Route::class);
+    }
+
 
 
 

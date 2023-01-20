@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\UserInstanceScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,10 +11,39 @@ class Route extends Model
     use HasFactory;
 
     protected $fillable = [
-
+        'name',
+        'description',
+        'imagen',
+        'state',
+        'price',
+        'inicio_ruta_name',
+        'inicio_ruta_direccion',
+        'inicio_ruta_description',
+        'inicio_ruta_imagen',
+        'fin_ruta_name',
+        'fin_ruta_direccion',
+        'fin_ruta_description',
+        'fin_ruta_imagen',
+        'instance_id',
+        'route_category_id'
     ];
+
+    public function instance(){
+        return $this->belongsTo(Instance::class);
+    }
 
     public function category(){
         return $this->belongsTo(RouteCategory::class);
     }
+
+    public function route_intermediates(){
+        return $this->hasMany(RouteIntermediate::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::addGlobalScope(new UserInstanceScope());
+    }
+
 }
