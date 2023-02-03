@@ -25,6 +25,7 @@
                                     'name'=>'inicio_ruta_name',
                                     'address'=>'inicio_ruta_direccion',
                                     'description'=>'inicio_ruta_description',
+                                    'nameFieldImagen'=>'inicio_ruta_imagen',
                                     'imagen'=>$inicio_ruta_imagen,
                                     'imagenSelected'=>$inicio_ruta_imagenSelected
                                 ])
@@ -35,13 +36,18 @@
                                         'name'=>'fin_ruta_name',
                                         'address'=>'fin_ruta_direccion',
                                         'description'=>'fin_ruta_description',
+                                        'nameFieldImagen'=>'fin_ruta_imagen',
                                         'imagen'=>$fin_ruta_imagen,
                                         'imagenSelected'=>$fin_ruta_imagenSelected
                                     ])
                         </div>
 
                         <div class="col-md-4 mt-2">
-                            .... modulo de rutas intermedias!
+                            @if($routeSelected)
+                                @livewire('routes.route-intermediate-component', ['route'=>$routeSelected])
+                            @else
+                                <h5><i class="fas fa-map-signs"></i> Tiene que crear primero la ruta para hacer los puntos intermedios!</h5>
+                            @endif
                         </div>
 
                     </div>
@@ -51,17 +57,17 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update_event({{$eventSelected}})"  wire:loading.attr="disabled" wire:target="update_event, image"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update_event({{$routeSelected}})"  wire:loading.attr="disabled" wire:target="update_event, image"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
-                    <button type="button" class="btn btn-danger" wire:click="destroy({{$eventSelected}})" wire:loading.attr="disabled"  wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
+                    <button type="button" class="btn btn-danger" wire:click="destroy({{$routeSelected}})" wire:loading.attr="disabled"  wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
                     @break
 
                     @default
                     <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled" wire:target="store, image"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
                 @endswitch
-                <div class="text-center text-muted" wire:loading wire:target="store, update_event, image, destroy"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="text-center text-muted" wire:loading wire:target="store, image, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>

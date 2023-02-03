@@ -30,7 +30,7 @@
         <div class="form-row">
             <div class="col-md-3">
                 <div class="form-group text-center">
-                    <div class="text-center text-muted align-middle" wire:loading.grid wire:target="{{$name}}_ruta_imagen">
+                    <div class="text-center text-muted align-middle" wire:loading.grid wire:target="{{$nameFieldImagen}}">
                         <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
                     </div>
 
@@ -43,20 +43,16 @@
             </div>
             <div class="col-md-9">
                 <div class="form-group">
-                    <label>Imagen principal:</label>
+                    <label>Imagen:</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input @error($name.'_ruta_imagen') is-invalid @enderror" id="{{$name}}_ruta_imagen" lang="es" wire:model="{{$name}}_ruta_imagen" accept=".png, .jpg, .jpeg">
+                        <input type="file" class="custom-file-input @error($nameFieldImagen) is-invalid @enderror" id="{{$name}}_ruta_imagen" lang="es" wire:model="{{$nameFieldImagen}}" accept=".png, .jpg, .jpeg">
                         <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
-                        @error($name.'_ruta_imagen')
+                        @error($nameFieldImagen)
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 </div>

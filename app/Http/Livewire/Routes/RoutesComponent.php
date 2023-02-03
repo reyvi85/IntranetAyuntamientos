@@ -70,7 +70,7 @@ class RoutesComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price',
+        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price', 'instanceSelected', 'routeSelected', 'categorySelected',
             'inicio_ruta_name', 'inicio_ruta_direccion', 'inicio_ruta_description', 'inicio_ruta_imagen', 'inicio_ruta_imagenSelected',
             'fin_ruta_name', 'fin_ruta_direccion', 'fin_ruta_description', 'fin_ruta_imagen', 'fin_ruta_imagenSelected'
         ]);
@@ -103,13 +103,17 @@ class RoutesComponent extends Component
             'instance_id'=>$this->instanceSelected,
             'route_category_id'=>$this->categorySelected
         ]);
-        $this->resetProps();
-        $this->emit('saveModal');
+        //$this->resetProps();
+        //$this->emit('saveModal');
+        $this->edit($route);
     }
 
     public function edit(Route $route){
         $this->resetProps();
+        $this->setConfigModal('Editar', 'fa-edit', 'edit');
         $this->routeSelected = $route->id;
+        $this->instanceSelected = $route->instance_id;
+        $this->categorySelected = $route->route_category_id;
         $this->name = $route->name;
         $this->description = $route->description;
         $this->imageRoute = $route->imagen;
@@ -121,6 +125,7 @@ class RoutesComponent extends Component
         $this->fin_ruta_direccion = $route->fin_ruta_direccion;
         $this->fin_ruta_description = $route->fin_ruta_description;
         $this->fin_ruta_imagenSelected = $route->fin_ruta_imagen;
+        $this->emit('routeIntermediate', $route->id);
     }
 
 
