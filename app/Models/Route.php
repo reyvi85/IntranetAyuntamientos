@@ -32,7 +32,7 @@ class Route extends Model
         return $this->belongsTo(Instance::class);
     }
 
-    public function category(){
+    public function route_category(){
         return $this->belongsTo(RouteCategory::class);
     }
 

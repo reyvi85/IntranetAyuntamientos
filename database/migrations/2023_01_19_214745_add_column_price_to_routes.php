@@ -14,7 +14,7 @@ class AddColumnPriceToRoutes extends Migration
     public function up()
     {
         Schema::table('routes', function (Blueprint $table) {
-            $table->double('price')->after('state')->default(0.0);
+            $table->double('price')->after('state')->default(0.0)->nullable();
         });
     }
 

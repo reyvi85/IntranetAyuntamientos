@@ -14,6 +14,7 @@ use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Province;
+use App\Models\Route;
 use App\Models\RouteCategory;
 use App\Models\User;
 use App\Models\Warning;
@@ -468,7 +469,7 @@ trait DataModels {
     }
 
     /**
-     * Localizaciones
+     * Rutas
      */
 
     public function getCategoryRoutes($search = null, $sort='id', $direction='desc'){
@@ -480,6 +481,15 @@ trait DataModels {
             ->get();
     }
 
+    public function getAllRoutes($search = null, $instancia = null, $categoria = null, $sort='id', $direction='desc'){
+        return Route::with('route_category')
+            ->when($search, function ($q) use($search){
+                $q->where('name','like', '%'.$search.'%')
+                    ->orWhere('description','like', '%'.$search.'%');
+             })
+            ->orderBy($sort, $direction)
+            ->paginate();
+    }
 
 
 }
