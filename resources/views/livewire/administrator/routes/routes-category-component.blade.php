@@ -16,7 +16,7 @@
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col" wire:click="order('name')">Nombre</th>
-                    <th class="text-center" scope="col" wire:click="order('routes_count')">Notificaciones</th>
+                    <th class="text-center" scope="col" wire:click="order('routes_count')">Rutas</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
@@ -42,10 +42,3 @@
 
 </div>
 
-@section('scripts')
-    <script type="text/javascript">
-        window.livewire.on('saveModal', () => {
-            $('#modalFormCategory').modal('hide');
-        });
-    </script>
-@endsection

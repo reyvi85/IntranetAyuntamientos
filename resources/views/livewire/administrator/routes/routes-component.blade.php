@@ -31,6 +31,7 @@
     <hr>
    @include('livewire.administrator.routes.listRoutes')
     @include('livewire.administrator.routes.formModalRoute')
+    @include('livewire.administrator.routes.formModalRouteIntermediates')
 </div>
 
 

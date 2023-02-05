@@ -28,7 +28,7 @@
 @section('scripts')
     <script type="text/javascript">
         window.livewire.on('saveModal', () => {
-            $('#modalFormLocation').modal('hide');
+            $('#modalFormRoutes').modal('hide');
             $('#modalFormCategory').modal('hide');
         });
     </script>

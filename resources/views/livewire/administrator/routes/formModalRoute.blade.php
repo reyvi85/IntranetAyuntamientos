@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div wire:ignore.self class="modal fade" id="modalFormRoutes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fas {{$modalConfig['icon']}}"></i> {{$modalConfig['titulo']}}</h5>
@@ -13,12 +13,12 @@
                     <h3 class="text-center"> Confirma realmente que desea eliminar este evento<br> <span class="text-danger font-weight-bolder">{{$titulo}}</span>?</h3>
                 @else
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             @include('livewire.administrator.routes.form.general')
                         </div>
 
 
-                        <div class="col-md-4 mt-2">
+                        <div class="col-md-6 mt-2">
                             @include('livewire.administrator.routes.form.routeForm',
                                 [
                                     'titulo'=>'Inicio de ruta',
@@ -42,14 +42,6 @@
                                     ])
                         </div>
 
-                        <div class="col-md-4 mt-2">
-                            @if($routeSelected)
-                                @livewire('routes.route-intermediate-component', ['route'=>$routeSelected])
-                            @else
-                                <h5><i class="fas fa-map-signs"></i> Tiene que crear primero la ruta para hacer los puntos intermedios!</h5>
-                            @endif
-                        </div>
-
                     </div>
                 @endif
             </div>
@@ -57,7 +49,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update_event({{$routeSelected}})"  wire:loading.attr="disabled" wire:target="update_event, image"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="routesUDPT({{$routeSelected}})"  wire:loading.attr="disabled" wire:target="routesUDPT, imagen"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
