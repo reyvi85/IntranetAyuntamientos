@@ -99,6 +99,18 @@ trait DataModels {
         ];
     }
 
+//    public function switchState($model, $state){
+//        $campos = collect(['visitantes', 'residentes', 'inicio', 'active', 'state']);
+//        if(!is_array($state) && $campos->contains($state)){
+//            $model->fill([
+//                $state=>($model->$state == 1)?0:1
+//            ])->save();
+//        }
+//        else{
+//            abort(403);
+//        }
+//    }
+
     /** Lista de comunidades filtradas
      * @param null $search
      * @param $sort

@@ -184,6 +184,27 @@ class RoutesComponent extends Component
         $this->resetProps();
     }
 
+    public function trash(Route $route){
+        $this->setConfigModal('Eliminar', 'fa-trash', 'trash');
+        $this->modalModeDestroy = true;
+        $this->routeSelected = $route->id;
+        $this->titulo = $route->name;
+    }
+
+    public function destroy(Route $route){
+        Storage::disk('public')->delete($route->imagen);
+        Storage::disk('public')->delete($route->inicio_ruta_imagen);
+        Storage::disk('public')->delete($route->fin_ruta_imagen);
+        if ($route->route_intermediates->count()){
+            foreach ($route->route_intermediates as $item){
+                Storage::disk('public')->delete($item->image);
+            }
+        }
+        $route->delete();
+        $this->emit('saveModal');
+        $this->resetProps();
+    }
+
 
 
     public function render()

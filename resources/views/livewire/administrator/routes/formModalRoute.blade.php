@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 @if ($modalModeDestroy)
-                    <h3 class="text-center"> Confirma realmente que desea eliminar este evento<br> <span class="text-danger font-weight-bolder">{{$titulo}}</span>?</h3>
+                    <h3 class="text-center"> Confirma realmente que desea eliminar este evento<br> <span class="text-danger font-weight-bolder">Eliminar ruta</span>?</h3>
                 @else
                     <div class="row">
                         <div class="col-md-6">
