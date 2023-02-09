@@ -60,8 +60,8 @@ class RoutesComponent extends Component
     public function mount(){
         $this->checkInstanceForUser();
         $this->setConfigModal();
-        $this->listCategory = $this->getCategoryRoutes();
         $this->setPatchToUpload('images/rutas');
+        $this->listCategory = $this->getCategoryRoutes();
     }
 
     public function categoryUDPT(){
@@ -69,7 +69,7 @@ class RoutesComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price', 'instanceSelected', 'routeSelected', 'categorySelected',
+        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price', 'categorySelected',
             'inicio_ruta_name', 'inicio_ruta_direccion', 'inicio_ruta_description', 'inicio_ruta_imagen', 'inicio_ruta_imagenSelected',
             'fin_ruta_name', 'fin_ruta_direccion', 'fin_ruta_description', 'fin_ruta_imagen', 'fin_ruta_imagenSelected'
         ]);
