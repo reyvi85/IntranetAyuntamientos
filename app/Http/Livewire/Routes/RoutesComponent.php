@@ -20,6 +20,7 @@ class RoutesComponent extends Component
         $listCategory,
         $categoryFilter,
         $categorySelected,
+        $routeTitulo,
 
         $name,
         $description,
@@ -81,6 +82,17 @@ class RoutesComponent extends Component
         $this->setConfigModal();
     }
 
+    public function routeIntermediate(Route $route){
+        $this->routeTitulo = $route->name;
+        $this->emit('routeIntermediate', $route->id);
+    }
+
+    public function changeState(Route $route){
+        $route->fill([
+            'state'=>($route->state==1)?0:1
+        ])->save();
+    }
+
     public function store(){
         $this->validate();
         $imgRoute = $this->imagen->store($this->getPatchToUpload(), 'public');
@@ -103,7 +115,9 @@ class RoutesComponent extends Component
             'route_category_id'=>$this->categorySelected
         ]);
         $this->resetProps();
-        $this->emit('saveModal');
+       // $this->emit('saveModal');
+        $this->emit('createRoute');
+        $this->emit('routeIntermediate', $route->id);
     }
 
     public function edit(Route $route){

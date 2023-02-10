@@ -16,14 +16,15 @@
                     <td>{{$row->name}}</td>
                     <td>{{$row->description}}</td>
                     <td>{{$row->route_category->name}}</td>
-                    <td class="text-center">{{$row->state}}</td>
+                    <td class="text-center">
+                        <a href="javascript:void(0)" wire:click="changeState({{$row->id}})">{!!($row->state == 1)?'<i class="fas fa-check-circle fa-2x" title="Activa"></i>':'<i class="fas fa-minus-circle fa-2x" title="Inactiva"></i>'!!}</a>
                     <td class="float-lg-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu">
 
                                 <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutes" wire:click="edit({{$row->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutesIntermediates" wire:click="edit({{$row->id}})" title="Rutas intermedias"><i class="fas fa-map-signs" wire:click="$emitUp('routeIntermediate', {{$row->id}})"></i> Rutas intermedias</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutesIntermediates" title="Rutas intermedias" wire:click="routeIntermediate('{{$row->id}}')"><i class="fas fa-map-signs"></i> Rutas intermedias</a>
                                 <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutes" wire:click="trash({{$row->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
 
                             </div>
