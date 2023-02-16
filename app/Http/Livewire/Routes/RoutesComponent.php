@@ -21,6 +21,8 @@ class RoutesComponent extends Component
         $categoryFilter,
         $categorySelected,
         $routeTitulo,
+        $viewRoute =false,
+        $route,
 
         $name,
         $description,
@@ -70,7 +72,7 @@ class RoutesComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price', 'categorySelected',
+        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price', 'categorySelected', 'viewRoute',
             'inicio_ruta_name', 'inicio_ruta_direccion', 'inicio_ruta_description', 'inicio_ruta_imagen', 'inicio_ruta_imagenSelected',
             'fin_ruta_name', 'fin_ruta_direccion', 'fin_ruta_description', 'fin_ruta_imagen', 'fin_ruta_imagenSelected'
         ]);
@@ -219,7 +221,11 @@ class RoutesComponent extends Component
         $this->resetProps();
     }
 
-
+    public function viewRoute(Route $route){
+        $this->setConfigModal('Ver ruta / '.$route->name, 'fa-eye', 'view');
+        $this->viewRoute = true;
+        $this->route = $route;
+    }
 
     public function render()
     {
