@@ -72,7 +72,7 @@ class RoutesComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price', 'categorySelected', 'viewRoute',
+        $this->reset(['routeSelected','imageRoute','name', 'description', 'imagen', 'price', 'categorySelected', 'viewRoute', 'modalModeDestroy',
             'inicio_ruta_name', 'inicio_ruta_direccion', 'inicio_ruta_description', 'inicio_ruta_imagen', 'inicio_ruta_imagenSelected',
             'fin_ruta_name', 'fin_ruta_direccion', 'fin_ruta_description', 'fin_ruta_imagen', 'fin_ruta_imagenSelected'
         ]);
@@ -201,6 +201,7 @@ class RoutesComponent extends Component
     }
 
     public function trash(Route $route){
+        $this->viewRoute = false;
         $this->setConfigModal('Eliminar', 'fa-trash', 'trash');
         $this->modalModeDestroy = true;
         $this->routeSelected = $route->id;
@@ -208,6 +209,7 @@ class RoutesComponent extends Component
     }
 
     public function destroy(Route $route){
+        $this->viewRoute = false;
         Storage::disk('public')->delete($route->imagen);
         Storage::disk('public')->delete($route->inicio_ruta_imagen);
         Storage::disk('public')->delete($route->fin_ruta_imagen);
@@ -224,6 +226,7 @@ class RoutesComponent extends Component
     public function viewRoute(Route $route){
         $this->setConfigModal('Ver ruta / '.$route->name, 'fa-eye', 'view');
         $this->viewRoute = true;
+        $this->modalModeDestroy = false;
         $this->route = $route;
     }
 

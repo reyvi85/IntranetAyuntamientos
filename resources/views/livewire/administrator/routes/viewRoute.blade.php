@@ -10,7 +10,7 @@
 <hr>
     @foreach($route->route_intermediates as $item)
         <div class="row align-items-start">
-            <div class="col-md-2 align-middle"></div>
+            <div class="col-md-2 align-bottom"></div>
             <div class="col-md-2 align-middle"><img src="{{asset($item->image)}}" class="rounded-circle img-thumbnail"></div>
             <div class="col-md-8">
                 <h5>{{$item->name}}</h5>
