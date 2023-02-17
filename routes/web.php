@@ -6,8 +6,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\Instancias\InstanciasComponent,
     App\Http\Livewire\Usuarios\UsuariosComponent,
-    App\Http\Livewire\Business\CategoryBusinessComponent,
-    App\Http\Livewire\Business\BusinessComponent,
     App\Http\Livewire\Business\ShowPublicBusiness,
     App\Http\Livewire\InterestPhonesComponent,
     App\Http\Livewire\Noticias\NoticiasComponent,
@@ -27,45 +25,6 @@ use \Illuminate\Support\Facades\Artisan;
 Route::get('/', function () {
     return view('auth.login');
 });
-
-//Route::get('/', UploadImg::class);
-
-
-Route::prefix('dashboard')->middleware(['auth', 'checkRol:Super-Administrador'])->group(function(){
-    Route::get('/comunidades-provincias', ComunidadesProvinciasComponent::class)->name('comunidades.provincias');
-    Route::get('/instancias', InstanciasComponent::class)->name('instancias');
-    Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
-  //  Route::get('/categorias-negocios', CategoryBusinessComponent::class)->name('category-business');
-  //  Route::get('/comercios', BusinessComponent::class)->name('business.index');
-    Route::get('/telefonos', InterestPhonesComponent::class)->name('phones.index');
-    Route::get('/noticias', NoticiasComponent::class)->name('noticias.index');
-    Route::get('/widgets', WidgetsComponent::class)->name('widgets.index');
-
-   /* Route::get('/comercios', function(){
-        return view('livewire.administrator.business.index');
-    })->name('business.index');
-*/
-    Route::get('/notificaciones', function(){
-        return view('livewire.administrator.notification-component');
-    })->name('notifications.index');
-
-    /** LOCALIZACIONES **/
-    Route::get('/localizaciones', function(){
-        return view('livewire.administrator.locations.index');
-    })->name('localizaciones.index');
-
-    /** AVISOS  **/
-    Route::get('/avisos', function(){
-        return view('livewire.administrator.avisos.index');
-    })->name('avisos.index');
-
-    /**  CMD Artisan **/
-    Route::get('cmd/{comando}', function($comando){
-            Artisan::call($comando);
-            dd(Artisan::output());
-    });
-});
-
 /**
  * GESTIÓN DE MODULOS
  **/
@@ -76,14 +35,16 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
      * GESTORES DE INSTANCIAS
      */
     Route::middleware(['CheckPermissionModules','checkRol:Super-Administrador,Administrador-Instancia,Gestor-Instancia'])->group(function(){
-   //     Route::get('/comercios', BusinessComponent::class)->name('gestion.business');
+        Route::get('/comunidades-provincias', ComunidadesProvinciasComponent::class)->name('comunidades.provincias');
+        Route::get('/instancias', InstanciasComponent::class)->name('instancias');
+        Route::get('/usuarios', UsuariosComponent::class)->name('usuarios');
         Route::get('/telefonos', InterestPhonesComponent::class)->name('gestion.phones');
         Route::get('/noticias', NoticiasComponent::class)->name('gestion.noticias');
         Route::get('/widgets', WidgetsComponent::class)->name('gestion.widgets');
 
         Route::get('/comercios', function(){
             return view('livewire.administrator.business.index');
-        })->name('business.index');
+        })->name('gestion.business');
 
         Route::get('/notificaciones', function(){
             return view('livewire.administrator.notification-component');
@@ -104,11 +65,14 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
         Route::get('/routes', function(){
             return view('livewire.administrator.routes.index');
         })->name('gestion.routes');
-
     });
 
 });
 
+Route::get('cmd/{comando}', function($comando){
+    Artisan::call($comando);
+    dd(Artisan::output());
+})->middleware('checkRol:Super-Administrador');
 
 /** Componentes **/
 Route::prefix('component')->middleware('checkInstance')->group(function (){
