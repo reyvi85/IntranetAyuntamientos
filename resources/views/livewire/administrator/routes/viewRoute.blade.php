@@ -8,18 +8,23 @@
         </div>
     </div>
 <hr>
-    @foreach($route->route_intermediates as $item)
-        <div class="row align-items-start">
-            <div class="col-md-2 align-bottom"></div>
-            <div class="col-md-2 align-middle"><img src="{{asset($item->image)}}" class="rounded-circle img-thumbnail"></div>
-            <div class="col-md-8">
-                <h5>{{$item->name}}</h5>
-                <p class="text-muted">{{$item->description}}</p>
-                <p class="small text-muted"><i class="fas fa-address-card"></i> {{$item->address}}</p>
+    @if($route->route_intermediates->count())
+        @foreach($route->route_intermediates as $item)
+            <div class="row align-items-start">
+                <div class="col-md-2 align-bottom"></div>
+                <div class="col-md-2 align-middle"><img src="{{asset($item->image)}}" class="rounded-circle img-thumbnail"></div>
+                <div class="col-md-8">
+                    <h5>{{$item->name}}</h5>
+                    <p class="text-muted">{{$item->description}}</p>
+                    <p class="small text-muted"><i class="fas fa-address-card"></i> {{$item->address}}</p>
+                </div>
             </div>
-        </div>
-        <hr>
-    @endforeach
+
+        @endforeach
+    @else
+        <p class="text-center">No hay rutas intermedias!</p>
+    @endif
+    <hr>
     <div class="row align-items-end">
         <div class="col-md-2 align-middle"><img src="{{asset($route->fin_ruta_imagen)}}" class="rounded-circle img-thumbnail"></div>
         <div class="col-md-10">

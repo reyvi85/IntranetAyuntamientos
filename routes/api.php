@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\LocationsController;
 use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\WidgetsController;
+use App\Http\Controllers\Api\RoutesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -98,9 +99,18 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
         Route::get('/{location}', [LocationsController::class, 'locationShow'])->name('api.location.show');
         Route::get('categories/{locationCategory}', [LocationsController::class, 'locationCategoryShow'])->name('api.locationCategory.show');
     });
-
+    /**
+     * E V E N T O S
+    **/
     Route::prefix('events')->group(function (){
         Route::get('/',[EventsController::class, 'index'])->name('event.index');
         Route::get('categories',[EventsController::class, 'categories'])->name('event.category');
+    });
+    /**
+     * R U T A S
+    **/
+    Route::prefix('routes')->group(function (){
+        Route::get('/',[RoutesController::class, 'index'])->name('route.index');
+        Route::get('categories',[RoutesController::class, 'categories'])->name('route.category');
     });
 });

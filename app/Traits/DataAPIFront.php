@@ -19,6 +19,8 @@ use App\Models\Location;
 use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Post;
+use App\Models\Route;
+use App\Models\RouteCategory;
 use App\Models\Warning;
 use App\Models\WarningAnswer;
 use App\Models\WarningCategory;
@@ -349,6 +351,33 @@ trait DataAPIFront
         ->withCount(['events'=>function ($q){
             $q->GetInstance();
         }])->get();
+    }
+
+    /**
+     * Rutas
+    **/
+
+    public function getAllRoutesCategory(){
+        return RouteCategory::withoutGlobalScopes()
+            ->withCount('routes')
+            ->has('routes')
+            ->orderBy('routes_count','Desc')
+            ->orderBy('name','Asc')
+            ->get();
+    }
+
+    public function getAllRoutes($search = null, $categoria = null, $sort='id', $direction='desc'){
+        return Route::with('route_category', 'route_intermediates')
+            ->when($search, function ($q) use($search){
+                $q->where('name','like', '%'.$search.'%')
+                    ->orWhere('description','like', '%'.$search.'%');
+            })
+            ->when($categoria, function ($q) use($categoria){
+                $q->where('route_category_id', $categoria);
+            })
+            ->GetInstance()
+            ->orderBy($sort, $direction)
+            ->get();
     }
 
 }
