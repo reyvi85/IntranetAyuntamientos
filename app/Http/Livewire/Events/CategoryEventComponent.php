@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Events;
 
 use App\Models\EventCategory;
 use App\Traits\DataModels;
+use App\Traits\DataModelsEvents;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,7 +12,7 @@ use Livewire\WithPagination;
 
 class CategoryEventComponent extends Component
 {
-    use DataModels, WithFileUploads;
+    use DataModels, DataModelsEvents, WithFileUploads;
 
     public $name, $image, $imageSelected, $categorySelected, $search;
 

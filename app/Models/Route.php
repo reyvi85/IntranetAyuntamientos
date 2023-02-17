@@ -41,6 +41,10 @@ class Route extends Model
         return $this->hasMany(RouteIntermediate::class);
     }
 
+    public function route_reserves(){
+        return $this->hasMany(RouteReserve::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

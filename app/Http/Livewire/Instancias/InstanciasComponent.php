@@ -3,16 +3,17 @@
 namespace App\Http\Livewire\Instancias;
 
 use App\Models\Instance;
+use App\Traits\DataModelsComunityProvinces;
 use App\Traits\Helper;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\DataModels;
+use App\Traits\DataModelsInstances;
 use Illuminate\Support\Facades\Route;
 class InstanciasComponent extends Component
 {
-    use DataModels, Helper;
-    use WithPagination;
+    use DataModels, Helper, DataModelsInstances,DataModelsComunityProvinces ,WithPagination;
 
     public $name,
         $instanceSelected,

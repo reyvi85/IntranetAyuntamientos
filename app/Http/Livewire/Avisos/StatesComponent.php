@@ -4,12 +4,13 @@ namespace App\Http\Livewire\Avisos;
 
 use App\Models\WarningState;
 use App\Traits\DataModels;
+use App\Traits\DataModelsAvisos;
 use App\Traits\Helper;
 use Livewire\Component;
 
 class StatesComponent extends Component
 {
-    use DataModels, Helper;
+    use DataModels, DataModelsAvisos, Helper;
     public $name, $stateSelected, $listColors, $colorSelected='primary';
 
 

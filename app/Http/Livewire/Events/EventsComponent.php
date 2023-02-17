@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Events;
 
 use App\Models\Event;
 use App\Traits\DataModels;
+use App\Traits\DataModelsEvents;
+use App\Traits\DataModelsInstances;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,7 +13,7 @@ use Livewire\WithPagination;
 
 class EventsComponent extends Component
 {
-    use DataModels, WithPagination, WithFileUploads;
+    use DataModels, DataModelsEvents, DataModelsInstances, WithPagination, WithFileUploads;
     protected $listeners = ['getLatitudeForInput',  'getLongitudeForInput', 'addCategoryEvents'];
 
     public $search, $eventSelected, $imageEvent, $listCategory, $categoryFilter,$categorySelected,

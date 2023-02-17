@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Notifications;
 
 use App\Models\CategoryNotification;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsNotifications;
 use Livewire\Component;
 use App\Traits\DataModels;
 use Livewire\WithPagination;
 
 class CategoryNotificationComponent extends Component
 {
-    use DataModels, WithPagination;
+    use DataModels, DataModelsNotifications, DataModelsInstances, WithPagination;
 
     protected $paginationTheme = 'bootstrap';
 

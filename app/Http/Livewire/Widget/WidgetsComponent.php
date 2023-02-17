@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Widget;
 
 use App\Models\Widget;
 use App\Traits\DataModels;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsWidgets;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +14,7 @@ use Livewire\WithPagination;
 
 class WidgetsComponent extends Component
 {
-    use DataModels, WithFileUploads, WithPagination;
+    use DataModels, DataModelsWidgets,DataModelsInstances ,WithFileUploads, WithPagination;
 
     public $search, $widgetSelected, $imageWidget, $img,
         $titulo,

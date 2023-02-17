@@ -4,11 +4,12 @@ namespace App\Http\Livewire\Routes;
 
 use App\Models\RouteCategory;
 use App\Traits\DataModels;
+use App\Traits\DataModelsRoute;
 use Livewire\Component;
 
 class RoutesCategoryComponent extends Component
 {
-    use DataModels;
+    use DataModels, DataModelsRoute;
 
     public $name, $categorySelected, $search;
 

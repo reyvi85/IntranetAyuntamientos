@@ -9,6 +9,7 @@
                     <a class="nav-link active" id="nav-route-tab" data-toggle="tab" href="#nav-route" role="tab" aria-controls="nav-route" aria-selected="true"><i class="fas fa-map-marker-alt"></i> Rutas</a>
                     @if (auth()->user()->rol == 'Super-Administrador')
                         <a class="nav-link" id="nav-category-tab" data-toggle="tab" href="#nav-category" role="tab" aria-controls="nav-category" aria-selected="false"><i class="fas fa-list"></i> Categorías</a>
+                        <a class="nav-link" id="nav-reserve-tab" data-toggle="tab" href="#nav-reserve" role="tab" aria-controls="nav-reserve" aria-selected="false"><i class="fas fa-address-card"></i> Reservas</a>
                     @endif
                 </div>
             </nav>
@@ -19,6 +20,10 @@
                 @if (auth()->user()->rol == 'Super-Administrador')
                     <div class="tab-pane fade" id="nav-category" role="tabpanel" aria-labelledby="nav-category-tab">
                         @livewire('routes.routes-category-component')
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-reserve" role="tabpanel" aria-labelledby="nav-reserve-tab">
+                        @livewire('routes.route-reserve-component')
                     </div>
                 @endif
             </div>

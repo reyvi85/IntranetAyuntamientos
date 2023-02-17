@@ -5,12 +5,14 @@ namespace App\Http\Livewire\Avisos;
 use App\Models\WarningCategory;
 use App\Models\WarningSubCategory;
 use App\Traits\DataModels;
+use App\Traits\DataModelsAvisos;
+use App\Traits\DataModelsInstances;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class CategorySubCategoryComponent extends Component
 {
-    use DataModels, WithPagination;
+    use DataModels, DataModelsAvisos, DataModelsInstances, WithPagination;
     protected $paginationTheme = 'bootstrap';
 
     public $name,

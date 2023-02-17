@@ -7,8 +7,6 @@
         <a class="dropdown-item" href="{{route('instancias')}}"><i class="fas fa-code"></i> Instancias</a>
         <a class="dropdown-item" href="{{route('usuarios')}}"><i class="fas fa-users"></i> Usuarios</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="{{route('category-business')}}"><i class="fas fa-th-list"></i> Categorías de comercios</a>
-        <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{route('business.index')}}"><i class="fas fa-euro-sign"></i> Comercios</a>
         <a class="dropdown-item" href="{{route('phones.index')}}"><i class="fas fa-phone"></i> Teléfonos</a>
         <a class="dropdown-item" href="{{route('notifications.index')}}"><i class="fas fa-bell"></i> Notificaciones</a>
@@ -17,5 +15,6 @@
         <a class="dropdown-item" href="{{route('noticias.index')}}"><i class="fas fa-newspaper"></i> Noticias</a>
         <a class="dropdown-item" href="{{route('widgets.index')}}"><i class="fas fa-cog"></i> Widgets</a>
         <a class="dropdown-item" href="{{route('gestion.events')}}"><i class="fas fa-cog"></i> Eventos</a>
+        <a class="dropdown-item" href="{{route('gestion.routes')}}"><i class="fas fa-cog"></i> Rutas</a>
     </div>
 </li>

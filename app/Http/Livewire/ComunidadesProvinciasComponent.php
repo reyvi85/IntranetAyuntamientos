@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\Province;
+use App\Traits\DataModelsComunityProvinces;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Traits\DataModels;
@@ -12,7 +13,7 @@ use App\Traits\DataModels;
 class ComunidadesProvinciasComponent extends Component
 {
     /** Traits */
-    use DataModels;
+    use DataModels, DataModelsComunityProvinces;
 
     public
         $name,

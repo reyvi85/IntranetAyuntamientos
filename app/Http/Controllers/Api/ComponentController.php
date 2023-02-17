@@ -7,12 +7,13 @@ use App\Http\Resources\Component\Business\BusinessCategoryResourceCollection;
 use App\Http\Resources\Component\Business\BusinessResourceCollection;
 use App\Http\Resources\Component\Business\BusinessCategoryResource;
 use App\Traits\DataFront;
+use App\Traits\DataModelsBusiness;
 use Illuminate\Http\Request;
 
 class ComponentController extends Controller
 {
-    use DataFront;
-
+    //use DataFront;
+    use DataModelsBusiness;
 
 
     public function getBisnessComponent(Request $request){

@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Business;
 
 use App\Models\Busine;
 use App\Scopes\UserInstanceScope;
+use App\Traits\DataModelsBusiness;
+use App\Traits\DataModelsInstances;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -14,7 +16,7 @@ use Livewire\WithPagination,
 
 class BusinessComponent extends Component
 {
-    use DataModels, WithPagination, WithFileUploads;
+    use DataModels, DataModelsInstances, DataModelsBusiness, WithPagination, WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
 
@@ -173,7 +175,7 @@ class BusinessComponent extends Component
     public function render()
     {
         $listBusiness = $this->getBusinessFiltered($this->search, $this->categorySelected, $this->instancias, $this->sort, $this->sortDirection);
-        return view('livewire.administrator.business-component', compact('listBusiness'))
-            ->extends('layouts.app');
+        return view('livewire.administrator.business.business-component', compact('listBusiness'));
+            //->extends('layouts.app');
     }
 }

@@ -195,10 +195,6 @@ trait DataAPIFront
             ->GetInstance()
             ->ApplySorts($sort)
             ->get();
-
-
-
-           // ->paginate($perPage)->appends(request()->query());
     }
 
     public function getAllBusinessCategory(){
@@ -379,5 +375,4 @@ trait DataAPIFront
             ->orderBy($sort, $direction)
             ->get();
     }
-
 }

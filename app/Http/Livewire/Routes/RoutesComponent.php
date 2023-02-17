@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Routes;
 
 use App\Models\Route;
 use App\Traits\DataModels;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsRoute;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,7 +13,7 @@ use Livewire\WithPagination;
 
 class RoutesComponent extends Component
 {
-    use DataModels, WithPagination, WithFileUploads;
+    use DataModels,DataModelsRoute,DataModelsInstances ,WithPagination, WithFileUploads;
 
     public
         $routeSelected,

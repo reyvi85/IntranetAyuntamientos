@@ -1,5 +1,5 @@
 @include('component.loading')
-<div class="form-row">
+<div class="form-row mt-2">
     <div class="form-group col-md-{{(auth()->user()->rol =='Super-Administrador')?4:7}}">
         <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
     </div>

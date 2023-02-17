@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Locations;
 
 use App\Models\LocationCategory;
 use App\Traits\DataModels;
+use App\Traits\DataModelsLocation;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -11,7 +12,7 @@ use Livewire\WithPagination;
 
 class CategoryLocationComponent extends Component
 {
-    use DataModels, WithPagination, WithFileUploads;
+    use DataModels, DataModelsLocation, WithPagination, WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
 

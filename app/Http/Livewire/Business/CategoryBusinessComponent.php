@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Business;
 
 use App\Models\CategoryBusine;
+use App\Traits\DataModelsBusiness;
 use Illuminate\Support\Str;
 use Livewire\Component,
     App\Traits\DataModels;
 
 class CategoryBusinessComponent extends Component
 {
-    use DataModels;
+    use DataModels, DataModelsBusiness;
     public $name, $slug, $categorySelected = null ,$search = null, $sort = 'id', $direction, $listCategory;
 
     protected $rules = [
@@ -80,7 +81,6 @@ class CategoryBusinessComponent extends Component
     public function render()
     {
         $this->listCategory = $this->getCategoryBusiness($this->search, $this->sort, $this->sortDirection);
-        return view('livewire.administrator.category-business-component')
-            ->extends('layouts.app');
+        return view('livewire.administrator.business.category-business-component');
     }
 }

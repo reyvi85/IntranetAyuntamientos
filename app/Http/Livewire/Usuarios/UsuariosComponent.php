@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Usuarios;
 
 use App\Models\User;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsUser;
 use App\Traits\Helper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,9 +14,7 @@ use Livewire\WithPagination;
 
 class UsuariosComponent extends Component
 {
-    use DataModels;
-    use Helper;
-    use WithPagination;
+    use DataModels, DataModelsUser, DataModelsInstances, Helper, WithPagination;
 
     public $name,
         $email,

@@ -5,13 +5,15 @@ namespace App\Http\Livewire\Routes;
 use App\Models\Route;
 use App\Models\RouteIntermediate;
 use App\Traits\DataModels;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsRoute;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class RouteIntermediateComponent extends Component
 {
-    use DataModels, WithFileUploads;
+    use DataModels, DataModelsRoute, WithFileUploads;
     public $route,
         $numRouteAllowed = 10,
         $edit=false,

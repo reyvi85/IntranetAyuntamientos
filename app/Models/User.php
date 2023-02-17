@@ -59,6 +59,10 @@ class User extends Authenticatable
         return $this->hasMany(Warning::class);
     }
 
+    public function route_reserves(){
+        return $this->hasMany(RouteReserve::class);
+    }
+
     public function isRole($rol)
     {
         return $this->rol === $rol;

@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Business;
 
 use App\Models\CategoryBusine;
+use App\Traits\DataModelsBusiness;
 use Livewire\Component;
 use App\Traits\DataFront,
     Livewire\WithPagination;
 
 class ShowPublicBusiness extends Component
 {
-    use DataFront, WithPagination;
+    use DataModelsBusiness, WithPagination;
 
     public $search=null, $listCategoryBussiness, $categorySelected=null, $viewList = false;
     public $keyInst;
@@ -42,16 +43,11 @@ class ShowPublicBusiness extends Component
         }
     }
 
-
-
     public function render()
     {
         $keyInst = request('token_inst');
-        //$listBusiness = ;
         return view('livewire.front.show-public-business', [
             'listBusiness' =>$this->getBusinessPublic($this->keyInst, $this->search, $this->categorySelected),
-            //'listCategoryBussiness' =>$this->_getAllCategoryBusiness()->where('business_count','<>',0)
-
         ])
             ->extends('layouts.appPublic');
     }

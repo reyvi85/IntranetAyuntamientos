@@ -3,13 +3,14 @@
 namespace App\Http\Livewire\Instancias;
 
 use App\Models\Instance;
+use App\Traits\DataModelsInstances;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Traits\DataModels;
 
 class ListInstanceForUserComponent extends Component
 {
-    use DataModels;
+    use DataModels, DataModelsInstances;
 
     protected $listeners = 'newInstanceAdd';
 

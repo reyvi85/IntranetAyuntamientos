@@ -3,6 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\InterestPhone;
+use App\Traits\DataModelsComunityProvinces;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsPhone;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Traits\DataModels;
@@ -10,7 +13,7 @@ use Livewire\WithPagination;
 
 class InterestPhonesComponent extends Component
 {
-    use DataModels, WithPagination;
+    use DataModels, DataModelsPhone, DataModelsInstances, WithPagination;
 
     protected $paginationTheme = 'bootstrap';
 

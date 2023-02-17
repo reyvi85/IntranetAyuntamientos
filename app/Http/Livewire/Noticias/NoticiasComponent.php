@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Noticias;
 
 use App\Models\Post;
 use App\Traits\DataModels;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsNews;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -12,7 +14,7 @@ use Livewire\WithPagination;
 
 class NoticiasComponent extends Component
 {
-    use DataModels, WithPagination, WithFileUploads;
+    use DataModels, DataModelsInstances, DataModelsNews, WithPagination, WithFileUploads;
 
     public $search, $postSelected, $imagePost, $fechaFilter, $residentesFilter,
         $titulo,

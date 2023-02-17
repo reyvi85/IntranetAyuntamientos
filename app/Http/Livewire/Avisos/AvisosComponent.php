@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Avisos;
 
 use App\Models\Warning;
 use App\Traits\DataModels;
+use App\Traits\DataModelsAvisos;
+use App\Traits\DataModelsInstances;
 use App\Traits\Helper;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +15,7 @@ use Livewire\WithPagination;
 
 class AvisosComponent extends Component
 {
-    use DataModels, Helper, WithPagination, WithFileUploads;
+    use DataModels, DataModelsAvisos, DataModelsInstances, Helper, WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
 
     public

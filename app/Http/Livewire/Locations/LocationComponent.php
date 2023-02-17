@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Locations;
 use App\Models\Location;
 use App\Models\LocationGallery;
 use App\Traits\DataModels;
+use App\Traits\DataModelsInstances;
+use App\Traits\DataModelsLocation;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -12,7 +14,7 @@ use Livewire\WithPagination;
 
 class LocationComponent extends Component
 {
-    use DataModels, WithPagination, WithFileUploads;
+    use DataModels,DataModelsLocation ,DataModelsInstances,WithPagination, WithFileUploads;
     protected $listeners = ['addCategoryLocation',  'getLatitudeForInput',  'getLongitudeForInput'];
 
     public $search, $locationSelected, $categoryFilter,
