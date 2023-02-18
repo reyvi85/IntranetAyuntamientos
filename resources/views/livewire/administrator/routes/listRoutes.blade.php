@@ -14,7 +14,7 @@
             <tbody>
             @foreach($routes as $row)
                 <tr>
-                    <td><img class="img-fluid img-thumbnail" src="{{asset($row->imagen)}}" width="250px"></td>
+                    <td><img class="img-fluid img-thumbnail" src="{{asset($row->imagen)}}" width="150px"></td>
                     <td>{{$row->name}}</td>
                     <td>{{$row->description}}</td>
                     <td>{{$row->route_category->name}}</td>
