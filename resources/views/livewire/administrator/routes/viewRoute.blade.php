@@ -22,7 +22,7 @@
 
         @endforeach
     @else
-        <p class="text-center">No hay rutas intermedias!</p>
+        <p class="text-center">No hay puntos intermedios!</p>
     @endif
     <hr>
     <div class="row align-items-end">
