@@ -4,12 +4,12 @@
         <div class="card-body">
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar nombre ..." wire:model="search">
                 </div>
             </div>
             <div class="table-responsive">
                 @if($listUsers->count())
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col"></th>

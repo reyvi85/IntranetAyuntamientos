@@ -10,16 +10,22 @@
             </div>
             <div class="modal-body">
                 @if ($modalModeDestroy)
-                    <h3 class="text-center"> Confirma realmente que desea eliminar esta reserva<br> <span class="text-danger font-weight-bolder">Eliminar reserva</span>?</h3>
+                    <h3 class="text-center"> Confirma realmente que desea <br> <span class="text-danger font-weight-bolder">eliminar esta reserva</span>?</h3>
                 @else
-                    @include('livewire.administrator.routes.form.reserveForm')
+                    @if($viewReserve)
+                        @include('livewire.administrator.routes.viewReserve')
+                    @else
+                        @include('livewire.administrator.routes.form.reserveForm')
+                    @endif
+
                 @endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
+                @if(!$viewReserve)
                     @switch($modalConfig['action'])
                         @case('edit')
-                        <button type="button" class="btn btn-primary" wire:click="routesUDPT({{$routeSelected}})"  wire:loading.attr="disabled" wire:target="routesUDPT, imagen"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                        <button type="button" class="btn btn-primary" wire:click="reserveUdpt({{$routeSelected}})"  wire:loading.attr="disabled" wire:target="reserveUdpt"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                         @break
 
                         @case('trash')
@@ -27,9 +33,10 @@
                         @break
 
                         @default
-                        <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled" wire:target="store, image"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
+                        <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled" wire:target="store"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
                     @endswitch
-                    <div class="text-center text-muted" wire:loading wire:target="store, image, destroy"><i class="fas fa-spinner fa-spin"></i></div>
+                @endif
+                    <div class="text-center text-muted" wire:loading wire:target="store, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>

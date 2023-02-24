@@ -37,8 +37,18 @@ trait DataModelsUser
             ->paginate();
     }
 
-    public function getUsersPerInstances($instance, $perPage = 15){
-        return User::where('instance_id', $instance)->paginate($perPage,['*'],'usersPage');
+    /**
+     * @param $instance
+     * @param null $search
+     * @param int $perPage
+     * @return mixed
+     */
+    public function getUsersPerInstances($instance, $search = null, $perPage = 10){
+        return User::when($search, function ($q) use($search){
+                $q->where('name', 'like', '%'.$search.'%');
+            })
+            ->where('instance_id', $instance)
+            ->paginate($perPage,['*'],'usersPage');
     }
 
 }

@@ -6,6 +6,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Email</th>
                 <th scope="col">Ruta</th>
+                <th scope="col">Fecha</th>
                 <th class="text-center" scope="col">Confirmada</th>
                 <th></th>
             </tr>
@@ -13,20 +14,19 @@
             <tbody>
             @foreach($reserves as $row)
                 <tr>
-
                     <td>{{$row->user->name}}</td>
                     <td>{{$row->user->email}}</td>
                     <td>{{$row->route->name}}</td>
+                    <td>{{$row->fecha_reserva}}</td>
                     <td class="text-center">
                         <a href="javascript:void(0)" wire:click="changeState({{$row->id}})">{!!($row->state == 1)?'<i class="fas fa-check-circle fa-2x" title="Activa"></i>':'<i class="fas fa-minus-circle fa-2x" title="Inactiva"></i>'!!}</a>
                     <td class="float-lg-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutes" wire:click="viewRoute({{$row->route_id}})" title="Editar"><i class="fas fa-eye"></i> Ver ruta</a>
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutes" wire:click="edit({{$row->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutesIntermediates" title="Rutas intermedias" wire:click="routeIntermediate('{{$row->id}}')"><i class="fas fa-map-signs"></i> Puntos intermedios</a>
-                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutes" wire:click="trash({{$row->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutesReserve" wire:click="viewReserve({{$row->id}})" title="Editar"><i class="fas fa-eye"></i> Ver reserva</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutesReserve" wire:click="edit({{$row->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
+                                <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalFormRoutesReserve" wire:click="trash({{$row->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
 
                             </div>
                         </div>

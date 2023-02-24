@@ -82,7 +82,6 @@ class AvisosComponent extends Component
         $this->setConfigModal();
         $this->colors = $this->getClassColor();
         $this->listAnswers = collect();
-      //  dd('pp');
         $this->listSubCategoryFilter = [];
         $this->setPatchToUpload('images/avisos');
     }
