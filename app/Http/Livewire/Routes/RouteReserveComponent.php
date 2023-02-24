@@ -94,7 +94,8 @@ class RouteReserveComponent extends Component
         RouteReserve::create([
             'user_id'=>$this->userSelected->id,
             'route_id'=>$this->routeSelected,
-            'fecha_reserva'=>$this->encodeTime()
+            'fecha_reserva'=>$this->encodeTime(),
+            'instance_id'=>$this->instanceSelected
         ]);
         $this->resetProps();
         $this->emit('resetUserSelected');
@@ -127,7 +128,8 @@ class RouteReserveComponent extends Component
             $routeReserve->fill([
                 'user_id'=>$this->userSelected->id,
                 'route_id'=>$this->routeSelected,
-                'fecha_reserva'=>$this->encodeTime()
+                'fecha_reserva'=>$this->encodeTime(),
+                'instance_id'=>$this->instanceSelected
             ])->save();
         $this->resetProps();
         $this->emit('resetUserSelected');
@@ -152,6 +154,10 @@ class RouteReserveComponent extends Component
         $this->modalModeDestroy = false;
         $this->viewReserve = true;
         $this->reserve = $routeReserve;
+    }
+
+    public function checkReserve(RouteReserve $routeReserve){
+
     }
 
     public function render()

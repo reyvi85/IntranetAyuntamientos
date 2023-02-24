@@ -85,6 +85,10 @@ class Instance extends Model
         return $this->hasMany(Route::class);
     }
 
+    public function route_reserves(){
+        return $this->hasMany(RouteReserve::class);
+    }
+
 
 
 

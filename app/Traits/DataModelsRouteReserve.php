@@ -30,12 +30,12 @@ trait DataModelsRouteReserve
                     $q->when($search, function ($q)use($search){
                         $q->where('name','like', '%'.$search.'%')
                             ->orWhere('description','like', '%'.$search.'%');
-                    })
-                    ->when($instancia, function ($q)use($instancia){
-                        $q->where('instance_id', $instancia);
                     });
                 }
             ])
+            ->when($instancia, function ($q)use($instancia){
+                $q->where('instance_id', $instancia);
+            })
             ->when($state, function ($q) use($state){
                 $q->where('state', $state);
             })
