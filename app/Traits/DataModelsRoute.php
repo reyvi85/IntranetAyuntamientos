@@ -29,6 +29,13 @@ trait DataModelsRoute
                     ->orWhere('description','like', '%'.$search.'%');
             })
             ->orderBy($sort, $direction)
-            ->paginate();
+            ->paginate(10, ['*'],'pageRoutes');
     }
+
+    public function getRoutesPerInstance($instance){
+        return Route::where('instance_id', $instance)
+            ->get();
+    }
+
+
 }

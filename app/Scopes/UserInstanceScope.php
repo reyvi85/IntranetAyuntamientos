@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserInstanceScope implements Scope
 {
-
-
     public function apply(Builder $builder, Model $model)
     {
         if(Auth::check() && Auth::user()->rol != 'Super-Administrador'){

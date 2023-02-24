@@ -37,4 +37,8 @@ trait DataModelsUser
             ->paginate();
     }
 
+    public function getUsersPerInstances($instance, $perPage = 15){
+        return User::where('instance_id', $instance)->paginate($perPage,['*'],'usersPage');
+    }
+
 }

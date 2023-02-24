@@ -35,6 +35,7 @@
         window.livewire.on('saveModal', () => {
             $('#modalFormRoutes').modal('hide');
             $('#modalFormCategory').modal('hide');
+            $('#modalFormRoutesReserve').modal('hide');
         });
 
         window.livewire.on('createRoute', () => {

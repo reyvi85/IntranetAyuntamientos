@@ -78,7 +78,9 @@ trait DataModels {
         }
     }
     public function updatedSearch(){
-        $this->resetPage();
+        if(trait_exists('WithPagination')){
+            $this->resetPage();
+        }
     }
     public function updatedInstancias(){
         $this->resetPage();
