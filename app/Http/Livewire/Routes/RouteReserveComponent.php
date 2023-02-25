@@ -22,6 +22,7 @@ class RouteReserveComponent extends Component
         $routeSelected,
         $dia, $mes, $year, $hrs, $min,
         $userSelected,
+        $reserveSelected,
         $viewReserve = false,
         $reserve,
         $listRoutes;
@@ -58,7 +59,7 @@ class RouteReserveComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['routeSelected', 'userSelected', 'dia', 'mes', 'year', 'hrs', 'min', 'viewReserve', 'modalModeDestroy']);
+        $this->reset(['routeSelected', 'userSelected', 'dia', 'mes', 'year', 'hrs', 'min', 'viewReserve', 'modalModeDestroy', 'reserveSelected']);
         //$this->resetPage();
     }
 
@@ -104,13 +105,15 @@ class RouteReserveComponent extends Component
 
     public function edit(RouteReserve $routeReserve){
         $this->resetProps();
+      //  dd($routeReserve);
         $this->setConfigModal('Editar', 'fa-edit', 'edit');
 
-        $this->instanceSelected = $routeReserve->route->instance_id;
+        $this->instanceSelected = $routeReserve->instance_id;
+        $this->reserveSelected = $routeReserve->id;
 
         $this->listRoutes = $this->getRoutesPerInstance($this->instanceSelected);
         $this->userSelected = $routeReserve->user_id;
-        $this->routeSelected = $routeReserve->id;
+        $this->routeSelected = $routeReserve->route_id;
         $this->decodeTime($routeReserve->fecha_reserva);
 
         $this->emit('selectInstance', $this->instanceSelected);

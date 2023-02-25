@@ -25,11 +25,11 @@
                 @if(!$viewReserve)
                     @switch($modalConfig['action'])
                         @case('edit')
-                        <button type="button" class="btn btn-primary" wire:click="reserveUdpt({{$routeSelected}})"  wire:loading.attr="disabled" wire:target="reserveUdpt"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                        <button type="button" class="btn btn-primary" wire:click="reserveUdpt({{$reserveSelected}})"  wire:loading.attr="disabled" wire:target="reserveUdpt"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                         @break
 
                         @case('trash')
-                        <button type="button" class="btn btn-danger" wire:click="destroy({{$routeSelected}})" wire:loading.attr="disabled"  wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
+                        <button type="button" class="btn btn-danger" wire:click="destroy({{$reserveSelected}})" wire:loading.attr="disabled"  wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
                         @break
 
                         @default
