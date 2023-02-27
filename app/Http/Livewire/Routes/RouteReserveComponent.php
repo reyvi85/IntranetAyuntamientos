@@ -134,7 +134,8 @@ class RouteReserveComponent extends Component
                 'user_id'=>$this->userSelected->id,
                 'route_id'=>$this->routeSelected,
                 'fecha_reserva'=>$this->encodeTime(),
-                'instance_id'=>$this->instanceSelected
+                'instance_id'=>$this->instanceSelected,
+                'state'=>false
             ])->save();
         $this->resetProps();
         $this->emit('resetUserSelected');
