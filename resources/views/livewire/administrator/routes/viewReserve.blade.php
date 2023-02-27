@@ -11,7 +11,8 @@
         @if($reserve->state)
             <p class="h5"><i class="fas fa-check"></i> Esta reserva ha sido confirmada!</p>
         @else
-            <button class="btn btn-primary btn-block align-middle" wire:click="checkReserve('{{$reserve->id}}')"><i class="fas fa-paper-plane"></i> Confirmar reserva!</button>
+            <button class="btn btn-primary btn-block align-middle" wire:loading.attr="disabled"  wire:target="checkReserve" wire:click="checkReserve('{{$reserve->id}}')"><i class="fas fa-paper-plane"></i> Confirmar reserva!</button>
+            <div class="text-center text-muted" wire:loading wire:target="checkReserve"><i class="fas fa-spinner fa-spin"></i> Enviando confirmacion de ruta ...</div>
         @endif
     </div>
 </div>
