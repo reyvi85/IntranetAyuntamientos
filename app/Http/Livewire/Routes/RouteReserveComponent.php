@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Routes;
 
+use App\Mail\ConfirmRouteReserve;
 use App\Models\RouteReserve;
 use App\Models\User;
 use App\Traits\DataModels;
@@ -10,6 +11,7 @@ use App\Traits\DataModelsRoute;
 use App\Traits\DataModelsRouteReserve;
 use App\Traits\DataModelsUser;
 use App\Traits\Helper;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -160,7 +162,7 @@ class RouteReserveComponent extends Component
     }
 
     public function checkReserve(RouteReserve $routeReserve){
-
+        Mail::to($routeReserve->user->email)->send(new ConfirmRouteReserve($routeReserve));
     }
 
     public function render()
