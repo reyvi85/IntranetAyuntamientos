@@ -19,7 +19,8 @@
                     <td>{{$row->route->name}}</td>
                     <td>{{$row->fecha_reserva}}</td>
                     <td class="text-center">
-                        <a href="javascript:void(0)" wire:click="changeState({{$row->id}})">{!!($row->state == 1)?'<i class="fas fa-check-circle fa-2x" title="Activa"></i>':'<i class="fas fa-minus-circle fa-2x" title="Inactiva"></i>'!!}</a>
+                        {!!($row->state == 1)?'<i class="fas fa-check-circle fa-2x" title="Activa"></i>':'<i class="fas fa-minus-circle fa-2x" title="Inactiva"></i>'!!}
+                    </td>
                     <td class="float-lg-right">
                         <div class="btn-group">
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
