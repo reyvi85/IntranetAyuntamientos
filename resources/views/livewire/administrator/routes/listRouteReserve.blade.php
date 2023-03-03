@@ -7,6 +7,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Ruta</th>
                 <th scope="col">Fecha</th>
+                <th class="text-center" scope="col"># Personas</th>
                 <th class="text-center" scope="col">Confirmada</th>
                 <th></th>
             </tr>
@@ -18,6 +19,7 @@
                     <td>{{$row->user->email}}</td>
                     <td>{{$row->route->name}}</td>
                     <td>{{$row->fecha_reserva}}</td>
+                    <td class="text-center">{{$row->num_person}}</td>
                     <td class="text-center">
                         {!!($row->state == 1)?'<i class="fas fa-check-circle fa-2x" title="Activa"></i>':'<i class="fas fa-minus-circle fa-2x" title="Inactiva"></i>'!!}
                     </td>

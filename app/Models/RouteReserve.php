@@ -15,6 +15,7 @@ class RouteReserve extends Model
         'user_id',
         'route_id',
         'state',
+        'num_person',
         'fecha_reserva',
         'instance_id'
     ];

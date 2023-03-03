@@ -22,7 +22,7 @@ class RouteReserveComponent extends Component
     public $search,
         $filterState,
         $routeSelected,
-        $dia, $mes, $year, $hrs, $min,
+        $dia, $mes, $year, $hrs, $min, $numPerson,
         $userSelected,
         $reserveSelected,
         $viewReserve = false,
@@ -34,6 +34,7 @@ class RouteReserveComponent extends Component
         'userSelected'=>'required',
         'instanceSelected'=>'required',
         'routeSelected'=>'required',
+        'numPerson'=>'required|numeric|integer',
         'dia'=>'required',
         'mes'=>'required',
         'year'=>'required',
@@ -44,6 +45,9 @@ class RouteReserveComponent extends Component
         'userSelected.required'=>'Debe de seleccionar un usuario!',
         'instanceSelected.required'=>'Debe seleccionar una instancia!',
         'routeSelected.required'=>'Debe seleccionar una ruta!',
+        'numPerson.required'=>'Debe de especificar el número de personas',
+        'numPerson.numeric'=>'El número de personas debe de ser un número',
+        'numPerson.integer'=>'El número de personas debe de ser un número entero',
         'year.required'=>'El campo año es obligatorio.',
         'hrs.required'=>'El campo hora es obligatorio.',
         'min.required'=>'El campo minutos es obligatorio.',
@@ -61,8 +65,8 @@ class RouteReserveComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['routeSelected', 'userSelected', 'dia', 'mes', 'year', 'hrs', 'min', 'viewReserve', 'modalModeDestroy', 'reserveSelected']);
-        //$this->resetPage();
+        $this->reset(['routeSelected', 'userSelected', 'dia', 'mes', 'year', 'hrs', 'min', 'viewReserve', 'modalModeDestroy', 'reserveSelected', 'numPerson']);
+        $this->resetErrorBag();
     }
 
     protected function encodeTime(){
@@ -98,6 +102,7 @@ class RouteReserveComponent extends Component
             'user_id'=>$this->userSelected->id,
             'route_id'=>$this->routeSelected,
             'fecha_reserva'=>$this->encodeTime(),
+            'num_person'=>$this->numPerson,
             'instance_id'=>$this->instanceSelected
         ]);
         $this->resetProps();
@@ -116,6 +121,7 @@ class RouteReserveComponent extends Component
         $this->listRoutes = $this->getRoutesPerInstance($this->instanceSelected);
         $this->userSelected = $routeReserve->user_id;
         $this->routeSelected = $routeReserve->route_id;
+        $this->numPerson = $routeReserve->num_person;
         $this->decodeTime($routeReserve->fecha_reserva);
 
         $this->emit('selectInstance', $this->instanceSelected);
@@ -133,6 +139,7 @@ class RouteReserveComponent extends Component
             $routeReserve->fill([
                 'user_id'=>$this->userSelected->id,
                 'route_id'=>$this->routeSelected,
+                'num_person'=>$this->numPerson,
                 'fecha_reserva'=>$this->encodeTime(),
                 'instance_id'=>$this->instanceSelected,
                 'state'=>false

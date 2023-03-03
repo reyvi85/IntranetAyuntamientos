@@ -23,6 +23,11 @@
 
 <div class="form-row">
     <div class="form-group col-md-2">
+        <label for="name"># Personas:</label>
+        <input type="text" class="form-control @error('numPerson') is-invalid @enderror" id="name" wire:model.defer="numPerson">
+    </div>
+
+    <div class="form-group col-md-2">
         <label>Día:</label>
         <select class="form-control @error('dia') is-invalid @enderror" wire:model="dia">
             <option value="">-- Día --</option>
