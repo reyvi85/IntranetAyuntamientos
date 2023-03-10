@@ -28,6 +28,9 @@ trait DataModelsRoute
                 $q->where('name','like', '%'.$search.'%')
                     ->orWhere('description','like', '%'.$search.'%');
             })
+            ->when($instancia, function ($q) use($instancia){
+                $q->where('instance_id',$instancia);
+            })
             ->orderBy($sort, $direction)
             ->paginate(10, ['*'],'pageRoutes');
     }

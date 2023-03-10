@@ -293,9 +293,13 @@ trait DataAPIFront
     }
 
     public function getAllCategoryLocation(){
-        return LocationCategory::withCount(['locations'=>function($q){
+        return LocationCategory::withoutGlobalScopes()
+                ->withCount(['locations'=>function($q){
                     $q->GetInstance();
                  }])
+            ->whereHas('locations', function (Builder $query){
+                $query->GetInstance();
+            })
             ->orderBy('locations_count', 'desc')
             ->get();
 

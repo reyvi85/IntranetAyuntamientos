@@ -14,7 +14,6 @@ class RouteResourse extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'post',
             'id'=>(string)$this->resource->id,
             'name'=>$this->resource->name,
             'description'=>$this->resource->description,
