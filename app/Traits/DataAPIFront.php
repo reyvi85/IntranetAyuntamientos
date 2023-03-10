@@ -360,7 +360,9 @@ trait DataAPIFront
     public function getAllRoutesCategory(){
         return RouteCategory::withoutGlobalScopes()
             ->withCount('routes')
-            ->has('routes')
+            ->whereHas('routes', function (Builder $q){
+                $q->GetInstance();
+            })
             ->orderBy('routes_count','Desc')
             ->orderBy('name','Asc')
             ->get();
