@@ -133,6 +133,7 @@ class RoutesComponent extends Component
         $this->name = $route->name;
         $this->description = $route->description;
         $this->imageRoute = $route->imagen;
+        $this->price = $route->price;
         $this->inicio_ruta_name = $route->inicio_ruta_name;
         $this->inicio_ruta_direccion = $route->inicio_ruta_direccion;
         $this->inicio_ruta_description = $route->inicio_ruta_description;
