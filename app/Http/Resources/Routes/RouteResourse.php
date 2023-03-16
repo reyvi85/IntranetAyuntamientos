@@ -19,7 +19,7 @@ class RouteResourse extends JsonResource
             'description'=>$this->resource->description,
             'imagen'=>asset($this->resource->imagen),
             'state'=>(boolean)$this->resource->state,
-            'price'=>($this->resource->price == 0)?"0.0":$this->resource->price,
+            'price'=>(string)$this->resource->price,
             'inicio_ruta_name'=>$this->resource->inicio_ruta_name,
             'inicio_ruta_direccion'=>$this->resource->inicio_ruta_direccion,
             'inicio_ruta_description'=>$this->resource->inicio_ruta_description,
