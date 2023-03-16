@@ -44,6 +44,7 @@ class AuthController extends Controller
             return response()->json([
                 'logged'=>false,
                 'access_token'=>null,
+                'user_id'=>null,
                 'message'=>'Credenciales inválidas'
             ],401);
         }
@@ -52,6 +53,7 @@ class AuthController extends Controller
         return response()->json([
             'logged'=>true,
             'access_token'=>$token,
+            'user_id'=>$user->id,
             'message'=>'Bienvenido '.$user->name,
 
         ]);
