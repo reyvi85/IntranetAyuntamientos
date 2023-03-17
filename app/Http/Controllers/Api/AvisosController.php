@@ -49,7 +49,7 @@ class  AvisosController extends Controller
             'image'=>$path,
             'lat'=>$request->latitud,
             'lng'=>$request->longitud,
-            'instance_id'=>auth()->user()->instance_id,
+            'instance_id'=>$request->instancia,
             'warning_state_id'=>1,
             'warning_sub_category_id'=> $this->getWarningSubCategoriesSinClasificar()->id,
             'user_id'=>auth()->id()
