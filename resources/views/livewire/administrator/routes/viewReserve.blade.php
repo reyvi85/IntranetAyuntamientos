@@ -5,7 +5,7 @@
             <i class="fas fa-envelope" title="Email"></i> {{$reserve->user->email}}<br>
             <i class="fas fa-calendar" title="Fecha de la reserva"></i> {{$reserve->fecha_reserva}}<br>
             <i class="fas fa-users" title="Número de personas"></i> {{$reserve->num_person}}<br>
-            <i class="fas fa-euro-sign" title="Precio"></i> {{$reserve->route->price * $reserve->num_person}}
+            <i class="fas fa-euro-sign" title="Precio"></i> {{($reserve->state)?$reserve->cost:$reserve->route->price * $reserve->num_person}}
         </p>
     </div>
     <div class="col-md-6">

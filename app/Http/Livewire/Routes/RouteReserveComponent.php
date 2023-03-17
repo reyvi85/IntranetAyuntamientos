@@ -171,7 +171,10 @@ class RouteReserveComponent extends Component
 
     public function checkReserve(RouteReserve $routeReserve){
         Mail::to($routeReserve->user->email)->send(new ConfirmRouteReserve($routeReserve));
-        $routeReserve->fill(['state'=>1])->save();
+        $routeReserve->fill([
+            'state'=>1,
+            'cost'=>$routeReserve->route->price * $routeReserve->num_person
+        ])->save();
         $this->emit('saveModal');
     }
 

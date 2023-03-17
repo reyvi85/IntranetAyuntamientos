@@ -30,6 +30,7 @@ class AuthController extends Controller
         return response()->json([
             'logged'=>true,
             'access_token'=>$token,
+            'user_id'=>$user->id,
             'message'=>'Registro completado con éxito!'
         ], 201);
     }

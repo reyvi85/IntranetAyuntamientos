@@ -112,5 +112,6 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
     Route::prefix('routes')->group(function (){
         Route::get('/',[RoutesController::class, 'index'])->name('route.index');
         Route::get('categories',[RoutesController::class, 'categories'])->name('route.category');
+        Route::get('reserves',[RoutesController::class, 'reserves'])->name('route.reserves');
     });
 });

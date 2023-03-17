@@ -21,6 +21,7 @@ use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Route;
 use App\Models\RouteCategory;
+use App\Models\RouteReserve;
 use App\Models\Warning;
 use App\Models\WarningAnswer;
 use App\Models\WarningCategory;
@@ -379,6 +380,16 @@ trait DataAPIFront
             })
             ->GetInstance()
             ->orderBy($sort, $direction)
+            ->get();
+    }
+
+    public function getRouteReserve($user = null){
+        return RouteReserve::with('user', 'route')
+            ->when($user, function ($q) use ($user){
+                $q->where('user_id', $user);
+            })
+            ->GetInstance()
+            ->orderBy('fecha_reserva', 'desc')
             ->get();
     }
 }
