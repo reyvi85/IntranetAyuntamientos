@@ -388,6 +388,7 @@ trait DataAPIFront
             ->when($user, function ($q) use ($user){
                 $q->where('user_id', $user);
             })
+            ->where('state', '=',1)
             ->GetInstance()
             ->orderBy('fecha_reserva', 'desc')
             ->get();
