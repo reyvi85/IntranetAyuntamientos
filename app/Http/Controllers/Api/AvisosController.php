@@ -15,10 +15,6 @@ use App\Http\Resources\Warning\WarningStateResourceCollection;
 use App\Http\Resources\Warning\WarningSubCategoryResource;
 use App\Http\Resources\Warning\WarningSubCategoryResourceCollection;
 use App\Models\Warning;
-use App\Models\WarningAnswer;
-use App\Models\WarningCategory;
-use App\Models\WarningState;
-use App\Models\WarningSubCategory;
 use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\NotificationsController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\WidgetsController;
 use App\Http\Controllers\Api\RoutesController;
+use App\Http\Controllers\Api\InstancesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -114,5 +115,9 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
         Route::get('categories',[RoutesController::class, 'categories'])->name('route.category');
         Route::get('reserves',[RoutesController::class, 'reserves'])->name('route.reserves');
         Route::post('reserves',[RoutesController::class, 'reserveStore'])->name('route.reserveStore')->middleware('auth:sanctum');;
+    });
+
+    Route::prefix('instancia')->group(function (){
+        Route::get('/',[InstancesController::class, 'showInstance'])->name('instance.show');
     });
 });

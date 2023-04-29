@@ -53,4 +53,8 @@ trait DataModelsInstances
     public function getAllInstace(){
         return Instance::all();
     }
+
+    public function getInstancePerKey($key){
+        return Instance::where('key',  $key)->first();
+    }
 }

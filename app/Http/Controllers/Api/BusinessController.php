@@ -8,7 +8,6 @@ use App\Http\Resources\Business\BusinessCategoryResourceCollection;
 use App\Http\Resources\Business\BusinessResource;
 use App\Http\Resources\Business\BusinessResourceCollection;
 use App\Models\Busine;
-use App\Models\CategoryBusine;
 use App\Traits\DataAPIFront;
 use Illuminate\Http\Request;
 
