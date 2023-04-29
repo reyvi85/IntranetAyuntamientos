@@ -5,17 +5,18 @@ namespace App\Http\Livewire\Instancias;
 use App\Models\Instance;
 use App\Traits\DataModelsComunityProvinces;
 use App\Traits\Helper;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use App\Traits\DataModels;
 use App\Traits\DataModelsInstances;
-use Illuminate\Support\Facades\Route;
 class InstanciasComponent extends Component
 {
-    use DataModels, Helper, DataModelsInstances,DataModelsComunityProvinces ,WithPagination;
+    use DataModels, Helper, DataModelsInstances,DataModelsComunityProvinces ,WithPagination, WithFileUploads;
 
-    public $name,
+    public $name, $description, $imagen,
         $instanceSelected,
         $municipio,
         $barrio,
@@ -26,7 +27,7 @@ class InstanciasComponent extends Component
         $lat,
         $lng,
         $listaModulos,
-
+        $imagenSelected,
         $selectedCommunity = null,
         $selectedProvince = null,
         $provincias = null,
@@ -54,6 +55,8 @@ class InstanciasComponent extends Component
 
     protected $rules =[
         'name'=>'required',
+        'description'=>'required',
+        'imagen'=>'required|image',
         'selectedCommunity'=>'required',
         'selectedProvince'=>'required',
         'municipio'=>'required',
@@ -73,6 +76,7 @@ class InstanciasComponent extends Component
         $this->modulos = [];
        $this->setConfigModal('Crear Instancia');
        $this->key = Str::random(64);
+        $this->setPatchToUpload('images/instancias');
     }
 
     public function render()
@@ -84,7 +88,7 @@ class InstanciasComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['instanceSelected','name', 'selectedCommunity', 'selectedProvince', 'provincias', 'municipio', 'barrio', 'postal_code','key', 'modulos']);
+        $this->reset(['instanceSelected','name', 'selectedCommunity', 'selectedProvince', 'provincias', 'municipio', 'barrio', 'postal_code','key', 'modulos', 'description', 'imagen', 'imagenSelected']);
         $this->setConfigModal();
         $this->resetErrorBag();
         $this->generateNewToken();
@@ -124,9 +128,11 @@ class InstanciasComponent extends Component
 
     public function storeInstance(){
         $this->validate();
-
+        $img = $this->imagen->store($this->getPatchToUpload(), 'public');
        $inst = Instance::create([
            'name'=>$this->name,
+           'description'=>$this->description,
+           'imagen'=>$img,
            'province_id'=>$this->selectedProvince ,
            'municipio'=>$this->municipio,
            'barrio'=>$this->barrio,
@@ -154,6 +160,8 @@ class InstanciasComponent extends Component
         $this->selectedProvince = $instance->province_id;
         $this->updatedSelectedCommunity($this->selectedCommunity);
         $this->name = $instance->name;
+        $this->description = $instance->description;
+        $this->imagenSelected = $instance->imagen;
         $this->municipio = $instance->municipio;
         $this->barrio = $instance->barrio;
         $this->postal_code = $instance->postal_code;
@@ -175,14 +183,26 @@ class InstanciasComponent extends Component
     {
         $this->validate([
             'name'=>'required',
+            'description'=>'required',
+            'imagen'=>'nullable|image',
             'selectedCommunity'=>'required',
             'selectedProvince'=>'required',
             'municipio'=>'required',
             'postal_code'=>'required',
             'key'=>'required|unique:instances,key,'.$instance->id,
         ]);
+
+        if($this->imagen){
+            Storage::disk('public')->delete($instance->imagen);
+            $img = $this->imagen->store($this->getPatchToUpload(), 'public');
+        }else{
+            $img = $instance->imagen;
+        }
+
         $instance->fill([
             'name'=>$this->name,
+            'description'=>$this->description,
+            'imagen'=>$img,
             'province_id'=>$this->selectedProvince ,
             'municipio'=>$this->municipio,
             'barrio'=>$this->barrio,
@@ -205,6 +225,7 @@ class InstanciasComponent extends Component
 
     public function destroy(Instance $instance){
        $instance->delete();
+       Storage::disk('public')->delete($instance->imagen);
        $this->resetProps();
        $this->modalModeDestroy = false;
         $this->emit('saveModal');

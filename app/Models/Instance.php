@@ -12,6 +12,8 @@ class Instance extends Model
 
     protected $fillable = [
         'name',
+        'description',
+        'imagen',
         'province_id' ,
         'municipio',
         'barrio',

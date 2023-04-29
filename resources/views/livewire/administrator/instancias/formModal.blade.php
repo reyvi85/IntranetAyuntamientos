@@ -21,6 +21,39 @@
                     </div>
 
                     <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label for="formGroupDescription">Descripción:</label>
+                            <textarea class="form-control @error('description') is-invalid @enderror" rows="5"  id="formGroupDescription" wire:model="description"></textarea>
+                            @error('description')
+                            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-4">
+                            <div class="form-group">
+                                <label>Imagen:</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input @error('imagen') is-invalid @enderror" id="customFileLang" lang="es" wire:model="imagen">
+                                    <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                    @error('imagen')
+                                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <div class="text-center text-muted align-middle" wire:loading.grid wire:target="imagen">
+                                    <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
+                                </div>
+
+                                @if ($imagen)
+                                    <img class="img-fluid img-thumbnail rounded" src="{{ $imagen->temporaryUrl() }}">
+                                @elseif(!is_null($imagenSelected))
+                                    <img class="img-fluid img-thumbnail rounded" src="{{asset($imagenSelected)}}">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
                         <div class="col-md-6 form-group">
                             <label>Comunidades:</label>
                             <select class="form-control @error('selectedCommunity') is-invalid @enderror" wire:model="selectedCommunity">
@@ -113,17 +146,17 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" wire:click="$set('modalModeDestroy', false)"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="updateInstance({{$instanceSelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="updateInstance({{$instanceSelected}})" wire:loading.attr="disabled" wire:target="imagen,updateInstance"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
-                    <button type="button" class="btn btn-danger" wire:click="destroy({{$instanceSelected}})" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
+                    <button type="button" class="btn btn-danger" wire:click="destroy({{$instanceSelected}})" wire:loading.attr="disabled" wire:loading.attr="disabled" wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
                     @break
 
                     @default
-                    <button type="button" class="btn btn-primary" wire:click="storeInstance" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
+                    <button type="button" class="btn btn-primary" wire:click="storeInstance" wire:loading.attr="disabled" wire:target="storeInstance, imagen"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
                 @endswitch
-                <div class="text-center text-muted" wire:loading wire:target="storeInstance"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="text-center text-muted" wire:loading wire:target="storeInstance, updateInstance, imagen, destroy"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>

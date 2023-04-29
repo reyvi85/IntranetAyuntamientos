@@ -8,6 +8,7 @@
 /public/images/widgets/*
 /public/images/events/*
 /public/images/rutas/*
+/public/images/instancias/*
 /storage/*.key
 /vendor
 .env

@@ -21,7 +21,6 @@ class PostController extends Controller
      * @return PostResourceCollection
      */
     public function index(Request $request){
-       //return Post::all();
       return PostResourceCollection::make($this->getPosts($request->search, $request->fecha, $request->sort, $request->perPage, $request->only));
 
     }
