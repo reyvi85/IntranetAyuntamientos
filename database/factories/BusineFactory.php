@@ -28,7 +28,7 @@ class BusineFactory extends Factory
             'direccion'=>$this->faker->address(),
             'telefono'=>$this->faker->phoneNumber(),
             'email'=>$this->faker->safeEmail(),
-            'logo'=>$this->faker->image(public_path('images/business'),640,480,null,false),
+            'logo'=>$this->faker->imageUrl(),
             'description'=>$this->faker->paragraph(),
             'url_web'=>$this->faker->url(),
             'slug'=>Str::slug($name),

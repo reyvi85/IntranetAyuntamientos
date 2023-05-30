@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeController,
+    App\Http\Controllers\DashboardController;
 use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\Instancias\InstanciasComponent,
     App\Http\Livewire\Usuarios\UsuariosComponent,
@@ -65,6 +66,8 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
         Route::get('/routes', function(){
             return view('livewire.administrator.routes.index');
         })->name('gestion.routes');
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     });
 
 });

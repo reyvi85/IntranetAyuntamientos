@@ -24,6 +24,8 @@ class InstanceFactory extends Factory
     {
         return [
             'name'=>$this->faker->sentence(),
+            'description'=>$this->faker->sentence(),
+            'imagen'=>$this->faker->imageUrl(),
             'province_id'=>rand(1,50),
             'municipio'=>$this->faker->word(),
             'barrio'=>$this->faker->word(),

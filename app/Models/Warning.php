@@ -22,7 +22,7 @@ class Warning extends Model
         'instance_id',
         'warning_state_id',
         'warning_sub_category_id',
-        'user_id'
+        'user_id', 'created_at'
     ];
 
     public $allowedSorts = ['id', 'asunto', 'created_at'];

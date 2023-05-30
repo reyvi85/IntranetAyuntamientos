@@ -57,9 +57,10 @@ trait Helper {
             ['id'=>5,'modulo'=>'Gestión de Noticias', 'icon'=>'fa-newspaper','routeName'=>'gestion.noticias', 'imagen'=>'noticias.jpg'],
             ['id'=>6,'modulo'=>'Directorio telefónico', 'icon'=>'fa-phone', 'routeName'=>'gestion.phones', 'imagen'=>'telefonos.jpg'],
             ['id'=>7,'modulo'=>'Localizaciones', 'icon'=>'fa-map-marker-alt', 'routeName'=>'gestion.localizaciones', 'imagen'=>'localizaciones.jpg'],
-            ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cogs', 'routeName'=>'home', 'imagen'=>'dashboard.jpg'],
+            ['id'=>8,'modulo'=>'Dashboard', 'icon'=>'fa-cogs', 'routeName'=>'dashboard.index', 'imagen'=>'dashboard.jpg'],
             ['id'=>9,'modulo'=>'Eventos', 'icon'=>'fa-cogs', 'routeName'=>'gestion.events', 'imagen'=>'eventos.jpg'],
             ['id'=>10,'modulo'=>'Rutas', 'icon'=>'fa-cogs', 'routeName'=>'gestion.routes', 'imagen'=>'turismo.jpg'],
+            ['id'=>11,'modulo'=>'Usuarios', 'icon'=>'fa-cogs', 'routeName'=>'usuarios', 'imagen'=>'usuarios.jpg'],
         ]);
     }
 

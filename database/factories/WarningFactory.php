@@ -35,6 +35,7 @@ class WarningFactory extends Factory
             'warning_state_id'=>rand(1,4),
             'warning_sub_category_id'=>$inst->sub_categories->random()->id,
             'user_id'=>rand(1,100),
+            'created_at'=>$this->faker->dateTimeBetween('2020/01/01', '2023/12/31')
         ];
     }
 }

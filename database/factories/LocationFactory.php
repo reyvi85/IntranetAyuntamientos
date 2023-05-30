@@ -22,7 +22,6 @@ class LocationFactory extends Factory
      */
     public function definition()
     {
-        $c = LocationCategory::select('id','instance_id')->get()->random();
         return [
             'name'=>$this->faker->sentence(),
             'description'=>$this->faker->text(),
@@ -33,8 +32,8 @@ class LocationFactory extends Factory
             'visitantes'=>$this->faker->boolean(),
             'residentes'=>$this->faker->boolean(),
             'inicio'=>$this->faker->boolean(),
-            'instance_id'=>$c->instance_id,
-            'location_category_id'=>$c->id,
+            'instance_id'=>rand(1,25),
+            'location_category_id'=>rand(1,150),
             'lat'=>$this->faker->latitude,
             'lng'=>$this->faker->longitude
         ];

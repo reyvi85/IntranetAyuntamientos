@@ -24,7 +24,6 @@ class LocationCategoryFactory extends Factory
         return [
             'name'=>$this->faker->sentence(4),
             'image'=>$this->faker->imageUrl(),
-            'instance_id'=>rand(1,25)
         ];
     }
 }
