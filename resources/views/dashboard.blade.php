@@ -6,9 +6,8 @@
             @slot('titulo')Dashboard @endslot
 
             @if (auth()->user()->rol =='Super-Administrador')
-                <div class="form-row">
-                    <form class="form-row" method="get">
-                        <div class="form-group col-md-8">
+                    <form class="row " method="get">
+                        <div class="col-md-8">
                             <select class="form-control" name="instancia">
                                 <option value="">-- Instancias --</option>
                                 @foreach($listInstance as $int)
@@ -16,13 +15,12 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="col-md-4">
                             <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-filter"></i> Filtrar</button>
                         </div>
-
                     </form>
-                </div>
             @endif
+            <hr>
                 <div class="row">
                 <div class="col-md-6">
                     {!! $warningsTotalChart->container() !!}
