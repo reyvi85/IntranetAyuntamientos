@@ -15,7 +15,7 @@ class WarningsTotalChart
     public function __construct(LarapexChart $chart)
     {
         $this->chart = $chart;
-        $query = $this->getStateWithWarning(request()->instance);
+        $query = $this->getStateWithWarning(request()->instancia);
         foreach ($query as $r){
             $this->data[] = $r->warnings_count;
             $this->labels[] = $r->name;

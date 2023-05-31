@@ -4,26 +4,41 @@
     <div class="col-12">
         @component('component.card')
             @slot('titulo')Dashboard @endslot
-            <div class="row">
-                <div class="col-md-12">
+
+            @if (auth()->user()->rol =='Super-Administrador')
+                <div class="form-row">
+                    <form class="form-row" method="get">
+                        <div class="form-group col-md-8">
+                            <select class="form-control" name="instancia">
+                                <option value="">-- Instancias --</option>
+                                @foreach($listInstance as $int)
+                                    <option value="{{$int->id}}" {{(request()->instancia == $int->id)?'selected':''}}>{{$int->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-filter"></i> Filtrar</button>
+                        </div>
+
+                    </form>
+                </div>
+            @endif
+                <div class="row">
+                <div class="col-md-6">
                     {!! $warningsTotalChart->container() !!}
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     {!! $statiscWarningChart->container() !!}
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     {!! $statiscUsersTotalChart->container() !!}
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     {!! $statiscUsersPerMonthChart->container() !!}
                 </div>
             </div>

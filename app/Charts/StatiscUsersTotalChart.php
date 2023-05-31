@@ -14,7 +14,7 @@ class StatiscUsersTotalChart
     public function __construct(LarapexChart $chart)
     {
         $this->chart = $chart;
-        $query = $this->getTotalUsers();
+        $query = $this->getTotalUsers(request()->instancia);
         foreach ($query as $r){
             $this->labels[] = $r->rol;
             $this->data[] = $r->Total;

@@ -15,8 +15,14 @@ trait DataModelsDashboard
 {
     public function getStateWithWarning($instancia = null){
         return WarningState::withCount(['warnings'=>function($q) use($instancia){
-            $q->when($instancia, function ($q) use($instancia){
-                $q->where('instance_id',$instancia);
+                    $q->where(function ($q) use($instancia){
+                if (Auth::user()->rol != 'Super-Administrador'){
+                    $q->where('warnings.instance_id', '=',Auth()->user()->instance_id);
+                }else{
+                    $q->when($instancia, function ($qr) use($instancia){
+                        $qr->where('warnings.instance_id', $instancia);
+                    });
+                }
             });
         }])
             ->get();
@@ -62,10 +68,21 @@ trait DataModelsDashboard
             ->get();
     }
 
-    public function getTotalUsers(){
+    public function getTotalUsers($instancia = null){
         return User::select(
             'rol', DB::raw('COUNT(*) as Total')
-        )
+            )
+            ->where(function ($q) use($instancia){
+                if (Auth::user()->rol != 'Super-Administrador'){
+                    $q->where('instance_id', '=',Auth()->user()->instance_id);
+                }else {
+                    $q->when($instancia, function ($qr) use ($instancia) {
+                        $qr->where('instance_id', $instancia);
+                    });
+                }
+            })
+
+
             ->groupBy('rol')
             ->get();
     }

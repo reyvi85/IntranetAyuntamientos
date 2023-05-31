@@ -22,7 +22,7 @@ class StatiscWarningChart
             ->setTitle('Avisos por meses')
             ->setSubtitle('Comportamiento de los avisos')
             ->setXAxis(['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']);
-        foreach ($this->getStatiscPerMonthWarning() as $st){
+        foreach ($this->getStatiscPerMonthWarning(request()->instancia) as $st){
            // dd($st);
             $gr->addData($st->Estado, [$st->Enero, $st->Febrero, $st->Marzo, $st->Abril, $st->Mayo, $st->Junio, $st->Julio, $st->Agosto, $st->Septiembre, $st->Octubre, $st->Noviembre, $st->Diciembre]);
         }
