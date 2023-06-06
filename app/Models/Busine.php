@@ -24,6 +24,7 @@ class Busine extends Model
         'description',
         'url_web',
         'slug',
+        'hit',
         'category_busine_id',
         'instance_id'
     ];

@@ -3,6 +3,7 @@
 namespace App\Models\Traits;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 trait HasInstance
@@ -30,6 +31,19 @@ trait HasInstance
            }
            return $q;
        }
+
+    }
+
+    public function scopeFilterInstance($query, $instancia){
+       return $query->where(function ($q) use($instancia){
+            if (Auth::user()->rol != 'Super-Administrador'){
+                $q->where('instance_id', '=',Auth()->user()->instance_id);
+            }else {
+                $q->when($instancia, function ($qr) use ($instancia) {
+                    $qr->where('instance_id', $instancia);
+                });
+            }
+        });
 
     }
 }

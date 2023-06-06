@@ -40,6 +40,21 @@
                     {!! $statiscUsersPerMonthChart->container() !!}
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    @include('dashboard.dataPost')
+                </div>
+
+                <div class="col-md-4">
+                    @include('dashboard.dataLocations')
+                </div>
+
+                <div class="col-md-4">
+                    @include('dashboard.dataBusines')
+                </div>
+            </div>
+
         @endcomponent
     </div>
 @endsection

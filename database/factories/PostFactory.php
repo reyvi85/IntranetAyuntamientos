@@ -34,6 +34,7 @@ class PostFactory extends Factory
             'residentes'=>rand(0,1),
             'inicio'=>rand(0,1),
             'slug'=>Str::slug($title),
+            'hit'=>rand(1,1000),
             'active'=>rand(0,1),
             'instance_id'=>rand(1,25)
         ];

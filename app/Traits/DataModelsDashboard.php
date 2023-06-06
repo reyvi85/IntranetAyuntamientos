@@ -4,6 +4,9 @@
 namespace App\Traits;
 
 
+use App\Models\Busine;
+use App\Models\Location;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Warning;
 use App\Models\WarningState;
@@ -54,15 +57,7 @@ trait DataModelsDashboard
                 DB::raw('COUNT(CASE WHEN MONTH(warnings.created_at) = 11 THEN warnings.id ELSE NULL END) as Noviembre'),
                 DB::raw('COUNT(CASE WHEN MONTH(warnings.created_at) = 12 THEN warnings.id ELSE NULL END) as Diciembre')
             )
-            ->where(function ($q) use($instancia){
-                if (Auth::user()->rol != 'Super-Administrador'){
-                    $q->where('warnings.instance_id', '=',Auth()->user()->instance_id);
-                        }else{
-                            $q->when($instancia, function ($qr) use($instancia){
-                                $qr->where('warnings.instance_id', $instancia);
-                            });
-                        }
-                    })
+            ->FilterInstance($instancia)
             ->join('warnings','warning_states.id', '=', 'warnings.warning_state_id')
             ->groupBy('warning_states.name')
             ->get();
@@ -72,17 +67,7 @@ trait DataModelsDashboard
         return User::select(
             'rol', DB::raw('COUNT(*) as Total')
             )
-            ->where(function ($q) use($instancia){
-                if (Auth::user()->rol != 'Super-Administrador'){
-                    $q->where('instance_id', '=',Auth()->user()->instance_id);
-                }else {
-                    $q->when($instancia, function ($qr) use ($instancia) {
-                        $qr->where('instance_id', $instancia);
-                    });
-                }
-            })
-
-
+            ->FilterInstance($instancia)
             ->groupBy('rol')
             ->get();
     }
@@ -103,17 +88,45 @@ trait DataModelsDashboard
             DB::raw('COUNT(CASE WHEN MONTH(created_at) = 11 THEN id ELSE NULL END) as Noviembre'),
             DB::raw('COUNT(CASE WHEN MONTH(created_at) = 12 THEN id ELSE NULL END) as Diciembre')
         )
-            ->where(function ($q) use($instancia){
-                if (Auth::user()->rol != 'Super-Administrador'){
-                    $q->where('instance_id', '=',Auth()->user()->instance_id);
-                }else{
-                    $q->when($instancia, function ($qr) use($instancia){
-                        $qr->where('instance_id', $instancia);
-                    });
-                }
-            })
+            ->FilterInstance($instancia)
             ->groupBy('rol')
             ->get();
     }
+    /**
+     *  P O S T
+    */
+    public function getPostMostPopular($instancia=null, $cantidad = 5){
+        return Post::select('titulo', 'hit')
+            ->FilterInstance($instancia)
+            ->orderBy('hit', 'Desc')
+            ->limit($cantidad)
+            ->get();
+    }
+
+    /**
+     * L O C A T I O N S
+    */
+
+    public function getLocationsMostPopular($instancia=null, $cantidad = 5){
+        return Location::select('name', 'hit')
+            ->FilterInstance($instancia)
+            ->orderBy('hit', 'Desc')
+            ->limit($cantidad)
+            ->get();
+    }
+
+    /**
+     * B U S I N E S
+    */
+
+    public function getBusinesMostPopular($instancia=null, $cantidad = 5){
+        return Busine::select('name', 'hit')
+            ->FilterInstance($instancia)
+            ->orderBy('hit', 'Desc')
+            ->limit($cantidad)
+            ->get();
+    }
+
+
 }
 

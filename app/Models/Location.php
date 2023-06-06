@@ -26,7 +26,8 @@ class Location extends Model
         'instance_id',
         'location_category_id',
         'lat',
-        'lng'
+        'lng',
+        'hit'
     ];
 
     protected $casts = [

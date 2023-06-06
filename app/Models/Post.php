@@ -24,6 +24,7 @@ class Post extends Model
         'residentes',
         'inicio',
         'slug',
+        'hit',
         'active',
         'instance_id'
     ];

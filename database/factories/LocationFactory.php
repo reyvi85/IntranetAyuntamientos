@@ -35,7 +35,8 @@ class LocationFactory extends Factory
             'instance_id'=>rand(1,25),
             'location_category_id'=>rand(1,150),
             'lat'=>$this->faker->latitude,
-            'lng'=>$this->faker->longitude
+            'lng'=>$this->faker->longitude,
+            'hit'=>rand(1,1000),
         ];
     }
 }

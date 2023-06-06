@@ -33,7 +33,8 @@ class BusineFactory extends Factory
             'url_web'=>$this->faker->url(),
             'slug'=>Str::slug($name),
             'category_busine_id'=>rand(1,25),
-            'instance_id'=>rand(1,25)
+            'instance_id'=>rand(1,25),
+            'hit'=>rand(1,1000)
         ];
     }
 }
