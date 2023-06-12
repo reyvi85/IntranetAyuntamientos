@@ -5,8 +5,10 @@ namespace App\Traits;
 
 
 use App\Models\Busine;
+use App\Models\Event;
 use App\Models\Location;
 use App\Models\Post;
+use App\Models\Route;
 use App\Models\User;
 use App\Models\Warning;
 use App\Models\WarningState;
@@ -93,14 +95,22 @@ trait DataModelsDashboard
             ->get();
     }
     /**
-     *  P O S T
+     * Most Popular method
     */
-    public function getPostMostPopular($instancia=null, $cantidad = 5){
-        return Post::select('titulo', 'hit')
+
+    public function getMostPopular($model, $campos=array(), $instancia=null, $cantidad = 5){
+        return $model::select($campos)
             ->FilterInstance($instancia)
             ->orderBy('hit', 'Desc')
             ->limit($cantidad)
             ->get();
+    }
+
+    /**
+     *  P O S T
+    */
+    public function getPostMostPopular($instancia=null, $cantidad = 5){
+        return $this->getMostPopular(Post::class, ['titulo', 'hit'], $instancia, $cantidad);
     }
 
     /**
@@ -108,11 +118,7 @@ trait DataModelsDashboard
     */
 
     public function getLocationsMostPopular($instancia=null, $cantidad = 5){
-        return Location::select('name', 'hit')
-            ->FilterInstance($instancia)
-            ->orderBy('hit', 'Desc')
-            ->limit($cantidad)
-            ->get();
+        return $this->getMostPopular(Location::class, ['name', 'hit'], $instancia, $cantidad);
     }
 
     /**
@@ -120,13 +126,49 @@ trait DataModelsDashboard
     */
 
     public function getBusinesMostPopular($instancia=null, $cantidad = 5){
-        return Busine::select('name', 'hit')
-            ->FilterInstance($instancia)
-            ->orderBy('hit', 'Desc')
-            ->limit($cantidad)
-            ->get();
+        return $this->getMostPopular(Busine::class, ['name', 'hit'], $instancia, $cantidad);
     }
 
+    /**
+     * E V E N T S
+     */
+
+    public function getEventsMostPopular($instancia=null, $cantidad = 5){
+        return $this->getMostPopular(Event::class, ['titulo', 'hit'], $instancia, $cantidad);
+    }
+/**
+     * E V E N T S
+     */
+
+    public function getRoutesMostPopular($instancia=null, $cantidad = 5){
+        return $this->getMostPopular(Route::class, ['name', 'hit'], $instancia, $cantidad);
+    }
+
+    public function increments($model, $id){
+        $model::increment('hit');
+        return response()->json([
+            'message'=>'Incrementado registro!'
+        ], 201);
+    }
+
+    public function getCounter($model, $id){
+        switch ($model){
+            case 'post':
+               return $this->increments(Post::class, $id);
+            case 'location':
+                return $this->increments(Location::class, $id);
+            case 'business':
+                return $this->increments(Busine::class, $id);
+            case 'event':
+                return $this->increments(Event::class, $id);
+            case 'route':
+                return $this->increments(Route::class, $id);
+            default:
+                return response()->json([
+                    'message'=>'La solicitud no fue válida!'
+                ], 400);
+        }
+    }
 
 }
 

@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\WidgetsController;
 use App\Http\Controllers\Api\RoutesController;
 use App\Http\Controllers\Api\InstancesController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
 Route::get('/user',[AuthController::class, 'userInfo'])->middleware('auth:sanctum');
-
+Route::get('/counter/{model}/{id}',[DashboardController::class, 'counterHit']);
 
 Route::prefix('v1')->middleware('checkInstance')->group(function (){
     /**
@@ -59,6 +60,7 @@ Route::prefix('v1')->middleware('checkInstance')->group(function (){
         Route::get('/', [BusinessController::class, 'index'])->name('api.bussiness.index');
         Route::get('/categories', [BusinessController::class, 'businessCategoryIndex'])->name('api.bussinessCategory.index');
         Route::get('/{busine}', [BusinessController::class, 'businessShow'])->name('api.bussiness.show');
+        Route::post('/{busine}', [BusinessController::class, 'getPlusHit'])->name('api.bussiness.increment');
         Route::get('/categories/{categoryBusine}', [BusinessController::class, 'businessCategoryShow'])->name('api.bussinessCategory.show');
     });
     /**

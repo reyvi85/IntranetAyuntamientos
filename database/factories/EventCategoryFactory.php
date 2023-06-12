@@ -22,7 +22,8 @@ class EventCategoryFactory extends Factory
     public function definition()
     {
         return [
-           'name'=>$this->faker->word()
+           'name'=>$this->faker->word(),
+           'image'=>$this->faker->imageUrl()
         ];
     }
 }

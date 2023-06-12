@@ -55,6 +55,16 @@
                 </div>
             </div>
 
+                <div class="row mt-2">
+                    <div class="col-md-4">
+                        @include('dashboard.dataEvents')
+                    </div>
+
+                    <div class="col-md-4">
+                        @include('dashboard.dataRoutes')
+                    </div>
+                </div>
+
         @endcomponent
     </div>
 @endsection

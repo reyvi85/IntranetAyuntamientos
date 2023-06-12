@@ -8,6 +8,7 @@ use App\Models\CategoryBusine;
 use App\Models\CategoryNotification;
 use App\Models\Community;
 use App\Models\Event;
+use App\Models\EventCategory;
 use App\Models\Instance;
 use App\Models\InterestPhone;
 use App\Models\Location;
@@ -15,6 +16,8 @@ use App\Models\LocationCategory;
 use App\Models\Notification;
 use App\Models\Post;
 use App\Models\Province;
+use App\Models\Route;
+use App\Models\RouteCategory;
 use App\Models\User;
 use App\Models\Warning;
 use App\Models\WarningAnswer;
@@ -56,7 +59,10 @@ class DatabaseSeeder extends Seeder
         WarningAnswer::factory(1500)->create();
         Post::factory(1500)->create();
         Widget::factory(1500)->create();
+        EventCategory::factory(25)->create();
+        Event::factory(1500)->create();
 
-        Event::factory(2000)->create();
+        RouteCategory::factory(25)->create();
+        Route::factory(1500)->create();
     }
 }

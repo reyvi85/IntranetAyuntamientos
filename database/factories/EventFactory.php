@@ -33,7 +33,8 @@ class EventFactory extends Factory
             'f_inicio'=>$this->faker->date(),
             'f_fin'=>$this->faker->date(),
             'instance_id'=>rand(1,25),
-            'event_category_id'=>rand(1,25)
+            'event_category_id'=>rand(1,25),
+            'hit'=>rand(1,1000),
         ];
     }
 }

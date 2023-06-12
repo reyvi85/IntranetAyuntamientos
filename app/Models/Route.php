@@ -26,7 +26,8 @@ class Route extends Model
         'fin_ruta_description',
         'fin_ruta_imagen',
         'instance_id',
-        'route_category_id'
+        'route_category_id',
+        'hit'
     ];
 
     public function instance(){

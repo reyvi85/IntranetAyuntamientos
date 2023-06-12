@@ -22,7 +22,8 @@ class Event extends Model
         'f_inicio',
         'f_fin',
         'instance_id',
-        'event_category_id'
+        'event_category_id',
+        'hit'
     ];
 
     protected $casts = [

@@ -41,4 +41,12 @@ class BusinessController extends Controller
         $categoryBusine  = $this->getBusinessCategory(request()->categoryBusine);
         return BusinessCategoryResource::make($categoryBusine);
     }
+
+    /**
+     * Incrementar hit de Busines
+     */
+
+    public function getPlusHit(Busine $busine){
+        return $busine->increment('hit');
+    }
 }
