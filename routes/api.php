@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register',[AuthController::class, 'register']);
 Route::post('/login',[AuthController::class, 'login']);
 Route::get('/user',[AuthController::class, 'userInfo'])->middleware('auth:sanctum');
-Route::get('/counter/{model}/{id}',[DashboardController::class, 'counterHit']);
+Route::post('/counter/{model}/{id}',[DashboardController::class, 'counterHit']);
 
 Route::prefix('v1')->middleware('checkInstance')->group(function (){
     /**

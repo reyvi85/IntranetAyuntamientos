@@ -145,7 +145,7 @@ trait DataModelsDashboard
     }
 
     public function increments($model, $id){
-        $model::increment('hit');
+        $model::find($id)->increment('hit');
         return response()->json([
             'message'=>'Incrementado registro!'
         ], 201);
