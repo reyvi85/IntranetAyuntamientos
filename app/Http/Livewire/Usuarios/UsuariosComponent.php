@@ -76,6 +76,12 @@ class UsuariosComponent extends Component
         $this->resetPage();
     }
 
+    public function updatedRol($role){
+        if ($role == 'Comerciante'){
+            dd($role);
+        }
+    }
+
     public function updatedFilterRol(){
         $this->resetPage();
     }

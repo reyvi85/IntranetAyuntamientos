@@ -15,7 +15,7 @@ trait Helper {
     }
 
     public function getUsersRoles(){
-        $roles = [1=>'Super-Administrador', 2=>'Administrador-Instancia', 3=>'Gestor-Instancia', 4=>'Comerciante', 5=>'Usuarios'];
+        $roles = [1=>'Super-Administrador', 2=>'Administrador-Instancia', 3=>'Gestor-Instancia', 4=>'Usuarios'];
         $data = collect($roles);
         if(Auth::user()->rol !='Super-Administrador'){
            $aux =  $data->except(1);

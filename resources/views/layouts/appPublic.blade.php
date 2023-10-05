@@ -25,7 +25,7 @@
 </head>
 <body>
 
-    <div id="intro" class="container-fluid py-4 shadow-lg">
+    <div id="intro" class="container-fluid py-4">
             @yield('content')
     </div>
         <!-- Scripts -->

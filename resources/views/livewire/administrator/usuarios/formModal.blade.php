@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <label for="rol">Rol:</label>
-                            <select class="form-control @error('rol') is-invalid @enderror" wire:model.defer="rol">
+                            <select class="form-control @error('rol') is-invalid @enderror" wire:model="rol">
                                 <option value="">-- Roles --</option>
                                 @foreach($listRoles as $item)
                                     <option value="{{$item}}">{{$item}}</option>

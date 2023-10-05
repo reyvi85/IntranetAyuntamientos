@@ -10,7 +10,8 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\Business\ShowPublicBusiness,
     App\Http\Livewire\InterestPhonesComponent,
     App\Http\Livewire\Noticias\NoticiasComponent,
-    App\Http\Livewire\Widget\WidgetsComponent;
+    App\Http\Livewire\Widget\WidgetsComponent,
+    App\Http\Livewire\Ampa\AmpaFrontComponent;
 use \Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +44,15 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
         Route::get('/noticias', NoticiasComponent::class)->name('gestion.noticias');
         Route::get('/widgets', WidgetsComponent::class)->name('gestion.widgets');
 
-        Route::get('/comercios', function(){
-            return view('livewire.administrator.business.index');
-        })->name('gestion.business');
+
+        Route::prefix('comercios')->group(function (){
+            Route::get('/', function(){
+                return view('livewire.administrator.business.index');
+            })->name('gestion.business');
+
+        });
+
+
 
         Route::get('/notificaciones', function(){
             return view('livewire.administrator.notification-component');
@@ -78,8 +85,9 @@ Route::get('cmd/{comando}', function($comando){
 })->middleware('checkRol:Super-Administrador');
 
 /** Componentes **/
-Route::prefix('component')->middleware('checkInstance')->group(function (){
-      Route::get('/business', ShowPublicBusiness::class)->name('business.show');
+Route::prefix('component')->group(function (){
+      Route::get('/business', ShowPublicBusiness::class)->middleware('checkInstance')->name('business.show');
+    Route::get('/ampa', AmpaFrontComponent::class)->name('ampa.index');
 });
 
 Auth::routes(['register' => false]);
