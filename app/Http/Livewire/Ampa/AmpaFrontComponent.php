@@ -23,6 +23,6 @@ class AmpaFrontComponent extends Component
     public function render()
     {
         return view('livewire.front.ampa-front-component')
-            ->extends('layouts.appPublic');;
+                    ->extends('layouts.appPublic');
     }
 }
