@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             @include('component.loading')
-            <h1>AMPA</h1>
+            <h1 class="text-center">A M P A</h1>
             <div class="row">
                     <div class="col-md-12 form-row">
                         <div class="form-group col-md-12">
@@ -11,43 +11,32 @@
 
                 </div>
             </div>
-
-            <div class="col-md-12">
-                @if(count($listAmpa) > 1)
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">DNI</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($listAmpa as $row)
-                            <tr>
-                                <th scope="row">{{$row->Nombre}}</th>
-                                <td>{{$row->Dni}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                @endif
-            </div>
         </div>
     </div>
 
     @if(count($listAmpa) == 1)
         <div class="row">
-            <div class="col-md-4">
-                <i class="fas fa-check-circle fa-10x" style="color: #1d643b"></i>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-success text-white"><h4><i class="fas fa-check-circle"></i> {{$listAmpa->first()->Nombre}} </h4></div>
+                    <div class="card-body">
+                        <p class="text-center h4"> DNI: {{$listAmpa->first()->Dni}}</p>
+                        <p class="text-center"> Cliente confirmado correctamente!</p>
+
+                    </div>
+                </div>
             </div>
         </div>
-    @elseif(count($listAmpa) == 0)
+    @elseif($is_empty != false )
         <div class="row">
-            <div class="col-md-4">
-                <i class="fas fa-window-close fa-10x" style="color: #761b18"></i>
-            </div>
-            <div class="col-md-8">
-                <p class="text-center">No hay datos relacionados a este cliente!</p>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-danger text-white"><h4><i class="fas fa-info-circle"></i> Error!</h4></div>
+                    <div class="card-body">
+                        <p class="text-center"> Este cliente no está en nuestros registros!</p>
+
+                    </div>
+                </div>
             </div>
         </div>
     @endif

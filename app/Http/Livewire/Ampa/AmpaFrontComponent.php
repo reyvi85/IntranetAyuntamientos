@@ -8,13 +8,15 @@ use Livewire\Component;
 class AmpaFrontComponent extends Component
 {
     use DataModelAmpa;
-    public $search, $listAmpa=[];
+    public $search, $listAmpa=[], $is_empty = false;
 
     public function updatedSearch(){
         if ($this->search == ""){
             $this->listAmpa =[];
+            $this->is_empty = false;
         }else{
             $this->listAmpa = $this->getClientAmpa($this->search);
+            $this->is_empty = true;
         }
     }
 
