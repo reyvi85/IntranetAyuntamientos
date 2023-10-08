@@ -1,9 +1,10 @@
-@section('title', 'A M P A')
+@section('title', 'Socios AMPA CEIP Ana María Matute')
 <div>
     <div class="row">
         <div class="col-md-12">
             @include('component.loading')
-            <h1 class="text-center">A M P A</h1>
+            <p class="text-center"><img class="img-fluid w-25" src="{{asset('images/logo-AMPA.png')}}"></p>
+            <h1 class="text-center">Socios AMPA CEIP Ana María Matute</h1>
             <div class="row">
                     <div class="col-md-12 form-row">
                         <div class="form-group col-md-12">
@@ -41,4 +42,19 @@
             </div>
         </div>
     @endif
+    <hr>
+    @if ($listBusiness->count())
+            @include('livewire.front.partial.businessBlock')
+    @else
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center">No hay comercios que mostrar!</p>
+            </div>
+        </div>
+    @endif
+    <div class="row mt-3">
+        <div class="col-md-12 d-flex justify-content-center">
+            {{$listBusiness->links()}}
+        </div>
+    </div>
 </div>

@@ -3,12 +3,16 @@
 namespace App\Http\Livewire\Ampa;
 
 use App\Traits\DataModelAmpa;
+use App\Traits\DataModelsBusiness;
 use Livewire\Component;
 
 class AmpaFrontComponent extends Component
 {
-    use DataModelAmpa;
-    public $search, $listAmpa=[], $is_empty = false;
+    use DataModelAmpa, DataModelsBusiness;
+    public $search,
+        $listAmpa=[],
+        $keyInst =  'DuoLMtXSpiXMaMZlQOGhZi6FIpX2i5toAfjoXMYBbTKSrzrgmDkslzbwNMbVAvO3', //'BQYgL0PQQClcQfZXewcFPTW5gf6NNLARd5y1CGdgpdlTfGk0OMwqEgMyuRBJ9pz0',
+        $is_empty = false;
 
     public function updatedSearch(){
         if ($this->search == ""){
@@ -22,7 +26,9 @@ class AmpaFrontComponent extends Component
 
     public function render()
     {
-        return view('livewire.front.ampa-front-component')
-                    ->extends('layouts.appPublic');
+        return view('livewire.front.ampa-front-component', [
+            'listBusiness' =>$this->getBusinessPublic($this->keyInst, null, null),
+            ])
+            ->extends('layouts.appPublic');
     }
 }
