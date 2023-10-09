@@ -8,7 +8,7 @@
             <div class="row">
                     <div class="col-md-12 form-row">
                         <div class="form-group col-md-12">
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Buscar" wire:model="search">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Validar DNI" wire:model="search">
                         </div>
 
                 </div>

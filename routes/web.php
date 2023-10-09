@@ -11,6 +11,7 @@ use App\Http\Livewire\ComunidadesProvinciasComponent,
     App\Http\Livewire\InterestPhonesComponent,
     App\Http\Livewire\Noticias\NoticiasComponent,
     App\Http\Livewire\Widget\WidgetsComponent,
+    \App\Http\Livewire\Ampa\Ampacomponent,
     App\Http\Livewire\Ampa\AmpaFrontComponent;
 use \Illuminate\Support\Facades\Artisan;
 /*
@@ -43,6 +44,7 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
         Route::get('/telefonos', InterestPhonesComponent::class)->name('gestion.phones');
         Route::get('/noticias', NoticiasComponent::class)->name('gestion.noticias');
         Route::get('/widgets', WidgetsComponent::class)->name('gestion.widgets');
+        Route::get('/ampa', Ampacomponent::class)->name('ampa.gestion');
 
 
         Route::prefix('comercios')->group(function (){

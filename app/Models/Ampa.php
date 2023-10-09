@@ -16,4 +16,16 @@ class Ampa extends Model
     ];
 
     protected $table = 'ampa';
+    public $timestamps = false;
+
+    public function setNombreAttribute($value)
+    {
+        $this->attributes['Nombre'] = strtoupper($value);
+    }
+
+    public function setDniAttribute($value)
+    {
+        $this->attributes['Dni'] = strtoupper($value);
+    }
+
 }

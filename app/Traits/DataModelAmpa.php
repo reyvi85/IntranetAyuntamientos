@@ -14,5 +14,11 @@ trait DataModelAmpa
               ->orWhere('Nombre','like','%'.$search.'%');
         })->get();
     }
+    public function getAllClientAmpa($search=null){
+        return Ampa::when($search !=null, function ($q) use($search){
+            $q->where('Dni',$search)
+              ->orWhere('Nombre','like','%'.$search.'%');
+        })->paginate(25);
+    }
 
 }

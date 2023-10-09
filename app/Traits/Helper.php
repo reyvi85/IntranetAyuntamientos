@@ -61,6 +61,7 @@ trait Helper {
             ['id'=>9,'modulo'=>'Eventos', 'icon'=>'fa-cogs', 'routeName'=>'gestion.events', 'imagen'=>'eventos.jpg'],
             ['id'=>10,'modulo'=>'Rutas', 'icon'=>'fa-cogs', 'routeName'=>'gestion.routes', 'imagen'=>'turismo.jpg'],
             ['id'=>11,'modulo'=>'Usuarios', 'icon'=>'fa-cogs', 'routeName'=>'usuarios', 'imagen'=>'usuarios.jpg'],
+            ['id'=>12,'modulo'=>'AMPA', 'icon'=>'fa-cogs', 'routeName'=>'ampa.gestion', 'imagen'=>'logo-AMPA.png'],
         ]);
     }
 
