@@ -24,10 +24,10 @@ use \Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
+
 Route::domain('ampamatutesocios.zitty.es')->group(function(){
     Route::get('/', AmpaFrontComponent::class)->name('ampa.index');
-});*/
+});
 
 Route::get('/', function () {
     return view('auth.login');
