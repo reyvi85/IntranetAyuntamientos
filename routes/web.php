@@ -25,6 +25,10 @@ use \Illuminate\Support\Facades\Artisan;
 |
 */
 
+Route::domain('ampamatutesocios.zitty.es')->group(function(){
+    Route::get('/', AmpaFrontComponent::class)->name('ampa.index');
+});
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -92,9 +96,7 @@ Route::prefix('component')->group(function (){
     //Route::get('/ampa', AmpaFrontComponent::class)->name('ampa.index');
 });
 
-Route::domain('ampamatutesocios.zitty.es')->group(function(){
-    Route::get('/', AmpaFrontComponent::class)->name('ampa.index');
-});
+
 
 Auth::routes(['register' => false]);
 
