@@ -14,6 +14,7 @@ class Ampa extends Model
       'Dni',
       'Active'
     ];
+    protected $primaryKey = 'Id';
 
     protected $table = 'ampa';
     public $timestamps = false;

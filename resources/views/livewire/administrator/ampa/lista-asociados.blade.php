@@ -29,8 +29,11 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" id="edit-({{$row->id}})" wire:click="edit({{$row->id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
-                            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$row->id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
+                            <a class="dropdown-item" href="javascript:void(0)" wire:click="changeToogle('{{$row->Id}}')"><i class="fas {{($row->Active == true)?'fa-check-circle':'fa-minus-circle'}}"></i> {{($row->Active == true)?'Desactivar':'Activar'}}</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" id="edit-({{$row->Id}})" wire:click="edit({{$row->Id}})" title="Editar"><i class="fas fa-edit"></i> Editar</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="javascript:void(0)" data-toggle="modal" data-target="#modalForm" wire:click="trash({{$row->Id}})" title="Eliminar"><i class="fas fa-trash"></i> Eliminar</a>
                         </div>
                     </div>
                 </td>

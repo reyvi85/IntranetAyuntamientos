@@ -24,10 +24,10 @@ use \Illuminate\Support\Facades\Artisan;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::domain('ampamatutesocios.zitty.es')->group(function(){
     Route::get('/', AmpaFrontComponent::class)->name('ampa.index');
-});
+});*/
 
 Route::get('/', function () {
     return view('auth.login');
@@ -48,7 +48,7 @@ Route::prefix('gestion')->middleware('auth')->group(function (){
         Route::get('/telefonos', InterestPhonesComponent::class)->name('gestion.phones');
         Route::get('/noticias', NoticiasComponent::class)->name('gestion.noticias');
         Route::get('/widgets', WidgetsComponent::class)->name('gestion.widgets');
-        Route::get('/ampa', Ampacomponent::class)->name('ampa.gestion');
+        Route::get('/sysampa', Ampacomponent::class)->name('ampa.gestion');
 
 
         Route::prefix('comercios')->group(function (){
@@ -93,7 +93,7 @@ Route::get('cmd/{comando}', function($comando){
 /** Componentes **/
 Route::prefix('component')->group(function (){
       Route::get('/business', ShowPublicBusiness::class)->middleware('checkInstance')->name('business.show');
-    //Route::get('/ampa', AmpaFrontComponent::class)->name('ampa.index');
+     // Route::get('/ampa', AmpaFrontComponent::class)->name('ampa.index');
 });
 
 

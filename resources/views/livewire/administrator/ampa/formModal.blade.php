@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 @if ($modalModeDestroy)
-                    <h3 class="text-center"> Confirma realmente que desea eliminar este asociado<br> <span class="text-danger font-weight-bolder">{{$nombre}} / {{$dni}}</span>?</h3>
+                    <h3 class="text-center"> Confirma realmente que desea eliminar este asociado<br> <span class="text-danger font-weight-bolder">{{$nombre}} / {{$dni}}</span></h3>
                 @else
                     <div class="row">
                         <div class="col-md-6">
@@ -38,11 +38,11 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update_widget({{$widgetSelected}})"  wire:loading.attr="disabled" wire:target="image,update_widget"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update_ampa({{$clientSelected}})"  wire:loading.attr="disabled" wire:target="image,update_ampa"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
-                    <button type="button" class="btn btn-danger" wire:click="destroy({{$widgetSelected}})" wire:loading.attr="disabled"  wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
+                    <button type="button" class="btn btn-danger" wire:click="destroy({{$clientSelected}})" wire:loading.attr="disabled"  wire:target="destroy"><i class="fas {{$modalConfig['icon']}}"></i> Sí, eliminar</button>
                     @break
 
                     @default
