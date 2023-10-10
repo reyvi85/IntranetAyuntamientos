@@ -89,7 +89,11 @@ Route::get('cmd/{comando}', function($comando){
 /** Componentes **/
 Route::prefix('component')->group(function (){
       Route::get('/business', ShowPublicBusiness::class)->middleware('checkInstance')->name('business.show');
-    Route::get('/ampa', AmpaFrontComponent::class)->name('ampa.index');
+    //Route::get('/ampa', AmpaFrontComponent::class)->name('ampa.index');
+});
+
+Route::domain('ampamatutesocios.zitty.es')->group(function(){
+    Route::get('/', AmpaFrontComponent::class)->name('ampa.index');
 });
 
 Auth::routes(['register' => false]);
