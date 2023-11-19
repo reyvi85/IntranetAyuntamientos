@@ -26,6 +26,12 @@ class InstanciasComponent extends Component
         $modulos,
         $lat,
         $lng,
+        $color_title = '#000000',
+        $color_sub_title = '#000000',
+        $background_color_dark = '#000000',
+        $background_color_dark_plus = '#000000',
+        $background_color_light = '#000000',
+
         $listaModulos,
         $imagenSelected,
         $selectedCommunity = null,
@@ -88,7 +94,20 @@ class InstanciasComponent extends Component
     }
 
     public function resetProps(){
-        $this->reset(['instanceSelected','name', 'selectedCommunity', 'selectedProvince', 'provincias', 'municipio', 'barrio', 'postal_code','key', 'modulos', 'description', 'imagen', 'imagenSelected']);
+        $this->reset(['instanceSelected',
+            'name',
+            'selectedCommunity',
+            'selectedProvince',
+            'provincias',
+            'municipio',
+            'barrio',
+            'postal_code','key', 'modulos', 'description', 'imagen',
+            'color_title',
+            'color_sub_title',
+            'background_color_dark',
+            'background_color_dark_plus',
+            'background_color_light',
+            'imagenSelected']);
         $this->setConfigModal();
         $this->resetErrorBag();
         $this->generateNewToken();
@@ -140,7 +159,12 @@ class InstanciasComponent extends Component
            'key'=>$this->key,
            'modulos'=>$this->addPermission(),
            'lat'=>$this->lat,
-           'lng'=>$this->lng
+           'lng'=>$this->lng,
+           'color_title'=>$this->color_title,
+           'color_sub_title'=>$this->color_sub_title,
+           'background_color_dark'=>$this->background_color_dark,
+           'background_color_dark_plus'=>$this->background_color_dark_plus,
+           'background_color_light'=>$this->background_color_light,
        ]);
        $inst->warning_categories()->create([
            'name'=>'Sin clasificar'
@@ -166,6 +190,11 @@ class InstanciasComponent extends Component
         $this->barrio = $instance->barrio;
         $this->postal_code = $instance->postal_code;
         $this->key = $instance->key;
+        $this->color_title = $instance->color_title;
+        $this->color_sub_title = $instance->color_sub_title;
+        $this->background_color_dark = $instance->background_color_dark;
+        $this->background_color_dark_plus = $instance->background_color_dark_plus;
+        $this->background_color_light = $instance->background_color_light;
         $this->lat = (is_null($instance->lat)?config('maps.lat_default'):$instance->lat);
         $this->lng = (is_null($instance->lng)?config('maps.lng_default'):$instance->lng);
 
@@ -210,7 +239,12 @@ class InstanciasComponent extends Component
             'key'=>$this->key,
             'modulos'=>$this->addPermission(),
             'lat'=>$this->lat,
-            'lng'=>$this->lng
+            'lng'=>$this->lng,
+            'color_title'=>$this->color_title,
+            'color_sub_title'=>$this->color_sub_title,
+            'background_color_dark'=>$this->background_color_dark,
+            'background_color_dark_plus'=>$this->background_color_dark_plus,
+            'background_color_light'=>$this->background_color_light,
         ])->save();
         $this->resetProps();
         $this->emit('saveModal');

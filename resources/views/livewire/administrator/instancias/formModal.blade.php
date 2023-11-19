@@ -53,6 +53,35 @@
                         </div>
                     </div>
 
+
+                <div class="row">
+                    <div class="col-md-2 form-group">
+                        <label for="titulo_color">Titulo:</label>
+                        <input type="color" class="form-control form-control-color" id="titulo_color" value="{{$color_title}}" wire:model="color_title">
+                    </div>
+
+                    <div class="col-md-2 form-group">
+                        <label for="color_sub_title" >Sub titulo:</label>
+                        <input type="color" class="form-control form-control-color" id="color_sub_title" value="{{$color_sub_title}}" wire:model="color_sub_title">
+                    </div>
+
+                    <div class="col-md-2 form-group">
+                        <label for="background_color_dark" >Fondo oscuro:</label>
+                        <input type="color" class="form-control form-control-color" id="background_color_dark" value="{{$background_color_dark}}" wire:model="background_color_dark">
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label for="background_color_dark_plus" >Fondo más oscuro:</label>
+                        <input type="color" class="form-control form-control-color" id="background_color_dark_plus" value="{{$background_color_dark_plus}}" wire:model="background_color_dark_plus">
+                    </div>
+
+                    <div class="col-md-3 form-group">
+                        <label for="background_color_light" >Fondo claro:</label>
+                        <input type="color" class="form-control form-control-color" id="background_color_light" value="{{$background_color_light}}" wire:model="background_color_light">
+                    </div>
+
+                </div>
+
                     <div class="form-row">
                         <div class="col-md-6 form-group">
                             <label>Comunidades:</label>

@@ -21,7 +21,12 @@ class Instance extends Model
         'key',
         'modulos',
         'lat',
-        'lng'
+        'lng',
+        'color_title',
+        'color_sub_title',
+        'background_color_dark',
+        'background_color_dark_plus',
+        'background_color_light'
     ];
 
     protected $casts = [
