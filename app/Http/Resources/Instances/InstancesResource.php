@@ -15,7 +15,7 @@ class InstancesResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->resource->id,
+            'id'=>(string)$this->resource->id,
             'nombre'=>$this->resource->name,
             'key'=>$this->resource->key,
             'descripcion'=>$this->resource->description,
@@ -27,11 +27,11 @@ class InstancesResource extends JsonResource
             'postalCode'=>$this->resource->postal_code,
             'latitud'=>$this->resource->lat,
             'longitud'=>$this->resource->lng,
-            'color_title'=>$this->resource->color_title,
-            'color_sub_title'=>$this->resource->color_sub_title,
-            'background_color_dark'=>$this->resource->background_color_dark,
-            'background_color_dark_plus'=>$this->resource->background_color_dark_plus,
-            'background_color_light'=>$this->resource->background_color_light,
+            'color_title'=>(string)$this->resource->color_title,
+            'color_sub_title'=>(string)$this->resource->color_sub_title,
+            'background_color_dark'=>(string)$this->resource->background_color_dark,
+            'background_color_dark_plus'=>(string)$this->resource->background_color_dark_plus,
+            'background_color_light'=>(string)$this->resource->background_color_light,
             'modulos'=>$this->resource->modulos
         ];
     }
