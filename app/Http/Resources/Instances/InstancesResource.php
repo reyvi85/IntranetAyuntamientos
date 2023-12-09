@@ -25,14 +25,14 @@ class InstancesResource extends JsonResource
             'municipio'=>$this->resource->municipio,
             'barrio'=>$this->resource->barrio,
             'postalCode'=>$this->resource->postal_code,
-            'latitud'=>$this->resource->lat,
-            'longitud'=>$this->resource->lng,
+            'latitud'=>(string)$this->resource->lat,
+            'longitud'=>(string)$this->resource->lng,
             'color_title'=>(string)$this->resource->color_title,
             'color_sub_title'=>(string)$this->resource->color_sub_title,
             'background_color_dark'=>(string)$this->resource->background_color_dark,
             'background_color_dark_plus'=>(string)$this->resource->background_color_dark_plus,
             'background_color_light'=>(string)$this->resource->background_color_light,
-            'modulos'=>$this->resource->modulos
+            'modulos'=>json_encode($this->resource->modulos)
         ];
     }
 }

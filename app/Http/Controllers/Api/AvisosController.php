@@ -32,7 +32,6 @@ class  AvisosController extends Controller
     }
     /** CREAR AVISO **/
     public function warningStore(WarningStoreRequest $request){
-
         if ($request->has('image')){
             $path = $request->image->store('images/avisos', 'public');
         }else{

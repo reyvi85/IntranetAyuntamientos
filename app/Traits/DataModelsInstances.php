@@ -51,7 +51,7 @@ trait DataModelsInstances
     }
 
     public function getAllInstace(){
-        return Instance::all();
+        return Instance::get();
     }
 
     public function getInstancePerKey($key){

@@ -36,14 +36,13 @@ Route::get('/user',[AuthController::class, 'userInfo'])->middleware('auth:sanctu
 Route::post('/counter/{model}/{id}',[DashboardController::class, 'counterHit']);
 
 Route::prefix('v1')->group(function (){
-
     Route::middleware('checkInstance')->group(function (){
         /**
          * AVISOS
          **/
         Route::prefix('warnings')->group(function (){
-            Route::get('/', [AvisosController::class, 'index'])->name('api.warning.index')->middleware('auth:sanctum');
-            Route::post('/warningStore', [AvisosController::class, 'warningStore'])->name('api.warning.store')->middleware('auth:sanctum');
+            Route::get('/', [AvisosController::class, 'index'])->middleware('auth:sanctum')->name('api.warning.index');
+            Route::post('/warningStore', [AvisosController::class, 'warningStore'])->middleware('auth:sanctum')->name('api.warning.store');
             Route::get('/show/{warning}', [AvisosController::class, 'show'])->name('api.warning.show');
             Route::get('/{id}/answer', [AvisosController::class, 'answerIndex'])->name('api.answer.index');
             Route::get('/answer/{warningAnswer}', [AvisosController::class, 'answerShow'])->name('api.answer.show');
