@@ -46,6 +46,7 @@ class AuthController extends Controller
                 'logged'=>false,
                 'access_token'=>null,
                 'user_id'=>null,
+                'instanceKey'=>null,
                 'message'=>'Credenciales inválidas'
             ],401);
         }
@@ -55,6 +56,7 @@ class AuthController extends Controller
             'logged'=>true,
             'access_token'=>$token,
             'user_id'=>$user->id,
+            'instanceKey'=>$user->instance->key,
             'message'=>'Bienvenido '.$user->name,
 
         ]);
