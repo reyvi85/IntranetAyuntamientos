@@ -57,6 +57,7 @@ class AuthController extends Controller
             'access_token'=>$token,
             'user_id'=>$user->id,
             'instanceKey'=>$user->instance->key,
+            'instanceId'=>$user->instance->id,
             'message'=>'Bienvenido '.$user->name,
 
         ]);
