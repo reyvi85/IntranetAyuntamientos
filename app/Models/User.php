@@ -57,6 +57,10 @@ class User extends Authenticatable
         return $this->belongsTo(Instance::class);
     }
 
+    public function instances(){
+        return $this->belongsToMany(Instance::class)->withTimestamps();
+    }
+
     public function warnings(){
         return $this->hasMany(Warning::class);
     }

@@ -123,6 +123,8 @@ Route::prefix('v1')->group(function (){
 
     Route::prefix('instancia')->group(function (){
         Route::get('/',[InstancesController::class, 'showInstance'])->middleware('checkInstance')->name('instance.show');
+        Route::get('/user',[InstancesController::class, 'user'])->middleware('auth:sanctum')->name('instance.user');
+        Route::post('/addUser',[InstancesController::class, 'AddUserInstancia'])->middleware('auth:sanctum')->name('instance.adduser');
         Route::get('/all',[InstancesController::class, 'index'])->name('instance.index');
     });
 

@@ -43,6 +43,10 @@ class Instance extends Model
         return $this->hasMany(User::class);
     }
 
+    public function userss(){
+        return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
     public function business(){
         return $this->hasMany(Busine::class);
     }

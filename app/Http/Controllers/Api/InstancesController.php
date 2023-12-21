@@ -20,4 +20,19 @@ class InstancesController extends Controller
     {
         return InstancesResource::make($this->getInstancePerKey($request->token_inst));
     }
+
+    public function user(Request $request)
+    {
+        return InstancesResourceCollection::make(auth()->user()->instances);
+    }
+
+    public function AddUserInstancia(Request $request)
+    {
+        $add = auth()->user()->instances()->sync($request->instances);
+        if ($add){
+            return response()->json([
+                'message'=>'Nuevas instancias añadidas con éxito'
+            ], 201);
+        }
+    }
 }
