@@ -23,7 +23,11 @@ class InstancesController extends Controller
 
     public function user(Request $request)
     {
-        return InstancesResourceCollection::make(auth()->user()->instances);
+        if(count(auth()->user()->instances)!=0){
+            return InstancesResourceCollection::make(auth()->user()->instances);
+        }else {
+            return InstancesResource::make(auth()->user()->instance);
+        }
     }
 
     public function AddUserInstancia(Request $request)
