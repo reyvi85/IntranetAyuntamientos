@@ -17,6 +17,10 @@ trait DataModelsInstances
      * @param null $busqueda
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
+    public function getInstancia($Id){
+        return Instance::find($Id);
+    }
+
     public function getInstancias($busqueda=null){
         $search = trim($busqueda);
         return Instance::with(['province', 'province.community'])
