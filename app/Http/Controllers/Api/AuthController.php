@@ -67,7 +67,7 @@ class AuthController extends Controller
                 'key'=>$user->instance->key,
                 'name'=>$user->instance->name,
                 'description'=>$user->instance->description,
-                'imagen'=>$user->instance->imagen,
+                'imagen'=> asset($user->instance->imagen),
                 'color_title'=>$user->instance->color_title,
                 'color_sub_title'=>$user->instance->color_sub_title,
                 'background_color_dark'=>$user->instance->background_color_dark,
