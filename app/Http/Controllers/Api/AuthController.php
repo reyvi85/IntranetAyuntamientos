@@ -48,21 +48,34 @@ class AuthController extends Controller
                 'logged'=>false,
                 'access_token'=>null,
                 'user_id'=>null,
-                'instanceKey'=>null,
-                'instanceId'=>null,
+                'instanciaDefault'=>[],
                 'message'=>'Credenciales inválidas'
             ],401);
         }
         $user =User::where('email', $request->email)->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
+        $otherOne = [];
+        foreach ($user->instances as $row){
+            $otherOne[] = $row->id;
+        }
         return response()->json([
             'logged'=>true,
             'access_token'=>$token,
             'user_id'=>$user->id,
-            'instanceKey'=>$user->instance->key,
-            'instanceId'=>$user->instance->id,
+            'instanciaDefault'=> [
+                'id'=>$user->instance->id,
+                'key'=>$user->instance->key,
+                'name'=>$user->instance->name,
+                'description'=>$user->instance->description,
+                'imagen'=>$user->instance->imagen,
+                'color_title'=>$user->instance->color_title,
+                'color_sub_title'=>$user->instance->color_sub_title,
+                'background_color_dark'=>$user->instance->background_color_dark,
+                'background_color_dark_plus'=>$user->instance->background_color_dark_plus,
+                'background_color_light'=>$user->instance->background_color_light,
+                'otherOne'=>$otherOne
+            ],
             'message'=>'Bienvenido '.$user->name,
-
         ]);
     }
 
