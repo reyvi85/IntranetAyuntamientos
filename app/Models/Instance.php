@@ -43,7 +43,7 @@ class Instance extends Model
         return $this->hasMany(User::class);
     }
 
-    public function userss(){
+    public function moreUsers(){
         return $this->belongsToMany(User::class)->withTimestamps();
     }
 

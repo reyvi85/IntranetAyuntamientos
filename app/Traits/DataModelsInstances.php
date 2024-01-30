@@ -7,6 +7,7 @@ namespace App\Traits;
 use App\Models\Community;
 use App\Models\Instance;
 use App\Models\Province;
+use App\Scopes\InstanceScope;
 use Illuminate\Database\Eloquent\Builder;
 
 trait DataModelsInstances
@@ -59,7 +60,7 @@ trait DataModelsInstances
     }
 
     public function getInstancesPerUser(){
-        return Instance::whereHas('userss', function (Builder $q){
+        return Instance::withoutGlobalScope(InstanceScope::class)->whereHas('moreUsers', function (Builder $q){
             $q->where('user_id', auth()->user()->id);
         })->get();
     }
