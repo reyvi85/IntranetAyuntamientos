@@ -7,6 +7,7 @@ use App\Http\Resources\Instances\InstancesResource;
 use App\Http\Resources\Instances\InstancesResourceCollection;
 use App\Traits\DataModelsInstances;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InstancesController extends Controller
 {
@@ -23,7 +24,9 @@ class InstancesController extends Controller
 
     public function user(Request $request)
     {
-            return InstancesResourceCollection::make($this->getInstancesPerUser());
+        $data = $this->getInstancesPerUser();
+        $data->push(auth()->user()->instance);
+           return InstancesResourceCollection::make($data);
     }
 
     public function AddUserInstancia(Request $request)
