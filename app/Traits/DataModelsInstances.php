@@ -58,6 +58,14 @@ trait DataModelsInstances
         return Instance::get();
     }
 
+    public function getInstancesPerUser(){
+        return Instance::whereHas('userss', function (Builder $q){
+            $q->where('user_id', auth()->user()->id);
+        })->get();
+    }
+
+
+
     public function getInstancePerKey($key){
         return Instance::where('key',  $key)->first();
     }
