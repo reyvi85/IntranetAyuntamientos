@@ -65,10 +65,7 @@ class AuthController extends Controller
         }
         $user =User::where('email', $request->email)->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
-        $otherOne = [];
-        foreach ($user->instances as $row){
-            $otherOne[] = $row->id;
-        }
+      
         return response()->json([
             'logged'=>true,
             'access_token'=>$token,
@@ -84,7 +81,6 @@ class AuthController extends Controller
                 'background_color_dark'=>$user->instance->background_color_dark,
                 'background_color_dark_plus'=>$user->instance->background_color_dark_plus,
                 'background_color_light'=>$user->instance->background_color_light,
-                'otherOne'=>$otherOne
             ],
             'message'=>'Bienvenido '.$user->name,
         ]);
