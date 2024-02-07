@@ -173,6 +173,10 @@ trait DataAPIFront
         return Instance::where('key',  $key)->first();
     }
 
+    public function getAllInstace(){
+        return Instance::get();
+    }
+
 
 
     /**
