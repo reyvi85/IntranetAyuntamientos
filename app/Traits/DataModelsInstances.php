@@ -58,16 +58,4 @@ trait DataModelsInstances
     public function getAllInstace(){
         return Instance::get();
     }
-
-    public function getInstancesPerUser(){
-        return Instance::withoutGlobalScope(InstanceScope::class)->whereHas('moreUsers', function (Builder $q){
-            $q->where('user_id', auth()->user()->id);
-        })->get();
-    }
-
-
-
-    public function getInstancePerKey($key){
-        return Instance::where('key',  $key)->first();
-    }
 }

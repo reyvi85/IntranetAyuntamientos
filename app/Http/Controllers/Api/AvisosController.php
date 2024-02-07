@@ -23,7 +23,7 @@ class  AvisosController extends Controller
     use DataAPIFront;
     /** LISTA DE AVISOS **/
     public function index(Request $request){
-        return WarningResourceCollection::make($this->getWarnings($request->search, $request->fecha, $request->category, $request->sub_category,$request->state,$request->sort ,$request->perPage));
+        return WarningResourceCollection::make($this->getWarnings($request->search, $request->fecha, $request->category, $request->sub_category,$request->state,$request->sort ,$request->perPage, $request->token_inst));
     }
     /** MOSTRAR AVISO **/
     public function show(Request $request){

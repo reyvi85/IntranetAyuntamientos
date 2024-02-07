@@ -15,7 +15,7 @@ class WarningResource extends JsonResource
      */
     public function toArray($request)
     {
-       // dd($this->resource->warning_answers);
+       // dd($this->resource);
         return[
             'id'=>(string)$this->resource->id,
             'asunto'=>$this->resource->asunto,

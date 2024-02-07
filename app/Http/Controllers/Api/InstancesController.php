@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Instances\InstancesResource;
 use App\Http\Resources\Instances\InstancesResourceCollection;
+use App\Traits\DataAPIFront;
 use App\Traits\DataModelsInstances;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class InstancesController extends Controller
 {
-    use DataModelsInstances;
+    use DataAPIFront;
 
     public function index(Request $request){
         return InstancesResourceCollection::make($this->getAllInstace());

@@ -14,6 +14,7 @@ use App\Models\CategoryBusine;
 use App\Models\CategoryNotification;
 use App\Models\Event;
 use App\Models\EventCategory;
+use App\Models\Instance;
 use App\Models\InterestPhone;
 use App\Models\Location;
 use App\Models\LocationCategory;
@@ -28,15 +29,26 @@ use App\Models\WarningCategory;
 use App\Models\WarningState;
 use App\Models\WarningSubCategory;
 use App\Models\Widget;
+use App\Scopes\InstanceScope;
 use Illuminate\Database\Eloquent\Builder;
 
 trait DataAPIFront
 {
-    public function getWarnings($search=null, $rangoFecha=null, $category = null, $subCategory = null , $estado=null, $sort=null, $perPage=15){
+    public function getWarnings($search=null, $rangoFecha=null, $category = null, $subCategory = null , $estado=null, $sort=null, $perPage=15, $key){
         return Warning::withoutGlobalScopes()
-            ->with(['warning_state', 'warning_answers','warning_sub_category', 'warning_sub_category.warning_category'])
+            ->whereHas('instance', function (Builder $q) use($key){
+                $q->where('key', 'like', '%'.$key.'%');
+            })
+            ->with(['warning_state', 'warning_answers',
+                'warning_sub_category'=>function($q){
+                $q->withoutGlobalScopes();
+            },
+                'warning_sub_category.warning_category'=>function($q){
+                    $q->withoutGlobalScopes();
+                }
+            ])
             ->withCount('warning_answers')
-            ->when($search, function ($q) use($search){
+        /*    ->when($search, function ($q) use($search){
                 $q->where('asunto','like', '%'.$search.'%')
                     ->orWhere('description','like', '%'.$search.'%')
                     ->orWhere('ubicacion','like', '%'.$search.'%');
@@ -63,9 +75,9 @@ trait DataAPIFront
             })
             ->when($estado, function ($q)use($estado){
                 $q->where('warning_state_id', $estado);
-            })
-            ->GetInstance()
-            ->ForUser()
+            })*/
+          //  ->GetInstance('instance',$key)
+           // ->ForUser()r
             ->ApplySorts($sort)
             ->get(); //paginate($perPage)->appends(request()->query());
     }
@@ -147,6 +159,21 @@ trait DataAPIFront
             $q->GetInstance();
         }])->findOrFail($state);
     }
+    /**
+     *  I N S T A N C I A S
+     */
+
+    public function getInstancesPerUser(){
+        return Instance::withoutGlobalScope(InstanceScope::class)->whereHas('moreUsers', function (Builder $q){
+            $q->where('user_id', auth()->user()->id);
+        })->get();
+    }
+
+    public function getInstancePerKey($key){
+        return Instance::where('key',  $key)->first();
+    }
+
+
 
     /**
      *  P O S T
