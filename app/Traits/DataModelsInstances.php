@@ -55,4 +55,8 @@ trait DataModelsInstances
             ->get();
     }
 
+    public function getAllInstace(){
+        return Instance::get();
+    }
+
 }
