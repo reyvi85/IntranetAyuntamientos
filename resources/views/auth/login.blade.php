@@ -24,7 +24,7 @@
     <div class="row justify-content-center">
         <div class="col-md-7">
             <div class="card">
-                <div class="card-header"><h4><i class="fas fa-user"></i> {{ __('Login') }} / Zitty.es</h4></div>
+                <div class="card-header"><h4><i class="fas fa-user"></i> {{ __('Login') }} / {{env('APP_NAME')}} </h4></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
