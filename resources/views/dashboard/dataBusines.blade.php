@@ -11,7 +11,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($locations as $row)
+            @foreach($busines as $row)
                 <tr>
                     <td>{{$row->name}}</td>
                     <td class="text-center">{{$row->hit}}</td>
