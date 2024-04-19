@@ -12,7 +12,7 @@ class InterestPhone extends Model
     use HasFactory, HasSort, HasInstance;
 
     protected $fillable = [
-        'name', 'description', 'phone', 'instance_id'
+        'name', 'description', 'phone', 'image','instance_id'
     ];
     public $allowedSorts = ['id','name', 'phone'];
 

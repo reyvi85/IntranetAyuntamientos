@@ -7,23 +7,26 @@ use App\Traits\DataModelsComunityProvinces;
 use App\Traits\DataModelsInstances;
 use App\Traits\DataModelsPhone;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use App\Traits\DataModels;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class InterestPhonesComponent extends Component
 {
-    use DataModels, DataModelsPhone, DataModelsInstances, WithPagination;
+    use DataModels, DataModelsPhone, DataModelsInstances, WithPagination, WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
 
-    public $search, $name, $description, $phone, $instance_id, $phoneSelected;
+    public $search, $name, $description, $phone, $image, $instance_id, $phoneSelected, $imagePhone;
 
     protected function rules(){
             return [
                 'name'=>'required',
                 'description'=>'nullable',
                 'phone'=>'required',
+                'image'=>'required|image',
                 'instanceSelected'=>'required'
             ];
     }
@@ -34,11 +37,12 @@ class InterestPhonesComponent extends Component
 
     public function mount(){
         $this->checkInstanceForUser();
+        $this->setPatchToUpload('images/phones');
         $this->setConfigModal('Añadir teléfono');
     }
 
     public function resetProps(){
-        $this->reset(['name', 'description', 'phone', 'modalModeDestroy']);
+        $this->reset(['name', 'description', 'phone','image', 'imagePhone','modalModeDestroy']);
         $this->resetErrorBag();
     }
 
@@ -49,10 +53,12 @@ class InterestPhonesComponent extends Component
 
     public function store(){
         $this->validate();
+        $imgPhone = $this->image->store($this->getPatchToUpload(), 'public');
         InterestPhone::create([
             'name'=>$this->name,
             'description'=>$this->description,
             'phone'=>$this->phone,
+            'image'=>$imgPhone,
             'instance_id'=>$this->instanceSelected
         ]);
         $this->emit('saveModal');
@@ -67,15 +73,23 @@ class InterestPhonesComponent extends Component
         $this->name = $interestPhone->name;
         $this->description = $interestPhone->description;
         $this->phone = $interestPhone->phone;
+        $this->imagePhone = $interestPhone->image;
         $this->instanceSelected = $interestPhone->instance_id;
     }
 
     public function update_phone(InterestPhone $interestPhone){
         $this->validate();
+        if($this->image){
+            Storage::disk('public')->delete($interestPhone->image);
+            $imgPhone = $this->image->store($this->getPatchToUpload(), 'public');
+        }else{
+            $imgPhone = $interestPhone->image;
+        }
         $interestPhone->fill([
             'name'=>$this->name,
             'description'=>$this->description,
             'phone'=>$this->phone,
+            'image'=>$imgPhone,
             'instance_id'=>$this->instanceSelected
         ])->save();
 
@@ -91,6 +105,7 @@ class InterestPhonesComponent extends Component
 
     public function destroy(InterestPhone $interestPhone){
         $interestPhone->delete();
+        Storage::disk('public')->delete($interestPhone->image);
         $this->emit('saveModal');
         $this->resetProps();
     }

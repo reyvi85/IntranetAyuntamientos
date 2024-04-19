@@ -9,6 +9,7 @@
 /public/images/events/*
 /public/images/rutas/*
 /public/images/instancias/*
+/public/images/phones/*
 /storage/*.key
 /vendor
 .env

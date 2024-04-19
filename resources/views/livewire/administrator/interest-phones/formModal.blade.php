@@ -35,6 +35,36 @@
                         <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                         @enderror
                     </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Imagen:</label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="customFileLang" lang="es" wire:model="image" accept=".png, .jpg, .jpeg">
+                                        <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                                        @error('image')
+                                        <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <div class="text-center text-muted align-middle" wire:loading.grid wire:target="image">
+                                        <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
+                                    </div>
+
+                                    @if ($image)
+                                        <img class="img-fluid img-thumbnail rounded" src="{{ $image->temporaryUrl() }}">
+                                    @elseif(!is_null($imagePhone))
+                                        <img class="img-fluid img-thumbnail rounded" src="{{asset($imagePhone)}}">
+                                    @endif
+                                </div>
+                            </div>
+
+                        </div>
+
+
                         @php($label = true)
                         @php($ModelName = 'instanceSelected')
                         @include('livewire.partial.comboInstancias')
@@ -48,7 +78,7 @@
                     @break
 
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update_phone({{$phoneSelected}})" wire:target="update_phone" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update_phone({{$phoneSelected}})" wire:target="update_phone,image" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
@@ -56,7 +86,7 @@
                     @break
 
                 @endswitch
-                <div class="text-center text-muted" wire:loading wire:target="store, update_phone, destroy"><i class="fas fa-spinner fa-spin"></i></div>
+                <div class="text-center text-muted" wire:loading wire:target="store, update_phone, destroy, image"><i class="fas fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>
