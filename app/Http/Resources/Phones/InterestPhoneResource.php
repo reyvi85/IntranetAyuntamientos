@@ -20,8 +20,8 @@ class InterestPhoneResource extends JsonResource
             'name'=>$this->resource->name,
             'description'=>$this->resource->description,
             'phone'=>$this->resource->phone,
+            'imagen'=>($this->resource->image == "" || $this->resource->image ==null)?asset("images/no-image.png"):asset($this->resource->image),
             'link_self'=>route('api.phones.show', [$this->resource, 'token_inst'=>$request->token_inst])
-
         ];
     }
 }
