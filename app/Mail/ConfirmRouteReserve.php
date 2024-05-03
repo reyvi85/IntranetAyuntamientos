@@ -29,7 +29,7 @@ class ConfirmRouteReserve extends Mailable
      */
     public function build()
     {
-        return $this->from('soporte@zitty.es')->subject('Confirmación de ruta')
+        return $this->from(env('MAIL_USERNAME'))->subject('Confirmación de ruta')
                     ->view('livewire.administrator.routes.mailConfirmRouteReserve');
     }
 }

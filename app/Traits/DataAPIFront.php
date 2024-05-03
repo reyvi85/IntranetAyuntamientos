@@ -77,7 +77,7 @@ trait DataAPIFront
                 $q->where('warning_state_id', $estado);
             })*/
           //  ->GetInstance('instance',$key)
-           // ->ForUser()r
+            ->ForUser()
             ->ApplySorts($sort)
             ->get(); //paginate($perPage)->appends(request()->query());
     }
