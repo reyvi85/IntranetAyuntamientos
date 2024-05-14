@@ -15,15 +15,14 @@ class WidgetsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'type'=>'widget',
             'id'=>(string)$this->resource->id,
             'titulo'=>$this->resource->titulo,
             'subtitulo'=>$this->resource->subtitulo,
-            'image'=>url($this->resource->image),
+            'imagen'=>url($this->resource->image),
             'url'=>$this->resource->enlace,
-            'embed'=>$this->resource->embed,
-            'slug'=>$this->resource->slug,
-            'link_self'=>route('api.widgets.show',[$this->resource->id,'token_inst'=>$request->token_inst])
+          //  'embed'=>$this->resource->embed,
+          //  'slug'=>$this->resource->slug,
+           // 'link_self'=>route('api.widgets.show',[$this->resource->id,'token_inst'=>$request->token_inst])
 
         ];
     }

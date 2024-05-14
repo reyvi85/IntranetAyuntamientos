@@ -356,7 +356,7 @@ trait DataAPIFront
             ->GetInstance()
             ->Active()
             ->ApplySorts($sort)
-            ->paginate($perPage)->appends(request()->query());
+            ->get();
     }
 
     /**
