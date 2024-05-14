@@ -18,7 +18,7 @@ class WidgetsResource extends JsonResource
             'id'=>(string)$this->resource->id,
             'titulo'=>$this->resource->titulo,
             'subtitulo'=>$this->resource->subtitulo,
-            'imagen'=>url($this->resource->image),
+            'imagen'=>asset($this->resource->image),
             'url'=>$this->resource->enlace,
           //  'embed'=>$this->resource->embed,
           //  'slug'=>$this->resource->slug,
