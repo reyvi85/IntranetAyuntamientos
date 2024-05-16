@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group text-center">
-                                    <div class="text-center text-muted align-middle" wire:loading.grid wire:target="image">
+                                    <div class="text-center text-muted align-middle" wire:loading wire:target="image,imagePhone">
                                         <i class="fas fa-spinner fa-spin"></i> Cargando imagen ...
                                     </div>
 
@@ -74,11 +74,11 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-minus-circle"></i> Cancelar</button>
                 @switch($modalConfig['action'])
                     @case('add')
-                    <button type="button" class="btn btn-primary" wire:click="store" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
+                    <button type="button" class="btn btn-primary" wire:click="store" wire:target="image"  wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Añadir</button>
                     @break
 
                     @case('edit')
-                    <button type="button" class="btn btn-primary" wire:click="update_phone({{$phoneSelected}})" wire:target="update_phone,image" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
+                    <button type="button" class="btn btn-primary" wire:click="update_phone({{$phoneSelected}})" wire:target="update_phone,image, imagePhone" wire:loading.attr="disabled"><i class="fas {{$modalConfig['icon']}}"></i> Editar</button>
                     @break
 
                     @case('trash')
