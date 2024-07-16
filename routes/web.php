@@ -101,3 +101,5 @@ Route::prefix('component')->group(function (){
 Auth::routes(['register' => false]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/unsubscribe', [DashboardController::class, 'unsubscribe'])->name('unsubscribe.index');
+Route::post('/unsubscribeDone', [DashboardController::class, 'unsubscribeDone'])->name('unsubscribe.done');

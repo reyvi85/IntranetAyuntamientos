@@ -39,4 +39,19 @@ class DashboardController extends Controller
     public function counterHit($model, $id){
         return $this->getCounter($model, $id);
     }
+
+    public function unsubscribe(){
+        return view('unsubscribe');
+    }
+
+    public function unsubscribeDone(Request $request){
+        $validated = $request->validate([
+            'email' => 'email|required',
+        ]);
+        $user = $this->getUsuerPerEmail($request->email);
+        if (!is_null($user)){
+            $user->delete();
+        }
+            return redirect()->route('unsubscribe.index');
+    }
 }

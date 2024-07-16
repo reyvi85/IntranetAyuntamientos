@@ -170,5 +170,9 @@ trait DataModelsDashboard
         }
     }
 
+    public function getUsuerPerEmail($email){
+        return User::where('email', 'like','%'.$email.'%')->first();
+    }
+
 }
 
