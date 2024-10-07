@@ -6,7 +6,12 @@
     <p class="text-muted"> Estás a punto de darse de baja de nuestros servicios y eliminar todos los datos asociados al mismo.</p>
     <p>
 
-<form class="form-group" action="{{ route('unsubscribe.done') }}" method="POST">
+    @if(session('message'))
+        <div class="alert alert-success">
+            {!! session('message') !!}
+        </div>
+    @else
+    <form class="form-group" action="{{ route('unsubscribe.done') }}" method="POST">
     @csrf
     <!-- nuestro formulario -->
         <label for="email5" class="form-label">Email</label>
@@ -17,7 +22,8 @@
         <div class="form-group py-3">
             <button type="submit" class="btn btn-primary"><i class="fas fa-minus-circle"></i> Eliminar subscripción</button>
         </div>
-
-</form>
+    </form>
     </p>
+    @endif
+
 @endsection

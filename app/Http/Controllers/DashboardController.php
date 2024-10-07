@@ -51,7 +51,12 @@ class DashboardController extends Controller
         $user = $this->getUsuerPerEmail($request->email);
         if (!is_null($user)){
             $user->delete();
+            return redirect()->route('unsubscribe.index')
+                ->with('message', 'Se eliminó con <b>ÉXITO</b> el usuario <b>'.$request->email.'</b>');
+        }elseif (is_null($user)){
+            return redirect()->route('unsubscribe.index')
+                ->with('message', 'Provablemente el usuario <b>'.$request->email.'</b> ya no exista en nuestro sistema, pruebe con otra direccion de correo!');
         }
-            return redirect()->route('unsubscribe.index');
+        return redirect()->route('unsubscribe.index');
     }
 }
